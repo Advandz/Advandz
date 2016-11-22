@@ -4,10 +4,7 @@
  * appropriate controller. We also handle any exceptions that were not handled
  * elsewhere in the application, so we can end gracefully.
  *
- * @package       Advandz
- * @version       $Revision$
- * @modifiedby    $LastChangedBy$
- * @lastmodified  $Date$
+ * @package Advandz
  */
 
 $start = microtime(true);

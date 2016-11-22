@@ -29,17 +29,14 @@ Passing variables to views from a controller is simple:
 <?php
 class Foo extends AppController
 {
-
 	public function index()
-    {
-	
+	{
 		$my_var = array(1,2,3);
 	
 		$this->set("my_var", $my_var);
 	}
-
 }
-
+?>
 ```
 
 You can also set multiple variables all at once:
@@ -48,18 +45,15 @@ You can also set multiple variables all at once:
 <?php
 class Foo extends AppController
 {
-
 	public function index()
-    {
-	
+	{
 		$my_var = array(1,2,3);
 		$my_other_var = array("a","b","c");
 	
 		$this->set(compact("my_var", "my_other_var"));
 	}
-
 }
-
+?>
 ```
 
 To set variables in the structure view use:
@@ -69,7 +63,6 @@ $this->structure->set("my_var", $my_var);
 ```
 
 ### Directory Structure ###
-
 <pre>
 /app
 	/controllers 	- where all controllers are to be placed
@@ -85,7 +78,7 @@ $this->structure->set("my_var", $my_var);
 /helpers			- where all helpers are located
 /language			- each language has its own directory in here
 	/en_us			- the default language directory
-/lib				- where all core minPHP files are located
-/plugins			- where all minPHP plugins are stored
+/lib				- where all core files are located
+/plugins			- where all plugins are stored
 /vendors			- where vendor code is placed (i.e. third party libraries)
 </pre>

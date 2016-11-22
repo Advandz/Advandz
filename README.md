@@ -1,4 +1,4 @@
-# Advandz #
+# Advandz Framework #
 ### The Framework for Enterprises and High-Performance Applications. ###
 
 Advandz is an enterprise-class powerful and scalable MVC framework for PHP application development.

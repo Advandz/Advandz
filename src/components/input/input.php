@@ -4,8 +4,8 @@
  * number of methods to verify whether the input data is formatted correctly.
  * Supports validating both scalar and array data.
  * 
- * @package minPHP
- * @subpackage minPHP.components.input
+ * @package Advandz
+ * @subpackage Advandz.components.input
  */
 class Input {
 	/**

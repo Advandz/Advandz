@@ -6,8 +6,8 @@
  * /config/core.php, or may be set at run time from anywhere within your
  * application.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 final class Configure {
 	/**

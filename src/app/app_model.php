@@ -1,7 +1,7 @@
 <?php
 /**
- * @package minPHP
- * @subpackage minPHP.app
+ * @package Advandz
+ * @subpackage Advandz.app
  */
 class AppModel extends Model {
 

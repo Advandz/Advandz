@@ -2,8 +2,8 @@
 /**
  * Format exceptions and errors thrown by PHP for handling in other parts of the app.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 class UnknownException extends ErrorException {
 	

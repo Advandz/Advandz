@@ -2,8 +2,8 @@
 /**
  * Handles the loading of various files and objects
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 final class Loader {
 	

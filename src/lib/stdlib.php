@@ -3,8 +3,8 @@
  * Standard Library, where all misc. and compatibility functions/handlers are
  * placed.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 
 /**

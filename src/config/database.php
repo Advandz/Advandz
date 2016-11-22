@@ -3,7 +3,7 @@
  * Initializes all database profiles, and sets the desired database profile
  * to be the active profile.
  *
- * @package minPHP
+ * @package Advandz
  */
 
 // Lazy connecting will only establish a connection to the database if one is
@@ -19,7 +19,7 @@ $default = array(
 	"driver" => "mysql",
 	"host"	=> "localhost",
 	//"port" => "8889",
-	"database" => "minphp",
+	"database" => "advandz",
 	"user" => "root",
 	"pass" => "root",
 	"persistent" => false,

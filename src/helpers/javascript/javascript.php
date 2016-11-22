@@ -6,8 +6,8 @@ Loader::load(HELPERDIR . "html" . DS . "html.php");
  *
  * Facilitates rendering/loading javascript into a view
  * 
- * @package minPHP
- * @subpackage minPHP.helpers.javascript
+ * @package Advandz
+ * @subpackage Advandz.helpers.javascript
  */
 class Javascript extends Html {
 	/**

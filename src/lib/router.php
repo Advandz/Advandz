@@ -2,8 +2,8 @@
 /**
  * Handles mapping of URIs from one type to another
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 final class Router {
 	/**

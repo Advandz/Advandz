@@ -1,5 +1,5 @@
 <?php
-use minphp\Language\Language as FrameworkLanguage;
+use Advandz\Language\Language as FrameworkLanguage;
 
 /**
  * {@inheritdoc}

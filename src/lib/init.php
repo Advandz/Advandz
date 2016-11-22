@@ -5,8 +5,8 @@
  * Includes all of the core library files as well as sets global constants used
  * throughout the app.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
  
 /**
@@ -18,11 +18,11 @@
 error_reporting(-1);
 
 /**
- * Sets the version of minPHP in use.  [Major].[Minor].[Revision]
+ * Sets the version of Advandz in use.  [Major].[Minor].[Revision]
  *
  * @deprecated since 1.0.0
  */
-define("MINPHP_VERSION", "1.0.0");
+define("ADVANDZ_VERSION", "1.0.0");
 
 /**
  * Sets the directory separator used throughout the application. DO NOT use this

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package minPHP
+ * @package Advandz
  */
 
 /**

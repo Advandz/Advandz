@@ -4,8 +4,8 @@
  * methods that allow controllers to interact with views, models, components,
  * helpers, and plugins.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 class Controller {
 	/**

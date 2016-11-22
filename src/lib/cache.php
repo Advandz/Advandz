@@ -2,8 +2,8 @@
 /**
  * Handles writing to and from the cache
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 final class Cache {
 	

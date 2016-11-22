@@ -2,8 +2,8 @@
 /**
  * Allows the creation of views.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 class View extends Language {
 	/**

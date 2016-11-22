@@ -2,8 +2,8 @@
 /**
  * Provides methods useful in formatting dates and date timestamps.
  *
- * @package minPHP
- * @subpackage minPHP.helpers.date
+ * @package Advandz
+ * @subpackage Advandz.helpers.date
  */
 class Date {
 	

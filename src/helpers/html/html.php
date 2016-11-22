@@ -2,8 +2,8 @@
 /**
  * Provides helper methods for dealing with HTML content
  * 
- * @package minPHP
- * @subpackage minPHP.helpers.html
+ * @package Advandz
+ * @subpackage Advandz.helpers.html
  */
 class Html {
 	/**

@@ -5,8 +5,8 @@ Configure::load("session");
 /**
  * A database powered Session driver. Requires the Record component
  *
- * @package minPHP
- * @subpage minPHP.components.session
+ * @package Advandz
+ * @subpage Advandz.components.session
  */
 class Session {
 	private $Record;

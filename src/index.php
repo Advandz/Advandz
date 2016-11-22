@@ -1,11 +1,10 @@
 <?php
-/* SVN FILE: $Id$ */
 /**
  * This file transfers control over to the dispatcher which will invoke the
  * appropriate controller. We also handle any exceptions that were not handled
  * elsewhere in the application, so we can end gracefully.
  *
- * @package       minPHP
+ * @package       Advandz
  * @version       $Revision$
  * @modifiedby    $LastChangedBy$
  * @lastmodified  $Date$

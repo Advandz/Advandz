@@ -4,8 +4,8 @@
  * to the proper controller. It extends Controller only so that it can invoke
  * its protected methods.
  *
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
  */
 class Dispatcher extends Controller {
 	/**

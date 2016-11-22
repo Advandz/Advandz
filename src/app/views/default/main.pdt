@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h2>It Works! <small><strong>minPHP</strong> was sucessfully installed</small></h2>
+                <h2>It Works! <small><strong>Advandz</strong> was sucessfully installed</small></h2>
             </div>
             <h4>If this is your first trip around the block, why don't we hold hands?</h4>
     
@@ -21,6 +21,6 @@
                 </li>
             </ul>
             
-            <p>For more help, check out the <a href="http://www.minphp.org/documentation">documentation</a>.</p>
+            <p>For more help, check out the minPHP <a href="http://www.minphp.org/documentation">documentation</a>.</p>
         </div>
     </div>

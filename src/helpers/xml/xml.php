@@ -2,8 +2,8 @@
 /**
  * Provides helper methods for creating XML documents from arrays and objects
  * 
- * @package minPHP
- * @subpackage minPHP.helpers.xml
+ * @package Advandz
+ * @subpackage Advandz.helpers.xml
  */
 class Xml {
 	/**

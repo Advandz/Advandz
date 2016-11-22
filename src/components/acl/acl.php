@@ -12,8 +12,8 @@ Loader::load(COMPONENTDIR . "record" . DS . "record.php");
  * The ACL is made up of AROs and their associated ACOs for specific actions.
  * Actions are either explicitly allowed or denied. Requires the Record component.
  *
- * @package minPHP
- * @subpage minPHP.components.acl
+ * @package Advandz
+ * @subpage Advandz.components.acl
  */
 class Acl {
 	

@@ -2,8 +2,8 @@
 /**
  * General purpose Database access object
  *
- * @package minPHP
- * @subpackage minPHP.components.record
+ * @package Advandz
+ * @subpackage Advandz.components.record
  */
 class Record extends Model {
 	/**

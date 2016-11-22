@@ -6,8 +6,8 @@ Loader::load(HELPERDIR . "html" . DS . "html.php");
  *
  * Allow the creation of forms and their respective fields and attributes
  *
- * @package minPHP
- * @subpackage minPHP.helpers.form
+ * @package Advandz
+ * @subpackage Advandz.helpers.form
  */
 class Form extends Html {
 	/**

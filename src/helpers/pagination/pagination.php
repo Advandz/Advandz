@@ -8,8 +8,8 @@
  * div.pagination ul, div.pagination li { display: inline; margin: 0; padding: 0; }
  * div.pagination li.current { font-weight: bold; }
  * 
- * @package minPHP
- * @subpackage minPHP.helpers.pagination
+ * @package Advandz
+ * @subpackage Advandz.helpers.pagination
  */
 Loader::load(HELPERDIR . "html" . DS . "html.php");
 

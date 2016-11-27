@@ -10,7 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-@include(dirname(__FILE__) . "/vendors/tracy/autoload.php");
+//@include(dirname(__FILE__) . "/vendors/tracy/autoload.php"); // Remove in Public Release
 
 $start = microtime(true);
 

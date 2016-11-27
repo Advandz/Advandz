@@ -5,8 +5,10 @@
  * elsewhere in the application, so we can end gracefully.
  *
  * @package Advandz
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
-
 $start = microtime(true);
 
 try {

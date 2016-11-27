@@ -4,6 +4,9 @@
  * to be the active profile.
  *
  * @package Advandz
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
 
 // Lazy connecting will only establish a connection to the database if one is

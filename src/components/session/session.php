@@ -6,7 +6,10 @@ Configure::load("session");
  * A database powered Session driver. Requires the Record component
  *
  * @package Advandz
- * @subpage Advandz.components.session
+ * @subpackage Advandz.components.session
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
 class Session {
 	private $Record;

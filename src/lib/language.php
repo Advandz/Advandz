@@ -1,4 +1,14 @@
 <?php
+/**
+ * Language Library, Manage all the language files stored in
+ * the language folders that are provided through your application.
+ * 
+ * @package Advandz
+ * @subpackage Advandz.lib
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
+ */
 use Advandz\Language\Language as FrameworkLanguage;
 
 /**

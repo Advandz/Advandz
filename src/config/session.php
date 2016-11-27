@@ -1,7 +1,13 @@
 <?php
-################################################################################
-# Session
-################################################################################
+/**
+ * Session settings.
+ *
+ * @package Advandz
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
+ */
+
 // The number of seconds to keep a session alive.
 Configure::set("Session.ttl", 1800);
 // The number of seconds to keep a cookie stored session alive

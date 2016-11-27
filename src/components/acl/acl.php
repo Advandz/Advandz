@@ -13,7 +13,10 @@ Loader::load(COMPONENTDIR . "record" . DS . "record.php");
  * Actions are either explicitly allowed or denied. Requires the Record component.
  *
  * @package Advandz
- * @subpage Advandz.components.acl
+ * @subpackage Advandz.components.acl
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
 class Acl {
 	

@@ -9,6 +9,10 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $start = microtime(true);
 
 try {

@@ -1,8 +1,9 @@
 # MIT License #
 
-Copyright (c) 2012-2017 [CyanDark, Inc.](https://cyandark.com/opensource)
-Copyright (c) 2010-2017 [Phillips Data, Inc.](https://github.com/phillipsdata)
-Copyright (c) 2009-2017 [Cody Phillips](https://github.com/clphillips)
+Copyright (c) 2012-2016 [CyanDark, Inc.](https://cyandark.com/opensource)
+Copyright (c) 2013-2016 [Dave Gandy](https://fontawesome.io/)
+Copyright (c) 2010-2016 [Phillips Data, Inc.](https://github.com/phillipsdata)
+Copyright (c) 2009-2016 [Cody Phillips](https://github.com/clphillips)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

@@ -5,7 +5,7 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 
 ## Requirements ##
 
-* PHP 5.4 or greater
+* PHP 5.5 or greater
 
 ## Getting Started ##
 
@@ -31,7 +31,7 @@ class Foo extends AppController
 {
 	public function index()
 	{
-		$my_var = array(1,2,3);
+		$my_var = [1,2,3];
 	
 		$this->set("my_var", $my_var);
 	}
@@ -47,8 +47,8 @@ class Foo extends AppController
 {
 	public function index()
 	{
-		$my_var = array(1,2,3);
-		$my_other_var = array("a","b","c");
+		$my_var = [1,2,3];
+		$my_other_var = ["a","b","c"];
 	
 		$this->set(compact("my_var", "my_other_var"));
 	}

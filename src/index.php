@@ -10,8 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+@include(dirname(__FILE__) . "/vendors/tracy/autoload.php");
 
 $start = microtime(true);
 

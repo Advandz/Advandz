@@ -121,5 +121,6 @@ define("VENDORDIR", dirname(dirname(__DIR__)) . DS . "vendor" . DS);
 // Include core libraries
 include_once LIBDIR . "autoload.php";
 include_once LIBDIR . "stdlib.php";
+
 // Load core configuration
 Configure::load("core");

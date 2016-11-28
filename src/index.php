@@ -10,12 +10,11 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-include(dirname(__FILE__) . "/vendors/tracy/autoload.php"); // Remove in Public Release
-
 $start = microtime(true);
 
 try {
 	include(dirname(__FILE__) . "/lib/init.php");
+	include(dirname(__FILE__) . "/debugger/autoload.php");
 	
 	// Dispatch the Web request
 	if (!empty($_SERVER['REQUEST_URI']))

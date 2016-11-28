@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<section>
+	<contents>
+		<item1>1</item1>
+		<item2>two</item2>
+		<item4 />
+	</contents>
+	<other>
+		
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</other>
+</section>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug the executed code in real-time
+ * PHP debugging tool, It is an ultimate tool among the diagnostic ones.
  *
  * @package Advandz
  * @subpackage Advandz.debugger
@@ -13,6 +13,6 @@ require __DIR__ . '/src/tracy.php';
 
 use Tracy\Debugger;
 
-Debugger::enable(Debugger::DEVELOPMENT, dirname(__FILE__) . DS . '..' . DS . 'log');
+Debugger::enable(Debugger::DEVELOPMENT, dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'log');
 Debugger::$strictMode = false;
 ?>

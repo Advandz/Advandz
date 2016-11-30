@@ -114,7 +114,7 @@ if [ "${option}" = "1" ]; then
 
         # Calculate Max FCGI processes
         MAX_FCGI_PROCESS = $(expr $SERVER_RAM_GB_INT * 10);
-        if [ $SERVER_RAM_GB_INT = 0 ] then
+        if [ $SERVER_RAM_GB_INT = 0 ]; then
             MAX_FCGI_PROCESS = 5;
         fi
         echo "> This server is capable to run up to $MAX_FCGI_PROCESS FCGI processes with 6 Childs everyone.";
@@ -362,7 +362,6 @@ if [ "${option}" = "1" ]; then
         echo "|                                                                  |";
         echo "o------------------------------------------------------------------o";
     fi
-
 elif [ "${option}" = "2" ]; then
     echo "Not Implemented";
 elif [ "${option}" = "3" ]; then

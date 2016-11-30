@@ -27,10 +27,8 @@ Passing variables to views from a controller is simple:
 
 ```php
 <?php
-class Foo extends AppController
-{
-	public function index()
-	{
+class Foo extends AppController {
+	public function index() {
 		$my_var = [1,2,3];
 	
 		$this->set("my_var", $my_var);
@@ -43,10 +41,8 @@ You can also set multiple variables all at once:
 
 ```php
 <?php
-class Foo extends AppController
-{
-	public function index()
-	{
+class Foo extends AppController {
+	public function index() {
 		$my_var = [1,2,3];
 		$my_other_var = ["a","b","c"];
 	
@@ -80,5 +76,5 @@ $this->structure->set("my_var", $my_var);
 	/en_us			- the default language directory
 /lib				- where all core files are located
 /plugins			- where all plugins are stored
-/vendors			- where vendor code is placed (i.e. third party libraries)
+/vendor				- where vendor code is placed (i.e. third party libraries)
 </pre>

@@ -1,6 +1,4 @@
 <?php
-Loader::load(COMPONENTDIR . "record" . DS . "record.php");
-
 /**
  * A generic Access Control List Component with inherited permissions based on a
  * hierarchical tree structure. The terminology for this system is as follows:
@@ -18,8 +16,9 @@ Loader::load(COMPONENTDIR . "record" . DS . "record.php");
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+Loader::load(COMPONENTDIR . "record" . DS . "record.php");
+
 class Acl {
-	
 	/**
 	 * Initialize the ACL
 	 */
@@ -281,3 +280,4 @@ class Acl {
 			set("action", $action)->set("permission", $permission)->insert("acl_acl");
 	}
 }
+?>

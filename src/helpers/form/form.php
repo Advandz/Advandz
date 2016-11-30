@@ -1,10 +1,7 @@
 <?php
-Loader::load(HELPERDIR . "html" . DS . "html.php");
-
 /**
- * Form helper, requires Html helper
- *
- * Allow the creation of forms and their respective fields and attributes
+ * Form helper, requires Html helper.
+ * Allow the creation of forms and their respective fields and attributes.
  *
  * @package Advandz
  * @subpackage Advandz.helpers.form
@@ -12,6 +9,8 @@ Loader::load(HELPERDIR . "html" . DS . "html.php");
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+Loader::load(HELPERDIR . "html" . DS . "html.php");
+
 class Form extends Html {
 	/**
 	 * @var string The string to use as the end of line character
@@ -87,8 +86,8 @@ class Form extends Html {
 	 * @param string $glue The value to use to concat multiple $value_var values together, if null, will simply print only the first non-null value in $value_var
 	 * @return array An array in key/value form
 	 */
-	public function collapseObjectArray($obj_arr, $value_var, $key_var=null, $glue=null) {
-		$result = array();
+	public function collapseObjectArray($obj_arr, $value_var, $key_var = null, $glue = null) {
+		$result = [];
 		foreach ($obj_arr as $key => $obj) {
 			$temp = get_object_vars($obj);
 			$value = "";
@@ -120,11 +119,11 @@ class Form extends Html {
 	 * @param array $attributes The attributes and values to add in the <form> tag, in key=value pairs
 	 * @return string The HTML for the <form> tag, void if output enabled
 	 */
-	public function create($uri=null, $attributes=array()) {
+	public function create($uri = null, $attributes = []) {
 		if ($uri == null)
 			$uri = $_SERVER['REQUEST_URI'];
 			
-		$default_attributes = array("method"=>"post","action"=>$uri);
+		$default_attributes = ["method" => "post", "action" => $uri];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		
 		$html = "<form" . $this->buildAttributes($attributes) . ">" . $this->eol;
@@ -150,7 +149,7 @@ class Form extends Html {
 	 * @param string $end_str The string to add after the </form> tag
 	 * @return string The </form> tag, void if output enabled
 	 */
-	public function end($end_str=null) {
+	public function end($end_str = null) {
 		$html = "</form>" . $end_str . $this->eol;
 		
 		return $this->output($html);
@@ -293,8 +292,8 @@ class Form extends Html {
 	 * @param boolean $preserve_tags True to preserve tags in the label name
 	 * @return string The label specified, void if output enabled
 	 */
-	public function label($name, $for=null, array $attributes=null, $preserve_tags=false) {
-		$default_attributes = array("for"=>$for);
+	public function label($name, $for = null, array $attributes = null, $preserve_tags=false) {
+		$default_attributes = ["for" => $for];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		return $this->output("<label" . $this->buildAttributes($attributes) . ">" . $this->_($name, true, $preserve_tags) . "</label>" . $this->eol);
 	}
@@ -307,7 +306,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The text field specified, void if output enabled
 	 */
-	public function fieldText($name, $value=null, $attributes=array()) {
+	public function fieldText($name, $value = null, $attributes = []) {
 		return $this->output($this->fieldInput("input", "text", $name, $value, $attributes));
 	}
 	
@@ -319,7 +318,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The hidden field specified, void if output enabled
 	 */	
-	public function fieldHidden($name, $value=null, $attributes=array()) {
+	public function fieldHidden($name, $value = null, $attributes = []) {
 		return $this->output($this->fieldInput("input", "hidden", $name, $value, $attributes));
 	}
 	
@@ -331,8 +330,8 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The image field specified, void if output enabled
 	 */
-	public function fieldImage($name, $value=null, $attributes=array()) {
-		$default_attributes = array("src"=>"", "alt"=>$value);
+	public function fieldImage($name, $value = null, $attributes = []) {
+		$default_attributes = ["src" => "", "alt" => $value];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		return $this->output($this->fieldInput("input", "image", $name, $value, $attributes));
 	}
@@ -345,7 +344,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The reset field specified, void if output enabled
 	 */
-	public function fieldReset($name, $value=null, $attributes=array()) {
+	public function fieldReset($name, $value = null, $attributes = []) {
 		return $this->output($this->fieldInput("input", "reset", $name, $value, $attributes));
 	}
 
@@ -358,7 +357,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The checkbox field specified, void if output enabled
 	 */
-	public function fieldCheckbox($name, $value=null, $checked=false, $attributes=array()) {
+	public function fieldCheckbox($name, $value = null, $checked = false, $attributes = []) {
 		return $this->output($this->radioCheck("checkbox", $name, $value, $checked, $attributes));
 	}
 	
@@ -371,7 +370,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The radio field specified, void if output enabled
 	 */	
-	public function fieldRadio($name, $value=null, $checked=false, $attributes=array()) {
+	public function fieldRadio($name, $value = null, $checked = false, $attributes = []) {
 		return $this->output($this->radioCheck("radio", $name, $value, $checked, $attributes));
 	}
 
@@ -383,8 +382,8 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The textarea field, void if output enabled
 	 */
-	public function fieldTextarea($name, $value=null, $attributes=array()) {
-		$default_attributes = array("name"=>$name);
+	public function fieldTextarea($name, $value = null, $attributes = []) {
+		$default_attributes = ["name" => $name];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		
 		$html = "<textarea" . $this->buildAttributes($attributes) . ">" .
@@ -400,7 +399,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The password field, void if output enabled
 	 */
-	public function fieldPassword($name, $attributes=array()) {
+	public function fieldPassword($name, $attributes = [])) {
 		return $this->output($this->fieldInput("input", "password", $name, null, $attributes));
 	}
 	
@@ -411,7 +410,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The file field, void if output enabled
 	 */
-	public function fieldFile($name, $attributes=array()) {
+	public function fieldFile($name, $attributes = []) {
 		return $this->output($this->fieldInput("input", "file", $name, null, $attributes));
 	}
 
@@ -426,8 +425,8 @@ class Form extends Html {
 	 * 	
 	 * @return string The select field, void if output enabled
 	 */	
-	public function fieldSelect($name, $options=array(), $selected_value=null, $attributes=array(), $option_attributes=array()) {
-		$default_attributes = array("name"=>$name);
+	public function fieldSelect($name, $options = [], $selected_value = null, $attributes = [], $option_attributes = [])) {
+		$default_attributes = ["name" => $name];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		
 		$html = "<select" . $this->buildAttributes($attributes) . ">" . $this->eol .
@@ -447,7 +446,7 @@ class Form extends Html {
 	 * 
 	 * @return string The multi-select field, void if output enabled
 	 */		
-	public function fieldMultiSelect($name, $options=array(), $selected_values=array(), $attributes=array(), $option_attributes=array()) {
+	public function fieldMultiSelect($name, $options = [], $selected_values = [], $attributes = [], $option_attributes = []) {
 		$attributes['multiple'] = "multiple";
 		return $this->fieldSelect($name, $options, $selected_values, $attributes, $option_attributes);
 	}
@@ -460,7 +459,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The button field, void if output enabled
 	 */	
-	public function fieldButton($name, $value=null, $attributes=array()) {
+	public function fieldButton($name, $value = null, $attributes = []) {
 		return $this->output($this->fieldInput("button", "button", $name, $value, $attributes));
 	}
 	
@@ -472,7 +471,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The submit field, void if output enabled
 	 */		
-	public function fieldSubmit($name, $value=null, $attributes=array()) {
+	public function fieldSubmit($name, $value = null, $attributes = []) {
 		return $this->output($this->fieldInput("input", "submit", $name, $value, $attributes));
 	}
 	
@@ -486,8 +485,8 @@ class Form extends Html {
 	 * @param array $attributes A list of attributes to set for this field
 	 * @return string The input or button field of the given type
 	 */
-	private function fieldInput($tag, $type, $name, $value=null, $attributes=array()) {
-		$default_attributes = array("type"=>$type, "name"=>$name);
+	private function fieldInput($tag, $type, $name, $value = null, $attributes = []) {
+		$default_attributes = ["type" => $type, "name" => $name];
 		if ($value !== null)
 			$default_attributes['value'] = $value;
 
@@ -517,7 +516,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for each option field
 	 * @return string The option fields along with any optgroups
 	 */
-	private function selectOptions($options, $selected_values=array(), $attributes=array()) {
+	private function selectOptions($options, $selected_values = [], $attributes = []) {
 		$open_group_tag = false;
 		
 		if (!is_array($selected_values))
@@ -531,7 +530,7 @@ class Form extends Html {
 		if (is_array($options)) {
 			foreach ($options as $value => $name) {
 				
-				$attr = array();
+				$attr = [];
 				
 				// Allow multi-dimensional array in addition to name/value pairs
 				if (is_array($name)) {
@@ -581,7 +580,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The radio or checkbox field
 	 */		
-	private function radioCheck($type, $name, $value=null, $checked=false, $attributes=array()) {
+	private function radioCheck($type, $name, $value = null, $checked=false, $attributes = []) {
 		switch ($type) {
 			case "radio":
 			case "checkbox":
@@ -628,3 +627,4 @@ class Form extends Html {
 		return false;
 	}
 }
+?>

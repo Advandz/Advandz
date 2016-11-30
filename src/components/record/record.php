@@ -1,6 +1,6 @@
 <?php
 /**
- * General purpose Database access object
+ * General purpose Database access object.
  *
  * @package Advandz
  * @subpackage Advandz.components.record
@@ -73,7 +73,6 @@ class Record extends Model {
 	 * @var array All values, in the order added appended to the PDO::query() method
 	 */
 	public $values = array();
-	
 	
 	/**
 	 * Returns a stdClass object used to identify keyword values (i.e. DEFAULT)
@@ -1439,3 +1438,4 @@ class Record extends Model {
 		return implode(".", $parts);
 	}
 }
+?>

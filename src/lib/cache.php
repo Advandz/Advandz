@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles writing to and from the cache
+ * Handles writing to and from the cache.
  *
  * @package Advandz
  * @subpackage Advandz.lib

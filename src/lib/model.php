@@ -1,7 +1,7 @@
 <?php
 /**
  * This class establishes and maintains a connection to a PDO resource, and
- * provides methods for interacting with that resource
+ * provides methods for interacting with that resource.
  *
  * @package Advandz
  * @subpackage Advandz.lib
@@ -20,7 +20,6 @@ class Model {
 		PDO::ATTR_PERSISTENT => false,
 		PDO::ATTR_STRINGIFY_FETCHES => false
 	);
-	
 	/**
 	 * @var object PDO connection
 	 */
@@ -282,3 +281,4 @@ class Model {
 		}
 	}
 }
+?>

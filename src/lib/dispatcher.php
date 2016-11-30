@@ -196,3 +196,4 @@ class Dispatcher extends Controller {
 		}
 	}
 }
+?>

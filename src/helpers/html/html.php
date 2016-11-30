@@ -1,6 +1,6 @@
 <?php
 /**
- * Provides helper methods for dealing with HTML content
+ * Provides helper methods for dealing with HTML content.
  * 
  * @package Advandz
  * @subpackage Advandz.helpers.html
@@ -188,8 +188,8 @@ class Html {
 	 * @return string The content with hyperlinks as HTML
 	 */
 	public function hyperlink($content) {
-		$pattern = array();
-		$replacement = array();
+		$pattern = [];
+		$replacement = [];
 		
 		// Convert email addresses to links
 		$pattern[] = "/[a-zA-Z0-9!#$%\*\/?\|^\{\}`~&'\+=_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10}/";
@@ -206,3 +206,4 @@ class Html {
 		return preg_replace($pattern, $replacement, $content);
 	}
 }
+?>

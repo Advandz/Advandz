@@ -9,7 +9,6 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class Date {
-	
 	const ATOM   = "Y-m-d\TH:i:sP";
 	const COOKIE = "l, d-M-y H:i:s T";
 	const ISO8601 = "Y-m-d\TH:i:sO";
@@ -26,13 +25,13 @@ class Date {
 	 * @var array Common date formats, predefined for PHP's date function, overwritable
 	 * by the constructor
 	 */
-	private $formats = array(
+	private $formats = [
 		'date' => "F j, Y",
 		'day' => "l, F j, Y",
 		'month' => "F Y",
 		'year' => "Y",
 		'date_time' => "M d y g:i:s A",
-	);
+	];
 	
 	private $timezone_from;
 	private $timezone_to;
@@ -63,6 +62,7 @@ class Date {
 	public function setTimezone($from=null, $to=null) {
 		$this->timezone_from = $from;
 		$this->timezone_to = $to;
+
 		return $this;
 	}
 	
@@ -79,6 +79,7 @@ class Date {
 	 */
 	public function setFormats(array $formats=null) {
 		$this->formats = array_merge($this->formats, (array)$formats);
+
 		return $this;
 	}
 	
@@ -103,20 +104,20 @@ class Date {
 	 * @return string The date range, null on error
 	 */
 	public function dateRange($start, $end, $formats=null) {
-		$default_formats = array(
-			'start'=>array(
-				'same_day'=>"F j, Y",
-				'same_month'=>"F j-",
-				'same_year'=>"F j - ",
+		$default_formats = [
+			'start' => [
+				'same_day' => "F j, Y",
+				'same_month' => "F j-",
+				'same_year' => "F j - ",
 				'other' => "F j, Y - "
-			),
-			'end'=>array(
-				'same_day'=>"",
-				'same_month'=>"j, Y",
-				'same_year'=>"F j, Y",
+			],
+			'end' => [
+				'same_day' => "",
+				'same_month' => "j, Y",
+				'same_year' => "F j, Y",
 				'other' => "F j, Y"
-			)
-		);
+			]
+		];
 		
 		$formats = $this->mergeArrays($default_formats, (array)$formats);
 
@@ -168,6 +169,7 @@ class Date {
 				
 			return $formatted_date;
 		}
+
 		return null;
 	}
 	
@@ -180,6 +182,7 @@ class Date {
 	public function toTime($date) {
 		if (!is_numeric($date))
 			$date = strtotime($date);
+
 		return $date;
 	}
 
@@ -193,11 +196,12 @@ class Date {
 	 * @return array An array of key/value pairs representing the range of months
 	 */
 	public function getMonths($start=1, $end=12, $key_format="m", $value_format="F") {
-		$months = array();
+		$months = [];
 		for ($i=$start; $i<=$end; $i++) {
 			$time = strtotime(date("Y-" . $i . "-01"));
 			$months[date($key_format, $time)] = date($value_format, $time);
 		}
+
 		return $months;
 	}
 	
@@ -211,11 +215,12 @@ class Date {
 	 * @return array An array of key/value pairs representing the range of years
 	 */
 	public function getYears($start, $end, $key_format="y", $value_format="Y") {
-		$years = array();
+		$years = [];
 		for ($i=$start; $i<=$end; $i++) {
 			$time = strtotime(date($i . "-01-01"));
 			$years[date($key_format, $time)] = date($value_format, $time);
 		}
+
 		return $years;		
 	}
 	
@@ -230,6 +235,7 @@ class Date {
 			$cur_timezone = date_default_timezone_get();
 			date_default_timezone_set($timezone);
 		}
+
 		return $cur_timezone;
 	}
 	
@@ -242,13 +248,13 @@ class Date {
 	public function getTimezones($country=null) {
 		
 		// Hold the array of timezone data
-		$tz_data = array();
+		$tz_data = [];
 		
 		// Only allow time zones to be provided if PHP supports them
 		if (!class_exists("DateTimeZone") || !method_exists("DateTimeZone", "listAbbreviations") || !method_exists("DateTimeZone", "listIdentifiers"))
 			return $tz_data;
 
-		$accepted_zones = array_flip(array("Africa","America","Antarctica","Arctic","Asia","Atlantic","Australia","Europe","Indian","Pacific","UTC"));
+		$accepted_zones = array_flip(["Africa","America","Antarctica","Arctic","Asia","Atlantic","Australia","Europe","Indian","Pacific","UTC"]);
 
 		if ($country && defined("DateTimeZone::PER_COUNTRY"))
 			$listing = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country);
@@ -268,9 +274,8 @@ class Date {
 			// Use transitions if possible
 			if ($use_transition) {
 				$zone_info = $zone->getTransitions(time(), time());
-			}
-			// Fall back to using old/slower/incomplete timezone calculations
-			else {
+			} else {
+				// Fall back to using old/slower/incomplete timezone calculations
 				$dateTime = new DateTime(); 
 				$dateTime->setTimeZone($zone); 
 				$abbr = $dateTime->format('T'); 
@@ -279,15 +284,15 @@ class Date {
 					continue;
 				
 				$temp = $all_abbr[strtolower($abbr)];
-				$zone_info = array(
-					array(
+				$zone_info = [
+					[
 						'ts' => time(),
 						'time' => $dateTime->format('Y-m-d\TH:i:sO'),
 						'offset' => $temp[0]['offset'],
 						'isdst' => $temp[0]['dst'],
 						'abbr' => $abbr
-					)
-				);
+					]
+				];
 				unset($temp);
 			}
 			
@@ -335,13 +340,13 @@ class Date {
 		$offset_h = ($offset < 0 ? true : false ? "-" : "+") . $offset_h;
 		$offset_m = str_pad(abs((int)(($offset/60)%60)), 2, '0', STR_PAD_LEFT); // offset in mins
 		
-		$timezone = array(
+		$timezone = [
 			'id' => $identifier,
 			'name' => str_replace('_', ' ', isset($zone[1]) ? $zone[1] : $zone[0]),
 			'offset' => (int)$offset,
 			'utc' => $offset_h . ":" . $offset_m . (isset($zone_info['isdst']) && $zone_info['isdst'] ? " DST" : ""),
 			'zone' => $zone
-		);
+		];
 
 		return $timezone;
 	}
@@ -385,11 +390,14 @@ class Date {
 	private function mergeArrays(array $arr1, array $arr2) {
 
 		foreach($arr2 as $key => $value) {
-		  if (array_key_exists($key, $arr1) && is_array($value))
-			$arr1[$key] = $this->mergeArrays($arr1[$key], $arr2[$key]);
-		  else
-			$arr1[$key] = $value;
-		}	  
+			if (array_key_exists($key, $arr1) && is_array($value)){
+				$arr1[$key] = $this->mergeArrays($arr1[$key], $arr2[$key]);
+			} else {
+				$arr1[$key] = $value;
+			}
+		}
+
 		return $arr1;
 	}
 }
+?>

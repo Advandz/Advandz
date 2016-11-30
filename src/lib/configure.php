@@ -16,7 +16,7 @@ final class Configure {
 	/**
 	 * @var array All configured settings handled by this class
 	 */
-	private static $config = array(); 
+	private static $config = []; 
 	
 	/**
 	 * Protected constructor to prevent instance creation
@@ -78,7 +78,7 @@ final class Configure {
 	 * @param string $file The file name in CONFIGDIR to load (without extension)
 	 * @param string $config_dir The directory from which to load the given config file, defaults to CONFIGDIR
 	 */
-	public static function load($file, $config_dir=CONFIGDIR) {
+	public static function load($file, $config_dir = CONFIGDIR) {
 		$file .= ".php";
 		
 		if (file_exists($config_dir . $file))
@@ -103,3 +103,4 @@ final class Configure {
 		error_reporting($level);
 	}
 }
+?>

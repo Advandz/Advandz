@@ -1,10 +1,7 @@
 <?php
-Loader::load(HELPERDIR . "html" . DS . "html.php");
-
 /**
- * Javascript Helper, requires Html Helper
- *
- * Facilitates rendering/loading javascript into a view
+ * Provides helper methods and facilitates the dealing with rendering/loading
+ * javascript into a view.
  * 
  * @package Advandz
  * @subpackage Advandz.helpers.javascript
@@ -12,15 +9,17 @@ Loader::load(HELPERDIR . "html" . DS . "html.php");
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+Loader::load(HELPERDIR . "html" . DS . "html.php");
+
 class Javascript extends Html {
 	/**
 	 * @var array A multi-dimensional array of locations and their respective javascript files
 	 */
-	private $js_files = array();
+	private $js_files = [];
 	/**
 	 * @var array An array of inline javascript blocks
 	 */
-	private $js_inline = array();
+	private $js_inline = [];
 	
 	/**
 	 * @var string The default path to use for javascript files
@@ -91,7 +90,7 @@ class Javascript extends Html {
 		if ($path == null)
 			$path = $this->default_path;
 		
-		$this->js_files[$location][] = array("file"=>$path . $file, "condition"=>$condition, "hidden"=>$hidden);
+		$this->js_files[$location][] = ["file" => $path . $file, "condition" => $condition, "hidden" => $hidden];
 		
 		return $this;
 	}
@@ -103,7 +102,7 @@ class Javascript extends Html {
 	 * @return Javascript Returns the instance of this object
 	 */
 	public function setInline($data, $condition=null, $hidden=true) {
-		$this->js_inline[] = array("data"=>$data, "condition"=>$condition, "hidden"=>$hidden);
+		$this->js_inline[] = ["data" => $data, "condition" => $condition, "hidden" => $hidden];
 		
 		return $this;
 	}
@@ -114,7 +113,7 @@ class Javascript extends Html {
 	 * @return Javascript Returns the instance of this object
 	 */
 	public function unsetFiles() {
-		$this->js_files = array();
+		$this->js_files = [];
 		
 		return $this;
 	}
@@ -125,8 +124,9 @@ class Javascript extends Html {
 	 * @return Javascript Returns the instance of this object
 	 */
 	public function unsetInline() {
-		$this->js_inline = array();
+		$this->js_inline = [];
 		
 		return $this;
 	}
 }
+?>

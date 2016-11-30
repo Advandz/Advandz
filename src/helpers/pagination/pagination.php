@@ -1,12 +1,8 @@
 <?php
 /**
  * Provides helper methods for dealing with Page Navigation content.
- *
- * The default implementation assumes the following styles:
- *
- * div.pagination { width: 100%; margin: 0 auto; text-align: center; }
- * div.pagination ul, div.pagination li { display: inline; margin: 0; padding: 0; }
- * div.pagination li.current { font-weight: bold; }
+ * NOTE: This helper is designed to work with the included CSS a.k.a
+ * Advandz-Framework.css or Bootstrap.
  * 
  * @package Advandz
  * @subpackage Advandz.helpers.pagination
@@ -43,9 +39,9 @@ class Pagination extends Html {
 	 * @param array $get The GET parameters for the current request
 	 * @param array $format Format settings to overwrite default settings with (optional)
 	 */
-	public function __construct(array $get=array(), array $format=array()) {
+	public function __construct(array $get=[], array $format=[]) {
 		// Load the language for the pagination
-		Language::loadLang("pagination", null, dirname(__FILE__) . DS . "language" . DS);
+		Language::loadLang("pagination");
 		
 		$this->setGet($get);
 		
@@ -60,8 +56,8 @@ class Pagination extends Html {
 				'first' => array(
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.first_link", true),
-					'attributes' => array(),
-					'link_attributes' => array(),
+					'attributes' => [],
+					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
 				),
@@ -69,8 +65,8 @@ class Pagination extends Html {
 				'last' => array(
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.last_link", true),
-					'attributes' => array(),
-					'link_attributes' => array(),
+					'attributes' => [],
+					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
 				),
@@ -78,8 +74,8 @@ class Pagination extends Html {
 				'next' => array(
 					'tag' => "li",
 					'name' => Language::_("Pagination.next_link", true),
-					'attributes' => array(),
-					'link_attributes' => array(),
+					'attributes' => [],
+					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
 				),
@@ -87,29 +83,29 @@ class Pagination extends Html {
 				'prev' => array(
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.prev_link", true),
-					'attributes' => array(),
-					'link_attributes' => array(),
+					'attributes' => [],
+					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
 				),
 				// Surround for the set of links
 				'surround' => array(
 					'tag' => "ul",
-					'attributes' => array(),
-					'link_attributes' => array()
+					'attributes' => [],
+					'link_attributes' => []
 				),
 				// The currently active link
 				'current' => array(
 					'tag' => "li",
 					'attributes' => array('class'=>"current"),
-					'link_attributes' => array(),
+					'link_attributes' => [],
 					'link' => false		// disable linking
 				),
 				// All numeric links
 				'numerical' => array(
 					'tag' => "li",
-					'attributes' => array(),
-					'link_attributes' => array()
+					'attributes' => [],
+					'link_attributes' => []
 				)
 			),
 			'merge_get' => true, 		// merge get params from URI with those set in 'params'
@@ -123,7 +119,7 @@ class Pagination extends Html {
 				'page' => "page",
 				'per_page' => "per_page"
 			),
-			'params' => array()			// key => value pairs of additional uri query parameters (if set, overrides $get params)
+			'params' => []			// key => value pairs of additional uri query parameters (if set, overrides $get params)
 		);
 			
 		$this->settings = $this->mergeArrays($this->settings, $format);
@@ -447,3 +443,4 @@ class Pagination extends Html {
 		echo $html;
 	}	
 }
+?>

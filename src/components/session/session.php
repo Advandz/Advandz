@@ -1,26 +1,52 @@
 <?php
-Loader::load(COMPONENTDIR . "record" . DS . "record.php");
-Configure::load("session");
-
 /**
- * A database powered Session driver. Requires the Record component
- *
+ * A database powered Session driver. Requires the Record component.
+ * 
  * @package Advandz
  * @subpackage Advandz.components.session
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+Loader::load(COMPONENTDIR . "record" . DS . "record.php");
+Configure::load("session");
+
 class Session {
+	/**
+	 * @var Record Record object class
+	 */
 	private $Record;
+	/**
+	 * @var integer Time to Live (seconds)
+	 */
 	private $ttl;
+	/**
+	 * @var string Name of the session table
+	 */
 	private $tbl;
+	/**
+	 * @var string Name of the session ID field
+	 */
 	private $tblid;
+	/**
+	 * @var string Name of the session expire date field
+	 */
 	private $tblexpire;
+	/**
+	 * @var string Name of the session value field
+	 */
 	private $tblvalue;
+	/**
+	 * @var string The cookie session ID
+	 */
 	private $csid;
+	/**
+	 * @var string The session ID
+	 */
 	private $sid;
-	
+	/**
+	 * @var integer Session instances
+	 */
 	private static $instances = 0;
 
 	/**
@@ -51,9 +77,9 @@ class Session {
 	}
 
 	/**
-	 *  Return the session ID
+	 * Return the session ID
 	 *  
-	 *  @return string The session ID
+	 * @return string The session ID
 	 */
 	public function getSid() {
 		return $this->sid;
@@ -192,18 +218,18 @@ class Session {
 	}
 
 	/**
-	 *  Sets the cookie session ID
+	 * Sets the cookie session ID
 	 *
-	 *  @param string $csid The cookie session ID
+	 * @param string $csid The cookie session ID
 	 */
 	private function setCsid($csid) {
 		$this->csid = $csid;
 	}
 
 	/**
-	 *  Reawake the session using the given cookie session id
+	 * Reawake the session using the given cookie session id
 	 *  
-	 *  @param string $cisd The cookie session ID
+	 * @param string $cisd The cookie session ID
 	 */
 	private function setKeepAlive($csid) {
 		$row = $this->Record->select($this->tblvalue)->from($this->tbl)->
@@ -219,10 +245,10 @@ class Session {
 	}
 
 	/**
-	 *  Open the given session. Not implemented, included only for compatibility
+	 * Open the given session. Not implemented, included only for compatibility
 	 *
-	 *  @param string $session_path The path to the session
-	 *  @param string $session_name The name of the session
+	 * @param string $session_path The path to the session
+	 * @param string $session_name The name of the session
 	 */
 	private function sessionOpen($session_path, $session_name) {
 	
@@ -295,3 +321,4 @@ class Session {
 		return $this->Record->affectedRows();
 	}
 }
+?>

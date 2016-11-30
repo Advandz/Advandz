@@ -1,6 +1,6 @@
 <?php
 /**
- * Provides helper methods for creating XML documents from arrays and objects
+ * Provides helper methods for creating XML documents from arrays and objects.
  * 
  * @package Advandz
  * @subpackage Advandz.helpers.xml
@@ -26,8 +26,8 @@ class Xml {
 	 * @return string The converted string
 	 */
 	public function xmlEntities($str) {
-		static $search_chars = array();
-		static $replace_chars = array();
+		static $search_chars = [];
+		static $replace_chars = [];
 		
 		if (empty($search_chars)) {
 			// Replace accepted whitespace characters. All other low ordered bytes are
@@ -122,3 +122,4 @@ class Xml {
 		return $xml;
 	}
 }
+?>

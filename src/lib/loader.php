@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles the loading of various files and objects
+ * Handles the loading of various files and objects.
  *
  * @package Advandz
  * @subpackage Advandz.lib
@@ -9,7 +9,6 @@
  * @author The Advandz Team <team@advandz.com>
  */
 final class Loader {
-	
 	/**
 	 * Protected constructor to prevent instance creation
 	 */
@@ -271,3 +270,4 @@ final class Loader {
 		}
 	}
 }
+?>

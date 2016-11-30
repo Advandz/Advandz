@@ -299,7 +299,7 @@ class Controller {
 	 *
 	 * @param string $uri The URI or URL to redirect to. Default is WEBDIR
 	 */
-	protected static final function redirect($uri=WEBDIR) {
+	protected static final function redirect($uri = WEBDIR) {
 		$parts = parse_url($uri);
 		$relative = true;
 		if (substr($uri, 0, 1) == "/")
@@ -325,3 +325,4 @@ class Controller {
 		$this->structure->setDefaultView($path);
 	}
 }
+?>

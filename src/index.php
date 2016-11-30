@@ -9,37 +9,53 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+class Advandz {
+    /**
+     * The framework constructor.
+     */
+	final public function __construct() {
+		// Debugger
+		include(dirname(__FILE__) . "/debugger/autoload.php");
 
-include(dirname(__FILE__) . "/debugger/autoload.php");
-$start = microtime(true);
+		// Benchmark counter
+		$start = microtime(true);
 
-try {
-	include(dirname(__FILE__) . "/lib/init.php");
-	
-	// Dispatch the Web request
-	if (!empty($_SERVER['REQUEST_URI']))
-		Dispatcher::dispatch($_SERVER['REQUEST_URI']);
-	// Dispatch the CLI request
-	else
-		Dispatcher::dispatchCli($argv);
-}
-catch (Exception $e) {
-	try {
-		// Attempt to raise any error, gracefully
-		Dispatcher::raiseError($e);
+		// Initialize system
+		try {
+			// Load framework
+			include(dirname(__FILE__) . "/lib/init.php");
+			
+			// Dispatch the Web request
+			if (!empty($_SERVER['REQUEST_URI'])){
+				Dispatcher::dispatch($_SERVER['REQUEST_URI']);
+			} else {
+				// Dispatch the CLI request
+				Dispatcher::dispatchCli($argv);
+			}
+		} catch (Exception $e) {
+			try {
+				// Attempt to raise any error, gracefully
+				Dispatcher::raiseError($e);
+			} catch (Exception $e) {
+				// Print stack trace if Dispatcher can't raise the error
+				if (Configure::get("System.debug")){
+					echo $e->getMessage() . " on line <strong>" . $e->getLine() .
+						"</strong> in <strong>" . $e->getFile() . "</strong>\n" .
+						"<br />Printing Stack Trace:<br />" . nl2br($e->getTraceAsString());
+				} else {
+					echo $e->getMessage();
+				}
+			}
+		}
+
+		// Stop benchmark counter
+		$end = microtime(true);
+
+		// Display rendering time if benchmarking is enabled
+		if (Configure::get("System.benchmark"))
+			echo "execution time: " . ($end - $start) . " seconds";
 	}
-	catch (Exception $e) {
-		if (Configure::get("System.debug"))
-			echo $e->getMessage() . " on line <strong>" . $e->getLine() .
-				"</strong> in <strong>" . $e->getFile() . "</strong>\n" .
-				"<br />Printing Stack Trace:<br />" . nl2br($e->getTraceAsString());
-		else
-			echo $e->getMessage();
-	}
 }
 
-$end = microtime(true);
-
-// Display rendering time if benchmarking is enabled
-if (Configure::get("System.benchmark"))
-	echo "execution time: " . ($end-$start) . " seconds";
+$Advandz = new Advandz();
+?>

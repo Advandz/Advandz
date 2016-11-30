@@ -10,9 +10,9 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class Advandz {
-    /**
-     * The framework constructor.
-     */
+	/**
+	 * The framework constructor.
+	 */
 	final public function __construct() {
 		// Debugger
 		include(dirname(__FILE__) . "/debugger/autoload.php");

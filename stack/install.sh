@@ -279,12 +279,7 @@ if [ "${option}" = "1" ]; then
     wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
     dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
     sudo apt-get update
-
-    #debconf-set-selections <<< "percona-server percona-server/root_password password $PERCONA_ROOT_PASSWORD"
-    #debconf-set-selections <<< "percona-server percona-server/root_password_again password $PERCONA_ROOT_PASSWORD"
-
     sudo DEBIAN_FRONTEND=noninteractive apt-get -y install percona-server-server-5.7
-
     apt-get -fy install
     cd ..
     rm -rf percona
@@ -294,15 +289,10 @@ if [ "${option}" = "1" ]; then
     clear;
     echo "Installing PowerDNS..."
     echo "=================================";
+    mysql -u root -e "CREATE DATABASE powerdns;"
+    mysql -u root -e "GRANT ALL ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY '$POWERDNS_PASSWORD';"
+    mysql -u root -e "FLUSH PRIVILEGES;"
     {
-        echo "CREATE DATABASE powerdns;";
-        echo " ";
-        echo "GRANT ALL ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY '$POWERDNS_PASSWORD';";
-        echo " ";
-        echo "FLUSH PRIVILEGES;";
-        echo " ";
-        echo "USE powerdns;"
-        echo " ";
         echo "CREATE TABLE domains (";
         echo "id INT auto_increment,";
         echo "name VARCHAR(255) NOT NULL,";
@@ -338,8 +328,7 @@ if [ "${option}" = "1" ]; then
         echo "account VARCHAR(40) DEFAULT NULL";
         echo ");";
     } >powerdns.sql
-    #mysql -u root -p$PERCONA_ROOT_PASSWORD "powerdns" < "powerdns.sql"
-    mysql -u root -p "powerdns" < "powerdns.sql"
+    mysql -u root "powerdns" < "powerdns.sql"
     rm -rf powerdns.sql
     export DEBIAN_FRONTEND=noninteractive
     apt-get install -y pdns-server pdns-backend-mysql
@@ -357,6 +346,11 @@ if [ "${option}" = "1" ]; then
 
     # Finalizing 
     /etc/init.d/lighttpd restart
+
+    # Set Root Password for Percona
+    sudo /etc/init.d/mysql stop
+    #mysqld_safe --skip-grant-tables & mysql -u root -e "USE mysql; UPDATE user SET authentication_string=PASSWORD(\"Metabee5\") WHERE User='root'; FLUSH privileges;"
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
 
 elif [ "${option}" = "2" ]; then
     echo "Not Implemented";

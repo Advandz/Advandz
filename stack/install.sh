@@ -276,11 +276,10 @@ if [ "${option}" = "1" ]; then
         dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
         sudo apt-get update
 
-        debconf-set-selections <<< "percona-server percona-server/root_password password $PERCONA_ROOT_PASSWORD"
-        debconf-set-selections <<< "percona-server percona-server/root_password_again password $PERCONA_ROOT_PASSWORD"
-        export DEBIAN_FRONTEND=noninteractive
+        #debconf-set-selections <<< "percona-server percona-server/root_password password $PERCONA_ROOT_PASSWORD"
+        #debconf-set-selections <<< "percona-server percona-server/root_password_again password $PERCONA_ROOT_PASSWORD"
 
-        sudo apt-get install percona-server-server-5.7
+        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install percona-server-server-5.7
 
         apt-get -fy install
         cd ..
@@ -335,7 +334,8 @@ if [ "${option}" = "1" ]; then
             echo "account VARCHAR(40) DEFAULT NULL";
             echo ");";
         } >powerdns.sql
-        mysql -u root -p$PERCONA_ROOT_PASSWORD "powerdns" < "powerdns.sql"
+        #mysql -u root -p$PERCONA_ROOT_PASSWORD "powerdns" < "powerdns.sql"
+        mysql -u root -p "powerdns" < "powerdns.sql"
         rm -rf powerdns.sql
         export DEBIAN_FRONTEND=noninteractive
         apt-get install -y pdns-server pdns-backend-mysql

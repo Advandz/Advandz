@@ -63,6 +63,7 @@ if [ "${option}" = "1" ]; then
     #
     # Ubuntu Screen
     #
+    clear;
     echo "o------------------------------------------------------------------o";
     echo "| Advandz Stack Installer                                     v1.0 |";
     echo "o------------------------------------------------------------------o";
@@ -101,6 +102,7 @@ if [ "${option}" = "1" ]; then
         exit;
     elif [ "${option}" = "I" ]; then
         # Install HHVM
+        clear;
         echo "Installing HHVM...";
         echo "=================================";
         sudo apt-get install software-properties-common
@@ -113,6 +115,7 @@ if [ "${option}" = "1" ]; then
         clear;
         echo "Installing Lighttpd...";
         echo "=================================";
+        apt-get -y remove apache2*
         apt-get -y install lighttpd
 
         # Calculate Max FCGI processes
@@ -269,13 +272,16 @@ if [ "${option}" = "1" ]; then
         apt-get -y install zlib1g-dev
         mkdir percona
         cd percona
-        wget https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.16-10/binary/debian/xenial/x86_64/Percona-Server-5.7.16-10-ra0c7d0d-$(lsb_release -sc)-x86_64-bundle.tar
-        tar -xvf Percona-Server-5.7.16-10-ra0c7d0d-$(lsb_release -sc)-x86_64-bundle.tar
-        rm -rf Percona-Server-5.7.16-10-ra0c7d0d-$(lsb_release -sc)-x86_64-bundle.tar
+        wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
+        dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+        sudo apt-get update
+
         debconf-set-selections <<< "percona-server percona-server/root_password password $PERCONA_ROOT_PASSWORD"
         debconf-set-selections <<< "percona-server percona-server/root_password_again password $PERCONA_ROOT_PASSWORD"
         export DEBIAN_FRONTEND=noninteractive
-        sudo dpkg -i *.deb
+
+        sudo apt-get install percona-server-server-5.7
+
         apt-get -fy install
         cd ..
         rm -rf percona
@@ -358,11 +364,11 @@ if [ "${option}" = "1" ]; then
         echo "|   Please copy and save the following data in a safe place.       |";
         echo "|                                                                  |";
         echo "|   Percona Root User: root                                        |";
-        echo "|   Percona Root Password: $PERCONA_ROOT_PASSWORD                            |";
+        echo "|   Percona Root Password: $PERCONA_ROOT_PASSWORD                              |";
         echo "|                                                                  |";
         echo "|   PowerDNS Database User: powerdns                               |";
         echo "|   PowerDNS Database Name: powerdns                               |";
-        echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                           |";
+        echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                         |";
         echo "|                                                                  |";
         echo "|   You can access to http://$SERVER_IP/?installed             |";
         echo "|                                                                  |";

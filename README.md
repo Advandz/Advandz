@@ -5,7 +5,7 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 
 ## Requirements ##
 
-* PHP 5.5 or greater
+* PHP 5.5 or greater or HHVM 3.6.0 or greater
 
 ## Getting Started ##
 

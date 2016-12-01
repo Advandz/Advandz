@@ -2494,23 +2494,22 @@ ldap.max_links = -1
     firewall-cmd --reload
 
     {
-        echo"
-        #######################################################################
-        ##
-        ##  FastCGI Module
-        ## ---------------
-        ##
-        ## See http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFastCGI
-        ##
-        server.modules += ( \"mod_fastcgi\" )
+        echo "#######################################################################
+##
+##  FastCGI Module
+## ---------------
+##
+## See http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFastCGI
+##
+server.modules += ( \"mod_fastcgi\" )
 
-        fastcgi.server += ( \".php\" =>
-                ((
-                        \"host\" => \"127.0.0.1\",
-                        \"port\" => \"9000\",
-                        \"broken-scriptfilename\" => \"enable\"
-                ))
-        )";
+fastcgi.server += ( \".php\" =>
+    ((
+        \"host\" => \"127.0.0.1\",
+        \"port\" => \"9000\",
+        \"broken-scriptfilename\" => \"enable\"
+    ))
+)";
     } >/etc/lighttpd/conf.d/fastcgi.conf
 
     {

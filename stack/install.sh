@@ -86,16 +86,16 @@ echo "|                                                                  |";
 echo "o------------------------------------------------------------------o";
 echo " ";
 echo "Choose an option: "
-read option;
+read choose;
 
 # Validate option
-until [ "${option}" = "C" ] || [ "${option}" = "I" ]; do
+until [ "${choose}" = "C" ] || [ "${choose}" = "I" ]; do
     echo "Please enter a valid option: ";
-    read option;
+    read choose;
 done
 
 # Abort installation
-if [ "${option}" = "C" ]; then
+if [ "${choose}" = "C" ]; then
     exit;
 
 # Option actions

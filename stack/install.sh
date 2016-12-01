@@ -97,6 +97,7 @@ done
 # Abort installation
 if [ "${choose}" = "C" ]; then
     exit;
+if
 
 # Option actions
 if [ "${option}" = "1" ]; then

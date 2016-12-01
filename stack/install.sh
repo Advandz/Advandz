@@ -19,7 +19,7 @@
 #
 SERVER_RAM=$(grep MemTotal /proc/meminfo | awk '{print $2}');
 SERVER_RAM_GB_INT=$(expr $SERVER_RAM / 1000000);
-SERVER_IP=$(curl -s http://checkip.dyndns.org/ | grep -o "[[:digit:].]\+");
+SERVER_HOSTNAME=$(hostname);
 PERCONA_ROOT_PASSWORD=$(date +%s | sha256sum | base64 | head -c 10 ; echo);
 sleep 1;
 POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 10 ; echo);
@@ -370,7 +370,7 @@ if [ "${option}" = "1" ]; then
         echo "|   PowerDNS Database Name: powerdns                               |";
         echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                         |";
         echo "|                                                                  |";
-        echo "|   You can access to http://$SERVER_IP/?installed             |";
+        echo "|   You can access to http://$SERVER_HOSTNAME/  ";
         echo "|                                                                  |";
         echo "|   NOTE: Before restart your server we recommend execute          |";
         echo "|   \"mysql_secure_installation\" for secure your Percona Server.    |";

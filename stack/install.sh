@@ -20,9 +20,9 @@
 SERVER_RAM=$(grep MemTotal /proc/meminfo | awk '{print $2}');
 SERVER_RAM_GB_INT=$(expr $SERVER_RAM / 1000000);
 SERVER_HOSTNAME=$(hostname);
-PERCONA_ROOT_PASSWORD=$(date +%s | sha256sum | base64 | head -c 10 ; echo);
+PERCONA_ROOT_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 sleep 1;
-POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 10 ; echo);
+POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 
 #
 # Main Screen
@@ -40,8 +40,6 @@ echo "|   ============================================================   |";
 echo "|   | [1] | Ubuntu                   | 14.04/15.04/15.10/16.04 |   |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | [2] | CentOS/RHEL/Oracle Linux | 7                       |   |";
-echo "|   ------------------------------------------------------------   |";
-echo "|   | [3] | Debian                   | 7                       |   |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | [4] | Debian                   | 8                       |   |";
 echo "|   ------------------------------------------------------------   |";
@@ -2738,7 +2736,7 @@ include \"conf.d/fastcgi.conf\"
     systemctl restart php-fpm
     systemctl restart lighttpd
 
-# Installing Percona Server
+    # Installing Percona Server
     clear;
     echo "==================================";
     echo " Installing Percona Server..."
@@ -2749,7 +2747,12 @@ include \"conf.d/fastcgi.conf\"
     yum -y install Percona-Server-server-57
     chkconfig --levels 235 mysqld on
     systemctl start mysql
-    mysqladmin -u root password $PERCONA_ROOT_PASSWORD
+
+    # Get Percona Password
+    PERCONA_ROOT_PASSWORD_TEMP=$(cat /var/log/mysqld.log |grep generated);
+    PERCONA_ROOT_PASSWORD_DELIMITER="#";
+    PERCONA_ROOT_PASSWORD_REPLACED=${PERCONA_ROOT_PASSWORD_TEMP/: /$PERCONA_ROOT_PASSWORD_DELIMITER};
+    PERCONA_ROOT_PASSWORD=$(cut -d "#" -f 2 <<< "$PERCONA_ROOT_PASSWORD_REPLACED");
 
     # Installing PowerDNS
     clear;
@@ -2817,11 +2820,6 @@ include \"conf.d/fastcgi.conf\"
     systemctl restart pdns.service
     systemctl enable pdns.service
 
-    # Set Root Password for Percona
-    systemctl stop mysql
-    mysql -uroot -p$PERCONA_ROOT_PASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
-    systemctl start mysql
-
 elif [ "${option}" = "3" ]; then
     echo "Not Implemented";
 elif [ "${option}" = "4" ]; then
@@ -2840,11 +2838,11 @@ echo "|   Advandz Stacks has been installed succesfully.                 |";
 echo "|   Please copy and save the following data in a safe place.       |";
 echo "|                                                                  |";
 echo "|   Percona Root User: root                                        |";
-echo "|   Percona Root Password: $PERCONA_ROOT_PASSWORD                              |";
+echo "|   Percona Root Password: $PERCONA_ROOT_PASSWORD                            |";
 echo "|                                                                  |";
 echo "|   PowerDNS Database User: powerdns                               |";
 echo "|   PowerDNS Database Name: powerdns                               |";
-echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                         |";
+echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                       |";
 echo "|                                                                  |";
 echo "|   You can access to http://$SERVER_HOSTNAME/  ";
 echo "|                                                                  |";

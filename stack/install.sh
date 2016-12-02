@@ -281,7 +281,6 @@ if [ "${option}" = "1" ]; then
     apt-get -fy install
     cd ..
     rm -rf percona
-    clear;
     
     # Installing PowerDNS
     clear;
@@ -2738,6 +2737,90 @@ include \"conf.d/fastcgi.conf\"
 
     systemctl restart php-fpm
     systemctl restart lighttpd
+
+# Installing Percona Server
+    clear;
+    echo "==================================";
+    echo " Installing Percona Server..."
+    echo "==================================";
+    yum -y remove mariadb*
+    yum -y remove mysql*
+    yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
+    yum -y install Percona-Server-server-57
+    chkconfig --levels 235 mysqld on
+    systemctl start mysql
+    mysqladmin -u root password $PERCONA_ROOT_PASSWORD
+
+    # Installing PowerDNS
+    clear;
+    echo "==================================";
+    echo " Installing PowerDNS..."
+    echo "==================================";
+    mysql -u root -p$PERCONA_ROOT_PASSWORD -e "CREATE DATABASE powerdns;"
+    mysql -u root -p$PERCONA_ROOT_PASSWORD -e "GRANT ALL ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY '$POWERDNS_PASSWORD';"
+    mysql -u root -p$PERCONA_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
+    {
+        echo "CREATE TABLE domains (";
+        echo "id INT auto_increment,";
+        echo "name VARCHAR(255) NOT NULL,";
+        echo "master VARCHAR(128) DEFAULT NULL,";
+        echo "last_check INT DEFAULT NULL,";
+        echo "type VARCHAR(6) NOT NULL,";
+        echo "notified_serial INT DEFAULT NULL,";
+        echo "account VARCHAR(40) DEFAULT NULL,";
+        echo "primary key (id)";
+        echo ");";
+        echo " ";
+        echo "CREATE UNIQUE INDEX name_index ON domains(name);";
+        echo " ";
+        echo "CREATE TABLE records (";
+        echo "id INT auto_increment,";
+        echo "domain_id INT DEFAULT NULL,";
+        echo "name VARCHAR(255) DEFAULT NULL,";
+        echo "type VARCHAR(6) DEFAULT NULL,";
+        echo "content VARCHAR(255) DEFAULT NULL,";
+        echo "ttl INT DEFAULT NULL,";
+        echo "prio INT DEFAULT NULL,";
+        echo "change_date INT DEFAULT NULL,";
+        echo "primary key(id)";
+        echo ");";
+        echo " ";
+        echo "CREATE INDEX rec_name_index ON records(name);";
+        echo "CREATE INDEX nametype_index ON records(name,type);";
+        echo "CREATE INDEX domain_id ON records(domain_id);";
+        echo " ";
+        echo "CREATE TABLE supermasters (";
+        echo "ip VARCHAR(25) NOT NULL,";
+        echo "nameserver VARCHAR(255) NOT NULL,";
+        echo "account VARCHAR(40) DEFAULT NULL";
+        echo ");";
+    } >powerdns.sql
+    mysql -u root -p$PERCONA_ROOT_PASSWORD "powerdns" < "powerdns.sql"
+    rm -rf powerdns.sql
+    rpm -Uhv http://mirror.cc.columbia.edu/pub/linux/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+    yum -y install pdns-backend-mysql pdns
+    chkconfig --levels 235 pdns on
+    {
+        echo "# MySQL Configuration file";
+        echo " ";
+        echo "launch=gmysql";
+        echo " ";
+        echo "gmysql-host=localhost";
+        echo "gmysql-dbname=powerdns";
+        echo "gmysql-user=powerdns";
+        echo "gmysql-password=$POWERDNS_PASSWORD";
+    } >/etc/pdns/pdns.conf
+
+    # Finalizing 
+    systemctl restart lighttpd
+    systemctl start pdns
+    systemctl restart pdns.service
+    systemctl enable pdns.service
+
+    # Set Root Password for Percona
+    systemctl stop mysql
+    mysql -uroot -p$PERCONA_ROOT_PASSWORD -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
+    systemctl start mysql
 
 elif [ "${option}" = "3" ]; then
     echo "Not Implemented";

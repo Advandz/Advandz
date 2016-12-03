@@ -1210,7 +1210,7 @@ echo "o------------------------------------------------------------------o";
 echo "| Advandz Stack Installer                                     v1.0 |";
 echo "o------------------------------------------------------------------o";
 echo "|                                                                  |";
-echo "|   Advandz Stacks has been installed succesfully.                 |";
+echo "|   Advandz Stack  has been installed succesfully.                 |";
 echo "|   Please copy and save the following data in a safe place.       |";
 echo "|                                                                  |";
 echo "|   HHVM Socket: /var/run/hhvm/server.sock                         |";

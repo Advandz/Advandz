@@ -9,17 +9,9 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class AppModel extends Model {
-    /**
-     * The main app model constructor.
-     */
-    public function __construct($db_info = null) {
-        // Load Components
-        Loader::loadComponents($this, ["Record"]);
-    }
-
-	#
-	# TODO: Define any methods that you would like to use in any of your other
-	# models that extend this class.
-	#
+    #
+    # TODO: Define any methods that you would like to use in any of your other
+    # models that extend this class.
+    #
 }
 ?>

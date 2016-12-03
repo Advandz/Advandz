@@ -14,9 +14,6 @@ class Advandz {
 	 * The framework constructor.
 	 */
 	final public function __construct() {
-		// Debugger
-		include(dirname(__FILE__) . "/debugger/autoload.php");
-
 		// Benchmark counter
 		$start = microtime(true);
 
@@ -25,6 +22,10 @@ class Advandz {
 			// Load framework
 			include(dirname(__FILE__) . "/lib/init.php");
 			
+			// Debugger
+			if (Configure::get("System.debug"))
+				include(dirname(__FILE__) . "/debugger/autoload.php");
+
 			// Dispatch the Web request
 			if (!empty($_SERVER['REQUEST_URI'])){
 				Dispatcher::dispatch($_SERVER['REQUEST_URI']);
@@ -39,11 +40,11 @@ class Advandz {
 			} catch (Exception $e) {
 				// Print stack trace if Dispatcher can't raise the error
 				if (Configure::get("System.debug")){
-					echo $e->getMessage() . " on line <strong>" . $e->getLine() .
+					print $e->getMessage() . " on line <strong>" . $e->getLine() .
 						"</strong> in <strong>" . $e->getFile() . "</strong>\n" .
 						"<br />Printing Stack Trace:<br />" . nl2br($e->getTraceAsString());
 				} else {
-					echo $e->getMessage();
+					print $e->getMessage();
 				}
 			}
 		}
@@ -53,7 +54,7 @@ class Advandz {
 
 		// Display rendering time if benchmarking is enabled
 		if (Configure::get("System.benchmark"))
-			echo "execution time: " . ($end - $start) . " seconds";
+			print "execution time: " . ($end - $start) . " seconds";
 	}
 }
 

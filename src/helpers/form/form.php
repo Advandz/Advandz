@@ -399,7 +399,7 @@ class Form extends Html {
 	 * @param array $attributes Attributes for this input field
 	 * @return string The password field, void if output enabled
 	 */
-	public function fieldPassword($name, $attributes = [])) {
+	public function fieldPassword($name, $attributes = []) {
 		return $this->output($this->fieldInput("input", "password", $name, null, $attributes));
 	}
 	
@@ -425,7 +425,7 @@ class Form extends Html {
 	 * 	
 	 * @return string The select field, void if output enabled
 	 */	
-	public function fieldSelect($name, $options = [], $selected_value = null, $attributes = [], $option_attributes = [])) {
+	public function fieldSelect($name, $options = [], $selected_value = null, $attributes = [], $option_attributes = []) {
 		$default_attributes = ["name" => $name];
 		$attributes = array_merge($default_attributes, (array)$attributes);
 		

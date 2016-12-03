@@ -36,8 +36,6 @@ if [ ${SERVER_ARCHITECTURE} != 'x86_64' ]; then
     echo "|                                                                  |";
     echo "|   This installer only works in x86_64 systems.                   |";
     echo "|                                                                  |";
-    echo "|                                                            ='(   |";
-    echo "|                                                                  |";
     echo "o------------------------------------------------------------------o";
     read architecture;
     exit;
@@ -145,15 +143,18 @@ if [ "${choose}" = "C" ]; then
     exit;
 fi
 
-# Operative System Actions
+#
+# Installation
+#
 if [ "${option}" = "1" ]; then
-    #
+    ##########################################
     # Ubuntu
-    #
+    ##########################################
+    
     if [ "${type}" = "M" ]; then
-        #
+        ######################################
         # Master Installation
-        #
+        ######################################
         
         # Install HHVM
         clear;
@@ -399,6 +400,10 @@ if [ "${option}" = "1" ]; then
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql start
     elif [ "${type}" = "S" ]; then
+        ######################################
+        # Slave Installation
+        ######################################
+        
         # Install HHVM
         clear;
         echo "==================================";
@@ -436,10 +441,15 @@ if [ "${option}" = "1" ]; then
         sudo /etc/init.d/mysql start   
     fi
 elif [ "${option}" = "2" ]; then
-    #
+    ##########################################
     # CentOS 7 Installation
-    #
+    ##########################################
+    
     if [ "${type}" = "M" ]; then
+        ######################################
+        # Master Installation
+        ######################################
+        
         # Install HHVM
         clear;
         echo "==================================";
@@ -560,6 +570,8 @@ elif [ "${option}" = "2" ]; then
             echo "## See http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModFastCGI";
             echo "##";
             echo "server.modules += ( \"mod_fastcgi\" )";
+            echo " ";
+            echo "fastcgi.map-extensions = (\".php3\" => \".php\", \".php4\" => \".php\", \".hh\" => \".php\")";
             echo " ";
             echo "fastcgi.server += ( \".php\" =>";
             echo "    ((";
@@ -833,6 +845,10 @@ elif [ "${option}" = "2" ]; then
         systemctl start pdns.service
         systemctl status pdns.service
     elif [ "${type}" = "S" ]; then
+        ######################################
+        # Slave Installation
+        ######################################
+        
         # Install HHVM
         clear;
         echo "==================================";
@@ -893,10 +909,15 @@ elif [ "${option}" = "2" ]; then
         PERCONA_ROOT_PASSWORD=$(cut -d "#" -f 2 <<< "$PERCONA_ROOT_PASSWORD_REPLACED");
     fi
 elif [ "${option}" = "3" ]; then
-    #
+    ##########################################
     # Debian Installation
-    #
+    ##########################################
+    
     if [ "${type}" = "M" ]; then
+        ######################################
+        # Master Installation
+        ######################################
+        
         # Install HHVM
         clear;
         echo "==================================";
@@ -1141,6 +1162,10 @@ elif [ "${option}" = "3" ]; then
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql restart
     elif [ "${type}" = "S" ]; then
+        ######################################
+        # Slave Installation
+        ######################################
+        
         # Install HHVM
         clear;
         echo "==================================";
@@ -1200,6 +1225,19 @@ elif [ "${option}" = "3" ]; then
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql restart
     fi
+fi
+
+#
+# Advandz Stack Control Panel
+#
+mkdir /var/advandz
+cd /var/advandz
+if [ "${option}" = "1" ]; then
+    # Ubuntu Version
+elif [ "${option}" = "2" ]; then
+    # CentOS Version
+elif [ "${option}" = "3" ]; then
+    # Debian Version
 fi
 
 #

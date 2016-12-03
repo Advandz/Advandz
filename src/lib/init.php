@@ -25,7 +25,7 @@ error_reporting(-1);
  *
  * @deprecated since 1.0.0
  */
-define("MINPHP_VERSION", "1.0.0");
+define("ADVANDZ_VERSION", "1.0.0");
 
 /**
  * Sets the directory separator used throughout the application. DO NOT use this
@@ -115,11 +115,12 @@ define("PLUGINDIR", ROOTWEBDIR . "plugins" . DS);
 /**
  * Absolute path to the vendors directory, where vendor libraries are stored.
  */
-define("VENDORDIR", ROOTWEBDIR . "vendor" . DS);
+define("VENDORDIR", ROOTWEBDIR . "vendors" . DS);
 
 // Include core libraries
+include_once LIBDIR . "loader.php";
 include_once LIBDIR . "autoload.php";
 include_once LIBDIR . "stdlib.php";
 // Load core configuration
-Configure::load("core");
+include_once CONFIGDIR . "core.php";
 ?>

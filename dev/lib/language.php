@@ -5,13 +5,11 @@
  * (fallback) language. When the definition can not be found in the set of
  * primary keys, the default is used instead.
  *
- * This class makes use of the following Configure class options:
- *
- * Language.default - Defines the default (fallback) language (ISO 639-1/2) e.g. "en_us"
- * Language.allow_pass_through - true/false allows keys without a definition to be passed through
- * 
- * @package minPHP
- * @subpackage minPHP.lib
+ * @package Advandz
+ * @subpackage Advandz.lib
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
 class Language {
 

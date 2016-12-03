@@ -28,7 +28,14 @@ final class Loader {
 			return false;
 		}
 		
-		$paths = array();
+		$paths = [
+			LIBDIR,
+			ROOTWEBDIR . APPDIR,
+			CONTROLLERDIR,
+			MODELDIR,
+			COMPONENTDIR,
+			HELPERDIR
+		];
 		
 		$plugin = null;
 		if (($c = strpos($class, "."))) {
@@ -37,13 +44,13 @@ final class Loader {
 		}
 		
 		if ($plugin !== null) {
-			$paths = array(
+			$paths = [
 				PLUGINDIR . $plugin,
 				PLUGINDIR . $plugin . "models" . DIRECTORY_SEPARATOR,
 				PLUGINDIR . $plugin . "controllers" . DIRECTORY_SEPARATOR,
 				PLUGINDIR . $plugin . "components" . DIRECTORY_SEPARATOR,
 				PLUGINDIR . $plugin . "helpers" . DIRECTORY_SEPARATOR
-			);
+			];
 		}
 		
 		$class_file = self::fromCamelCase($class);

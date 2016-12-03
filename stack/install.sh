@@ -17,12 +17,31 @@
 #
 # Variables
 #
+SERVER_ARCHITECTURE=$(uname -m);
 SERVER_RAM=$(grep MemTotal /proc/meminfo | awk '{print $2}');
 SERVER_RAM_GB_INT=$(expr $SERVER_RAM / 1000000);
 SERVER_HOSTNAME=$(hostname);
 PERCONA_ROOT_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 sleep 1;
 POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
+
+#
+# Architecture Error
+#
+if [ ${SERVER_ARCHITECTURE} != 'x86_64' ]; then
+    clear;
+    echo "o------------------------------------------------------------------o";
+    echo "| Advandz Stack Installer                                     v1.0 |";
+    echo "o------------------------------------------------------------------o";
+    echo "|                                                                  |";
+    echo "|   This installer only works in x86_64 systems.                   |";
+    echo "|                                                                  |";
+    echo "|                                                            ='(   |";
+    echo "|                                                                  |";
+    echo "o------------------------------------------------------------------o";
+    read architecture;
+    exit;
+fi
 
 #
 # Main Screen
@@ -77,7 +96,7 @@ read type;
 # Validate option
 until [ "${type}" = "S" ] || [ "${type}" = "M" ]; do
     echo "Please enter a valid option: ";
-    read choose;
+    read type;
 done
 
 #
@@ -93,7 +112,7 @@ echo "|                                                                  |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | Name                                | Type               |   |";
 echo "|   ============================================================   |";
-if [ "${choose}" = "M" ]; then
+if [ "${type}" = "M" ]; then
 echo "|   | Lighttpd                            | Web Server         |   |";
 echo "|   ------------------------------------------------------------   |";
 fi
@@ -101,7 +120,7 @@ echo "|   | Percona Server 5.7                  | MySQL Server       |   |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | HHVM                                | PHP Replacement    |   |";
 echo "|   ------------------------------------------------------------   |";
-if [ "${choose}" = "M" ]; then
+if [ "${type}" = "M" ]; then
 echo "|   | PowerDNS                            | DNS Server         |   |";
 echo "|   ------------------------------------------------------------   |";
 fi
@@ -884,10 +903,10 @@ elif [ "${option}" = "3" ]; then
     echo " Installing HHVM...";
     echo "==================================";
     apt-get -y install sudo
-    sudo apt-get -y update
     sudo apt-get -y upgrade
     sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
     echo deb http://dl.hhvm.com/debian $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/hhvm.list
+    sudo apt-get -y update
     sudo apt-get -y install hhvm
 
     # Install Lighttpd
@@ -900,12 +919,12 @@ elif [ "${option}" = "3" ]; then
     apt-get -y install lighttpd
 
     # Calculate Max FCGI processes
-    MAX_FCGI_PROCESS = $(expr $SERVER_RAM_GB_INT * 10);
+    SERVER_RAM_GB_INT=$(awk "BEGIN {print ($SERVER_RAM/1000000)}");
+    MAX_FCGI_PROCESS=$(awk "BEGIN {print ($SERVER_RAM_GB_INT*10)}");
     if [ $SERVER_RAM_GB_INT = 0 ]; then
-        MAX_FCGI_PROCESS = 5;
+        MAX_FCGI_PROCESS=5;
     fi
     echo "> This server is capable to run up to $MAX_FCGI_PROCESS FCGI processes with 6 Childs everyone.";
-    sleep 5;
 
     # Configuring HHVM in Lighttpd
     clear;

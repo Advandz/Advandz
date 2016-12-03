@@ -75,7 +75,7 @@ echo "Choose an option: "
 read type;
 
 # Validate option
-until [ "${master}" = "S" ] || [ "${master}" = "M" ]; do
+until [ "${type}" = "S" ] || [ "${type}" = "M" ]; do
     echo "Please enter a valid option: ";
     read choose;
 done

@@ -30,6 +30,10 @@ class View extends Language {
 	 */
 	public $view_dir;
 	/**
+	 * @var string This aasets relative path (useful in template to reference view related files [e.g. images, javascript, css])
+	 */
+	public $assets_dir;
+	/**
 	 * @var string This view's partial path relative to the public web directory
 	 */
 	public $view_path;
@@ -85,6 +89,7 @@ class View extends Language {
 		$this->view = $view;
 		$this->view_path = $view_path;
 		$this->view_dir = Router::makeURI(str_replace("index.php/", "", WEBDIR) . $view_path . "views" . DS . $view . DS);
+		$this->assets_dir = Router::makeURI(str_replace("index.php/", "", WEBDIR) . "assets" . DS);
 	}
 
 	/**

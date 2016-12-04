@@ -9,6 +9,8 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+namespace Advandz;
+
 class Advandz {
 	/**
 	 * The framework constructor.

@@ -1,6 +1,6 @@
 <?php
 /**
- * This class helps to define a explicit type in variable declaration.
+ * This class helps to define a pseudo-explicit type in variable declaration.
  *
  * @package Advandz
  * @subpackage Advandz.lib
@@ -16,8 +16,8 @@ class Type {
      * @return string The value
      */
     static public function String($value = '') {
-        if(!is_string($value))
-            throw new Exception("Invalid data type, String expected");
+        if (!is_string($value))
+            throw new Exception("Argument passed must be an instance of String");
 
         return $value;
     }
@@ -29,8 +29,8 @@ class Type {
      * @return string The value
      */
     static public function Integer($value = 0) {
-        if(!is_int($value))
-            throw new Exception("Invalid data type, Integer expected");
+        if (!is_int($value))
+            throw new Exception("Argument passed must be an instance of Integer");
 
         return $value;
     }
@@ -42,8 +42,8 @@ class Type {
      * @return string The value
      */
     static public function Float($value = 0.0) {
-        if(!is_float($value))
-            throw new Exception("Invalid data type, Float expected");
+        if (!is_float($value))
+            throw new Exception("Argument passed must be an instance of Float");
 
         return $value;
     }
@@ -55,8 +55,8 @@ class Type {
      * @return string The value
      */
     static public function Double($value = 0.0) {
-        if(!is_double($value))
-            throw new Exception("Invalid data type, Double expected");
+        if (!is_double($value))
+            throw new Exception("Argument passed must be an instance of Double");
 
         return $value;
     }
@@ -68,8 +68,8 @@ class Type {
      * @return string The value
      */
     static public function Boolean($value = false) {
-        if(!is_bool($value))
-            throw new Exception("Invalid data type, Boolean expected");
+        if (!is_bool($value))
+            throw new Exception("Argument passed must be an instance of Boolean");
 
         return $value;
     }
@@ -81,8 +81,8 @@ class Type {
      * @return string The value
      */
     static public function Array($value = []) {
-        if(!is_array($value))
-            throw new Exception("Invalid data type, Array expected");
+        if (!is_array($value))
+            throw new Exception("Argument passed must be an instance of Array");
 
         return $value;
     }
@@ -93,9 +93,12 @@ class Type {
      * @param string $value The defined value of the variable
      * @return string The value
      */
-    static public function Object(stdClass $value = null) {
-        if(!is_object($value))
-            throw new Exception("Invalid data type, Object expected");
+    static public function Object($value = null) {
+        if (is_null($value))
+            $value = new stdClass();
+
+        if (!is_object($value))
+            throw new Exception("Argument passed must be an instance of Object");
 
         return $value;
     }

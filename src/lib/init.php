@@ -21,7 +21,7 @@
 error_reporting(-1);
 
 /**
- * Sets the version of minPHP in use.  [Major].[Minor].[Revision]
+ * Sets the version of Advandz in use. [Major].[Minor].[Revision]
  *
  * @deprecated since 1.0.0
  */

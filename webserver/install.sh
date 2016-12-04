@@ -426,7 +426,7 @@ elif [ "${option}" = "2" ]; then
     echo "==================================";
     echo " ";
     echo "Progress [==========         ] 50%";
-    ./installers/centos/advandz-powerdns.sh $PERCONA_ROOT_PASSWORD
+    POWERDNS_PASSWORD=$(./installers/centos/advandz-powerdns.sh $PERCONA_ROOT_PASSWORD);
 
     # Installing Pure-FTPD
     clear;
@@ -436,6 +436,15 @@ elif [ "${option}" = "2" ]; then
     echo " ";
     echo "Progress [============       ] 60%";
     ./installers/centos/advandz-pure-ftpd.sh
+
+    # Installing Advandz
+    clear;
+    echo "==================================";
+    echo " Installing Advandz..."
+    echo "==================================";
+    echo " ";
+    echo "Progress [==============     ] 70%";
+    # TODO 
 
 elif [ "${option}" = "3" ]; then
     ##########################################
@@ -689,19 +698,6 @@ elif [ "${option}" = "3" ]; then
         # Set Root Password for Percona
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql restart
-fi
-
-#
-# Advandz Stack Control Panel
-#
-mkdir /var/advandz
-cd /var/advandz
-if [ "${option}" = "1" ]; then
-    # Ubuntu Version
-elif [ "${option}" = "2" ]; then
-    # CentOS Version
-elif [ "${option}" = "3" ]; then
-    # Debian Version
 fi
 
 #

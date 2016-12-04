@@ -16,6 +16,7 @@
 
 # Install Percona Server
 PERCONA_ROOT_PASSWORD=$1;
+POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 
 mysql -u root -p$PERCONA_ROOT_PASSWORD -e "CREATE DATABASE powerdns;" >> /dev/null 2>&1;
 mysql -u root -p$PERCONA_ROOT_PASSWORD -e "GRANT ALL ON powerdns.* TO 'powerdns'@'localhost' IDENTIFIED BY '$POWERDNS_PASSWORD';" >> /dev/null 2>&1;
@@ -74,3 +75,5 @@ chkconfig --levels 235 pdns on >> /dev/null 2>&1;
 
 systemctl enable pdns.service >> /dev/null 2>&1;
 systemctl start pdns.service >> /dev/null 2>&1;
+
+echo $POWERDNS_PASSWORD;

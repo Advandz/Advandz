@@ -9,11 +9,10 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 	/controllers 	- where all controllers are to be placed
 	/models 		- where all models are to be placed
 	/views			- where all views are to be placed
-		/default	- a collection of related display components
-			/css
-			/images
-			/javascript
 /assets             - where all assets are to be placed
+    /css            - where all styles are to be placed
+    /images         - where all images are to be placed
+    /javascript     - where all scripts are to be placed
 /cache              - where cached views are stored (must be writable to use)
 /components			- where components are placed
 /config				- where configuration files are to be stored
@@ -23,5 +22,5 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 /lib                - where all core files are located
 /logs               - where all logs files are located
 /plugins			- where all plugins are stored
-/vendors				- where vendor code is placed (i.e. third party libraries)
+/vendors			- where vendor code is placed (i.e. third party libraries)
 </pre>

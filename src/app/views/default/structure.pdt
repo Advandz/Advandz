@@ -11,9 +11,9 @@
         <link rel="stylesheet" href="<?php echo $this->assets_dir;?>css/styles.css">
 
         <!-- Scripts -->
-        <script src="<?php echo $this->assets_dir;?>js/jquery.js"></script>
-        <script src="<?php echo $this->assets_dir;?>js/advandz-framework.js"></script>
-        <script src="<?php echo $this->assets_dir;?>js/script.js"></script>
+        <script src="<?php echo $this->assets_dir;?>javascript/jquery.js"></script>
+        <script src="<?php echo $this->assets_dir;?>javascript/advandz-framework.js"></script>
+        <script src="<?php echo $this->assets_dir;?>javascript/script.js"></script>
     </head>
 
     <body class="bg-primary bg bg-dark">

@@ -15,8 +15,8 @@
 # 
 
 # Install HHVM
-yum update -y 
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+yum update -y  >> /dev/null 2>&1;
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm  >> /dev/null 2>&1;
 
 # HHVM Dependences
 yum install cpp gcc-c++ cmake git psmisc {binutils,boost,jemalloc,numactl}-devel \
@@ -24,12 +24,12 @@ yum install cpp gcc-c++ cmake git psmisc {binutils,boost,jemalloc,numactl}-devel
 lib{xslt,event,yaml,vpx,png,zip,icu,mcrypt,memcached,cap,dwarf}-devel \
 {unixODBC,expat,mariadb}-devel lib{edit,curl,xml2,xslt}-devel \
 glog-devel oniguruma-devel ocaml gperf enca libjpeg-turbo-devel openssl-devel \
-mariadb mariadb-server make -y
+mariadb mariadb-server make -y  >> /dev/null 2>&1;
 
-yum install -y GeoIP
-wget ftp://fr2.rpmfind.net/linux/epel/7/x86_64/l/libc-client-2007f-4.el7.1.x86_64.rpm
-rpm -Uvh libc-client-2007f-4.el7.1.x86_64.rpm
-rpm -Uvh http://mirrors.linuxeye.com/hhvm-repo/7/x86_64/hhvm-3.15.2-1.el7.centos.x86_64.rpm
+yum install -y GeoIP  >> /dev/null 2>&1;
+wget ftp://fr2.rpmfind.net/linux/epel/7/x86_64/l/libc-client-2007f-4.el7.1.x86_64.rpm  >> /dev/null 2>&1;
+rpm -Uvh libc-client-2007f-4.el7.1.x86_64.rpm  >> /dev/null 2>&1;
+rpm -Uvh http://mirrors.linuxeye.com/hhvm-repo/7/x86_64/hhvm-3.15.2-1.el7.centos.x86_64.rpm  >> /dev/null 2>&1;
 
 mkdir /var/log/hhvm
 echo " " > /var/log/hhvm/error.log
@@ -45,6 +45,5 @@ echo " " > /var/log/hhvm/error.log
     echo "WantedBy=multi-user.target";
 } >/usr/lib/systemd/system/hhvm.service
 
-systemctl enable hhvm.service
-systemctl start hhvm.service
-systemctl status hhvm.service
+systemctl enable hhvm.service  >> /dev/null 2>&1;
+systemctl start hhvm.service  >> /dev/null 2>&1;

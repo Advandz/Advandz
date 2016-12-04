@@ -24,6 +24,8 @@ SERVER_HOSTNAME=$(hostname);
 PERCONA_ROOT_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 sleep 1;
 POWERDNS_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
+sleep 1;
+ADVANDZ_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
 OSV=$(rpm -q --queryformat '%{VERSION}' centos-release);
 
 #
@@ -32,13 +34,12 @@ OSV=$(rpm -q --queryformat '%{VERSION}' centos-release);
 if [ ${SERVER_ARCHITECTURE} != 'x86_64' ]; then
     clear;
     echo "o------------------------------------------------------------------o";
-    echo "| Advandz Stack Installer                                     v1.0 |";
+    echo "| Advandz Web Server Installer                                v1.0 |";
     echo "o------------------------------------------------------------------o";
     echo "|                                                                  |";
     echo "|   This installer only works in x86_64 systems.                   |";
     echo "|                                                                  |";
     echo "o------------------------------------------------------------------o";
-    read architecture;
     exit;
 fi
 
@@ -47,7 +48,7 @@ fi
 #
 clear;
 echo "o------------------------------------------------------------------o";
-echo "| Advandz Stack Installer                                     v1.0 |";
+echo "| Advandz Web Server Installer                                v1.0 |";
 echo "o------------------------------------------------------------------o";
 echo "|                                                                  |";
 echo "|   What is your Operative System?                                 |";
@@ -57,7 +58,7 @@ echo "|   | Opt | Type                     | Version                 |   |";
 echo "|   ============================================================   |";
 echo "|   | [1] | Ubuntu                   | 14.04/15.04/15.10/16.04 |   |";
 echo "|   ------------------------------------------------------------   |";
-echo "|   | [2] | CentOS/RHEL/Oracle Linux | 6/7                     |   |";
+echo "|   | [2] | CentOS/RHEL/Cloud Linux  | 6/7                     |   |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | [3] | Debian                   | 7/8                     |   |";
 echo "|   ------------------------------------------------------------   |";
@@ -73,56 +74,34 @@ until [ "${option}" = "1" ] || [ "${option}" = "2" ] || [ "${option}" = "3" ] ||
     read option;
 done
 
-#
-# Type Screen
-#
-clear;
-echo "o------------------------------------------------------------------o";
-echo "| Advandz Stack Installer                                     v1.0 |";
-echo "o------------------------------------------------------------------o";
-echo "|                                                                  |";
-echo "|   Select the type of installation:                               |";
-echo "|                                                                  |";
-echo "|                                   ┌───────────┐ ┌────────────┐   |";
-echo "|                                   │ [S] Slave │ │ [M] Master │   |";
-echo "|                                   └───────────┘ └────────────┘   |";
-echo "|                                                                  |";
-echo "o------------------------------------------------------------------o";
-echo " ";
-echo "Choose an option: "
-read type;
-
-# Validate option
-until [ "${type}" = "S" ] || [ "${type}" = "M" ]; do
-    echo "Please enter a valid option: ";
-    read type;
-done
 
 #
 # Confirmation Screen
 #
 clear;
 echo "o------------------------------------------------------------------o";
-echo "| Advandz Stack Installer                                     v1.0 |";
+echo "| Advandz Web Server Installer                                v1.0 |";
 echo "o------------------------------------------------------------------o";
 echo "|                                                                  |";
 echo "|   The following software will be installed:                      |";
 echo "|                                                                  |";
 echo "|   ------------------------------------------------------------   |";
-echo "|   | Name                                | Type               |   |";
+echo "|   | Name                      | Type                         |   |";
 echo "|   ============================================================   |";
-if [ "${type}" = "M" ]; then
-echo "|   | Lighttpd                            | Web Server         |   |";
+echo "|   | Apache                    | Web Server                   |   |";
 echo "|   ------------------------------------------------------------   |";
-fi
-echo "|   | Percona Server 5.7                  | MySQL Server       |   |";
+echo "|   | NGINX                     | Reverse Proxy                |   |";
 echo "|   ------------------------------------------------------------   |";
-echo "|   | HHVM                                | PHP Replacement    |   |";
+echo "|   | Percona Server 5.7        | MySQL Replacement            |   |";
 echo "|   ------------------------------------------------------------   |";
-if [ "${type}" = "M" ]; then
-echo "|   | PowerDNS                            | DNS Server         |   |";
+echo "|   | HHVM                      | PHP Replacement              |   |";
 echo "|   ------------------------------------------------------------   |";
-fi
+echo "|   | PowerDNS                  | DNS Server                   |   |";
+echo "|   ------------------------------------------------------------   |";
+echo "|   | Pure-FTPD                 | FTP Server                   |   |";
+echo "|   ------------------------------------------------------------   |";
+echo "|   | Advandz Web Server        | Server Control Panel         |   |";
+echo "|   ------------------------------------------------------------   |";
 echo "|                                                                  |";
 echo "|                                 ┌────────────┐ ┌─────────────┐   |";
 echo "|                                 │ [C] Cancel │ │ [I] Install │   |";
@@ -152,7 +131,6 @@ if [ "${option}" = "1" ]; then
     # Ubuntu
     ##########################################
     
-    if [ "${type}" = "M" ]; then
         ######################################
         # Master Installation
         ######################################
@@ -400,47 +378,6 @@ if [ "${option}" = "1" ]; then
         sudo /etc/init.d/mysql stop
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql start
-    elif [ "${type}" = "S" ]; then
-        ######################################
-        # Slave Installation
-        ######################################
-        
-        # Install HHVM
-        clear;
-        echo "==================================";
-        echo " Installing HHVM...";
-        echo "==================================";
-        sudo apt-get install software-properties-common
-        sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-        sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
-        sudo apt-get -y update
-        sudo apt-get -y install hhvm
-
-        # Installing Percona Server
-        clear;
-        echo "==================================";
-        echo " Installing Percona Server..."
-        echo "==================================";
-        apt-get -y remove mysql-server*
-        apt-get -y install zlib1g-dev
-        apt-get -y install libaio1
-        apt-get -y install libmecab2
-        apt-get -y install zlib1g-dev
-        mkdir percona
-        cd percona
-        wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
-        dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
-        sudo apt-get update
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install percona-server-server-5.7
-        apt-get -fy install
-        cd ..
-        rm -rf percona
-
-        # Set Root Password for Percona
-        sudo /etc/init.d/mysql stop
-        mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
-        sudo /etc/init.d/mysql start   
-    fi
 elif [ "${option}" = "2" ]; then
     ##########################################
     # CentOS 7 Installation
@@ -505,7 +442,6 @@ elif [ "${option}" = "3" ]; then
     # Debian Installation
     ##########################################
     
-    if [ "${type}" = "M" ]; then
         ######################################
         # Master Installation
         ######################################
@@ -753,70 +689,6 @@ elif [ "${option}" = "3" ]; then
         # Set Root Password for Percona
         mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
         sudo /etc/init.d/mysql restart
-    elif [ "${type}" = "S" ]; then
-        ######################################
-        # Slave Installation
-        ######################################
-        
-        # Install HHVM
-        clear;
-        echo "==================================";
-        echo " Installing HHVM...";
-        echo "==================================";
-        apt-get -y install sudo
-        sudo apt-get -y upgrade
-        sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-        echo deb http://dl.hhvm.com/debian $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/hhvm.list
-        sudo apt-get -y update
-        sudo apt-get -y install hhvm
-
-        # Configuring Lighttpd in HHVM
-        clear;
-        echo "==================================";
-        echo " Configuring HHVM...";
-        echo "==================================";
-        {
-            echo "; php options";
-            echo " ";
-            echo "pid = /var/run/hhvm/pid";
-            echo " ";
-            echo "; hhvm specific";
-            echo " ";
-            echo "hhvm.server.file_socket = /var/run/hhvm/server.sock";
-            echo "hhvm.server.port = 9001";
-            echo "hhvm.server.type = fastcgi";
-            echo "hhvm.server.default_document = index.php";
-            echo "hhvm.log.use_log_file = true";
-            echo "hhvm.log.file = /var/log/hhvm/error.log";
-            echo "hhvm.repo.central.path = /var/run/hhvm/hhvm.hhbc";
-        } >/etc/hhvm/php.ini
-        sudo update-rc.d hhvm defaults
-        sudo /etc/init.d/hhvm start
-
-        # Installing Percona Server
-        clear;
-        echo "==================================";
-        echo " Installing Percona Server..."
-        echo "==================================";
-        apt-get -y remove mysql-server*
-        apt-get -y install zlib1g-dev
-        apt-get -y install libaio1
-        apt-get -y install libmecab2
-        apt-get -y install zlib1g-dev
-        mkdir percona
-        cd percona
-        wget https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb
-        dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
-        sudo apt-get update
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install percona-server-server-5.7
-        apt-get -fy install
-        cd ..
-        rm -rf percona
-
-        # Set Root Password for Percona
-        mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_PASSWORD';";
-        sudo /etc/init.d/mysql restart
-    fi
 fi
 
 #
@@ -837,11 +709,16 @@ fi
 #
 clear;
 echo "o------------------------------------------------------------------o";
-echo "| Advandz Stack Installer                                     v1.0 |";
+echo "| Advandz Web Server Installer                                v1.0 |";
 echo "o------------------------------------------------------------------o";
 echo "|                                                                  |";
 echo "|   Advandz Stack  has been installed succesfully.                 |";
 echo "|   Please copy and save the following data in a safe place.       |";
+echo "|                                                                  |";
+echo "|   Advandz Control Panel User: admin                              |";
+echo "|   Advandz Control Panel Password: $ADVANDZ_PASSWORD                     |";
+echo "|   Advandz Control Panel Port: 2083                               |";
+echo "|   Advandz Control Panel Port (SSL): 2087                         |";
 echo "|                                                                  |";
 echo "|   HHVM Socket: /var/run/hhvm/server.sock                         |";
 echo "|   HHVM FastCGI Port: 9001                                        |";
@@ -849,14 +726,12 @@ echo "|                                                                  |";
 echo "|   Percona Root User: root                                        |";
 echo "|   Percona Root Password: $PERCONA_ROOT_PASSWORD                            |";
 echo "|                                                                  |";
-if [ "${type}" = "M" ]; then
 echo "|   PowerDNS Database User: powerdns                               |";
 echo "|   PowerDNS Database Name: powerdns                               |";
 echo "|   PowerDNS Database Password: $POWERDNS_PASSWORD                       |";
 echo "|                                                                  |";
-echo "|   You can access to http://$SERVER_HOSTNAME/  ";
+echo "|   You can access to http://$SERVER_HOSTNAME:2083/  ";
 echo "|                                                                  |";
-fi
 echo "|   NOTE: Before restart your server we recommend execute          |";
 echo "|   \"mysql_secure_installation\" for secure your installation.      |";
 echo "|                                                                  |";

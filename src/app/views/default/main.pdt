@@ -21,6 +21,10 @@
                     <h5 class="list-group-item-heading">The <strong>structure view</strong> for this page is located in:</h5>
                     <code>/app/views/default/structure.pdt</code>
                 </li>
+                <li class="list-group-item">
+                    <h5 class="list-group-item-heading">The <strong>assets</strong> for this page is located in:</h5>
+                    <code>/assets</code>
+                </li>
             </ul>
             
             <p>For more help, check out the <a href="http://www.advandz.com/documentation">documentation</a>.</p>

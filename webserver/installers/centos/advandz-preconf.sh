@@ -14,14 +14,13 @@
 # @author The Advandz Team <team@advandz.com>
 # 
 
-# Install Apache
-yum -y install httpd >> /dev/null 2>&1;
-
-systemctl enable httpd >> /dev/null 2>&1;
-systemctl start httpd >> /dev/null 2>&1;
-
-firewall-cmd --permanent --zone=public --add-service=http >> /dev/null 2>&1;
-firewall-cmd --permanent --zone=public --add-service=https >> /dev/null 2>&1;
-firewall-cmd --permanent --add-port=8080/tcp >> /dev/null 2>&1;
-firewall-cmd --permanent --add-port=4343/tcp >> /dev/null 2>&1;
-firewall-cmd --reload >> /dev/null 2>&1;
+# Pre-Configuring Advandz Environment
+yum -y install unzip >> /dev/null 2>&1;
+yum -y clean all >> /dev/null 2>&1;
+yum -y remove nginx >> /dev/null 2>&1;
+yum -y remove httpd >> /dev/null 2>&1;
+yum -y remove lighttpd >> /dev/null 2>&1;
+yum -y remove openlitespeed >> /dev/null 2>&1;
+yum -y remove litespeed >> /dev/null 2>&1;
+yum -y erase httpd nginx lighttpd openlitespeed litespeed >> /dev/null 2>&1;
+yum -y update >> /dev/null 2>&1;

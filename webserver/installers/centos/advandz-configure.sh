@@ -23,7 +23,6 @@ mkdir /etc/advandz/domains/ws-panel
 mv scripts /etc/advandz/scripts
 adduser advandz
 chown -R advandz:advandz /etc/advandz/
-chown -R root:root /etc/advandz/panel
 
 {
     echo "<html>";
@@ -72,8 +71,8 @@ chown -R root:root /etc/advandz/panel
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
 rm -rf /etc/httpd/conf/httpd.conf
 rm -rf /etc/httpd/conf.modules.d/10-fcgid.conf
-cp config/httpd.conf /etc/httpd/conf/httpd.conf
-cp config/10-fcgid.conf /etc/httpd/conf.modules.d/10-fcgid.conf
+cp installers/centos/config/httpd.conf /etc/httpd/conf/httpd.conf
+cp installers/centos/config/10-fcgid.conf /etc/httpd/conf.modules.d/10-fcgid.conf
 yum -y install mod_fcgid >> /dev/null 2>&1;
 yum -y install mod_proxy_fcgi >> /dev/null 2>&1;
 mkdir /etc/httpd/sites-available
@@ -83,8 +82,8 @@ mkdir /etc/httpd/sites-enabled
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 rm -rf /etc/nginx/nginx.conf
 rm -rf /etc/nginx/fastcgi.conf
-cp config/nginx.conf /etc/nginx/nginx.conf
-cp config/fastcgi.conf /etc/nginx/fastcgi.conf
+cp installers/centos/config/nginx.conf /etc/nginx/nginx.conf
+cp installers/centos/config/fastcgi.conf /etc/nginx/fastcgi.conf
 
 # Restart services
 service httpd restart >> /dev/null 2>&1;

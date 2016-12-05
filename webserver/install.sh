@@ -58,7 +58,7 @@ echo "|   | Opt | Type                     | Version                 |   |";
 echo "|   ============================================================   |";
 echo "|   | [1] | Ubuntu                   | 14.04/15.04/15.10/16.04 |   |";
 echo "|   ------------------------------------------------------------   |";
-echo "|   | [2] | CentOS/RHEL/Cloud Linux  | 6/7                     |   |";
+echo "|   | [2] | CentOS/RHEL/Cloud Linux  | 7                       |   |";
 echo "|   ------------------------------------------------------------   |";
 echo "|   | [3] | Debian                   | 7/8                     |   |";
 echo "|   ------------------------------------------------------------   |";
@@ -136,13 +136,22 @@ elif [ "${option}" = "2" ]; then
     # CentOS Installation
     ##########################################
 
+    # Pre-configuring Environment
+    clear;
+    echo "==================================";
+    echo " Pre-configuring Environment..."
+    echo "==================================";
+    echo " ";
+    echo "Progress [==                 ] 10%";
+    ./installers/centos/advandz-preconf.sh
+
     # Installing HHVM
     clear;
     echo "==================================";
     echo " Installing HHVM..."
     echo "==================================";
     echo " ";
-    echo "Progress [==                 ] 10%";
+    echo "Progress [====               ] 20%";
     ./installers/centos/advandz-hhvm.sh
 
     # Installing Apache
@@ -151,7 +160,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing Apache..."
     echo "==================================";
     echo " ";
-    echo "Progress [====               ] 20%";
+    echo "Progress [======             ] 30%";
     ./installers/centos/advandz-apache.sh
 
     # Installing Nginx
@@ -160,7 +169,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing Nginx..."
     echo "==================================";
     echo " ";
-    echo "Progress [======             ] 30%";
+    echo "Progress [========           ] 40%";
     ./installers/centos/advandz-nginx.sh
 
     # Installing Percona Server
@@ -169,7 +178,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing Percona Server..."
     echo "==================================";
     echo " ";
-    echo "Progress [========           ] 40%";
+    echo "Progress [==========         ] 50%";
     PERCONA_ROOT_PASSWORD=$(./installers/centos/advandz-percona.sh);
 
     # Installing PowerDNS
@@ -178,7 +187,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing PowerDNS..."
     echo "==================================";
     echo " ";
-    echo "Progress [==========         ] 50%";
+    echo "Progress [============       ] 60%";
     POWERDNS_PASSWORD=$(./installers/centos/advandz-powerdns.sh $PERCONA_ROOT_PASSWORD);
 
     # Installing Pure-FTPD
@@ -187,7 +196,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing Pure-FTPD..."
     echo "==================================";
     echo " ";
-    echo "Progress [============       ] 60%";
+    echo "Progress [==============     ] 70%";
     ./installers/centos/advandz-pure-ftpd.sh
 
     # Installing Advandz
@@ -196,7 +205,7 @@ elif [ "${option}" = "2" ]; then
     echo " Installing Advandz..."
     echo "==================================";
     echo " ";
-    echo "Progress [==============     ] 70%";
+    echo "Progress [================   ] 80%";
     # TODO 
 
     # Setting up
@@ -205,7 +214,7 @@ elif [ "${option}" = "2" ]; then
     echo " Setting up..."
     echo "==================================";
     echo " ";
-    echo "Progress [================   ] 80%";
+    echo "Progress [================== ] 90%";
     ./installers/centos/advandz-configure.sh
 
 elif [ "${option}" = "3" ]; then

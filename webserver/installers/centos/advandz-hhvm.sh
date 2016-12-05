@@ -39,7 +39,7 @@ echo " " > /var/log/hhvm/error.log
     echo "Description=HHVM HipHop Virtual Machine (FCGI)";
     echo " ";
     echo "[Service]";
-    echo "ExecStart=/usr/local/bin/hhvm --config /etc/hhvm/server.ini --user lighttpd --mode daemon -vServer.Type=fastcgi -vServer.Port=9001";
+    echo "ExecStart=/usr/local/bin/hhvm --config /etc/hhvm/server.ini --user apache --mode daemon -vServer.Type=fastcgi -vServer.Port=9001";
     echo " ";
     echo "[Install]";
     echo "WantedBy=multi-user.target";

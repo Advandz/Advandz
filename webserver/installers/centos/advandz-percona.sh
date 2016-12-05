@@ -15,6 +15,8 @@
 # 
 
 # Install Percona Server
+PERCONA_ROOT_NEW_PASSWORD=$(date +%s | sha256sum | base64 | head -c 12 ; echo);
+
 yum -y remove mariadb* >> /dev/null 2>&1;
 yum -y remove mysql* >> /dev/null 2>&1;
 yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm >> /dev/null 2>&1;
@@ -29,4 +31,7 @@ PERCONA_ROOT_PASSWORD_DELIMITER="#";
 PERCONA_ROOT_PASSWORD_REPLACED=${PERCONA_ROOT_PASSWORD_TEMP/: /$PERCONA_ROOT_PASSWORD_DELIMITER};
 PERCONA_ROOT_PASSWORD=$(cut -d "#" -f 2 <<< "$PERCONA_ROOT_PASSWORD_REPLACED");
 
-echo $PERCONA_ROOT_PASSWORD;
+mysql -uroot -p$PERCONA_ROOT_PASSWORD --connect-expired-password -e "SET GLOBAL validate_password_policy=LOW;";
+mysql -uroot -p$PERCONA_ROOT_PASSWORD --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PERCONA_ROOT_NEW_PASSWORD';";
+
+echo $PERCONA_ROOT_NEW_PASSWORD;

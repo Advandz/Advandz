@@ -10,5 +10,5 @@
  * @author The Advandz Team <team@advandz.com>
  */
 @include_once VENDORDIR . "autoload.php";
-spl_autoload_register(array('Loader', 'autoload'), true, true);
+spl_autoload_register(['Loader', 'autoload'], true, true);
 ?>

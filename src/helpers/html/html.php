@@ -41,7 +41,7 @@ class Html {
 		$str = htmlentities($str, ENT_QUOTES, "UTF-8");
 
 		if ($preserve_tags)
-			$str = str_replace(array("&lt;", "&gt;", "&quot;", "&#039;"), array("<", ">", "\"", "'"), $str);
+			$str = str_replace(["&lt;", "&gt;", "&quot;", "&#039;"], ["<", ">", "\"", "'"], $str);
 		return $str;
 	}
 	

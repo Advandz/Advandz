@@ -80,7 +80,7 @@ class Type {
      * @param string $value The defined value of the variable
      * @return string The value
      */
-    static public function Array($value = []) {
+    static public function [$value = []] {
         if (!is_array($value))
             throw new Exception("Argument passed must be an instance of Array");
 

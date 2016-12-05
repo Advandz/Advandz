@@ -189,10 +189,10 @@ class Dispatcher extends Controller {
 	private static function cleanGlobals() {
 
 		if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
-			array_walk_recursive($_GET, array('Dispatcher', 'stripSlashes'));
-			array_walk_recursive($_POST, array('Dispatcher', 'stripSlashes'));
-			array_walk_recursive($_COOKIE, array('Dispatcher', 'stripSlashes'));
-			array_walk_recursive($_REQUEST, array('Dispatcher', 'stripSlashes'));
+			array_walk_recursive($_GET, ['Dispatcher', 'stripSlashes']);
+			array_walk_recursive($_POST, ['Dispatcher', 'stripSlashes']);
+			array_walk_recursive($_COOKIE, ['Dispatcher', 'stripSlashes']);
+			array_walk_recursive($_REQUEST, ['Dispatcher', 'stripSlashes']);
 		}
 	}
 }

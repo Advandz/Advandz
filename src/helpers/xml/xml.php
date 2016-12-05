@@ -45,8 +45,8 @@ class Xml {
 				}
 			}
 			
-			$search_chars = array_merge(array("&", "<", ">", "\"", "`"), $search_chars);
-			$replace_chars = array_merge(array("&amp;", "&lt;", "&gt;", "&quot;", "&apos;"), $replace_chars);
+			$search_chars = array_merge(["&", "<", ">", "\"", "`"], $search_chars);
+			$replace_chars = array_merge(["&amp;", "&lt;", "&gt;", "&quot;", "&apos;"], $replace_chars);
 		}
   
 		return str_replace($search_chars, $replace_chars, $str);

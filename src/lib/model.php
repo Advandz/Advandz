@@ -13,13 +13,13 @@ class Model {
 	/**
 	 * @var array Default PDO attribute settings
 	 */
-	private $default_pdo_options = array(
+	private $default_pdo_options = [
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_CASE => PDO::CASE_LOWER,
 		PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
 		PDO::ATTR_PERSISTENT => false,
 		PDO::ATTR_STRINGIFY_FETCHES => false
-	);
+	];
 	/**
 	 * @var object PDO connection
 	 */
@@ -27,11 +27,11 @@ class Model {
 	/**
 	 * @var array An array of all database connections established
 	 */
-	private static $connections = array();
+	private static $connections = [];
 	/**
 	 * @var array An array of all database connection info (used to find a matching connection)
 	 */
-	private static $db_infos = array();
+	private static $db_infos = [];
 	/**
 	 * @var object PDO Statement
 	 */
@@ -225,7 +225,7 @@ class Model {
 	 */
 	public static function makeDSN($db) {
 		if (!isset($db['driver']) || !isset($db['database']) || !isset($db['host']))
-			throw new Exception("Call to Model::makeDSN with invalid parameters, required array('driver'=>,'database'=>,'host'=>)");
+			throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
 			
 		return $db['driver'] . ":dbname=" . $db['database'] . ";host=" . $db['host'] . (isset($db['port']) ? ";port=" . $db['port'] : "");
 	}

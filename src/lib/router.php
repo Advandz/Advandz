@@ -116,7 +116,7 @@ final class Router {
 				
 				// Methods that must be declared public due to bug in PHP < 5.2 [#37632], but are not
 				// publically callable. Note: this bug does not affect protected methods declared as final.
-				$public_protected = array("preaction", "postaction");
+				$public_protected = ["preaction", "postaction"];
 				
 				// A method may be required to inherit from the given class
 				if (($inherits_from != null && ($declared_class->getName() != $inherits_from && !$declared_class->isSubclassOf($inherits_from)))
@@ -148,8 +148,8 @@ final class Router {
 		$plugin = null;
 		$controller = Configure::get("System.default_controller");
 		$action = null;
-		$get = array();
-		$uri = array();
+		$get = [];
+		$uri = [];
 		$uri_str = null;
 		
 		// Filter the URI, removing any part of the web root
@@ -162,7 +162,7 @@ final class Router {
 		// Parse the URI into its many parts
 		$temp = Router::parseURI($filtered_uri);
 		
-		$uri = array();
+		$uri = [];
 		$uri_str = "";
 		if (is_array($temp)) {
 			foreach ($temp as $key => $value) {
@@ -216,7 +216,7 @@ final class Router {
 		foreach ($_GET as $key=>$value)
 			$get[$key] = $value;
 		
-		return array('plugin'=>$plugin, 'controller'=>$controller, 'action'=>$action, 'get'=>$get, 'uri'=>$uri, 'uri_str'=>$uri_str);
+		return ['plugin'=>$plugin, 'controller'=>$controller, 'action'=>$action, 'get'=>$get, 'uri'=>$uri, 'uri_str'=>$uri_str];
 	}
 }
 ?>

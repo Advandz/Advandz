@@ -191,12 +191,12 @@ class Session {
 			session_name($session_name);
 			
 			session_set_save_handler(
-				array(&$this, "sessionOpen"),
-				array(&$this, "sessionClose"),
-				array(&$this, "sessionSelect"),
-				array(&$this, "sessionWrite"),
-				array(&$this, "sessionDestroy"),
-				array(&$this, "sessionGarbageCollect")
+				[&$this, "sessionOpen"],
+				[&$this, "sessionClose"],
+				[&$this, "sessionSelect"],
+				[&$this, "sessionWrite"],
+				[&$this, "sessionDestroy"],
+				[&$this, "sessionGarbageCollect"]
 			);
 			
 			// If a cookie is available, attempt to use that session and reset
@@ -298,7 +298,7 @@ class Session {
 
 		$this->Record->duplicate($this->tblexpire, "=", $expiration)->
 			duplicate($this->tblvalue, "=", $value)->
-			insert($this->tbl, array($this->tblid => $sid, $this->tblexpire => $expiration, $this->tblvalue => $value));
+			insert($this->tbl, [$this->tblid => $sid, $this->tblexpire => $expiration, $this->tblvalue => $value]);
 	}
 
 	/**

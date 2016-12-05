@@ -38,7 +38,7 @@ class Language {
 	 */
 	public static final function _($lang_key, $return=false) {
 		$args = func_get_args();
-		return call_user_func_array(array("Language", "getText"), $args);
+		return call_user_func_array(["Language", "getText"], $args);
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Language {
 			if (isset($lang) && is_array($lang)) {
 				
 				if (!isset(self::$lang_text[$language]))
-					self::$lang_text[$language] = array();
+					self::$lang_text[$language] = [];
 				
 				// Set the text for this language
 				foreach ($lang as $key => $text)

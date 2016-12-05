@@ -45,69 +45,69 @@ class Pagination extends Html {
 		
 		$this->setGet($get);
 		
-		$this->settings = array(
+		$this->settings = [
 			// Wrapper to surround the link set
-			'wrapper' => array(
+			'wrapper' => [
 				'tag' => "div",
-				'attributes' => array('class'=>"pagination")
-			),
-			'navigation' => array(
+				'attributes' => ['class'=>"pagination"]
+			],
+			'navigation' => [
 				// First page link
-				'first' => array(
+				'first' => [
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.first_link", true),
 					'attributes' => [],
 					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
-				),
+				],
 				// Last page link
-				'last' => array(
+				'last' => [
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.last_link", true),
 					'attributes' => [],
 					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
-				),
+				],
 				// Next page link
-				'next' => array(
+				'next' => [
 					'tag' => "li",
 					'name' => Language::_("Pagination.next_link", true),
 					'attributes' => [],
 					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
-				),
+				],
 				// Previous page link
-				'prev' => array(
+				'prev' => [
 					'tag' => "li",
 					'name' =>  Language::_("Pagination.prev_link", true),
 					'attributes' => [],
 					'link_attributes' => [],
 					'show' => "if_needed", // options: if_needed, never, always
 					'disabled' => "disabled" // class to use if show and not needed
-				),
+				],
 				// Surround for the set of links
-				'surround' => array(
+				'surround' => [
 					'tag' => "ul",
 					'attributes' => [],
 					'link_attributes' => []
-				),
+				],
 				// The currently active link
-				'current' => array(
+				'current' => [
 					'tag' => "li",
-					'attributes' => array('class'=>"current"),
+					'attributes' => ['class'=>"current"],
 					'link_attributes' => [],
 					'link' => false		// disable linking
-				),
+				],
 				// All numeric links
-				'numerical' => array(
+				'numerical' => [
 					'tag' => "li",
 					'attributes' => [],
 					'link_attributes' => []
-				)
-			),
+				]
+			],
 			'merge_get' => true, 		// merge get params from URI with those set in 'params'
 			'show' => "if_needed",		// options: if_needed, never, always
 			'pages_to_show' => 5,		// max number of numerical pages shown in the pagination
@@ -115,12 +115,12 @@ class Pagination extends Html {
 			'total_results' => 0,		// total number of results in the pagination set
 			'results_per_page' => 1,	// number of result items per page
 			'uri' => "",
-			'uri_labels' => array(		// tags that will be substituted with their appropriate value
+			'uri_labels' => [			// tags that will be substituted with their appropriate value
 				'page' => "page",
 				'per_page' => "per_page"
-			),
+			],
 			'params' => []			// key => value pairs of additional uri query parameters (if set, overrides $get params)
-		);
+		];
 			
 		$this->settings = $this->mergeArrays($this->settings, $format);
 	}
@@ -416,7 +416,7 @@ class Pagination extends Html {
 	public function getPageUri($page) {
 		$uri = $this->getUri();
 		// Replace the page tag with the page value
-		return str_replace(array("[" . $this->settings['uri_labels']['page'] . "]", "[" . $this->settings['uri_labels']['per_page'] . "]"), array($page, $this->settings['results_per_page']), $uri);
+		return str_replace(["[" . $this->settings['uri_labels']['page'] . "]", "[" . $this->settings['uri_labels']['per_page'] . "]"], [$page, $this->settings['results_per_page']], $uri);
 	}
 	
 	/**

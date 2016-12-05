@@ -14,11 +14,11 @@ class Input {
 	/**
 	 * @var array All errors violated in the Input::validates() method
 	 */
-	private $errors = array();
+	private $errors = [];
 	/**
 	 * @var array All rules set in Input::setRules()
 	 */
-	private $rules = array();
+	private $rules = [];
 	/**
 	 * @var boolean Flag whether or not checking should cease
 	 */
@@ -233,7 +233,7 @@ class Input {
 	 */
 	public function setRules($rules) {
 		$this->rules = $rules;
-		$this->errors = array();
+		$this->errors = [];
 	}
 	
 	/**
@@ -248,7 +248,7 @@ class Input {
 	 * @param int $cur_depth The current depth traveled
 	 * @param array $path A list of all array indexes encountered
 	 */
-	public function processValidation(&$value, $key, $var, $max_depth=null, $cur_depth=0, $path=array()) {
+	public function processValidation(&$value, $key, $var, $max_depth=null, $cur_depth=0, $path=[]) {
 		
 		// Find the key at the current depth
 		$index = array_key_exists($cur_depth, $var['raw_index']) ? $var['raw_index'][$cur_depth] : "";
@@ -279,7 +279,7 @@ class Input {
 				if (strpos($index, "[") !== false) {
 					$depth = substr_count($index, "[");
 					
-					$field = array();
+					$field = [];
 					// Turn rule index into array
 					parse_str($index, $field);
 					
@@ -305,7 +305,7 @@ class Input {
 					}
 
 					// Search recursively through the array for the element to be evaluated and attempt to validate it
-					$this->array_walk_recursive($data[$index], array($this, "processValidation"), array("index"=>$index, "raw_index"=>$raw_index, "rule"=>$rule), $depth);
+					$this->array_walk_recursive($data[$index], [$this, "processValidation"], ["index"=>$index, "raw_index"=>$raw_index, "rule"=>$rule], $depth);
 					
 					// Destroy the temporary value created in order to validate rules
 					if (!$val_exists)
@@ -366,7 +366,7 @@ class Input {
 	 * @param return mixed The result returned by the callback
 	 */
 	private function formatData($callback, $data, $key, $path) {
-		$params = array();
+		$params = [];
 		
 		if (is_array($callback)) {
 			$method = array_shift($callback);
@@ -438,10 +438,10 @@ class Input {
 	 * @param string $key The most immediate key to the given value
 	 * @param array $path A list of all array indexes encountered
 	 */
-	private function validateRule($index, $rule, &$value, $key, $path=array()) {
+	private function validateRule($index, $rule, &$value, $key, $path=[]) {
 		// Cast the rule set into an array of rules for this index
 		if (isset($rule['rule']))
-			$rule = array($rule);
+			$rule = [$rule];
 
 		// Loop through each rule set for this index
 		foreach ($rule as $type => $rule_set) {
@@ -454,7 +454,7 @@ class Input {
 				$method = array_shift($rule_set['rule']);
 			else {
 				$method = $rule_set['rule'];
-				$rule_set['rule'] = array();
+				$rule_set['rule'] = [];
 			}
 			
 			// Format the data before running the evaluation
@@ -470,7 +470,7 @@ class Input {
 			if (is_string($method)) {
 				// If the method doesn't exist in this class, assume it is a global PHP function
 				if (method_exists($this, $method))
-					$method = array($this, $method);
+					$method = [$this, $method];
 			}
 			
 			// Process boolean rules (true / false)
@@ -519,7 +519,7 @@ class Input {
 	 * @param array $path A list of all array indexes encountered
 	 * @return boolean False if the input is no longer an array and therefore can not be recursed through, true otherwise
 	 */
-	private static function array_walk_recursive(&$input, $callback, $params=null, $max_depth=null, $cur_depth=0, $path=array()) {
+	private static function array_walk_recursive(&$input, $callback, $params=null, $max_depth=null, $cur_depth=0, $path=[]) {
 		
 		if (!is_array($input))
 			return false;
@@ -542,7 +542,7 @@ class Input {
 			
 			// Invoke the callback, emulating the array_walk_recursive function
 			if (!is_array($input[$key]) || $cur_depth >= $max_depth)
-				call_user_func_array($callback, array(&$input[$key], $key, $params, $max_depth, $cur_depth, $path));
+				call_user_func_array($callback, [&$input[$key], $key, $params, $max_depth, $cur_depth, $path]);
 			
 			if (is_array($input[$key])) {
 				// Recurse deeper

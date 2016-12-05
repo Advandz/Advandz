@@ -77,7 +77,7 @@ class Acl {
 	 */
 	public function getAccessList($aro_alias, $aco_alias) {
 		$aco = explode("/", $aco_alias);
-		$access_list = array();
+		$access_list = [];
 		
 		// Attempt to find an entry for the given ACO, if no results, attempt for a subset of that ACO path
 		$temp_aco = $aco_alias;
@@ -85,10 +85,10 @@ class Acl {
 		for ($i=0; $i<$aco_count; $i++) {
 			
 			// Build temp subquery
-			$fields = array("acl_aro.id", "acl_aro.alias", "acl_aro.lineage", 'ancestor.id'=>"ancestor_id",
-				'ancestor.alias'=>"ancestor_alias", 'ancestor.lineage'=>"ancestor_lineage");
+			$fields = ["acl_aro.id", "acl_aro.alias", "acl_aro.lineage", 'ancestor.id'=>"ancestor_id",
+				'ancestor.alias'=>"ancestor_alias", 'ancestor.lineage'=>"ancestor_lineage"];
 			$temp = $this->Record->select($fields)->from("acl_aro")->
-				leftJoin(array("acl_aro"=>"ancestor"), "acl_aro.lineage", "like", "CONCAT('%/', ancestor.id, '/%')", false, false)->
+				leftJoin(["acl_aro"=>"ancestor"], "acl_aro.lineage", "like", "CONCAT('%/', ancestor.id, '/%')", false, false)->
 				where("acl_aro.alias", "=", $aro_alias);
 			$temp_subquery = $temp->get();
 			$values = $temp->values;
@@ -96,20 +96,20 @@ class Acl {
 			$this->Record->values = $values;
 			
 			// Build aro subquery (containing temp)
-			$aro = $this->Record->select(array("acl_aro.id", "acl_aro.alias", "acl_aro.lineage"))->
+			$aro = $this->Record->select(["acl_aro.id", "acl_aro.alias", "acl_aro.lineage"])->
 				from("acl_aro")->on("acl_aro.id", "=", "temp.id", false)->orOn("acl_aro.id", "=", "temp.ancestor_id", false)->
-				innerJoin(array($temp_subquery=>"temp"))->group("acl_aro.id")->
-				order(array('acl_aro.lineage'=>"desc"));
+				innerJoin([$temp_subquery=>"temp"])->group("acl_aro.id")->
+				order(['acl_aro.lineage'=>"desc"]);
 			$aro_subquery = $aro->get();
 			$values = $aro->values;
 			$this->Record->reset();
 			
 			// Build query (containing aro subquery)
-			$fields = array("aro.*", "acl_acl.action", "acl_acl.permission");
+			$fields = ["aro.*", "acl_acl.action", "acl_acl.permission"];
 			$access_list = $this->Record->select($fields)->from("acl_acl")->
 				on("acl_acl.aco_id", "=", "acl_aco.id", false)->on("acl_aco.alias", "=", $temp_aco)->
 				innerJoin("acl_aco")->
-				innerJoin(array($aro_subquery=>"aro"), "acl_acl.aro_id", "=", "aro.id", false)->appendValues($values)->fetchAll();
+				innerJoin([$aro_subquery=>"aro"], "acl_acl.aro_id", "=", "aro.id", false)->appendValues($values)->fetchAll();
 
 			if ($access_list && !empty($access_list))
 				break;
@@ -229,7 +229,7 @@ class Acl {
 		if ($action != null)
 			$this->Record->where("acl_acl.action", "=", $action);
 		
-		$this->Record->delete(array("acl_acl.*"));
+		$this->Record->delete(["acl_acl.*"]);
 	}
 	
 	/**
@@ -240,7 +240,7 @@ class Acl {
 	 * @return mixed An array of the ARO/ACO combo, false otherwise
 	 */
 	private function getAroAcoByAlias($aro_alias, $aco_alias) {
-		$fields = array('acl_aro.id'=>"aro_id",'acl_aro.lineage'=>"aro_lineage",'acl_aco.id'=>"aco_id");
+		$fields = ['acl_aro.id'=>"aro_id",'acl_aro.lineage'=>"aro_lineage",'acl_aco.id'=>"aco_id"];
 		return $this->Record->select($fields)->from("acl_aro")->from("acl_aco")->
 			where("acl_aro.alias", "=", $aro_alias)->where("acl_aco.alias", "=", $aco_alias)->fetch();
 	}
@@ -252,7 +252,7 @@ class Acl {
 	 * @return mixed An array containing the ARO, false if no match found
 	 */
 	public function getAroByAlias($alias) {
-		$fields = array("id", "parent_id", "alias", "lineage");
+		$fields = ["id", "parent_id", "alias", "lineage"];
 		return $this->Record->select($fields)->from("acl_aro")->where("alias", "=", $alias)->fetch();
 	}
 
@@ -263,7 +263,7 @@ class Acl {
 	 * @return mixed An array containing the ACO, false if no match found
 	 */	
 	public function getAcoByAlias($alias) {
-		$fields = array("id", "alias");
+		$fields = ["id", "alias"];
 		return $this->Record->select($fields)->from("acl_aco")->where("alias", "=", $alias)->fetch();
 	}
 	

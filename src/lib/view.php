@@ -155,7 +155,7 @@ class View extends Language {
 			$view = $view_parts[1];
 		}
 		
-		return array($view_path, $view);
+		return [$view_path, $view];
 	}
 }
 ?>

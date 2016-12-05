@@ -87,7 +87,7 @@ final class Loader {
 					$model = $key;
 				else {
 					$model = $value;
-					$value = array();
+					$value = [];
 				}
 				
 				$plugin = null;
@@ -126,7 +126,7 @@ final class Loader {
 				}
 				
 				// Instantiate the model
-				$parent->$model_name = call_user_func_array(array(new ReflectionClass($model_name), 'newInstance'), $value);
+				$parent->$model_name = call_user_func_array([new ReflectionClass($model_name), 'newInstance'], $value);
 			}
 		}
 	}
@@ -231,7 +231,7 @@ final class Loader {
 					$object = $key;
 				else {
 					$object = $value;
-					$value = array();
+					$value = [];
 				}
 				
 				$plugin = null;
@@ -264,7 +264,7 @@ final class Loader {
 				require_once $object;
 
 				// Initialize the object
-				$parent->$object_name = call_user_func_array(array(new ReflectionClass($object_name), 'newInstance'), $value);
+				$parent->$object_name = call_user_func_array([new ReflectionClass($object_name), 'newInstance'], $value);
 				
 				if ($type == "helper") {
 					// Link this object with the view and structure view associated with this controller

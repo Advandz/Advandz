@@ -19,8 +19,10 @@ mkdir /etc/advandz/
 mkdir /etc/advandz/conf
 mkdir /etc/advandz/ssl
 mkdir /etc/advandz/domains
-mkdir /etc/advandz/domains/ws-panel
-mv scripts /etc/advandz/scripts
+mkdir /etc/advandz/panel
+mkdir /etc/advandz/www
+mkdir /etc/advandz/www/cgi-bin
+mv installers/centos/scripts /etc/advandz/scripts
 adduser advandz
 chown -R advandz:advandz /etc/advandz/
 
@@ -65,7 +67,7 @@ chown -R advandz:advandz /etc/advandz/
     echo "    </div>";
     echo "</body>";
     echo "</html>";
-} >/etc/advandz/domains/index.php
+} >/etc/advandz/www/index.php
 
 # Configure Apache
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak

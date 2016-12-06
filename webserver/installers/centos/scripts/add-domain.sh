@@ -38,9 +38,6 @@ function apache_add_domain {
     DOMAIN_USER=$(echo ${APACHE_DOMAIN/./$USER_DELIMITER});
     OS_USER=$(echo $DOMAIN_USER|cut -c1-30);
 
-    # Add user
-    adduser $OS_USER;
-
     # Create Folder
     DIRECTORY="/etc/advandz/domains/$APACHE_DOMAIN";
     if [ -d "$DIRECTORY" ]; then
@@ -49,8 +46,9 @@ function apache_add_domain {
     fi
     mkdir /etc/advandz/domains/$APACHE_DOMAIN;
     mkdir /etc/advandz/domains/$APACHE_DOMAIN/public_html;
+    mkdir /etc/advandz/domains/$APACHE_DOMAIN/public_html/cgi-bin;
     mkdir /etc/advandz/domains/$APACHE_DOMAIN/logs;
-    chown -R $OS_USER:$OS_USER /etc/advandz/domains/$APACHE_DOMAIN;
+    chown -R advandz:advandz /etc/advandz/domains/$APACHE_DOMAIN;
     {
         echo "<html>";
         echo "<head>";
@@ -64,26 +62,18 @@ function apache_add_domain {
 
     # Create Domain Vhost
     {
-        echo "Listen $APACHE_PORT";
-        echo " ";
         echo "<VirtualHost *:$APACHE_PORT>";
-        echo "  User $OS_USER";
-        echo "  Group $OS_USER";
-        echo "  ServerName www.$APACHE_DOMAIN";
-        echo "  ServerAlias $APACHE_DOMAIN";
-        echo "  RewriteEngine On";
+        echo "  ServerName $APACHE_DOMAIN";
+        echo "  ServerAlias www.$APACHE_DOMAIN";
+        echo "  DirectoryIndex index.php";
+        echo "  DirectoryIndex index.html";
         echo "  DocumentRoot /etc/advandz/domains/$APACHE_DOMAIN/public_html";
         echo "  ErrorLog /etc/advandz/domains/$APACHE_DOMAIN/logs/error.log";
-        echo "  CustomLog /etc/advandz/domains/$APACHE_DOMAIN/logs/requests.log combined";
-        echo " ";
-        echo "  <Directory \"/etc/advandz/domains/$APACHE_DOMAIN/public_html\">";
-        echo "    Options Indexes MultiViews FollowSymLinks";
-        echo "    AllowOverride None";
-        echo "    Order allow,deny";
-        echo "    Allow from all";
-        echo "  </Directory>";
+        echo "  CustomLog /etc/advandz/domains/$APACHE_DOMAIN/logs/access.log combined";
+        echo "  ScriptAlias /cgi-bin/ \"/etc/advandz/domains/$APACHE_DOMAIN/public_html/cgi-bin/\"";
+        echo "  ProxyPassMatch ^/(.+\.(hh|php)(/.*)?)$ fcgi://127.0.0.1:9001/etc/advandz/domains/$APACHE_DOMAIN/public_html/$1";
         echo "</VirtualHost>";
-    } >/etc/httpd/sites-available/$APACHE_DOMAIN.conf
+    } >/etc/httpd/sites-enabled/$APACHE_DOMAIN.conf
 
     echo "SUCCESS : Domain has been added succesfully. : $OS_USER";
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * A database powered Session driver. Requires the Record component.
+ * Provides a keyed hash using HMAC and the Hash of a specific data.
  *
  * @package Advandz
  * @subpackage Advandz.components.session
@@ -16,25 +16,23 @@ class hashing{
      * @param mixed $data Data to be hashed.
      * @param string $key Shared secret key.
      * @param boolean $raw Outputs the hash as raw binary data.
+     * @return string $hmac Return a keyed hash using HMAC.
      */
-
     public function hmacHash($algorithm, $data, $key, $raw=false){
         $hmac = hash_hmac($algorithm, $data, $key, $raw);
         return $hmac;
     }
-
     /**
      * Calculate the Hash of a specific data.
      *
      * @param string $algorithm Hashing algorithm.
      * @param mixed $data Data to be hashed.
      * @param boolean $raw Outputs the hash as raw binary data.
+     * @return string $hash Return the Hash of a specific data.
      */
-
-    public function hash($algorithm, $data, $raw=false){
+    public function hash($algorithm, $data, $raw = false){
         $hash = hash($algorithm, $data, $raw);
         return $hash;
     }
-
 }
 ?>

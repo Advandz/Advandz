@@ -33,11 +33,6 @@ function apache_add_domain {
         APACHE_PORT="8080";
     fi
 
-    # Generate Domain User
-    USER_DELIMITER="";
-    DOMAIN_USER=$(echo ${APACHE_DOMAIN/./$USER_DELIMITER});
-    OS_USER=$(echo $DOMAIN_USER|cut -c1-30);
-
     # Create Folder
     DIRECTORY="/etc/advandz/domains/$APACHE_DOMAIN";
     if [ -d "$DIRECTORY" ]; then
@@ -48,11 +43,12 @@ function apache_add_domain {
     mkdir /etc/advandz/domains/$APACHE_DOMAIN/public_html;
     mkdir /etc/advandz/domains/$APACHE_DOMAIN/public_html/cgi-bin;
     mkdir /etc/advandz/domains/$APACHE_DOMAIN/logs;
+    mkdir /etc/advandz/domains/$APACHE_DOMAIN/ssl;
     chown -R advandz:advandz /etc/advandz/domains/$APACHE_DOMAIN;
     {
         echo "<html>";
         echo "<head>";
-        echo "    <title>Welcome to $APACHE_DOMAIN!</title>";
+        echo "    <title>Welcome to $APACHE_DOMAIN</title>";
         echo "</head>";
         echo "<body>";
         echo "    <h1>Success! The $APACHE_DOMAIN domain is working!</h1>";
@@ -65,17 +61,20 @@ function apache_add_domain {
         echo "<VirtualHost *:$APACHE_PORT>";
         echo "  ServerName $APACHE_DOMAIN";
         echo "  ServerAlias www.$APACHE_DOMAIN";
-        echo "  DirectoryIndex index.php";
-        echo "  DirectoryIndex index.html";
+        echo "  DirectoryIndex index.html index.php";
         echo "  DocumentRoot /etc/advandz/domains/$APACHE_DOMAIN/public_html";
         echo "  ErrorLog /etc/advandz/domains/$APACHE_DOMAIN/logs/error.log";
         echo "  CustomLog /etc/advandz/domains/$APACHE_DOMAIN/logs/access.log combined";
         echo "  ScriptAlias /cgi-bin/ \"/etc/advandz/domains/$APACHE_DOMAIN/public_html/cgi-bin/\"";
-        echo "  ProxyPassMatch ^/(.+\.(hh|php)(/.*)?)$ fcgi://127.0.0.1:9001/etc/advandz/domains/$APACHE_DOMAIN/public_html/$1";
+        echo "  ProxyPassMatch ^/(.+\.(hh|php)(/.*)?)$ fcgi://127.0.0.1:9001/etc/advandz/domains/$APACHE_DOMAIN/public_html/\$1";
         echo "</VirtualHost>";
+        echo "<Directory \"/etc/advandz/domains/$APACHE_DOMAIN/public_html\">";
+        echo "  Options Indexes FollowSymLinks";
+        echo "  AllowOverride FileInfo";
+        echo "</Directory>";
     } >/etc/httpd/sites-enabled/$APACHE_DOMAIN.conf
 
-    echo "SUCCESS : Domain has been added succesfully. : $OS_USER";
+    echo "SUCCESS : Domain has been added succesfully. : $APACHE_DOMAIN";
 
     service httpd restart >> /dev/null 2>&1;
 }

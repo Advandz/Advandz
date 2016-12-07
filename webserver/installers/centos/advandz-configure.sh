@@ -15,21 +15,26 @@
 # 
 
 # Configure Advandz Environment
+HOSTNAME=$(hostname);
+
 mkdir /etc/advandz/
 mkdir /etc/advandz/conf
 mkdir /etc/advandz/ssl
 mkdir /etc/advandz/domains
 mkdir /etc/advandz/panel
+mkdir /etc/advandz/logs
 mkdir /etc/advandz/www
 mkdir /etc/advandz/www/cgi-bin
 mv installers/centos/scripts /etc/advandz/scripts
-adduser advandz
+#adduser advandz
+groupadd advandz
+useradd -d /etc/advandz/ -g advandz -s /bin/nologin advandz
 chown -R advandz:advandz /etc/advandz/
 
 {
     echo "<html>";
     echo "<head>";
-    echo "    <title>Advandz Stack</title>";
+    echo "    <title>Advandz Web Server</title>";
     echo "    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">";
     echo "</head>";
     echo " ";
@@ -71,6 +76,7 @@ chown -R advandz:advandz /etc/advandz/
 
 # Configure Apache
 cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.bak
+cp /etc/httpd/conf.modules.d/10-fcgid.conf /etc/httpd/conf.modules.d/10-fcgid.conf.bak
 rm -rf /etc/httpd/conf/httpd.conf
 rm -rf /etc/httpd/conf.modules.d/10-fcgid.conf
 cp installers/centos/config/httpd.conf /etc/httpd/conf/httpd.conf
@@ -79,6 +85,18 @@ yum -y install mod_fcgid >> /dev/null 2>&1;
 yum -y install mod_proxy_fcgi >> /dev/null 2>&1;
 mkdir /etc/httpd/sites-available
 mkdir /etc/httpd/sites-enabled
+# Create Domain Vhost
+{
+    echo "<VirtualHost *:8080>";
+    echo "  ServerName $HOSTNAME";
+    echo "  DirectoryIndex index.html index.php";
+    echo "  DocumentRoot /etc/advandz/www";
+    echo "  ErrorLog /etc/advandz/logs/error.log";
+    echo "  CustomLog /etc/advandz/logs/access.log combined";
+    echo "  ScriptAlias /cgi-bin/ \"/etc/advandz/www/cgi-bin/\"";
+    echo "  ProxyPassMatch ^/(.+\.(hh|php)(/.*)?)$ fcgi://127.0.0.1:9001/etc/advandz/www/\$1";
+    echo "</VirtualHost>";
+} >/etc/httpd/sites-enabled/00-$HOSTNAME.conf
 
 # Configure Nginx
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak

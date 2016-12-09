@@ -1,53 +1,48 @@
 <?php
-
 /**
- * This file is part of the Tracy (https://tracy.nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ * PHP debugging tool, It is an ultimate tool among the diagnostic ones.
+ *
+ * @package Advandz
+ * @subpackage Advandz.debugger
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
-
 namespace Tracy\Bridges\Nette;
 
 use Nette;
 
-
 /**
  * Tracy extension for Nette DI.
  */
-class TracyExtension extends Nette\DI\CompilerExtension
-{
+class TracyExtension extends Nette\DI\CompilerExtension {
 	public $defaults = [
-		'email' => NULL,
-		'fromEmail' => NULL,
-		'logSeverity' => NULL,
-		'editor' => NULL,
-		'browser' => NULL,
-		'errorTemplate' => NULL,
-		'strictMode' => NULL,
-		'showBar' => NULL,
-		'maxLen' => NULL,
-		'maxDepth' => NULL,
-		'showLocation' => NULL,
-		'scream' => NULL,
-		'bar' => [], // of class name
-		'blueScreen' => [], // of callback
+		'email'         => null,
+		'fromEmail'     => null,
+		'logSeverity'   => null,
+		'editor'        => null,
+		'browser'       => null,
+		'errorTemplate' => null,
+		'strictMode'    => null,
+		'showBar'       => null,
+		'maxLen'        => null,
+		'maxDepth'      => null,
+		'showLocation'  => null,
+		'scream'        => null,
+		'bar'           => [], // of class name
+		'blueScreen'    => [], // of callback
 	];
-
 	/** @var bool */
 	private $debugMode;
-
 	/** @var bool */
 	private $cliMode;
 
-
-	public function __construct($debugMode = FALSE, $cliMode = FALSE)
-	{
+	public function __construct($debugMode = false, $cliMode = false) {
 		$this->debugMode = $debugMode;
 		$this->cliMode = $cliMode;
 	}
 
-
-	public function loadConfiguration()
-	{
+	public function loadConfiguration() {
 		$this->validateConfig($this->defaults);
 		$builder = $this->getContainerBuilder();
 
@@ -62,9 +57,7 @@ class TracyExtension extends Nette\DI\CompilerExtension
 			->setFactory('Tracy\Debugger::getBar');
 	}
 
-
-	public function afterCompile(Nette\PhpGenerator\ClassType $class)
-	{
+	public function afterCompile(Nette\PhpGenerator\ClassType $class) {
 		$initialize = $class->getMethod('initialize');
 		$builder = $this->getContainerBuilder();
 
@@ -72,13 +65,13 @@ class TracyExtension extends Nette\DI\CompilerExtension
 		unset($options['bar'], $options['blueScreen']);
 		if (isset($options['logSeverity'])) {
 			$res = 0;
-			foreach ((array) $options['logSeverity'] as $level) {
+			foreach ((array)$options['logSeverity'] as $level) {
 				$res |= is_int($level) ? $level : constant($level);
 			}
 			$options['logSeverity'] = $res;
 		}
 		foreach ($options as $key => $value) {
-			if ($value !== NULL) {
+			if ($value !== null) {
 				$key = ($key === 'fromEmail' ? 'getLogger()->' : '$') . $key;
 				$initialize->addBody($builder->formatPhp(
 					'Tracy\Debugger::' . $key . ' = ?;',
@@ -93,7 +86,7 @@ class TracyExtension extends Nette\DI\CompilerExtension
 		}
 
 		if ($this->debugMode) {
-			foreach ((array) $this->config['bar'] as $item) {
+			foreach ((array)$this->config['bar'] as $item) {
 				$initialize->addBody($builder->formatPhp(
 					'$this->getService(?)->addPanel(?);',
 					Nette\DI\Compiler::filterArguments([
@@ -108,12 +101,12 @@ class TracyExtension extends Nette\DI\CompilerExtension
 			}
 		}
 
-		foreach ((array) $this->config['blueScreen'] as $item) {
+		foreach ((array)$this->config['blueScreen'] as $item) {
 			$initialize->addBody($builder->formatPhp(
 				'$this->getService(?)->addPanel(?);',
 				Nette\DI\Compiler::filterArguments([$this->prefix('blueScreen'), $item])
 			));
 		}
 	}
-
 }
+?>

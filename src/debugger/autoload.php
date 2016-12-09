@@ -8,7 +8,6 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-
 require __DIR__ . '/src/tracy.php';
 
 use Tracy\Debugger;

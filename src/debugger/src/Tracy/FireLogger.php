@@ -1,20 +1,17 @@
 <?php
-
 /**
- * This file is part of the Tracy (https://tracy.nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ * FireLogger console logger.
+ *
+ * @package Advandz
+ * @subpackage Advandz.debugger
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
-
 namespace Tracy;
 
 use Tracy;
 
-
-/**
- * FireLogger console logger.
- *
- * @see http://firelogger.binaryage.com
- */
 class FireLogger implements ILogger
 {
 	/** @var int  */
@@ -176,3 +173,4 @@ class FireLogger implements ILogger
 	}
 
 }
+?>

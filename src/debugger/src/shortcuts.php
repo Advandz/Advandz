@@ -1,30 +1,26 @@
 <?php
-
 /**
- * This file is part of the Tracy (https://tracy.nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ * PHP debugging tool, It is an ultimate tool among the diagnostic ones.
+ *
+ * @package Advandz
+ * @subpackage Advandz.debugger
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
-
 if (!function_exists('dump')) {
-	/**
-	 * Tracy\Debugger::dump() shortcut.
-	 * @tracySkipLocation
-	 */
-	function dump($var)
-	{
+	function dump($var) {
 		array_map('Tracy\Debugger::dump', func_get_args());
+
 		return $var;
 	}
 }
 
 if (!function_exists('bdump')) {
-	/**
-	 * Tracy\Debugger::barDump() shortcut.
-	 * @tracySkipLocation
-	 */
-	function bdump($var)
-	{
+	function bdump($var) {
 		call_user_func_array('Tracy\Debugger::barDump', func_get_args());
+
 		return $var;
 	}
 }
+?>

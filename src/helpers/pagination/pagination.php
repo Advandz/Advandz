@@ -1,8 +1,6 @@
 <?php
 /**
  * Provides helper methods for dealing with Page Navigation content.
- * NOTE: This helper is designed to work with the included CSS a.k.a
- * Advandz-Framework.css or Bootstrap.
  * 
  * @package Advandz
  * @subpackage Advandz.helpers.pagination

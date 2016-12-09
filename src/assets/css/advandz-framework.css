@@ -1392,11 +1392,13 @@ code, kbd, pre, samp {
 }
 
 code {
-	padding: 2px 4px;
+	padding: 2px 0px;
 	font-size: 90%;
 	color: #008dc2;
 	background-color: #E6F5FD;
 	border: 1px solid #CEECFB;
+    border-left: none;
+    border-right: none;
 	border-radius: 4px;
 }
 

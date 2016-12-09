@@ -1,9 +1,12 @@
 <?php
-
 /**
- * Tracy (https://tracy.nette.org)
+ * PHP debugging tool, It is an ultimate tool among the diagnostic ones.
  *
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ * @package Advandz
+ * @subpackage Advandz.debugger
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
 
 require __DIR__ . '/Tracy/IBarPanel.php';
@@ -18,3 +21,4 @@ require __DIR__ . '/Tracy/Logger.php';
 require __DIR__ . '/Tracy/Debugger.php';
 require __DIR__ . '/Tracy/OutputDebugger.php';
 require __DIR__ . '/shortcuts.php';
+?>

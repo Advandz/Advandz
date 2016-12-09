@@ -1,101 +1,98 @@
 <?php
-
 /**
- * This file is part of the Tracy (https://tracy.nette.org)
- * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ * PHP debugging tool, It is an ultimate tool among the diagnostic ones.
+ *
+ * @package Advandz
+ * @subpackage Advandz.debugger
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
  */
-
 namespace Tracy;
-
 
 /**
  * Debug Bar.
  */
-class Bar
-{
+class Bar {
 	/** @var IBarPanel[] */
 	private $panels = [];
-
 	/** @var bool */
 	private $dispatched;
 
-
 	/**
 	 * Add custom panel.
+	 *
 	 * @param  IBarPanel
 	 * @param  string
 	 * @return self
 	 */
-	public function addPanel(IBarPanel $panel, $id = NULL)
-	{
-		if ($id === NULL) {
+	public function addPanel(IBarPanel $panel, $id = null) {
+		if ($id === null) {
 			$c = 0;
 			do {
 				$id = get_class($panel) . ($c++ ? "-$c" : '');
 			} while (isset($this->panels[$id]));
 		}
 		$this->panels[$id] = $panel;
+
 		return $this;
 	}
 
-
 	/**
 	 * Returns panel with given id
+	 *
 	 * @param  string
 	 * @return IBarPanel|NULL
 	 */
-	public function getPanel($id)
-	{
-		return isset($this->panels[$id]) ? $this->panels[$id] : NULL;
+	public function getPanel($id) {
+		return isset($this->panels[$id]) ? $this->panels[$id] : null;
 	}
-
 
 	/**
 	 * Renders debug bar.
+	 *
 	 * @return void
 	 */
-	public function render()
-	{
+	public function render() {
 		$useSession = $this->dispatched && session_status() === PHP_SESSION_ACTIVE;
-		$redirectQueue = & $_SESSION['_tracy']['redirect'];
+		$redirectQueue = &$_SESSION['_tracy']['redirect'];
 
 		if (!Helpers::isHtmlMode() && !Helpers::isAjax()) {
 			return;
-
 		} elseif (Helpers::isAjax()) {
-			$rows[] = (object) ['type' => 'ajax', 'panels' => $this->renderPanels('-ajax')];
+			$rows[] = (object)['type' => 'ajax', 'panels' => $this->renderPanels('-ajax')];
 			$dumps = Dumper::fetchLiveData();
-			$contentId = $useSession ? $_SERVER['HTTP_X_TRACY_AJAX'] . '-ajax' : NULL;
-
+			$contentId = $useSession ? $_SERVER['HTTP_X_TRACY_AJAX'] . '-ajax' : null;
 		} elseif (preg_match('#^Location:#im', implode("\n", headers_list()))) { // redirect
-			$redirectQueue = array_slice((array) $redirectQueue, -10);
+			$redirectQueue = array_slice((array)$redirectQueue, -10);
 			Dumper::fetchLiveData();
 			Dumper::$livePrefix = count($redirectQueue) . 'p';
 			$redirectQueue[] = [
 				'panels' => $this->renderPanels('-r' . count($redirectQueue)),
-				'dumps' => Dumper::fetchLiveData(),
+				'dumps'  => Dumper::fetchLiveData(),
 			];
-			return;
 
+			return;
 		} else {
-			$rows[] = (object) ['type' => 'main', 'panels' => $this->renderPanels()];
+			$rows[] = (object)['type' => 'main', 'panels' => $this->renderPanels()];
 			$dumps = Dumper::fetchLiveData();
-			foreach (array_reverse((array) $redirectQueue) as $info) {
-				$rows[] = (object) ['type' => 'redirect', 'panels' => $info['panels']];
+			foreach (array_reverse((array)$redirectQueue) as $info) {
+				$rows[] = (object)['type' => 'redirect', 'panels' => $info['panels']];
 				$dumps += $info['dumps'];
 			}
-			$redirectQueue = NULL;
-			$contentId = $useSession ? substr(md5(uniqid('', TRUE)), 0, 10) : NULL;
+			$redirectQueue = null;
+			$contentId = $useSession ? substr(md5(uniqid('', true)), 0, 10) : null;
 		}
 
-		ob_start(function () {});
+		ob_start(function () {
+		});
 		require __DIR__ . '/assets/Bar/panels.phtml';
 		require __DIR__ . '/assets/Bar/bar.phtml';
 		$content = Helpers::fixEncoding(ob_get_clean());
 
 		if ($contentId) {
-			$queue = & $_SESSION['_tracy']['bar'];
-			$queue = array_slice(array_filter((array) $queue), -5, NULL, TRUE);
+			$queue = &$_SESSION['_tracy']['bar'];
+			$queue = array_slice(array_filter((array)$queue), -5, null, true);
 			$queue[$contentId] = ['content' => $content, 'dumps' => $dumps];
 		}
 
@@ -106,7 +103,8 @@ class Bar
 			$script = isset($_SERVER['SCRIPT_NAME']) ? strtolower($_SERVER['SCRIPT_NAME']) : '';
 			if ($lpath !== $script) {
 				$max = min(strlen($lpath), strlen($script));
-				for ($i = 0; $i < $max && $lpath[$i] === $script[$i]; $i++);
+				for ($i = 0; $i < $max && $lpath[$i] === $script[$i]; $i++)
+					;
 				$path = $i ? substr($path, 0, strrpos($path, '/', $i - strlen($path) - 1) + 1) : '/';
 				$cookiePath = session_get_cookie_params()['path'];
 				if (substr($cookiePath, 0, strlen($path)) === $path) {
@@ -117,12 +115,10 @@ class Bar
 		}
 	}
 
-
 	/**
 	 * @return array
 	 */
-	private function renderPanels($suffix = NULL)
-	{
+	private function renderPanels($suffix = null) {
 		set_error_handler(function ($severity, $message, $file, $line) {
 			if (error_reporting() & $severity) {
 				throw new \ErrorException($message, 0, $severity, $file, $line);
@@ -135,12 +131,11 @@ class Bar
 		foreach ($this->panels as $id => $panel) {
 			$idHtml = preg_replace('#[^a-z0-9]+#i', '-', $id) . $suffix;
 			try {
-				$tab = (string) $panel->getTab();
-				$panelHtml = $tab ? (string) $panel->getPanel() : NULL;
+				$tab = (string)$panel->getTab();
+				$panelHtml = $tab ? (string)$panel->getPanel() : null;
 				if ($tab && $panel instanceof \Nette\Diagnostics\IBarPanel) {
 					$e = new \Exception('Support for Nette\Diagnostics\IBarPanel is deprecated');
 				}
-
 			} catch (\Throwable $e) {
 			} catch (\Exception $e) {
 			}
@@ -153,21 +148,21 @@ class Bar
 				$panelHtml = "<h1>Error: $id</h1><div class='tracy-inner'>" . nl2br(Helpers::escapeHtml($e)) . '</div>';
 				unset($e);
 			}
-			$panels[] = (object) ['id' => $idHtml, 'tab' => $tab, 'panel' => $panelHtml];
+			$panels[] = (object)['id' => $idHtml, 'tab' => $tab, 'panel' => $panelHtml];
 		}
 
 		restore_error_handler();
+
 		return $panels;
 	}
 
-
 	/**
 	 * Renders debug bar assets.
+	 *
 	 * @return bool
 	 */
-	public function dispatchAssets()
-	{
-		$asset = isset($_GET['_tracy_bar']) ? $_GET['_tracy_bar'] : NULL;
+	public function dispatchAssets() {
+		$asset = isset($_GET['_tracy_bar']) ? $_GET['_tracy_bar'] : null;
 		if ($asset === 'css') {
 			header('Content-Type: text/css; charset=utf-8');
 			header('Cache-Control: max-age=864000');
@@ -177,8 +172,8 @@ class Bar
 			readfile(__DIR__ . '/assets/Toggle/toggle.css');
 			readfile(__DIR__ . '/assets/Dumper/dumper.css');
 			readfile(__DIR__ . '/assets/BlueScreen/bluescreen.css');
-			return TRUE;
 
+			return true;
 		} elseif ($asset === 'js') {
 			header('Content-Type: text/javascript');
 			header('Cache-Control: max-age=864000');
@@ -188,38 +183,39 @@ class Bar
 			readfile(__DIR__ . '/assets/Toggle/toggle.js');
 			readfile(__DIR__ . '/assets/Dumper/dumper.js');
 			readfile(__DIR__ . '/assets/BlueScreen/bluescreen.js');
-			return TRUE;
+
+			return true;
 		}
 	}
 
-
 	/**
 	 * Renders debug bar content.
+	 *
 	 * @return bool
 	 */
-	public function dispatchContent()
-	{
-		$this->dispatched = TRUE;
+	public function dispatchContent() {
+		$this->dispatched = true;
 		if (Helpers::isAjax()) {
 			header('X-Tracy-Ajax: 1'); // session must be already locked
 		}
 		if (preg_match('#^content(-ajax)?.(\w+)$#', isset($_GET['_tracy_bar']) ? $_GET['_tracy_bar'] : '', $m)) {
-			$session = & $_SESSION['_tracy']['bar'][$m[2] . $m[1]];
+			$session = &$_SESSION['_tracy']['bar'][$m[2] . $m[1]];
 			header('Content-Type: text/javascript');
 			header('Cache-Control: max-age=60');
 			header_remove('Set-Cookie');
 			if ($session) {
 				$method = $m[1] ? 'loadAjax' : 'init';
 				echo "Tracy.Debug.$method(", json_encode($session['content']), ', ', json_encode($session['dumps']), ');';
-				$session = NULL;
+				$session = null;
 			}
-			$session = & $_SESSION['_tracy']['bluescreen'][$m[2]];
+			$session = &$_SESSION['_tracy']['bluescreen'][$m[2]];
 			if ($session) {
 				echo "Tracy.BlueScreen.loadAjax(", json_encode($session['content']), ', ', json_encode($session['dumps']), ');';
-				$session = NULL;
+				$session = null;
 			}
-			return TRUE;
+
+			return true;
 		}
 	}
-
 }
+?>

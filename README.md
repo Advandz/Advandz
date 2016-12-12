@@ -3,6 +3,14 @@
 
 Advandz is an enterprise-class powerful and scalable MVC framework for PHP application development.
 
+## Who is Advandz For?
+- You need build a High-Performance and Scalable application.
+- You need develop a Cloud-Ready application.
+- You want a framework with a small footprint.
+- You want a framework that requires nearly zero configuration.
+- You eschew complexity, favoring simple solutions.
+- You need clear, thorough documentation.
+
 ### Directory Structure ###
 <pre>
 /app

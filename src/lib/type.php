@@ -9,12 +9,13 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class Type {
-    /**
-     * Set the data type of a variable as String
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as String
+	 *
+	 * @param string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function String($value = '') {
         if (!is_string($value))
             throw new Exception("Argument passed must be an instance of String");
@@ -22,12 +23,13 @@ class Type {
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Integer
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as Integer
+	 *
+	 * @param int|string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function Integer($value = 0) {
         if (!is_int($value))
             throw new Exception("Argument passed must be an instance of Integer");
@@ -35,12 +37,13 @@ class Type {
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Float
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as Float
+	 *
+	 * @param float|string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function Float($value = 0.0) {
         if (!is_float($value))
             throw new Exception("Argument passed must be an instance of Float");
@@ -48,12 +51,13 @@ class Type {
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Double
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as Double
+	 *
+	 * @param float|string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function Double($value = 0.0) {
         if (!is_double($value))
             throw new Exception("Argument passed must be an instance of Double");
@@ -61,12 +65,13 @@ class Type {
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Boolean
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as Boolean
+	 *
+	 * @param bool|string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function Boolean($value = false) {
         if (!is_bool($value))
             throw new Exception("Argument passed must be an instance of Boolean");
@@ -74,25 +79,27 @@ class Type {
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Array
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
-    static public function [$value = []] {
+	/**
+	 * Set the data type of a variable as Array
+	 *
+	 * @param array|string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
+    static public function Array($value = []) {
         if (!is_array($value))
             throw new Exception("Argument passed must be an instance of Array");
 
         return $value;
     }
 
-    /**
-     * Set the data type of a variable as Object
-     *
-     * @param string $value The defined value of the variable
-     * @return string The value
-     */
+	/**
+	 * Set the data type of a variable as Object
+	 *
+	 * @param string $value The defined value of the variable
+	 * @return string The value
+	 * @throws Exception
+	 */
     static public function Object($value = null) {
         if (is_null($value))
             $value = new stdClass();
@@ -106,8 +113,7 @@ class Type {
     /**
      * Set the data type of a variable as Null
      *
-     * @param string $value The defined value of the variable
-     * @return string The value
+     * @return null
      */
     static public function Null() {
         return null;

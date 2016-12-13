@@ -21,7 +21,7 @@ class Knife extends Language {
 	 * @param string $file The template file used as our view
 	 * @throws Exception
 	 */
-	public function compile($file = null) {
+	public final function compile($file = null) {
 		if (!file_exists($file))
 			throw new Exception("Files does not exist: " . $file);
 

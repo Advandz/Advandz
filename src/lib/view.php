@@ -8,7 +8,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-class View extends Language {
+class View extends Knife {
 	/**
 	 * @var array Holds all the variables we will send to the view
 	 */
@@ -123,14 +123,15 @@ class View extends Language {
 		$file = ROOTWEBDIR . $this->view_path . "views" . DS . $this->view . DS . $this->file . $this->view_ext;
 
 		if (is_array($this->vars))
-			extract($this->vars);    // Extract the vars to local namespace
+			extract($this->vars); // Extract the vars to local namespace
 
 		if (!file_exists($file))
 			throw new Exception("Files does not exist: " . $file);
 
 		ob_start(); // Start output buffering
 
-		include $file; // Include the file
+		$this->compile($file); // Compile the view template
+		//include $file; // Include the file
 
 		$contents = ob_get_clean(); // Get the contents of the buffer and close buffer.
 

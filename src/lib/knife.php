@@ -19,7 +19,7 @@ class Knife extends Language {
 	 * Compiles the template into PHP code
 	 *
 	 * @param string $file The template file used as our view
-	 * @return string The compiled to PHP code
+	 * @return string The file location to the compiled code
 	 * @throws Exception
 	 */
 	public final function compile($file = null) {

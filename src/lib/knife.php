@@ -14,6 +14,41 @@ class Knife extends Language {
 	 * @var string The template code
 	 */
 	public $template;
+	/**
+	 * @var array The tags with the equivalent PHP code
+	 */
+	private $tags = [
+		'@lang'     => "<? echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
+		'!@lang'    => "<? \$this->_(\"%%STATEMENT%%\"); ?>",
+		'@yield'    => "<? echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
+		'!@yield'   => "<? echo \$this->%%STATEMENT%%; ?>",
+		'@raw'      => "<? echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
+		'!@raw'     => "<? print_r(\$%%STATEMENT%%); ?>",
+		'@var'      => "<? echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
+		'!@var'     => "<? echo \$%%STATEMENT%%; ?>",
+		'@this'     => "<? \$this->",
+		'!@this'    => "<? \$this->",
+		'@constant' => "<? echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
+		'include'   => "<? include %%STATEMENT%%; ?>",
+		'@include'  => "<? include_once %%STATEMENT%%; ?>",
+		'require'   => "<? require %%STATEMENT%%; ?>",
+		'@require'  => "<? require_once %%STATEMENT%%; ?>",
+		'if'        => "<? if (%%STATEMENT%%) { ?>",
+		'elseif'    => "<? } elseif (%%STATEMENT%%) { ?>",
+		'else'      => "<? } else { ?>",
+		'/if'       => "<? } ?>",
+		'while'     => "<? while (%%STATEMENT%%) { ?>",
+		'/while'    => "<? } ?>",
+		'do'        => "<? do { ?>",
+		'dowhile'   => "<? } while (%%STATEMENT%%); ",
+		'/do'       => "?>",
+		'for'       => "<? for (%%STATEMENT%%) { ?>",
+		'/for'      => "<? } ?>",
+		'foreach'   => "<? foreach (%%STATEMENT%%) { ?>",
+		'/foreach'  => "<? } ?>",
+		'php'       => "<?php ",
+		'/php'      => " ?>"
+	];
 
 	/**
 	 * Compiles the template into PHP code
@@ -48,8 +83,8 @@ class Knife extends Language {
 				if (!$this->template)
 					throw new Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
 
-				// Parse tags
-				$this->parseTags();
+				// Compile tags
+				$this->compileTags();
 
 				// Save compiled view
 				file_put_contents($compiled_file, $this->template);
@@ -72,118 +107,30 @@ class Knife extends Language {
 
 	/**
 	 * Parse all the tags and convert them into PHP code
+	 *
+	 * @throws Exception
 	 */
-	private function parseTags() {
-		// Parse {{ }} tags
+	private function compileTags() {
+		// Parse comment tags
+		$this->replaceTemplate("{{--", '<? /*');
+		$this->replaceTemplate("--}}", '*/ ?>');
+
+		// Compile the tags
 		preg_replace_callback('/\\{\\{([^{}]+)\}\\}/', function ($matches) {
-			// Get the tags arguments
 			$args = explode(" ", trim($matches[1]), 2);
 
-			// Parse the "include" tags
-			if ($args[0] == "include")
-				$this->replaceTag($matches[0], "<? include " . $args[1] . "; ?>");
-
-			// Parse the "@include" tags
-			if ($args[0] == "@include")
-				$this->replaceTag($matches[0], "<? include_once " . $args[1] . "; ?>");
-
-			// Parse the "require" tags
-			if ($args[0] == "require")
-				$this->replaceTag($matches[0], "<? require " . $args[1] . "; ?>");
-
-			// Parse the "@require" tags
-			if ($args[0] == "@require")
-				$this->replaceTag($matches[0], "<? require_once " . $args[1] . "; ?>");
-
-			// Parse the "if" tags
-			if ($args[0] == "if")
-				$this->replaceTag($matches[0], "<? if (" . $args[1] . ") { ?>");
-			if ($args[0] == "elseif")
-				$this->replaceTag($matches[0], "<? } elseif (" . $args[1] . ") { ?>");
-
-			// Parse the "while" tags
-			if ($args[0] == "while")
-				$this->replaceTag($matches[0], "<? while (" . $args[1] . ") { ?>");
-
-			// Parse the "dowhile" tags
-			if ($args[0] == "dowhile")
-				$this->replaceTag($matches[0], "<? } while (" . $args[1] . ");");
-
-			// Parse the "for" tags
-			if ($args[0] == "for")
-				$this->replaceTag($matches[0], "<? for (" . $args[1] . ") { ?>");
-
-			// Parse the "foreach" tags
-			if ($args[0] == "foreach")
-				$this->replaceTag($matches[0], "<? foreach (" . $args[1] . ") { ?>");
-
-			// Parse the "@yield" tags
-			if ($args[0] == "@yield")
-				$this->replaceTag($matches[0], "<? \$this->" . $args[1] . "; ?>");
+			if (array_key_exists($args[0], $this->tags)) {
+				$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
+			} else {
+				throw new Exception($matches[0] . " is a invalid tag");
+			}
 		}, $this->template);
 
-		// Parse structure tags
-		$this->replaceTag("{{else}}", '<? } else { ?>');
-		$this->replaceTag("{{do}}", '<? do { ?>');
-		$this->replaceTag("{{/if}}", '<? } ?>');
-		$this->replaceTag("{{/do}}", '?>');
-		$this->replaceTag("{{/while}}", '<? } ?>');
-		$this->replaceTag("{{/for}}", '<? } ?>');
-
-		// Parse PHP tags
-		$this->replaceTag("{{", '<? ');
-		$this->replaceTag("}}", ' ?>');
-
-		// Replace escaped tag
-		$this->replaceTag("{\{", '{{');
-		$this->replaceTag("}\}", '}}');
-		$this->replaceTag("{\\{", '{\{');
-		$this->replaceTag("}\\}", '}\}');
-
-		// Parse {[ ]} tags
-		preg_replace_callback('/\\{\\[([^{}]+)\]\\}/', function ($matches) {
-			// Get the tags arguments
-			$args = explode(" ", trim($matches[1]), 2);
-
-			// Parse the "@lang" tags
-			if ($args[0] == "@lang" || $args[0] == "!@lang")
-				$this->replaceTag($matches[0], "<? echo $this->_(\"" . $args[1] . "\", true); ?>");
-
-			// Parse the "@yield" tags
-			if ($args[0] == "@yield")
-				$this->replaceTag($matches[0], "<? echo $this->Html->safe(\$this->" . $args[1] . "); ?>");
-
-			if ($args[0] == "!@yield")
-				$this->replaceTag($matches[0], "<? echo \$this->" . $args[1] . "; ?>");
-
-			// Parse the "@raw" tags
-			if ($args[0] == "@raw")
-				$this->replaceTag($matches[0], "<? echo $this->Html->safe(print_r(\$" . $args[1] . ")); ?>");
-
-			if ($args[0] == "!@raw")
-				$this->replaceTag($matches[0], "<? echo print_r(\$" . $args[1] . "); ?>");
-
-			// Parse the "@var" tags
-			if ($args[0] == "@var")
-				$this->replaceTag($matches[0], "<? echo $this->Html->safe(\$" . $args[1] . "); ?>");
-
-			if ($args[0] == "!@var")
-				$this->replaceTag($matches[0], "<? echo \$" . $args[1] . "; ?>");
-
-			// Parse the "@constant" tags
-			if ($args[0] == "@constant" || $args[0] == "!@constant" && defined($args[1]))
-				$this->replaceTag($matches[0], "<? echo " . $args[1] . "; ?>");
-		}, $this->template);
-
-		// Parse PHP tags
-		$this->replaceTag("{[", '<?= ');
-		$this->replaceTag("]}", '; ?>');
-
-		// Replace escaped tag
-		$this->replaceTag("{\[", '{[');
-		$this->replaceTag("]\}", ']}');
-		$this->replaceTag("{\\[", '{\[');
-		$this->replaceTag("]\\}", ']\}');
+		// Replace escaped tags
+		$this->replaceTemplate('{\{', '{{');
+		$this->replaceTemplate('}\}', '}}');
+		$this->replaceTemplate('{\\{', '{\{');
+		$this->replaceTemplate('}\\}', '}\}');
 	}
 
 	/**
@@ -191,9 +138,35 @@ class Knife extends Language {
 	 *
 	 * @param string $tag The tag to be replaced
 	 * @param string $code The PHP code
+	 * @param string $statement The called function arguments
 	 */
-	private function replaceTag($tag, $code) {
-		$this->template = str_replace($tag, $code, $this->template);
+	private function replaceTag($tag, $code, $statement) {
+		$code = $this->replace('%%STATEMENT%%', $statement, $code);
+		$this->replaceTemplate($tag, $code);
+	}
+
+	/**
+	 * Replace a string in the template code
+	 *
+	 * @param mixed $search The value being searched for. An array may be used to designate multiple needles.
+	 * @param mixed $replace The replacement value that replaces found search values. An array may be used to
+	 *     designate multiple replacements.
+	 */
+	private function replaceTemplate($search, $replace) {
+		$this->template = $this->replace($search, $replace, $this->template);
+	}
+
+	/**
+	 * Replace a value in the given data
+	 *
+	 * @param mixed $search The value being searched for. An array may be used to designate multiple needles.
+	 * @param mixed $replace The replacement value that replaces found search values. An array may be used to
+	 *     designate multiple replacements.
+	 * @param mixed $data The string or array being searched and replaced on.
+	 * @return mixed Returns a string with all occurrences of search in data replaced with the given replace value.
+	 */
+	private function replace($search, $replace, $data) {
+		return str_replace($search, $replace, $data);
 	}
 }
 ?>

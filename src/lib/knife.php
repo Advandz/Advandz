@@ -108,9 +108,9 @@ class Knife extends Language {
 			if ($args[0] == "while")
 				$this->replaceTag($matches[0], "<?php while (" . $args[1] . ") { ?>");
 
-			// Parse the "/dowhile" tags
-			if ($args[0] == "/dowhile")
-				$this->replaceTag($matches[0], "<?php } while (" . $args[1] . "); ?>");
+			// Parse the "dowhile" tags
+			if ($args[0] == "dowhile")
+				$this->replaceTag($matches[0], "<?php } while (" . $args[1] . ");");
 
 			// Parse the "for" tags
 			if ($args[0] == "for")
@@ -125,6 +125,7 @@ class Knife extends Language {
 		$this->replaceTag("{{else}}", '<?php } else { ?>');
 		$this->replaceTag("{{do}}", '<?php do { ?>');
 		$this->replaceTag("{{/if}}", '<?php } ?>');
+		$this->replaceTag("{{/do}}", '?>');
 		$this->replaceTag("{{/while}}", '<?php } ?>');
 		$this->replaceTag("{{/for}}", '<?php } ?>');
 

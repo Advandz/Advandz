@@ -7676,7 +7676,7 @@ if ( !support.optSelected ) {
     jQuery.propHooks.selected = {
         get: function( elem ) {
 
-            /* eslint no-unused-expressions: 0 */
+            /* eslint no-unused-expressions: "off" */
 
             var parent = elem.parentNode;
             if ( parent && parent.parentNode ) {
@@ -7686,7 +7686,7 @@ if ( !support.optSelected ) {
         },
         set: function( elem ) {
 
-            /* eslint no-unused-expressions: 0 */
+            /* eslint no-unused-expressions: "off" */
 
             var parent = elem.parentNode;
             if ( parent ) {

@@ -37,7 +37,6 @@ Configure::set("System.cli_render_views", false);
 // Override the default error reporting level after boostrapping
 //Configure::errorReporting(0);
 
-
 ################################################################################
 # Caching
 ################################################################################
@@ -48,6 +47,13 @@ Configure::set("Cache.dir_permissions", 0755);
 // File extension for cache files
 Configure::set("Caching.ext", ".html");
 
+################################################################################
+# Knife Template Engine
+################################################################################
+// Enable the Knife template engine (true/false).
+Configure::set("Knife.on", true);
+// The compiled cached file life-time in seconds.
+Configure::set("Knife.cache_time", 3600);
 
 ################################################################################
 # Language

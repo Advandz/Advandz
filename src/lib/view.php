@@ -130,8 +130,7 @@ class View extends Knife {
 
 		ob_start(); // Start output buffering
 
-		$this->compile($file); // Compile the view template
-		//include $file; // Include the file
+		include $this->compile($file); // Include the file
 
 		$contents = ob_get_clean(); // Get the contents of the buffer and close buffer.
 

@@ -143,8 +143,6 @@ class Knife extends Language {
 		$this->replaceTag("]}", '); ?>');
 
 		// Parse PHP tags
-		$this->replaceTag("{{php}}", '<?php ');
-		$this->replaceTag("{{/php}}", ' ?>');
 		$this->replaceTag("{{", '<?php ');
 		$this->replaceTag("}}", ' ?>');
 

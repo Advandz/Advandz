@@ -74,77 +74,64 @@ class Knife extends Language {
 	 * Parse all the tags and convert them into PHP code
 	 */
 	private function parseTags() {
+		// Parse {{ }} tags
 		preg_replace_callback('/\\{\\{([^{}]+)\}\\}/', function ($matches) {
 			// Get the tags arguments
 			$args = explode(" ", trim($matches[1]), 2);
 
-			// Parse the "lang" tags
-			if ($args[0] == "lang")
-				$this->replaceTag($matches[0], Language::getText($args[1]));
-
 			// Parse the "include" tags
 			if ($args[0] == "include")
-				$this->replaceTag($matches[0], "<?php include " . $args[1] . "; ?>");
+				$this->replaceTag($matches[0], "<? include " . $args[1] . "; ?>");
 
 			// Parse the "@include" tags
 			if ($args[0] == "@include")
-				$this->replaceTag($matches[0], "<?php include_once " . $args[1] . "; ?>");
+				$this->replaceTag($matches[0], "<? include_once " . $args[1] . "; ?>");
 
 			// Parse the "require" tags
 			if ($args[0] == "require")
-				$this->replaceTag($matches[0], "<?php require " . $args[1] . "; ?>");
+				$this->replaceTag($matches[0], "<? require " . $args[1] . "; ?>");
 
 			// Parse the "@require" tags
 			if ($args[0] == "@require")
-				$this->replaceTag($matches[0], "<?php require_once " . $args[1] . "; ?>");
+				$this->replaceTag($matches[0], "<? require_once " . $args[1] . "; ?>");
 
 			// Parse the "if" tags
 			if ($args[0] == "if")
-				$this->replaceTag($matches[0], "<?php if (" . $args[1] . ") { ?>");
+				$this->replaceTag($matches[0], "<? if (" . $args[1] . ") { ?>");
 			if ($args[0] == "elseif")
-				$this->replaceTag($matches[0], "<?php } elseif (" . $args[1] . ") { ?>");
+				$this->replaceTag($matches[0], "<? } elseif (" . $args[1] . ") { ?>");
 
 			// Parse the "while" tags
 			if ($args[0] == "while")
-				$this->replaceTag($matches[0], "<?php while (" . $args[1] . ") { ?>");
+				$this->replaceTag($matches[0], "<? while (" . $args[1] . ") { ?>");
 
 			// Parse the "dowhile" tags
 			if ($args[0] == "dowhile")
-				$this->replaceTag($matches[0], "<?php } while (" . $args[1] . ");");
+				$this->replaceTag($matches[0], "<? } while (" . $args[1] . ");");
 
 			// Parse the "for" tags
 			if ($args[0] == "for")
-				$this->replaceTag($matches[0], "<?php for (" . $args[1] . ") { ?>");
+				$this->replaceTag($matches[0], "<? for (" . $args[1] . ") { ?>");
 
 			// Parse the "foreach" tags
 			if ($args[0] == "foreach")
-				$this->replaceTag($matches[0], "<?php foreach (" . $args[1] . ") { ?>");
+				$this->replaceTag($matches[0], "<? foreach (" . $args[1] . ") { ?>");
+
+			// Parse the "@yield" tags
+			if ($args[0] == "@yield")
+				$this->replaceTag($matches[0], "<? \$this->" . $args[1] . "; ?>");
 		}, $this->template);
 
 		// Parse structure tags
-		$this->replaceTag("{{else}}", '<?php } else { ?>');
-		$this->replaceTag("{{do}}", '<?php do { ?>');
-		$this->replaceTag("{{/if}}", '<?php } ?>');
+		$this->replaceTag("{{else}}", '<? } else { ?>');
+		$this->replaceTag("{{do}}", '<? do { ?>');
+		$this->replaceTag("{{/if}}", '<? } ?>');
 		$this->replaceTag("{{/do}}", '?>');
-		$this->replaceTag("{{/while}}", '<?php } ?>');
-		$this->replaceTag("{{/for}}", '<?php } ?>');
-
-		// Parse yield variables tags
-		$this->replaceTag("{[@yield ", '<?php echo $this->Html->safe($this->');
-		$this->replaceTag("{![@yield ", '<?php echo ($this->'); // Without XSS filtering
-
-		// Parse RAW variables tags
-		$this->replaceTag("{[@raw ", '<?php print_r(');
-		$this->replaceTag("{![@raw ", '<?php print_r('); // Without XSS filtering
-
-		// Parse variables tags
-		$this->replaceTag("{[@var ", '<?php echo $this->Html->safe($');
-		$this->replaceTag("{![@var ", '<?php echo ($'); // Without XSS filtering
-
-		$this->replaceTag("]}", '); ?>');
+		$this->replaceTag("{{/while}}", '<? } ?>');
+		$this->replaceTag("{{/for}}", '<? } ?>');
 
 		// Parse PHP tags
-		$this->replaceTag("{{", '<?php ');
+		$this->replaceTag("{{", '<? ');
 		$this->replaceTag("}}", ' ?>');
 
 		// Replace escaped tag
@@ -152,6 +139,51 @@ class Knife extends Language {
 		$this->replaceTag("}\}", '}}');
 		$this->replaceTag("{\\{", '{\{');
 		$this->replaceTag("}\\}", '}\}');
+
+		// Parse {[ ]} tags
+		preg_replace_callback('/\\{\\[([^{}]+)\]\\}/', function ($matches) {
+			// Get the tags arguments
+			$args = explode(" ", trim($matches[1]), 2);
+
+			// Parse the "@lang" tags
+			if ($args[0] == "@lang" || $args[0] == "!@lang")
+				$this->replaceTag($matches[0], "<? echo $this->_(\"" . $args[1] . "\", true); ?>");
+
+			// Parse the "@yield" tags
+			if ($args[0] == "@yield")
+				$this->replaceTag($matches[0], "<? echo $this->Html->safe(\$this->" . $args[1] . "); ?>");
+
+			if ($args[0] == "!@yield")
+				$this->replaceTag($matches[0], "<? echo \$this->" . $args[1] . "; ?>");
+
+			// Parse the "@raw" tags
+			if ($args[0] == "@raw")
+				$this->replaceTag($matches[0], "<? echo $this->Html->safe(print_r(\$" . $args[1] . ")); ?>");
+
+			if ($args[0] == "!@raw")
+				$this->replaceTag($matches[0], "<? echo print_r(\$" . $args[1] . "); ?>");
+
+			// Parse the "@var" tags
+			if ($args[0] == "@var")
+				$this->replaceTag($matches[0], "<? echo $this->Html->safe(\$" . $args[1] . "); ?>");
+
+			if ($args[0] == "!@var")
+				$this->replaceTag($matches[0], "<? echo \$" . $args[1] . "; ?>");
+
+			// Parse the "@constant" tags
+			if ($args[0] == "@constant" || $args[0] == "!@constant" && defined($args[1]))
+				$this->replaceTag($matches[0], "<? echo " . $args[1] . "; ?>");
+		}, $this->template);
+
+		// Parse PHP tags
+		$this->replaceTag("{[", '<?= ');
+		$this->replaceTag("]}", '; ?>');
+
+		// Replace escaped tag
+		$this->replaceTag("{\[", '{[');
+		$this->replaceTag("]\}", ']}');
+		$this->replaceTag("{\\[", '{\[');
+		$this->replaceTag("]\\}", ']\}');
 	}
 
 	/**

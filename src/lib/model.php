@@ -11,16 +11,6 @@
  */
 class Model {
 	/**
-	 * @var array Default PDO attribute settings
-	 */
-	private $default_pdo_options = [
-		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-		PDO::ATTR_CASE => PDO::CASE_LOWER,
-		PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
-		PDO::ATTR_PERSISTENT => false,
-		PDO::ATTR_STRINGIFY_FETCHES => false
-	];
-	/**
 	 * @var object PDO connection
 	 */
 	private $connection;
@@ -40,7 +30,17 @@ class Model {
 	 * @var mixed Fetch Mode the PDO:FETCH_* constant (int) to fetch records by, null to use default setting
 	 */
 	private $fetch_mode = null;
-	
+	/**
+	 * @var array Default PDO attribute settings
+	 */
+	private $default_pdo_options = [
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+		PDO::ATTR_CASE => PDO::CASE_LOWER,
+		PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
+		PDO::ATTR_PERSISTENT => false,
+		PDO::ATTR_STRINGIFY_FETCHES => false
+	];
+
 	/**
 	 * Creates a new Model object that establishes a new PDO connection using
 	 * the given database info, or the default configured info set in the database
@@ -58,11 +58,12 @@ class Model {
 		if (!Configure::get("Database.lazy_connecting") || $db_info !== null)
 			$this->makeConnection($db_info);
 	}
-	
+
 	/**
 	 * Sets the fetch mode to the given value, returning the old value
 	 *
 	 * @param mixed $fetch_mode The PDO:FETCH_* constant (int) to fetch records by, null to use default setting
+	 * @return mixed The fetch mode
 	 */
 	public function setFetchMode($fetch_mode) {
 		$cur = $this->fetch_mode;
@@ -87,7 +88,7 @@ class Model {
 	/**
 	 * Sets the given value to the given attribute for this connection
 	 *
-	 * @param long $attribute The attribute to set
+	 * @param string $attribute The attribute to set
 	 * @param int $value The value to assign to the attribute
 	 * @throws Exception Thrown when no PDO connection has been established
 	 */
@@ -97,12 +98,11 @@ class Model {
 		
 		$this->connection->setAttribute($attribute, $value);
 	}
-	
+
 	/**
 	 * Query the Database using the given prepared statement and argument list
-	 * 
+	 *
 	 * @param string $sql The SQL to execute
-	 * @param string $... Bound parameters [$param1, $param2, ..., $paramN]
 	 * @return PDOStatement The resulting PDOStatement from the execution of this query
 	 * @throws Exception Thrown when no PDO connection has been established
 	 */
@@ -128,7 +128,7 @@ class Model {
 		// Return the statement
 		return $this->statement;
 	}
-	
+
 	/**
 	 * Prepares an SQL statement to be executed by the PDOStatement::execute() method.
 	 * Useful when executing the same query with different bound parameters.
@@ -136,6 +136,7 @@ class Model {
 	 * @param string $sql The SQL statement to prepare
 	 * @param int $fetch_mode The PDO::FETCH_* constant, defaults to "Database.fetch_mode" config setting
 	 * @return PDOStatement The resulting PDOStatement from the preparation of this query
+	 * @throws Exception When connection has not been instantiated
 	 * @see PDOStatement::execute()
 	 */
 	public function prepare($sql, $fetch_mode=null) {
@@ -152,11 +153,12 @@ class Model {
 		
 		return $this->statement;
 	}
-	
+
 	/**
 	 * Begin a transaction
 	 *
-	 * @return boolean True if the transaction was successfully opened, false otherwise
+	 * @return bool True if the transaction was successfully opened, false otherwise
+	 * @throws Exception When connection has not been instantiated
 	 */
 	public function begin() {
 		// Ensure PDO connection exists
@@ -164,11 +166,12 @@ class Model {
 			throw new Exception("Call to Model::begin when connection has not been instantiated");
 		return $this->connection->beginTransaction();
 	}
-	
+
 	/**
 	 * Rolls back and closes the transaction
 	 *
-	 * @return boolean True if the transaction was successfully rolled back and closed, false otherwise
+	 * @return bool True if the transaction was successfully rolled back and closed, false otherwise
+	 * @throws Exception When connection has not been instantiated
 	 */
 	public function rollBack() {
 		// Ensure PDO connection exists
@@ -180,8 +183,9 @@ class Model {
 	/**
 	 * Commits a transaction
 	 *
-	 * @return boolean True if the transaction was successfully commited and closed, false otherwise
-	 */	
+	 * @return bool True if the transaction was successfully commited and closed, false otherwise
+	 * @throws Exception When connection has not been instantiated
+	 */
 	public function commit() {
 		// Ensure PDO connection exists
 		if ($this->lazyConnect() && !($this->connection instanceof PDO))

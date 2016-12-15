@@ -1,7 +1,6 @@
 <?php
 /**
  * Performs all of the bootstrap operations necessary to begin execution.
- * 
  * Includes all of the core library files as well as sets global constants used
  * throughout the app.
  *
@@ -11,7 +10,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
- 
+
 /**
  * Sets the default error reporting level (everything).  This value should
  * remain as-is.  If the error level needs to be changed it should be done so
@@ -22,8 +21,6 @@ error_reporting(-1);
 
 /**
  * Sets the version of Advandz in use. [Major].[Minor].[Revision]
- *
- * @deprecated since 1.0.0
  */
 define("ADVANDZ_VERSION", "1.0.0");
 

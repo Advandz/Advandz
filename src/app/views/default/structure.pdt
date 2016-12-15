@@ -5,22 +5,23 @@
         <title>Advandz Framework</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="<?php echo $this->assets_dir;?>css/advandz-icons.css">
-        <link rel="stylesheet" href="<?php echo $this->assets_dir;?>css/advandz-animations.css">
-        <link rel="stylesheet" href="<?php echo $this->assets_dir;?>css/advandz-framework.css">
-        <link rel="stylesheet" href="<?php echo $this->assets_dir;?>css/styles.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-icons.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-animations.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-framework.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/styles.css">
 
         <!-- Scripts -->
-        <script src="<?php echo $this->assets_dir;?>javascript/jquery.js"></script>
-        <script src="<?php echo $this->assets_dir;?>javascript/advandz-framework.js"></script>
-        <script src="<?php echo $this->assets_dir;?>javascript/script.js"></script>
+        <script src="{{@yield assets_dir}}javascript/jquery.js"></script>
+        <script src="{{@yield assets_dir}}javascript/advandz-framework.js"></script>
+        <script src="{{@yield assets_dir}}javascript/script.js"></script>
     </head>
 
     <body class="bg-primary bg bg-dark">
         <div class="container">
             <div class="bg-default box-shadow box-round-corners-sm margin-40 padding-40 af-animation swing">
-                <?php echo $content;?>
+                {{!@var content}}
             </div>
         </div>
     </body>
 </html>
+

@@ -18,36 +18,36 @@ class Knife extends Language {
 	 * @var array The tags with the equivalent PHP code
 	 */
 	private $tags = [
-		'@lang'     => "<? echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
-		'!@lang'    => "<? \$this->_(\"%%STATEMENT%%\"); ?>",
-		'@yield'    => "<? echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
-		'!@yield'   => "<? echo \$this->%%STATEMENT%%; ?>",
-		'@raw'      => "<? echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
-		'!@raw'     => "<? print_r(\$%%STATEMENT%%); ?>",
-		'@var'      => "<? echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
-		'!@var'     => "<? echo \$%%STATEMENT%%; ?>",
-		'@this'     => "<? \$this->",
-		'!@this'    => "<? \$this->",
+		'@lang' => "<? echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
+		'!@lang' => "<? \$this->_(\"%%STATEMENT%%\"); ?>",
+		'@yield' => "<? echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
+		'!@yield' => "<? echo \$this->%%STATEMENT%%; ?>",
+		'@raw' => "<? echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
+		'!@raw' => "<? print_r(\$%%STATEMENT%%); ?>",
+		'@var' => "<? echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
+		'!@var' => "<? echo \$%%STATEMENT%%; ?>",
+		'@this' => "<? \$this->",
+		'!@this' => "<? \$this->",
 		'@constant' => "<? echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
-		'include'   => "<? include %%STATEMENT%%; ?>",
-		'@include'  => "<? include_once %%STATEMENT%%; ?>",
-		'require'   => "<? require %%STATEMENT%%; ?>",
-		'@require'  => "<? require_once %%STATEMENT%%; ?>",
-		'if'        => "<? if (%%STATEMENT%%) { ?>",
-		'elseif'    => "<? } elseif (%%STATEMENT%%) { ?>",
-		'else'      => "<? } else { ?>",
-		'/if'       => "<? } ?>",
-		'while'     => "<? while (%%STATEMENT%%) { ?>",
-		'/while'    => "<? } ?>",
-		'do'        => "<? do { ?>",
-		'dowhile'   => "<? } while (%%STATEMENT%%); ",
-		'/do'       => "?>",
-		'for'       => "<? for (%%STATEMENT%%) { ?>",
-		'/for'      => "<? } ?>",
-		'foreach'   => "<? foreach (%%STATEMENT%%) { ?>",
-		'/foreach'  => "<? } ?>",
-		'php'       => "<?php ",
-		'/php'      => " ?>"
+		'include' => "<? include %%STATEMENT%%; ?>",
+		'@include' => "<? include_once %%STATEMENT%%; ?>",
+		'require' => "<? require %%STATEMENT%%; ?>",
+		'@require' => "<? require_once %%STATEMENT%%; ?>",
+		'if' => "<? if (%%STATEMENT%%) { ?>",
+		'elseif' => "<? } elseif (%%STATEMENT%%) { ?>",
+		'else' => "<? } else { ?>",
+		'/if' => "<? } ?>",
+		'while' => "<? while (%%STATEMENT%%) { ?>",
+		'/while' => "<? } ?>",
+		'do' => "<? do { ?>",
+		'dowhile' => "<? } while (%%STATEMENT%%); ",
+		'/do' => "?>",
+		'for' => "<? for (%%STATEMENT%%) { ?>",
+		'/for' => "<? } ?>",
+		'foreach' => "<? foreach (%%STATEMENT%%) { ?>",
+		'/foreach' => "<? } ?>",
+		'php' => "<?php ",
+		'/php' => " ?>"
 	];
 
 	/**
@@ -55,7 +55,7 @@ class Knife extends Language {
 	 *
 	 * @param string $file The template file used as our view
 	 * @return string The file location to the compiled code
-	 * @throws Exception
+	 * @throws Exception When is not a valid view or you don't have the permissions to read them
 	 */
 	public final function compile($file = null) {
 		// Load HTML helper
@@ -68,20 +68,23 @@ class Knife extends Language {
 			// Delete compiled view if is old
 			if (Configure::get("Caching.on") && file_exists($compiled_file)) {
 				$build_date = filemtime($compiled_file); // Last modified date of the compiled view
-				$cache_time = (!empty(Configure::get("Knife.cache_time")) ? Configure::get("Knife.cache_time") : 3600);
+				$ttl = (!empty(Configure::get("Knife.ttl")) ? Configure::get("Knife.ttl") : 3600);
 
-				if ($build_date + $cache_time <= time())
+				if ($build_date + $ttl <= time()) {
 					unlink($compiled_file);
+				}
 			}
 
 			// Create compiled view
 			if (!file_exists($compiled_file)) {
 				// Check if the view exists and get the content
-				if (file_exists($file))
+				if (file_exists($file)) {
 					$this->template = file_get_contents($file);
+				}
 
-				if (!$this->template)
+				if (!$this->template) {
 					throw new Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
+				}
 
 				// Compile tags
 				$this->compileTags();
@@ -108,7 +111,7 @@ class Knife extends Language {
 	/**
 	 * Parse all the tags and convert them into PHP code
 	 *
-	 * @throws Exception
+	 * @throws Exception When a invalid tag is parsed
 	 */
 	private function compileTags() {
 		// Parse comment tags
@@ -120,7 +123,7 @@ class Knife extends Language {
 			$args = explode(" ", trim($matches[1]), 2);
 
 			if (array_key_exists($args[0], $this->tags)) {
-				$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
+				@$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
 			} else {
 				throw new Exception($matches[0] . " is a invalid tag");
 			}

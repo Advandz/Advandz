@@ -53,7 +53,7 @@ Configure::set("Caching.ext", ".html");
 // Enable the Knife template engine (true/false).
 Configure::set("Knife.on", true);
 // The compiled cached file life-time in seconds.
-Configure::set("Knife.cache_time", 3600);
+Configure::set("Knife.ttl", 3600);
 
 ################################################################################
 # Language

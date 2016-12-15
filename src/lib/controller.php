@@ -24,7 +24,7 @@ class Controller {
 	 */
 	public $view;
 	/**
-	 * @var array All parts of the Routed URI 
+	 * @var array All parts of the Routed URI
 	 */
 	public $uri;
 	/**
@@ -85,90 +85,86 @@ class Controller {
 	 */
 	public function __construct() {
 		$this->structure_view = Configure::get("System.default_structure");
-		
+
 		// Initialize the structure view
 		$this->structure = new View();
-		
+
 		// Initialize the main view
 		$this->view = new View();
-		
+
 		// Load any preset models
 		$this->uses($this->uses);
-		
+
 		// Load any preset components
 		$this->components($this->components);
 
 		// Load any preset helpers
 		$this->helpers($this->helpers);
 	}
-	
+
 	/**
 	 * Load the given models into this controller
-	 * 
+	 *
 	 * @param array $models All models to load
 	 */
 	protected final function uses($models) {
 		Loader::loadModels($this, $models);
 	}
-	
+
 	/**
 	 * Load the given components into this controller
-	 * 
-	 * @param array $components All components to load 
+	 *
+	 * @param array $components All components to load
 	 */
 	protected final function components($components) {
 		Loader::loadComponents($this, $components);
 	}
-	
+
 	/**
 	 * Load the given helpers into this controller, making them available to
 	 * any implicitly initialized Views, including Controller::$structure
-	 * 
-	 * @param array $helpers All helpers to load 
+	 *
+	 * @param array $helpers All helpers to load
 	 */
 	protected final function helpers($helpers) {
 		Loader::loadHelpers($this, $helpers);
 	}
-	
+
 	/**
 	 * The default action method, overwritable.
 	 */
 	public function index() {
-	
 	}
-	
+
 	/**
 	 * Overwritable method called before the index method, or controller specified action.
 	 * This method is public to make compatible with PHP 5.1 (due to a bug not fixed until 5.2).
 	 * It is, however, not a callable action.
-	 */         
+	 */
 	public function preAction() {
-	
-	}         
-	
+	}
+
 	/**
 	 * Overwritable method called after the index method, or controller specified action
 	 * This method is public to make compatible with PHP 5.1 (due to a bug not fixed until 5.2).
 	 * It is, however, not a callable action.
 	 */
 	public function postAction() {
-	
 	}
-	
+
 	/**
 	 * Invokes View::set() on $this->view
-	 * 
+	 *
 	 * @param mixed $name The name of the variable to set in this view
 	 * @param mixed $value The value to assign to the variable set in this view
 	 * @see View::set()
 	 */
-	protected final function set($name, $value=null) {
+	protected final function set($name, $value = null) {
 		$this->view->set($name, $value);
 	}
-	
+
 	/**
 	 * Prints the given template file from the given view.
-	 *
 	 * This method is only useful for including a static view in another view.
 	 * For setting variables in views, or for setting multiple views in a single
 	 * Page (e.g. partials) see Controller::partial()
@@ -181,7 +177,7 @@ class Controller {
 		$view = new View($file, $view);
 		echo $view->fetch();
 	}
-	
+
 	/**
 	 * Returns the given template file using the supplied params from the given view.
 	 *
@@ -190,56 +186,61 @@ class Controller {
 	 * @param string $view The view to find the given template file in
 	 * @return string The rendered template
 	 */
-	protected final function partial($file, $params = null, $view = null) {        	
+	protected final function partial($file, $params = null, $view = null) {
 		$partial = clone $this->view;
-		
+
 		if (is_array($params)) {
-			foreach ($params as $key => $value)
+			foreach ($params as $key => $value) {
 				$partial->set($key, $value);
+			}
 		}
+
 		return $partial->fetch($file, $view);
 	}
-	
+
 	/**
 	 * Starts caching for the current request
 	 *
-	 * @param mixed $time The amount of time to cache for, either an integer (seconds) or a proper strtotime string (e.g. "1 hour").
+	 * @param mixed $time The amount of time to cache for, either an integer (seconds) or a proper strtotime string
+	 *     (e.g. "1 hour").
 	 * @return boolean True if caching is enabled, false otherwise.
 	 */
 	protected final function startCaching($time) {
-		if (!Configure::get("Caching.on"))
+		if (!Configure::get("Caching.on")) {
 			return false;
-		
-		if (!is_numeric($time))
-			$time = strtotime($time)-time();
+		}
+
+		if (!is_numeric($time)) {
+			$time = strtotime($time) - time();
+		}
 		$this->cache_for = $time;
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Stops caching for the current request. If invoked, caching will not be performed for this request.
 	 */
 	protected final function stopCaching() {
 		$this->cache_for = null;
 	}
-	
+
 	/**
 	 * Clears the cache file for the given URI, or for the curren request if no URI is given
 	 *
 	 * @param mixed $uri The request to clear, if not given or false the current request is cleared
 	 */
-	protected final function clearCache($uri=false) {
+	protected final function clearCache($uri = false) {
 		Cache::clearCache(strtolower($uri ? $uri : $this->uri_str));
 	}
-	
+
 	/**
 	 * Empties the entire cache of all files (directories excluded)
 	 */
 	protected final function emptyCache() {
 		Cache::emptyCache();
 	}
-	
+
 	/**
 	 * Renders the view with its structure (if set).  The view is set into the structure as $content.
 	 * This method can only be called once, since it includes the structure when outputting.
@@ -249,33 +250,34 @@ class Controller {
 	 * @param string $file The template file to render
 	 * @param string $view The view directory to look in for the template file.
 	 */
-	protected final function render($file=null, $view=null) {
-		if ($this->rendered)
+	protected final function render($file = null, $view = null) {
+		if ($this->rendered) {
 			return;
-		
+		}
+
 		$template = $this->structure_view;
-		
+
 		$this->rendered = true;
-		
+
 		// Prepare the structure
 		if (strpos($template, DS) > 0) {
 			$temp = explode(DS, $template);
 			$template = $temp[1];
 			$view = $temp[0];
 		}
-		
+
 		if ($file == null) {
 			// Use the view file set for this view (if set)
-			if ($this->view->file !== null)
+			if ($this->view->file !== null) {
 				$file = $this->view->file;
-			else {
+			} else {
 				// Auto-load the view file. These have the format of:
 				// [controller_name]_[method_name] for all non-index methods
 				$file = Loader::fromCamelCase(get_class($this)) .
 					($this->action != null && $this->action != "index" ? "_" . strtolower($this->action) : "");
 			}
 		}
-		
+
 		// Render view
 		$output = $this->view->fetch($file, $view);
 		// Render view in structure
@@ -283,15 +285,16 @@ class Controller {
 			$this->structure->set("content", $output);
 			$output = $this->structure->fetch($template, $view);
 		}
-		
+
 		// Create the cache file, if set
-		if ($this->cache_for != null)
+		if ($this->cache_for != null) {
 			Cache::writeCache($this->uri_str, $output, $this->cache_for);
-			
+		}
+
 		// Output the structure containing the view to standard out
 		echo $output;
 	}
-	
+
 	/**
 	 * Initiates a header redirect to the given URI/URL. Automatically prepends
 	 * WEBDIR to $uri if $uri is relative (e.g. does not start with a '/' and is
@@ -302,19 +305,20 @@ class Controller {
 	protected static final function redirect($uri = WEBDIR) {
 		$parts = parse_url($uri);
 		$relative = true;
-		if (substr($uri, 0, 1) == "/")
+		if (substr($uri, 0, 1) == "/") {
 			$relative = false;
+		}
 		// If not scheme is specified, assume http(s)
 		if (!isset($parts['scheme'])) {
 			$uri = "http" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off" ? "s" : "") .
 				"://" . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']) .
 				($relative ? WEBDIR : "") . $uri;
 		}
-		
+
 		header("Location: " . $uri);
 		exit;
 	}
-	
+
 	/**
 	 * Sets the default view path for this view and its structure view
 	 *

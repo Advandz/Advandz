@@ -12,7 +12,6 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class Language {
-
 	/**
 	 * @var array An associative array containing name of all of the language files loaded
 	 * and the language they pertain to
@@ -26,15 +25,16 @@ class Language {
 	 * @var string The current language (ISO 639-1/2) e.g. "en_us"
 	 */
 	private static $current_language;
-	
-	
+
 	/**
 	 * Alias of Language::getText()
-	 * @see Language::getText()
 	 *
+	 * @see Language::getText()
 	 * @param string $lang_key The language key identifier for this requested text
 	 * @param boolean $return Whether to return the text or output it
-	 * @param mixed $... Values to substitute in the language result. Uses sprintf(). If parameter is an array, only that value is passed to sprintf().
+	 * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
+	 *     that value is passed to sprintf().
+	 * @return mixed
 	 */
 	public static final function _($lang_key, $return=false) {
 		$args = func_get_args();
@@ -45,10 +45,12 @@ class Language {
 	 * Fetches text from the loaded language file.  Will search the preferred
 	 * language file first, if not found in there, then will search the default
 	 * language file for the $lang_key text.
-	 * 
+	 *
 	 * @param string $lang_key The language key identifier for this requested text
 	 * @param boolean $return Whether to return the text or output it
-	 * @param mixed $... Values to substitute in the language result. Uses sprintf(). If parameter is an array, only that value is passed to sprintf().
+	 * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
+	 *     that value is passed to sprintf().
+	 * @return string The resultant text
 	 */
 	public static final function getText($lang_key, $return=false) {
 		$language = self::$current_language != null ? self::$current_language : Configure::get("Language.default");

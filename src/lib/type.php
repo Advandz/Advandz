@@ -14,109 +14,117 @@ class Type {
 	 *
 	 * @param string $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of string
 	 */
-    static public function String($value = '') {
-        if (!is_string($value))
-            throw new Exception("Argument passed must be an instance of String");
+	static public function string($value = '') {
+		if (!is_string($value)) {
+			throw new Exception("Argument passed must be an instance of string");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Integer
 	 *
-	 * @param int|string $value The defined value of the variable
+	 * @param int $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of integer
 	 */
-    static public function Integer($value = 0) {
-        if (!is_int($value))
-            throw new Exception("Argument passed must be an instance of Integer");
+	static public function integer($value = 0) {
+		if (!is_int($value)) {
+			throw new Exception("Argument passed must be an instance of integer");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Float
 	 *
-	 * @param float|string $value The defined value of the variable
+	 * @param float $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of float
 	 */
-    static public function Float($value = 0.0) {
-        if (!is_float($value))
-            throw new Exception("Argument passed must be an instance of Float");
+	static public function float($value = 0.0) {
+		if (!is_float($value)) {
+			throw new Exception("Argument passed must be an instance of float");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Double
 	 *
-	 * @param float|string $value The defined value of the variable
+	 * @param float $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of double
 	 */
-    static public function Double($value = 0.0) {
-        if (!is_double($value))
-            throw new Exception("Argument passed must be an instance of Double");
+	static public function double($value = 0.0) {
+		if (!is_double($value)) {
+			throw new Exception("Argument passed must be an instance of double");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Boolean
 	 *
-	 * @param bool|string $value The defined value of the variable
+	 * @param boolean $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of boolean
 	 */
-    static public function Boolean($value = false) {
-        if (!is_bool($value))
-            throw new Exception("Argument passed must be an instance of Boolean");
+	static public function boolean($value = false) {
+		if (!is_bool($value)) {
+			throw new Exception("Argument passed must be an instance of boolean");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Array
 	 *
-	 * @param array|string $value The defined value of the variable
+	 * @param array $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an instance of array
 	 */
-    static public function Array($value = []) {
-        if (!is_array($value))
-            throw new Exception("Argument passed must be an instance of Array");
+	static public function array($value = []) {
+		if (!is_array($value)) {
+			throw new Exception("Argument passed must be an instance of array");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
 	/**
 	 * Set the data type of a variable as Object
 	 *
 	 * @param string $value The defined value of the variable
 	 * @return string The value
-	 * @throws Exception
+	 * @throws Exception When the argument passed is not an object
 	 */
-    static public function Object($value = null) {
-        if (is_null($value))
-            $value = new stdClass();
+	static public function object($value = null) {
+		if (is_null($value)) {
+			$value = new stdClass();
+		}
 
-        if (!is_object($value))
-            throw new Exception("Argument passed must be an instance of Object");
+		if (!is_object($value)) {
+			throw new Exception("Argument passed must be an object");
+		}
 
-        return $value;
-    }
+		return $value;
+	}
 
-    /**
-     * Set the data type of a variable as Null
-     *
-     * @return null
-     */
-    static public function Null() {
-        return null;
-    }
+	/**
+	 * Set the data type of a variable as Null
+	 *
+	 * @return null
+	 */
+	static public function null() {
+		return null;
+	}
 }
 ?>

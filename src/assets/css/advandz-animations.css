@@ -106,7 +106,6 @@
 	animation-name: flash;
 }
 
-
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes pulse {
@@ -410,7 +409,6 @@
 	-webkit-animation-name: tada;
 	animation-name: tada;
 }
-
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
@@ -2376,7 +2374,6 @@
 	animation-name: hinge;
 }
 
-
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 
 @-webkit-keyframes rollIn {
@@ -2409,7 +2406,6 @@
 	-webkit-animation-name: rollIn;
 	animation-name: rollIn;
 }
-
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 

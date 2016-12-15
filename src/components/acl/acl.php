@@ -26,10 +26,10 @@ class Acl {
 		$this->Record = new Record();
 		$this->Record->setFetchMode(PDO::FETCH_OBJ);
 	}
-	
+
 	/**
 	 * Check whether the ARO is allowed access to the ACO
-	 * 
+	 *
 	 * @param string $aco_alias The alias of the ACO
 	 * @param string $aro_alias The alias of the ARO
 	 * @param string $action The action to verify on the ACO
@@ -40,14 +40,14 @@ class Acl {
 		// Check if the given ARO has access to the ACO to perform the action
 		// given.  Action privleges are inherited based on ARO tree
 		$aco = explode("/", $aco_alias);
-		
+
 		$access_list = $this->getAccessList($aro_alias, $aco_alias);
-		
+
 		$list_size = count($access_list);
-		
+
 		// Holds the wildcard result for this ACO if defined
 		$wildcard = false;
-		
+
 		for ($i=0; $i<$list_size; $i++) {
 			// Asterisks (*) are considered wildcards
 			if ($action == "*" || $access_list[$i]->action == $action) {
@@ -55,22 +55,22 @@ class Acl {
 					return true;
 				return false;
 			}
-			
+
 			// If there is a wildcard action for this ACO use it in the case of no exact matches
 			if ($access_list[$i]->action == "*")
 				$wildcard = $access_list[$i];
 		}
-		
+
 		// If there is a wildcard for this ACO use that value in the case where no better match found
 		if ($wildcard && $wildcard->permission == "allow")
 			return true;
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Fetches the Access List for the ARO on the given ACO
-	 * 
+	 *
 	 * @param string $aco_alias The alias of the ACO
 	 * @param string $aro_alias The alias of the ARO
 	 * @return array An array of ARO/ACO hierachy relationships
@@ -78,12 +78,12 @@ class Acl {
 	public function getAccessList($aro_alias, $aco_alias) {
 		$aco = explode("/", $aco_alias);
 		$access_list = [];
-		
+
 		// Attempt to find an entry for the given ACO, if no results, attempt for a subset of that ACO path
 		$temp_aco = $aco_alias;
 		$aco_count = count($aco);
 		for ($i=0; $i<$aco_count; $i++) {
-			
+
 			// Build temp subquery
 			$fields = ["acl_aro.id", "acl_aro.alias", "acl_aro.lineage", 'ancestor.id'=>"ancestor_id",
 				'ancestor.alias'=>"ancestor_alias", 'ancestor.lineage'=>"ancestor_lineage"];
@@ -94,7 +94,7 @@ class Acl {
 			$values = $temp->values;
 			$this->Record->reset();
 			$this->Record->values = $values;
-			
+
 			// Build aro subquery (containing temp)
 			$aro = $this->Record->select(["acl_aro.id", "acl_aro.alias", "acl_aro.lineage"])->
 				from("acl_aro")->on("acl_aro.id", "=", "temp.id", false)->orOn("acl_aro.id", "=", "temp.ancestor_id", false)->
@@ -103,7 +103,7 @@ class Acl {
 			$aro_subquery = $aro->get();
 			$values = $aro->values;
 			$this->Record->reset();
-			
+
 			// Build query (containing aro subquery)
 			$fields = ["aro.*", "acl_acl.action", "acl_acl.permission"];
 			$access_list = $this->Record->select($fields)->from("acl_acl")->
@@ -113,14 +113,14 @@ class Acl {
 
 			if ($access_list && !empty($access_list))
 				break;
-			
+
 			array_pop($aco);
 			$temp_aco = implode("/", $aco);
 		}
-		
+
 		return $access_list;
 	}
-	
+
 	/**
 	 * Record that the ARO has access to the ACO for the given action
 	 *
@@ -140,13 +140,13 @@ class Acl {
 	 * @param string $aco_alias The alias of the ACO
 	 * @param string $aro_alias The alias of the ARO
 	 * @param string $action The action to deny
-	 */	
+	 */
 	public function deny($aro_alias, $aco_alias, $action="*") {
 		$data = $this->getAroAcoByAlias($aro_alias, $aco_alias);
 		if ($data)
 			$this->addAcl($data->aro_id, $data->aco_id, $action, "deny");
 	}
-	
+
 	/**
 	 * Add a new ARO as a child to the given parent
 	 *
@@ -165,12 +165,12 @@ class Acl {
 			else
 				$parent = null;
 		}
-		
+
 		$this->Record->set("parent_id", $parent)->set("alias", $alias)->
 			set("lineage", $lineage)->insert("acl_aro");
 		return $this->Record->lastInsertId();
 	}
-	
+
 	/**
 	 * Removes the ARO from the ARO and ACL
 	 *
@@ -181,7 +181,7 @@ class Acl {
 		$this->Record->from("acl_aro")->leftJoin("acl_acl", "acl_acl.aro_id", "=", "acl_aro.id", false)->
 			where("acl_aro.alias", "=", $alias)->delete(array("acl_aro.*", "acl_acl.*"));
 	}
-	
+
 	/**
 	 * Add a new ACO
 	 *
@@ -193,7 +193,7 @@ class Acl {
 		$this->Record->set("alias", $alias)->insert("acl_aco");
 		return $this->Record->lastInsertId();
 	}
-	
+
 	/**
 	 * Removes the ACO from the ACO and ACL
 	 *
@@ -204,34 +204,34 @@ class Acl {
 		$this->Record->from("acl_aco")->leftJoin("acl_acl", "acl_acl.aco_id", "=", "acl_aco.id", false)->
 			where("acl_aco.alias", "=", $alias)->delete(array("acl_aco.*", "acl_acl.*"));
 	}
-	
+
 	/**
 	 * Removes an entry from the ACL that matches the given ARO, ACO, and action
-	 * 
+	 *
 	 * @param string $aro_alias The ARO alias
 	 * @param string $aco_alias The ACO alias
 	 * @param string $action The action
 	 */
 	public function removeAcl($aro_alias=null, $aco_alias=null, $action=null) {
-		
+
 		// Only allow delete if at least ARO or ACO is given
 		if ($aro_alias == null && $aco_alias == null)
 			return;
-		
+
 		$this->Record->from("acl_aro")->from("acl_aco")->from("acl_acl")->
 			where("acl_acl.aro_id", "=", "acl_aro.id", false)->
 			where("acl_acl.aco_id", "=", "acl_aco.id", false);
-		
+
 		if ($aro_alias != null)
 			$this->Record->where("acl_aro.alias", "=", $aro_alias);
 		if ($aco_alias != null)
 			$this->Record->where("acl_aco.alias", "=", $aco_alias);
 		if ($action != null)
 			$this->Record->where("acl_acl.action", "=", $action);
-		
+
 		$this->Record->delete(["acl_acl.*"]);
 	}
-	
+
 	/**
 	 * Retrieve the ARO and ACO using the given ARO and ACO aliases
 	 *
@@ -244,7 +244,7 @@ class Acl {
 		return $this->Record->select($fields)->from("acl_aro")->from("acl_aco")->
 			where("acl_aro.alias", "=", $aro_alias)->where("acl_aco.alias", "=", $aco_alias)->fetch();
 	}
-	
+
 	/**
 	 * Retrieve the ARO with the given alias
 	 *
@@ -261,12 +261,12 @@ class Acl {
 	 *
 	 * @param string $alias The alias of the ACO
 	 * @return mixed An array containing the ACO, false if no match found
-	 */	
+	 */
 	public function getAcoByAlias($alias) {
 		$fields = ["id", "alias"];
 		return $this->Record->select($fields)->from("acl_aco")->where("alias", "=", $alias)->fetch();
 	}
-	
+
 	/**
 	 * Record the given ARO and ACO IDs for the action and permission given
 	 *

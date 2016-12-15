@@ -16,15 +16,15 @@ final class Configure {
 	/**
 	 * @var array All configured settings handled by this class
 	 */
-	private static $config = []; 
-	
+	private static $config = [];
+
 	/**
 	 * Protected constructor to prevent instance creation
 	 */
 	protected function __construct() {
-		
+		// Nothing to do
 	}
-	
+
 	/**
 	 * Fetches a setting set using Configure::set()
 	 *
@@ -32,11 +32,13 @@ final class Configure {
 	 * @return mixed The setting specified by $name, or null if $name was not set
 	 */
 	public static function get($name) {
-		if (isset(self::$config[$name]))
+		if (isset(self::$config[$name])) {
 			return self::$config[$name];
+		}
+
 		return null;
 	}
-	
+
 	/**
 	 * Checks if the setting exists
 	 *
@@ -44,11 +46,13 @@ final class Configure {
 	 * @return boolean true if $name was set, false otherwise
 	 */
 	public static function exists($name) {
-		if (array_key_exists($name, self::$config))
+		if (array_key_exists($name, self::$config)) {
 			return true;
+		}
+
 		return false;
 	}
-	
+
 	/**
 	 * Frees the setting given by $name, if it exists. All settings no longer in
 	 * use should be freed using this method whenever possible
@@ -56,10 +60,11 @@ final class Configure {
 	 * @param string $name The name of the setting to free
 	 */
 	public static function free($name) {
-		if (self::exists($name))
+		if (self::exists($name)) {
 			unset(self::$config[$name]);
+		}
 	}
-	
+
 	/**
 	 * Adds the given $value to the configuration using the $name given
 	 *
@@ -70,7 +75,7 @@ final class Configure {
 	public static function set($name, $value) {
 		self::$config[$name] = $value;
 	}
-	
+
 	/**
 	 * Loads the given file and extracts all $config array elements, adding each
 	 * to Configure::$config
@@ -80,10 +85,11 @@ final class Configure {
 	 */
 	public static function load($file, $config_dir = CONFIGDIR) {
 		$file .= ".php";
-		
-		if (file_exists($config_dir . $file))
+
+		if (file_exists($config_dir . $file)) {
 			include_once $config_dir . $file;
-		
+		}
+
 		if (isset($config) && is_array($config)) {
 			foreach ($config as $name => $value) {
 				self::$config[$name] = $value;
@@ -93,7 +99,7 @@ final class Configure {
 		// into our namespace
 		unset($config);
 	}
-	
+
 	/**
 	 * Overwrites the existing error reporting level
 	 *

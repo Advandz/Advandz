@@ -18,7 +18,7 @@ class Cdnjs {
 	 * @return array An array with all the files of the library
 	 */
 	public function loadLibraries($libs = []) {
-		$loaded_libs = [];
+		$loaded_libs = Type::array();
 		if (is_array($libs)) {
 			foreach ($libs as $key => $value) {
 				// Fetch library

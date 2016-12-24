@@ -3,41 +3,6 @@
 # filename:   .htaccess
 ########################################################
 
-<Directory /config>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /components>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /helpers>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /language>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /lib>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /logs>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
-<Directory /vendors>
-   Order Deny,allow
-   Deny from all
-</Directory>
-
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-d

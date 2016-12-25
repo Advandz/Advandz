@@ -18,35 +18,35 @@ class Knife extends Language {
 	 * @var array The tags with the equivalent PHP code
 	 */
 	private $tags = [
-		'@lang' => "<? echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
-		'!@lang' => "<? \$this->_(\"%%STATEMENT%%\"); ?>",
-		'@yield' => "<? echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
-		'!@yield' => "<? echo \$this->%%STATEMENT%%; ?>",
-		'@raw' => "<? echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
-		'!@raw' => "<? print_r(\$%%STATEMENT%%); ?>",
-		'@var' => "<? echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
-		'!@var' => "<? echo \$%%STATEMENT%%; ?>",
-		'@this' => "<? \$this->",
-		'!@this' => "<? \$this->",
-		'@constant' => "<? echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
-		'include' => "<? include %%STATEMENT%%; ?>",
-		'@include' => "<? include_once %%STATEMENT%%; ?>",
-		'require' => "<? require %%STATEMENT%%; ?>",
-		'@require' => "<? require_once %%STATEMENT%%; ?>",
-		'if' => "<? if (%%STATEMENT%%) { ?>",
-		'elseif' => "<? } elseif (%%STATEMENT%%) { ?>",
-		'else' => "<? } else { ?>",
-		'/if' => "<? } ?>",
-		'while' => "<? while (%%STATEMENT%%) { ?>",
-		'/while' => "<? } ?>",
-		'do' => "<? do { ?>",
-		'dowhile' => "<? } while (%%STATEMENT%%); ",
+		'@lang' => "<?php echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
+		'!@lang' => "<?php \$this->_(\"%%STATEMENT%%\"); ?>",
+		'@yield' => "<?php echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
+		'!@yield' => "<?php echo \$this->%%STATEMENT%%; ?>",
+		'@raw' => "<?php echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
+		'!@raw' => "<?php print_r(\$%%STATEMENT%%); ?>",
+		'@var' => "<?php echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
+		'!@var' => "<?php echo \$%%STATEMENT%%; ?>",
+		'@this' => "<?php \$this->",
+		'!@this' => "<?php \$this->",
+		'@constant' => "<?php echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
+		'include' => "<?php include %%STATEMENT%%; ?>",
+		'@include' => "<?php include_once %%STATEMENT%%; ?>",
+		'require' => "<?php require %%STATEMENT%%; ?>",
+		'@require' => "<?php require_once %%STATEMENT%%; ?>",
+		'if' => "<?php if (%%STATEMENT%%) { ?>",
+		'elseif' => "<?php } elseif (%%STATEMENT%%) { ?>",
+		'else' => "<?php } else { ?>",
+		'/if' => "<?php } ?>",
+		'while' => "<?php while (%%STATEMENT%%) { ?>",
+		'/while' => "<?php } ?>",
+		'do' => "<?php do { ?>",
+		'dowhile' => "<?php } while (%%STATEMENT%%); ",
 		'/do' => "?>",
-		'for' => "<? for (%%STATEMENT%%) { ?>",
-		'/for' => "<? } ?>",
-		'foreach' => "<? foreach (%%STATEMENT%%) { ?>",
-		'/foreach' => "<? } ?>",
-		'php' => "<?php ",
+		'for' => "<?php for (%%STATEMENT%%) { ?>",
+		'/for' => "<?php } ?>",
+		'foreach' => "<?php foreach (%%STATEMENT%%) { ?>",
+		'/foreach' => "<?php } ?>",
+		'php' => "<?phpphp ",
 		'/php' => " ?>"
 	];
 
@@ -115,7 +115,7 @@ class Knife extends Language {
 	 */
 	private function compileTags() {
 		// Parse comment tags
-		$this->replaceTemplate("{{--", '<? /*');
+		$this->replaceTemplate("{{--", '<?php /*');
 		$this->replaceTemplate("--}}", '*/ ?>');
 
 		// Compile the tags

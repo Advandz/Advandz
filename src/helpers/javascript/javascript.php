@@ -26,7 +26,7 @@ class Javascript extends Html {
 	private $default_path;
 
 	/**
-	 * Constructs a Javascript Helper
+	 * Constructs a Javascript Helper.
 	 *
 	 * @param string $default_path The default path to use for javascript files
 	 */
@@ -35,7 +35,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Sets the default path to use for all javascript requests
+	 * Sets the default path to use for all javascript requests.
 	 *
 	 * @param string $default_path The default path to use for javascript files
 	 * @return string The previous default path
@@ -48,7 +48,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Return the HTML used to create the script tags and load the set javascript
+	 * Return the HTML used to create the script tags and load the set javascript.
 	 *
 	 * @param string $location The location where the script resides (generally "head" or "body")
 	 * @return string The HTML used to load all of the set javascript files
@@ -66,7 +66,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Return the HTML used to create the inline javascript
+	 * Return the HTML used to create the inline javascript.
 	 *
 	 * @return string The HTML used to load all of the set inline javascript
 	 */
@@ -83,7 +83,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Sets the given javascript file into the structure view
+	 * Sets the given javascript file into the structure view.
 	 *
 	 * @param string $file The name of the javascript file to load
 	 * @param string $location The location to set the given file (genearlly "head" or "body")
@@ -113,7 +113,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Unset all files that are currently set
+	 * Unset all files that are currently set.
 	 *
 	 * @return Javascript Returns the instance of this object
 	 */
@@ -124,7 +124,7 @@ class Javascript extends Html {
 	}
 
 	/**
-	 * Unset all inline data that is currently set
+	 * Unset all inline data that is currently set.
 	 *
 	 * @return Javascript Returns the instance of this object
 	 */

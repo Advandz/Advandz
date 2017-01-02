@@ -6,12 +6,11 @@
  * @copyright Copyright 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
-
 if (typeof jQuery === 'undefined') {
 	throw new Error('Advandz\'s JavaScript requires jQuery')
 }
 +function ($) {
-	var version = $.fn.jquery.split(" ")[0].split(".")
+	var version = $.fn.jquery.split(" ")[0].split(".");
 	if ((version[0] < 2 && version[1] < 9) || (version[0] === 1 && version[1] === 9 && version[2] < 1) || (version[0] >= 4)) {
 		throw new Error('Advandz\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0')
 	}
@@ -197,7 +196,6 @@ if (typeof jQuery === 'undefined') {
 		setTransitionEndSupport();
 		return Util;
 	}(jQuery);
-
 	/**
 	 * --------------------------------------------------------------------------
 	 * alert.js
@@ -332,7 +330,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Alert;
 	}(jQuery);
-
 	/**
 	 * --------------------------------------------------------------------------
 	 * button.js
@@ -366,7 +363,6 @@ if (typeof jQuery === 'undefined') {
 			CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY,
 			FOCUS_BLUR_DATA_API: 'focus' + EVENT_KEY + DATA_API_KEY + ' ' + ('blur' + EVENT_KEY + DATA_API_KEY)
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -434,7 +430,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Button;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -451,7 +446,6 @@ if (typeof jQuery === 'undefined') {
 			var button = $(event.target).closest(Selector.BUTTON)[0];
 			$(button).toggleClass(ClassName.FOCUS, /^focus(in)?$/.test(event.type));
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -465,7 +459,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Button;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * carousel.js
@@ -530,7 +523,6 @@ if (typeof jQuery === 'undefined') {
 			DATA_SLIDE: '[data-slide], [data-slide-to]',
 			DATA_RIDE: '[data-ride="carousel"]'
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -798,7 +790,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Carousel;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -811,7 +802,6 @@ if (typeof jQuery === 'undefined') {
 				Carousel._jQueryInterface.call($carousel, $carousel.data());
 			});
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -825,14 +815,12 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Carousel;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * collapse.js
 	 * --------------------------------------------------------------------------
 	 */
 	var Collapse = function ($) {
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Constants
@@ -874,7 +862,6 @@ if (typeof jQuery === 'undefined') {
 			ACTIVES: '.card > .in, .card > .collapsing',
 			DATA_TOGGLE: '[data-toggle="collapse"]'
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -1067,7 +1054,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Collapse;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -1080,7 +1066,6 @@ if (typeof jQuery === 'undefined') {
 			var config = data ? 'toggle' : $(this).data();
 			Collapse._jQueryInterface.call($(target), config);
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -1094,7 +1079,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Collapse;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * dropdown.js
@@ -1139,7 +1123,6 @@ if (typeof jQuery === 'undefined') {
 			NAVBAR_NAV: '.navbar-nav',
 			VISIBLE_ITEMS: '[role="menu"] li:not(.disabled) a, ' + '[role="listbox"] li:not(.disabled) a'
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -1291,7 +1274,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Dropdown;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -1300,7 +1282,6 @@ if (typeof jQuery === 'undefined') {
 		$(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.ROLE_MENU, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.ROLE_LISTBOX, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, Dropdown.prototype.toggle).on(Event.CLICK_DATA_API, Selector.FORM_CHILD, function (e) {
 			e.stopPropagation();
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -1314,7 +1295,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Dropdown;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * modal.js
@@ -1673,7 +1653,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Modal;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -1703,7 +1682,6 @@ if (typeof jQuery === 'undefined') {
 			});
 			Modal._jQueryInterface.call($(target), config, this);
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -1717,7 +1695,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Modal;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * scrollspy.js
@@ -1772,7 +1749,6 @@ if (typeof jQuery === 'undefined') {
 			OFFSET: 'offset',
 			POSITION: 'position'
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -1935,7 +1911,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return ScrollSpy;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -1948,7 +1923,6 @@ if (typeof jQuery === 'undefined') {
 				ScrollSpy._jQueryInterface.call($spy, $spy.data());
 			}
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -1962,7 +1936,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return ScrollSpy;
 	}(jQuery);
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * tab.js
@@ -2006,7 +1979,6 @@ if (typeof jQuery === 'undefined') {
 			DROPDOWN_TOGGLE: '.dropdown-toggle',
 			DROPDOWN_ACTIVE_CHILD: '> .dropdown-menu .active'
 		};
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -2137,7 +2109,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Tab;
 		}();
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * Data Api implementation
@@ -2147,7 +2118,6 @@ if (typeof jQuery === 'undefined') {
 			event.preventDefault();
 			Tab._jQueryInterface.call($(this), 'show');
 		});
-		
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -2162,7 +2132,6 @@ if (typeof jQuery === 'undefined') {
 		return Tab;
 	}(jQuery);
 	/* global Tether */
-	
 	/**
 	 * --------------------------------------------------------------------------
 	 * tooltip.js
@@ -2176,7 +2145,6 @@ if (typeof jQuery === 'undefined') {
 		if (window.Tether === undefined) {
 			throw new Error('Advandz tooltips require Tether (http://tether.io/)');
 		}
-
 		/**
 		 * ------------------------------------------------------------------------
 		 * Constants
@@ -2253,7 +2221,6 @@ if (typeof jQuery === 'undefined') {
 			CLICK: 'click',
 			MANUAL: 'manual'
 		};
-
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -2612,7 +2579,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Tooltip;
 		}();
-
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery
@@ -2626,7 +2592,6 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Tooltip;
 	}(jQuery);
-
 	/**
 	 * --------------------------------------------------------------------------
 	 * popover.js
@@ -2672,7 +2637,6 @@ if (typeof jQuery === 'undefined') {
 			MOUSEENTER: 'mouseenter' + EVENT_KEY,
 			MOUSELEAVE: 'mouseleave' + EVENT_KEY
 		};
-
 		/**
 		 * ------------------------------------------------------------------------
 		 * Class Definition
@@ -2763,7 +2727,6 @@ if (typeof jQuery === 'undefined') {
 			}]);
 			return Popover;
 		}(Tooltip);
-
 		/**
 		 * ------------------------------------------------------------------------
 		 * jQuery

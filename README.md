@@ -1,4 +1,9 @@
 # Advandz Framework #
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/46f5e9c0ffd2445ea5e5ba66ef89ca5d)](https://www.codacy.com/app/yosoy/Advandz-Framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Advandz/Advandz-Framework&amp;utm_campaign=Badge_Grade)
+![alt text](https://img.shields.io/badge/license-MIT-blue.svg "License")
+![alt text](https://img.shields.io/badge/php-%3E%3D5.4-8c198c.svg "PHP Requirement")
+![alt text](https://img.shields.io/badge/HHVM-%3E%3D3.4.0-orange.svg "HHVM Requirement")
+
 ### The Framework for Enterprises and High-Performance Applications. ###
 
 Advandz is an enterprise-class powerful and scalable MVC framework for PHP application development.

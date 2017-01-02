@@ -34,5 +34,4 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 </pre>
 
 ### Support the Development
-<a class="dbox-donation-button" href="https://donorbox.org/advandz-framework" style="background:#0275d8; color: #fff;text-decoration: none;font-family: Verdana,sans-serif;display: inline-block;font-size: 16px;padding: 13px 17px 13px 17px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; box-shadow: 0 1px 0 0 #015197; text-shadow: 0 1px rgba(0, 0, 0, 0.3);" >Donate</a>
-<a href="https://donorbox.org/advandz-framework" target="_blank">https://d1iczxrky3cnb2.cloudfront.net/button-small-blue.png</a>
+<a href="https://donorbox.org/advandz-framework" target="_blank"><img src="https://d1iczxrky3cnb2.cloudfront.net/button-small-blue.png" /></a>

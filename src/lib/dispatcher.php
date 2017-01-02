@@ -36,7 +36,6 @@ class Dispatcher extends Controller {
 	 * @throws Exception thrown when request can not be dispatched or Dispatcher::raiseError can not handle the error
 	 */
 	public static function dispatch($request_uri, $is_cli = false) {
-
 		self::cleanGlobals();
 
 		$_post = $_POST;
@@ -140,7 +139,8 @@ class Dispatcher extends Controller {
 	 * Print an exception thrown error page
 	 *
 	 * @param Exception $e An exception thrown
-	 * @throws Exception
+	 * @return boolean False if the redirects fail
+	 * @throws Exception Throw our original error, since the error can not be handled cleanly
 	 */
 	public static function raiseError($e) {
 		$error_message = null;
@@ -152,9 +152,13 @@ class Dispatcher extends Controller {
 		} elseif ($e instanceof Exception) {
 			if ($e->getCode() == 404 && Configure::get("System.404_forwarding")) {
 				// Forward to 404 - page not found.
-				header("HTTP/1.0 404 Not Found");
-				header("Location: " . WEBDIR . "404/");
-				exit();
+				try {
+					header("HTTP/1.0 404 Not Found");
+					header("Location: " . WEBDIR . "404/");
+					return true;
+				} catch (Exception $e) {
+					return false;
+				}
 			} elseif (Configure::get("System.debug")) {
 				$error_message = htmlentities($e->getMessage(), ENT_QUOTES, "UTF-8") . " on line <strong>" .
 					$e->getLine() . "</strong> in <strong>" . $e->getFile() .
@@ -188,7 +192,6 @@ class Dispatcher extends Controller {
 	 * Clean all super globals by removing slashes added by 'magic quotes'
 	 */
 	private static function cleanGlobals() {
-
 		if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) {
 			array_walk_recursive($_GET, ['Dispatcher', 'stripSlashes']);
 			array_walk_recursive($_POST, ['Dispatcher', 'stripSlashes']);

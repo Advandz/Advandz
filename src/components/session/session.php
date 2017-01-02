@@ -97,7 +97,7 @@ class Session {
 			return $_SESSION[$name];
 		}
 
-		return "";
+		return Type::string();
 	}
 
 	/**
@@ -300,7 +300,7 @@ class Session {
 	 * @param string $value The value to write to the session
 	 */
 	private function sessionWrite($sid, $value) {
-		//  We need to use the sid set so we can write a cookie if needed
+		// We need to use the sid set so we can write a cookie if needed
 		$this->sid = $sid;
 
 		$expiration = date("Y-m-d H:i:s", time() + $this->ttl);

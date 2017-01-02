@@ -301,6 +301,7 @@ class Controller {
 	 * not a url)
 	 *
 	 * @param string $uri The URI or URL to redirect to. Default is WEBDIR
+	 * @return boolean False if the redirects fail
 	 */
 	protected static final function redirect($uri = WEBDIR) {
 		$parts = parse_url($uri);
@@ -308,6 +309,7 @@ class Controller {
 		if (substr($uri, 0, 1) == "/") {
 			$relative = false;
 		}
+
 		// If not scheme is specified, assume http(s)
 		if (!isset($parts['scheme'])) {
 			$uri = "http" . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off" ? "s" : "") .
@@ -315,8 +317,13 @@ class Controller {
 				($relative ? WEBDIR : "") . $uri;
 		}
 
-		header("Location: " . $uri);
-		exit;
+		// Try to redirect
+		try {
+			header("Location: " . $uri);
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 
 	/**

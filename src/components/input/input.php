@@ -247,7 +247,7 @@ class Input {
 	 */
 	public function setRules($rules) {
 		$this->rules = $rules;
-		$this->errors = [];
+		$this->errors = Type::array();
 	}
 
 	/**
@@ -264,7 +264,6 @@ class Input {
 	 * @param array $path A list of all array indexes encountered
 	 */
 	public function processValidation(&$value, $key, $var, $max_depth = null, $cur_depth = 0, $path = []) {
-
 		// Find the key at the current depth
 		$index = array_key_exists($cur_depth, $var['raw_index']) ? $var['raw_index'][$cur_depth] : "";
 
@@ -389,7 +388,7 @@ class Input {
 	 * @return mixed The formatted data
 	 */
 	private function formatData($callback, $data, $key, $path) {
-		$params = [];
+		$params = Type::array();
 
 		if (is_array($callback)) {
 			$method = array_shift($callback);
@@ -554,7 +553,6 @@ class Input {
 	 *     otherwise
 	 */
 	private static function array_walk_recursive(&$input, $callback, $params = null, $max_depth = null, $cur_depth = 0, $path = []) {
-
 		if (!is_array($input)) {
 			return false;
 		}

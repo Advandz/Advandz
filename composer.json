@@ -1,0 +1,7 @@
+{
+    "name": "Advandz/Advandz-Framework",
+    "description": "Advandz is an enterprise-class powerful and scalable MVC framework for people who love building well-written web applications using PHP.",
+    "require": {
+        "php": "^5.4 || ^7.0"
+    }
+}

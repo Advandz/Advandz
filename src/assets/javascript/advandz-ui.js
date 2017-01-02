@@ -1,12 +1,17 @@
 /*!
- * Advandz Framework v1.0.0
- * Copyright 2016-2017 The Advandz Team 
+ * Advandz UI Javascript
+ *
+ * @package Advandz
+ * @version 1.0.0
+ * @copyright Copyright 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
+
 if (typeof jQuery === 'undefined') {
 	throw new Error('Advandz\'s JavaScript requires jQuery')
 }
 +function ($) {
-	var version = $.fn.jquery.split(' ')[0].split('.')
+	var version = $.fn.jquery.split(" ")[0].split(".")
 	if ((version[0] < 2 && version[1] < 9) || (version[0] === 1 && version[1] === 9 && version[2] < 1) || (version[0] >= 4)) {
 		throw new Error('Advandz\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0')
 	}
@@ -205,7 +210,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'alert';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.alert';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -340,7 +345,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'button';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.button';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -473,7 +478,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'carousel';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.carousel';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -834,7 +839,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'collapse';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.collapse';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -1102,7 +1107,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'dropdown';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.dropdown';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -1322,7 +1327,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'modal';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.modal';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -1725,7 +1730,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'scrollspy';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.scrollspy';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -1970,7 +1975,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'tab';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.tab';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var DATA_API_KEY = '.data-api';
@@ -2178,7 +2183,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'tooltip';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.tooltip';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var JQUERY_NO_CONFLICT = $.fn[NAME];
@@ -2634,7 +2639,7 @@ if (typeof jQuery === 'undefined') {
 		 * ------------------------------------------------------------------------
 		 */
 		var NAME = 'popover';
-		var VERSION = '4.0.0-alpha.5';
+		var VERSION = '1.0.0';
 		var DATA_KEY = 'bs.popover';
 		var EVENT_KEY = '.' + DATA_KEY;
 		var JQUERY_NO_CONFLICT = $.fn[NAME];

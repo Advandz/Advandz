@@ -1,6 +1,10 @@
 /*!
- * Advandz Framework v1.0.0
- * Copyright 2016-2017 The Advandz Team
+ * Advandz UI
+ *
+ * @package Advandz
+ * @version 1.0.0
+ * @copyright Copyright 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
 html {
@@ -4483,6 +4487,7 @@ base::-moz-progress-bar,
 }
 .progress-striped[value]::-webkit-progress-value {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -webkit-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     -webkit-background-size: 1rem 1rem;
     background-size: 1rem 1rem;

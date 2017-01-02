@@ -46,7 +46,8 @@ class Knife extends Language {
 		'/for' => "<?php } ?>",
 		'foreach' => "<?php foreach (%%STATEMENT%%) { ?>",
 		'/foreach' => "<?php } ?>",
-		'php' => "<?phpphp ",
+		'php' => "<?php ",
+		'!php' => "<?= ",
 		'/php' => " ?>"
 	];
 

@@ -5,9 +5,9 @@
  *
  * @package Advandz
  * @subpackage Advandz.helpers.javascript
- * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
- * @author The Advandz Team <team@advandz.com>
+ * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
 Loader::load(HELPERDIR . "html" . DS . "html.php");
 

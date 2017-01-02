@@ -6,7 +6,6 @@
 [![HHVM Version](https://img.shields.io/badge/hhvm-%3E%3D3.4.0-orange.svg?style=flat-square)](http://hhvm.com)
 [![Donate via PayPal](https://img.shields.io/badge/donante-PayPal-blue.svg?style=flat-square)](https://donorbox.org/advandz-framework)
 
-
 ### The Framework for Enterprises and High-Performance Applications. ###
 
 Advandz is an enterprise-class powerful and scalable MVC framework for PHP application development.
@@ -40,6 +39,3 @@ Advandz is an enterprise-class powerful and scalable MVC framework for PHP appli
 /plugins			- where all plugins are stored
 /vendors			- where vendor code is placed (i.e. third party libraries)
 </pre>
-
-### Support the Development
-<a href="https://donorbox.org/advandz-framework" target="_blank"><img src="https://d1iczxrky3cnb2.cloudfront.net/button-small-blue.png" /></a>

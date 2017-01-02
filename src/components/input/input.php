@@ -82,7 +82,7 @@ class Input {
 	 * @return boolean True if it meets the given requirements, false otherwise
 	 */
 	public static function isPassword($str, $min_length = 6, $type = "any", $custom_regex = null) {
-		$regex = "";
+		$regex = Type::string();
 
 		switch ($type) {
 			default:

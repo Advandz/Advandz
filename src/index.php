@@ -21,10 +21,6 @@ class Advandz {
 		try {
 			// Load framework
 			include(dirname(__FILE__) . "/lib/init.php");
-			
-			// Debugger
-			if (Configure::get("System.debug"))
-				include(dirname(__FILE__) . "/debugger/autoload.php");
 
 			// Dispatch the Web request
 			if (!empty($_SERVER['REQUEST_URI'])){
@@ -54,9 +50,9 @@ class Advandz {
 
 		// Display rendering time if benchmarking is enabled
 		if (Configure::get("System.benchmark"))
-			print "execution time: " . ($end - $start) . " seconds";
+			print "Execution time: " . ($end - $start) . " seconds.";
 	}
 }
 
-$Advandz = new Advandz();
+$advandz = new Advandz();
 ?>

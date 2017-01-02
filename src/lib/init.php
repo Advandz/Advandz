@@ -118,6 +118,7 @@ define("VENDORDIR", ROOTWEBDIR . "vendors" . DS);
 include_once LIBDIR . "loader.php";
 include_once LIBDIR . "autoload.php";
 include_once LIBDIR . "stdlib.php";
+
 // Load core configuration
 include_once CONFIGDIR . "core.php";
 ?>

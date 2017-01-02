@@ -36,11 +36,8 @@ class Acl {
 	 * @return boolean True if the ARO is allowed to access the ACO, else false
 	 */
 	public function check($aro_alias, $aco_alias, $action="*") {
-
 		// Check if the given ARO has access to the ACO to perform the action
 		// given.  Action privleges are inherited based on ARO tree
-		$aco = explode("/", $aco_alias);
-
 		$access_list = $this->getAccessList($aro_alias, $aco_alias);
 
 		$list_size = count($access_list);

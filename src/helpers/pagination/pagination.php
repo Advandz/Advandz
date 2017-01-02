@@ -183,7 +183,7 @@ class Pagination extends Html {
 	 * @return boolean True if pagination should be shown, false otherwise
 	 */
 	public function hasPages() {
-		$pages = 0;
+		$pages = Type::integer();
 		if (isset($this->settings['total_pages']) && $this->settings['total_pages'] > 0) {
 			$pages = $this->settings['total_pages'];
 		} else {
@@ -391,7 +391,7 @@ class Pagination extends Html {
 	 * @return string The HTML for the <a> tag, void if output enabled
 	 */
 	private function createLink(array $link, $page) {
-		$html = "";
+		$html = Type::string();
 		if (is_array($link)) {
 			$link['link_attributes']['href'] = $this->getPageUri($page);
 			$html .= "<a" . $this->buildAttributes($link['link_attributes']) . ">" .

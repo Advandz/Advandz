@@ -38,8 +38,9 @@ final class Loader {
 		];
 
 		$plugin = null;
-		if (($c = strpos($class, "."))) {
-			$plugin = self::fromCamelCase(substr($class, 0, $c)) . DIRECTORY_SEPARATOR;
+		$ext_pos = strpos($class, ".");
+		if (!empty($class)) {
+			$plugin = self::fromCamelCase(substr($class, 0, $ext_pos)) . DIRECTORY_SEPARATOR;
 			$class = substr($class, $c + 1);
 		}
 

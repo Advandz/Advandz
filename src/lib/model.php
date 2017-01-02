@@ -210,7 +210,7 @@ class Model {
 	 * @return int The number of rows affected by the previous query
 	 * @throws Exception Thrown when called prior to Model::query()
 	 */
-	public function affectedRows($statement=null) {
+	public function affectedRows($statement = null) {
 		if ($statement == null)
 			$statement = $this->statement;
 			
@@ -223,15 +223,15 @@ class Model {
 	/**
 	 * Build a DSN string using the given array of parameters
 	 * 
-	 * @param array $db An array of parameters
+	 * @param array $db_params An array of parameters
 	 * @return string The DSN string
 	 * @throws Exception Thrown when $db contains invalid parameters
 	 */
-	public static function makeDSN($db) {
-		if (!isset($db['driver']) || !isset($db['database']) || !isset($db['host']))
+	public static function makeDSN($db_params) {
+		if (!isset($db_params['driver']) || !isset($db_params['database']) || !isset($db_params['host']))
 			throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
 			
-		return $db['driver'] . ":dbname=" . $db['database'] . ";host=" . $db['host'] . (isset($db['port']) ? ";port=" . $db['port'] : "");
+		return $db_params['driver'] . ":dbname=" . $db_params['database'] . ";host=" . $db_params['host'] . (isset($db_params['port']) ? ";port=" . $db_params['port'] : "");
 	}
 	
 	/**

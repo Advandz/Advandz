@@ -1450,7 +1450,7 @@ class Record extends Model {
 		$this->values = Type::array();
 		$this->duplicate = Type::array();
 		$this->having = Type::array();
-		$this->open = 0;
+		$this->open = Type::integer();
 	}
 
 	/**

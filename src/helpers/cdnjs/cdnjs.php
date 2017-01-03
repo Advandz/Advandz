@@ -18,7 +18,7 @@ class Cdnjs {
 	 * @return array An array with all the files of the library
 	 */
 	public function loadLibraries($libs = []) {
-		$loaded_libs = Type::array();
+		$loaded_libs = Type::_array();
 		if (is_array($libs)) {
 			foreach ($libs as $key => $value) {
 				// Fetch library
@@ -57,7 +57,7 @@ class Cdnjs {
 					}
 
 					// Load the latest version if the provided version is invalid
-					if (empty($loaded_libs[$library->name]) || !file_get_contents($loaded_libs[$library->name])) {
+					if (empty($loaded_libs[$library->name]) || !@file_get_contents($loaded_libs[$library->name])) {
 						$loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/' . $library->name . '/' . $library->version . '/' . $library->filename;
 					}
 				}

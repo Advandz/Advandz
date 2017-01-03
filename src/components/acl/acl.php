@@ -76,7 +76,7 @@ class Acl {
 	 */
 	public function getAccessList($aro_alias, $aco_alias) {
 		$aco = explode("/", $aco_alias);
-		$access_list = Type::array();
+		$access_list = Type::_array();
 
 		// Attempt to find an entry for the given ACO, if no results, attempt for a subset of that ACO path
 		$temp_aco = $aco_alias;

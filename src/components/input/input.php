@@ -82,7 +82,7 @@ class Input {
 	 * @return boolean True if it meets the given requirements, false otherwise
 	 */
 	public static function isPassword($str, $min_length = 6, $type = "any", $custom_regex = null) {
-		$regex = Type::string();
+		$regex = Type::_string();
 
 		switch ($type) {
 			default:
@@ -247,7 +247,7 @@ class Input {
 	 */
 	public function setRules($rules) {
 		$this->rules = $rules;
-		$this->errors = Type::array();
+		$this->errors = Type::_array();
 	}
 
 	/**
@@ -388,7 +388,7 @@ class Input {
 	 * @return mixed The formatted data
 	 */
 	private function formatData($callback, $data, $key, $path) {
-		$params = Type::array();
+		$params = Type::_array();
 
 		if (is_array($callback)) {
 			$method = array_shift($callback);
@@ -422,7 +422,7 @@ class Input {
 
 		foreach ($params as &$param) {
 			// The number of blank array indexes from the _linked rule value
-			$blank = 0;
+			$blank = Type::_integer();
 			// If the parameter given is linked, find the value of the linked field
 			if (is_array($param) && isset($param['_linked'])) {
 				$data_set = $this->data;

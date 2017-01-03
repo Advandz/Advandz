@@ -74,7 +74,7 @@ class Xml {
 	 * @return string The XML segement
 	 */
 	private function buildXmlSegment($value, $root_node = "result", $tab_count = -1) {
-		$xml = "";
+		$xml = Type::_string();
 		$tab = $this->tab;
 
 		if (is_numeric($root_node)) {

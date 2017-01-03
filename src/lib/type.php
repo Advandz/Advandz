@@ -16,7 +16,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of string
 	 */
-	static public function string($value = '') {
+	static public function _string($value = '') {
 		if (!is_string($value)) {
 			throw new Exception("Argument passed must be an instance of string");
 		}
@@ -31,7 +31,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of integer
 	 */
-	static public function integer($value = 0) {
+	static public function _integer($value = 0) {
 		if (!is_int($value)) {
 			throw new Exception("Argument passed must be an instance of integer");
 		}
@@ -46,7 +46,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of float
 	 */
-	static public function float($value = 0.0) {
+	static public function _float($value = 0.0) {
 		if (!is_float($value)) {
 			throw new Exception("Argument passed must be an instance of float");
 		}
@@ -61,7 +61,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of double
 	 */
-	static public function double($value = 0.0) {
+	static public function _double($value = 0.0) {
 		if (!is_double($value)) {
 			throw new Exception("Argument passed must be an instance of double");
 		}
@@ -76,7 +76,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of boolean
 	 */
-	static public function boolean($value = false) {
+	static public function _boolean($value = false) {
 		if (!is_bool($value)) {
 			throw new Exception("Argument passed must be an instance of boolean");
 		}
@@ -91,7 +91,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an instance of array
 	 */
-	static public function array($value = []) {
+	static public function _array($value = []) {
 		if (!is_array($value)) {
 			throw new Exception("Argument passed must be an instance of array");
 		}
@@ -106,7 +106,7 @@ class Type {
 	 * @return string The value
 	 * @throws Exception When the argument passed is not an object
 	 */
-	static public function object($value = null) {
+	static public function _object($value = null) {
 		if (is_null($value)) {
 			$value = new stdClass();
 		}
@@ -123,7 +123,7 @@ class Type {
 	 *
 	 * @return null
 	 */
-	static public function null() {
+	static public function _null() {
 		return null;
 	}
 }

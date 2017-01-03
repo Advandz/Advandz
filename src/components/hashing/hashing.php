@@ -19,9 +19,7 @@ class Hashing {
 	 * @return string Return a keyed hash using HMAC.
 	 */
 	public function hmacHash($algorithm, $data, $key, $raw = false) {
-		$hmac = hash_hmac($algorithm, $data, $key, $raw);
-
-		return $hmac;
+		return hash_hmac($algorithm, $data, $key, $raw);
 	}
 
 	/**
@@ -33,9 +31,7 @@ class Hashing {
 	 * @return string Return the Hash of a specific data.
 	 */
 	public function hash($algorithm, $data, $raw = false) {
-		$hash = hash($algorithm, $data, $raw);
-
-		return $hash;
+		return hash($algorithm, $data, $raw);
 	}
 }
 ?>

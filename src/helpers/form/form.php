@@ -90,7 +90,7 @@ class Form extends Html {
 	 * @return array An array in key/value form
 	 */
 	public function collapseObjectArray($obj_arr, $value_var, $key_var = null, $glue = null) {
-		$result = [];
+		$result = Type::_array();
 		foreach ($obj_arr as $key => $obj) {
 			$temp = get_object_vars($obj);
 			$value = "";
@@ -197,7 +197,6 @@ class Form extends Html {
 	 * @return boolean True if the token is valid, false otherwise
 	 */
 	public function verifyCsrfToken($key = null, $csrf_token = null) {
-
 		if ($key == null) {
 			$key = $this->csrf_token_key;
 			if ($key === null) {
@@ -223,7 +222,7 @@ class Form extends Html {
 		$output = $this->return_output;
 		$this->setOutput(true);
 
-		$html = "";
+		$html = Type::_string();
 		$num_fields = count($fields);
 
 		for ($i = 0; $i < $num_fields; $i++) {
@@ -517,7 +516,7 @@ class Form extends Html {
 			$default_attributes['value'] = $value;
 		}
 
-		$end = "";
+		$end = Type::_string();
 		switch ($tag) {
 			case "button":
 				$end = ">" . $value . "</" . $tag . ">";

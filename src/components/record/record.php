@@ -1096,7 +1096,7 @@ class Record extends Model {
 		}
 
 		// Build fields
-		$fields = Type::array();
+		$fields = Type::_array();
 		foreach ($this->fields as $name => $field) {
 			$action = isset($field['add']) ? "add" : "drop";
 
@@ -1193,7 +1193,7 @@ class Record extends Model {
 		}
 
 		// Reset the conditionals
-		$this->on = Type::array();
+		$this->on = Type::_array();
 	}
 
 	/**
@@ -1438,19 +1438,19 @@ class Record extends Model {
 	public function reset() {
 		$this->type = null;
 		$this->join_sql = null;
-		$this->tables = Type::array();
-		$this->columns = Type::array();
-		$this->fields = Type::array();
-		$this->keys = Type::array();
-		$this->where = Type::array();
-		$this->on = Type::array();
-		$this->order = Type::array();
-		$this->group = Type::array();
-		$this->limit = Type::array();
-		$this->values = Type::array();
-		$this->duplicate = Type::array();
-		$this->having = Type::array();
-		$this->open = Type::integer();
+		$this->tables = Type::_array();
+		$this->columns = Type::_array();
+		$this->fields = Type::_array();
+		$this->keys = Type::_array();
+		$this->where = Type::_array();
+		$this->on = Type::_array();
+		$this->order = Type::_array();
+		$this->group = Type::_array();
+		$this->limit = Type::_array();
+		$this->values = Type::_array();
+		$this->duplicate = Type::_array();
+		$this->having = Type::_array();
+		$this->open = Type::_integer();
 	}
 
 	/**
@@ -1511,7 +1511,7 @@ class Record extends Model {
 			$identifier = explode(".", $identifier);
 		}
 
-		$parts = Type::array();
+		$parts = Type::_array();
 		if (is_array($identifier)) {
 			foreach ($identifier as $part) {
 				$parts[] = $q . str_replace($q, $q . $q, $part) . $q;

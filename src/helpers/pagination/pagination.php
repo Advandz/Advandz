@@ -129,7 +129,6 @@ class Pagination extends Html {
 	 * @return array The merged arrays
 	 */
 	private function mergeArrays(array $arr1, array $arr2) {
-
 		foreach ($arr2 as $key => $value) {
 			if (array_key_exists($key, $arr1) && is_array($value)) {
 				$arr1[$key] = $this->mergeArrays($arr1[$key], $arr2[$key]);
@@ -183,7 +182,7 @@ class Pagination extends Html {
 	 * @return boolean True if pagination should be shown, false otherwise
 	 */
 	public function hasPages() {
-		$pages = Type::integer();
+		$pages = Type::_integer();
 		if (isset($this->settings['total_pages']) && $this->settings['total_pages'] > 0) {
 			$pages = $this->settings['total_pages'];
 		} else {
@@ -375,7 +374,7 @@ class Pagination extends Html {
 	 * @return string The HTML for a closing tag, void if output enabled
 	 */
 	private function closeTag($tag) {
-		$html = "";
+		$html = Type::_string();
 		if (is_array($tag) && isset($tag['tag'])) {
 			$html .= "</" . $this->_($tag['tag'], true) . ">" . $this->eol;
 		}
@@ -391,7 +390,7 @@ class Pagination extends Html {
 	 * @return string The HTML for the <a> tag, void if output enabled
 	 */
 	private function createLink(array $link, $page) {
-		$html = Type::string();
+		$html = Type::_string();
 		if (is_array($link)) {
 			$link['link_attributes']['href'] = $this->getPageUri($page);
 			$html .= "<a" . $this->buildAttributes($link['link_attributes']) . ">" .

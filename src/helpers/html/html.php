@@ -51,11 +51,11 @@ class Html {
 	 * @return boolean True if it is UTF8, false otherwise
 	 */
 	public function isUtf8($str) {
-		$c = 0;
-		$b = 0;
-		$bits = 0;
+		$c = Type::_integer();
+		$b = Type::_integer();
+		$bits = Type::_integer();
 		$len = strlen($str);
-		for ($i=0; $i<$len; $i++) {
+		for ($i = 0; $i < $len; $i++) {
 			$c = ord($str[$i]);
 			if ($c > 128) {
 				if (($c >= 254))
@@ -154,7 +154,7 @@ class Html {
 	 * @return string The key=value attributes
 	 */
 	public function buildAttributes(array $attributes=null, $glue=" ") {
-		$html = "";
+		$html = Type::_string();
 		
 		if (!empty($attributes)) {
 			foreach ($attributes as $key => $value) {
@@ -188,8 +188,8 @@ class Html {
 	 * @return string The content with hyperlinks as HTML
 	 */
 	public function hyperlink($content) {
-		$pattern = [];
-		$replacement = [];
+		$pattern = Type::_array();
+		$replacement = Type::_array();
 		
 		// Convert email addresses to links
 		$pattern[] = "/[a-zA-Z0-9!#$%\*\/?\|^\{\}`~&'\+=_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10}/";

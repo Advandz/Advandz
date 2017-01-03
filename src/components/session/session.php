@@ -97,7 +97,7 @@ class Session {
 			return $_SESSION[$name];
 		}
 
-		return Type::string();
+		return Type::_string();
 	}
 
 	/**

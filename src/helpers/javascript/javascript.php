@@ -54,7 +54,7 @@ class Javascript extends Html {
 	 * @return string The HTML used to load all of the set javascript files
 	 */
 	public function getFiles($location) {
-		$html = "";
+		$html = Type::_string();
 		if (isset($this->js_files[$location])) {
 			$num_docs = count($this->js_files[$location]);
 			for ($i = 0; $i < $num_docs; $i++) {
@@ -71,7 +71,7 @@ class Javascript extends Html {
 	 * @return string The HTML used to load all of the set inline javascript
 	 */
 	public function getInline() {
-		$html = "";
+		$html = Type::_string();
 
 		$num_docs = count($this->js_inline);
 
@@ -118,7 +118,7 @@ class Javascript extends Html {
 	 * @return Javascript Returns the instance of this object
 	 */
 	public function unsetFiles() {
-		$this->js_files = [];
+		$this->js_files = Type::_array();
 
 		return $this;
 	}
@@ -129,7 +129,7 @@ class Javascript extends Html {
 	 * @return Javascript Returns the instance of this object
 	 */
 	public function unsetInline() {
-		$this->js_inline = [];
+		$this->js_inline = Type::_array();
 
 		return $this;
 	}

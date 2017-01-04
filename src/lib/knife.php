@@ -28,11 +28,14 @@ class Knife extends Language {
 		'!@var' => "<?php echo \$%%STATEMENT%%; ?>",
 		'@this' => "<?php \$this->",
 		'!@this' => "<?php \$this->",
-		'@constant' => "<?php echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
+		'@constant' => "<?php echo \$this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
+		'!@constant' => "<?php echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
 		'include' => "<?php include %%STATEMENT%%; ?>",
 		'@include' => "<?php include_once %%STATEMENT%%; ?>",
 		'require' => "<?php require %%STATEMENT%%; ?>",
 		'@require' => "<?php require_once %%STATEMENT%%; ?>",
+		'@php' => "<?= \$this->Html->safe(%%STATEMENT%%); ?>",
+		'!@php' => "<?= %%STATEMENT%%; ?>",
 		'if' => "<?php if (%%STATEMENT%%) { ?>",
 		'elseif' => "<?php } elseif (%%STATEMENT%%) { ?>",
 		'else' => "<?php } else { ?>",
@@ -47,7 +50,6 @@ class Knife extends Language {
 		'foreach' => "<?php foreach (%%STATEMENT%%) { ?>",
 		'/foreach' => "<?php } ?>",
 		'php' => "<?php ",
-		'!php' => "<?= ",
 		'/php' => " ?>"
 	];
 

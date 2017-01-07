@@ -3,14 +3,21 @@
 # filename:   .htaccess
 ########################################################
 
+# Enable Rewrite Engine
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php
 
-# Deny access to pdt files
+# Deny Access to “.pdt” Files
 <Files ~ "\.(pdt)$">
+   order deny,allow
+   deny from all
+</Files>
+
+# Deny Access to “spaceman” Script
+<Files ~ “spaceman”>
    order deny,allow
    deny from all
 </Files>

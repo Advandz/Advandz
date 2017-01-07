@@ -17,7 +17,7 @@ RewriteRule ^(.*)$ index.php
 </Files>
 
 # Deny Access to “spaceman” Script
-<Files ~ “spaceman”>
+<Files "spaceman">
    order deny,allow
    deny from all
 </Files>

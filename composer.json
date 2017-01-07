@@ -16,10 +16,10 @@
     ],
     "autoload": {
         "classmap": [
-            "src/app",
-            "src/components",
-            "src/helpers",
-            "src/lib"
+            "app",
+            "components",
+            "helpers",
+            "lib"
         ]
     },
     "config": {

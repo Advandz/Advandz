@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+#
+# TODO: Spaceman is the command-line interface included with Laravel. It provides a number of helpful commands that can assist you while you build your application.
+#

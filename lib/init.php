@@ -85,7 +85,7 @@ define("VIEWDIR", ROOTWEBDIR . APPDIR . "views" . DS);
 define("CONTROLLERDIR", ROOTWEBDIR . APPDIR . "controllers" . DS);
 
 /**
- * Absolute path to the componenets directory, where all components are stored.
+ * Absolute path to the components directory, where all components are stored.
  */
 define("COMPONENTDIR", ROOTWEBDIR . "components" . DS);
 
@@ -121,4 +121,3 @@ include_once LIBDIR . "stdlib.php";
 
 // Load core configuration
 include_once CONFIGDIR . "core.php";
-?>

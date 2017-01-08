@@ -1,7 +1,7 @@
 <?php
 /**
  * Main Page Controller.
- * 
+ *
  * @package Advandz
  * @subpackage Advandz.app.controllers
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
@@ -17,4 +17,3 @@ class Main extends AppController {
     # (e.g. $this->loadLang("langfile", "en_us"))
     #
 }
-?>

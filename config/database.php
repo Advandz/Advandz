@@ -24,15 +24,15 @@ Configure::set("Database.reuse_connection", true);
 # Default database profile
 ################################################################################
 $default = [
-	"driver" => "mysql",
-	"host"	=> "localhost",
-	"port" => "3306",
-	"database" => "advandz",
-	"user" => "root",
-	"pass" => "root",
-	"persistent" => false,
-	"charset_query" => "SET NAMES 'utf8'",
-	"options" => [] // an array of PDO specific options for this connection
+    "driver" => "mysql",
+    "host" => "localhost",
+    "port" => "3306",
+    "database" => "advandz",
+    "user" => "root",
+    "pass" => "root",
+    "persistent" => false,
+    "charset_query" => "SET NAMES 'utf8'",
+    "options" => [] // an array of PDO specific options for this connection
 ];
 
 ################################################################################
@@ -50,9 +50,9 @@ $default = [
 // live servers) without making any changes.
 $server = (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : "");
 switch ($server) {
-	default:
-		Configure::set("Database.profile", $default);
-		break;
+    default:
+        Configure::set("Database.profile", $default);
+        break;
 }
 
 ################################################################################
@@ -60,4 +60,3 @@ switch ($server) {
 ################################################################################
 unset($default);
 unset($server);
-?>

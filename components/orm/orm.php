@@ -12,21 +12,20 @@
 Loader::load(COMPONENTDIR . "orm" . DS . "table.php");
 
 class Orm extends Record {
-	/**
-	 * Initializes a Table Class
-	 *
-	 * @param string $table Called function
-	 * @return mixed Returns a Table Object if the table exists
-	 */
-	public function loadTable($table) {
-		$table_exists = $this->select()->from(Loader::fromCamelCase($table))->numResults();
-		if ($table_exists) {
-			$this->{Loader::toCamelCase($table)} = new Table(Loader::fromCamelCase($table));
-
-			return $this->{Loader::toCamelCase($table)};
-		}
-
-		return null;
-	}
+    /**
+     * Initializes a Table Class
+     *
+     * @param string $table Called function
+     * @return mixed Returns a Table Object if the table exists
+     */
+    public function loadTable($table) {
+        $table_exists = $this->select()->from(Loader::fromCamelCase($table))->numResults();
+        if ($table_exists) {
+            $this->{Loader::toCamelCase($table)} = new Table(Loader::fromCamelCase($table));
+            
+            return $this->{Loader::toCamelCase($table)};
+        }
+        
+        return null;
+    }
 }
-?>

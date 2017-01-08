@@ -11,7 +11,7 @@
 // The number of seconds to keep a session alive.
 Configure::set("Session.ttl", 1800);
 // The number of seconds to keep a cookie stored session alive
-Configure::set("Session.cookie_ttl", 7*24*60*60);
+Configure::set("Session.cookie_ttl", 7 * 24 * 60 * 60);
 // The name of the session cookie to be used by the session (if available)
 Configure::set("Session.cookie_name", "csid");
 // The name of the sessions database table
@@ -26,4 +26,3 @@ Configure::set("Session.tbl_val", "value");
 Configure::set("Session.session_name", "sid");
 // Whether or not enable HTTP only session cookies
 Configure::set("Session.session_httponly", true);
-?>

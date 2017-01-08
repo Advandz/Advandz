@@ -15,7 +15,7 @@
  * capability.
  */
 if (function_exists("date_default_timezone_set")) {
-	date_default_timezone_set(@date_default_timezone_get());
+    date_default_timezone_set(@date_default_timezone_get());
 }
 
 /**
@@ -38,4 +38,3 @@ set_exception_handler(["UnknownException", "setExceptionHandler"]);
  * @see UnknownException::setFatalErrorHandler()
  */
 register_shutdown_function(["UnknownException", "setFatalErrorHandler"]);
-?>

@@ -9,16 +9,15 @@
  * @author The Advandz Team <team@advandz.com>
  */
 class Cashier {
-	/**
-	 * Initializes a Gateways Class
-	 *
-	 * @param string $table Called function
-	 * @return mixed Returns a Table Object if the table exists
-	 */
-	public function useGateway($table) {
-		#
-		# TODO: Create the Gateway classes for PayPal, BitPay and Stripe.
-		#
-	}
+    /**
+     * Initializes a Gateways Class
+     *
+     * @param string $table Called function
+     * @return mixed Returns a Table Object if the table exists
+     */
+    public function useGateway($table) {
+        #
+        # TODO: Create the Gateway classes for PayPal, BitPay and Stripe.
+        #
+    }
 }
-?>

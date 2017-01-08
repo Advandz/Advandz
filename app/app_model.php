@@ -1,7 +1,7 @@
 <?php
 /**
  * The parent model for the application.
- * 
+ *
  * @package Advandz
  * @subpackage Advandz.app
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
@@ -14,4 +14,3 @@ class AppModel extends Model {
     # models that extend this class.
     #
 }
-?>

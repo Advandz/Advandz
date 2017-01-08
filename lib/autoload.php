@@ -9,13 +9,25 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-// Load Composer Vendors Classes
-@include_once VENDORDIR . "autoload.php";
+
+/**
+ * Load the vendor classes managed by Composer
+ */
+include_once VENDORDIR . "autoload.php";
 spl_autoload_register(['Loader', 'autoload'], true, true);
 
-// Load Helper Classes
-$helper_classes = array_diff(scandir(HELPERDIR), array('.', '..'));
+/**
+ * Load the helper classes
+ */
+$helper_classes = array_diff(scandir(HELPERDIR), ['.', '..']);
 foreach ($helper_classes as $class) {
-	include_once HELPERDIR . $class . DIRECTORY_SEPARATOR . $class . '.php';
+    include_once HELPERDIR . $class . DIRECTORY_SEPARATOR . $class . '.php';
 }
-?>
+
+/**
+ * Load the components classes
+ */
+$components_classes = array_diff(scandir(COMPONENTDIR), ['.', '..']);
+foreach ($components_classes as $class) {
+    include_once COMPONENTDIR . $class . DIRECTORY_SEPARATOR . $class . '.php';
+}

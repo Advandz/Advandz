@@ -17,4 +17,3 @@ class _404 extends AppController {
     # (e.g. $this->loadLang("langfile", "en_us"))
     #
 }
-?>

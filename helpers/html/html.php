@@ -8,6 +8,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+namespace Advandz\Helper;
+use Type;
+
 class Html {
 	/**
 	 * @var boolean True if requiring XHTML standards, false for traditional HTML

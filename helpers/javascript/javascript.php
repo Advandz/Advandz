@@ -9,9 +9,13 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz\Helper;
+use Type;
+use Loader;
+
 Loader::load(HELPERDIR . "html" . DS . "html.php");
 
-class Javascript extends Html {
+class Javascript extends \Advandz\Helper\Html {
 	/**
 	 * @var array A multi-dimensional array of locations and their respective javascript files
 	 */

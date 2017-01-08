@@ -8,6 +8,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz\Helper;
+use Type;
+
 class Xml {
 	/**
 	 * @var string The string to repeat for every tab space

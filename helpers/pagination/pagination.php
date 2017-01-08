@@ -8,9 +8,14 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz\Helper;
+use Type;
+use Loader;
+use Language;
+
 Loader::load(HELPERDIR . "html" . DS . "html.php");
 
-class Pagination extends Html {
+class Pagination extends \Advandz\Helper\Html {
 	/**
 	 * @var string The string to use as the end of line character
 	 */
@@ -359,7 +364,7 @@ class Pagination extends Html {
 	 * @return string The HTML for an open tag, void if output enabled
 	 */
 	private function openTag($tag) {
-		$html = "";
+		$html = Type::_string();
 		if (is_array($tag) && isset($tag['tag'])) {
 			$html .= "<" . $this->_($tag['tag'], true) . $this->buildAttributes($tag['attributes']) . ">" . $this->eol;
 		}

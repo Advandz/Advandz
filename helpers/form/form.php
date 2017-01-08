@@ -9,9 +9,13 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz\Helper;
+use Type;
+use Loader;
+
 Loader::load(HELPERDIR . "html" . DS . "html.php");
 
-class Form extends Html {
+class Form extends \Advandz\Helper\Html {
 	/**
 	 * @var string The string to use as the end of line character
 	 */

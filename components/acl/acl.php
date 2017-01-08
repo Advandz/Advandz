@@ -14,13 +14,18 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
-Loader::load(COMPONENTDIR . "record" . DS . "record.php");
+namespace Advandz\Component;
+
+use Loader;
+use Type;
 
 class Acl {
     /**
      * Initialize the ACL
      */
     public function __construct() {
+        Loader::load(COMPONENTDIR . "record" . DS . "record.php");
+        
         $this->Record = new Record();
         $this->Record->setFetchMode(PDO::FETCH_OBJ);
     }

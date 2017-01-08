@@ -8,7 +8,11 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
-class Record extends Model {
+namespace Advandz\Component;
+
+use Type;
+
+class Record extends \Model {
     /**
      * @var int The number of open parentheses in where statements yet to be applied
      */

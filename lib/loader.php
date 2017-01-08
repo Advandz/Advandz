@@ -273,12 +273,15 @@ final class Loader {
                     throw new Exception("<strong>" . $object_name . "</strong> " . $type . " not found");
                 }
                 
-                // Load the object
+                // Load the object if
                 require_once $object;
                 
                 // Initialize the object
                 if ($type == "helper") {
                     $namespace = "Advandz\\Helper\\" . $object_name;
+                    $parent->$object_name = new $namespace();
+                } elseif ($type == "component") {
+                    $namespace = "Advandz\\Component\\" . $object_name;
                     $parent->$object_name = new $namespace();
                 } else {
                     $parent->$object_name = call_user_func_array([new ReflectionClass($object_name), 'newInstance'], $value);

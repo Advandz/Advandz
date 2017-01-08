@@ -14,7 +14,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-class Http extends Model {
+namespace Advandz\Component;
+
+class Http extends \Model {
     /**
      * @var string The server to send te request
      */

@@ -10,6 +10,10 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz\Component;
+
+use Type;
+
 class Input {
     /**
      * @var array All errors violated in the Input::validates() method
@@ -294,7 +298,7 @@ class Input {
                 if (strpos($index, "[") !== false) {
                     $depth = substr_count($index, "[");
                     
-                    $field = [];
+                    $field = Type::_array();
                     // Turn rule index into array
                     parse_str($index, $field);
                     

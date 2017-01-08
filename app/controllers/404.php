@@ -8,6 +8,8 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+namespace Advandz\Controller;
+
 class _404 extends AppController {
     #
     # TODO: Define any methods, load any models or components or anything else

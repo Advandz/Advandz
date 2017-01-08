@@ -8,11 +8,16 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+namespace Advandz\Controller;
+
+use Controller;
+use Loader;
+
 class AppController extends Controller {
     /**
-     * Main function (Structure)
+     * Pre-Action, This method called before the index method, or controller specified action.
      */
-    public function index() {
+    public function preAction() {
         Loader::loadHelpers($this, ['Cdnjs']);
         
         $libs = $this->Cdnjs->loadLibraries(['jquery']);

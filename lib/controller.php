@@ -273,12 +273,13 @@ class Controller {
             } else {
                 // Auto-load the view file. These have the format of:
                 // [controller_name]_[method_name] for all non-index methods
-                $file = Loader::fromCamelCase(get_class($this)) . ($this->action != null && $this->action != "index" ? "_" . strtolower($this->action) : "");
+                $file = Loader::fromCamelCase($this->controller) . ($this->action != null && $this->action != "index" ? "_" . strtolower($this->action) : "");
             }
         }
         
         // Render view
         $output = $this->view->fetch($file, $view);
+        
         // Render view in structure
         if ($template != null) {
             $this->structure->set("content", $output);

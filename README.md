@@ -6,36 +6,18 @@
 [![HHVM Version](https://img.shields.io/badge/hhvm-%3E%3D3.10.0-orange.svg?style=flat-square)](http://hhvm.com)
 [![Donate via PayPal](https://img.shields.io/badge/donante-PayPal-blue.svg?style=flat-square)](https://donorbox.org/advandz-framework)
 
-### The Framework for Enterprises and High-Performance Applications. ###
+## About Advandz
 
-Advandz is an enterprise-class powerful and scalable MVC framework for PHP application development.
+Advandz is an enterprise-class powerful and scalable application development framework - a toolkit - for people who build web applications using PHP. Its goal is to enable you to develop projects much faster than you could if you were writing code from scratch, by providing a rich set of libraries for commonly needed tasks, as well as a simple interface and logical structure to access these libraries. Advandz lets you creatively focus on your project by minimizing the amount of code needed for a given task.
 
-### Who is Advandz For?
-- You need build a High-Performance and Scalable application.
-- You need develop a Cloud-Ready application.
-- You want a framework with a small footprint.
-- You want a framework that requires nearly zero configuration.
-- You eschew complexity, favoring simple solutions.
-- You need clear, thorough documentation.
+## Learning Advandz
 
-### Directory Structure ###
-<pre>
-/app
-	/controllers 	- where all controllers are to be placed
-	/models 		- where all models are to be placed
-	/views			- where all views are to be placed
-/assets             - where all assets are to be placed
-    /css            - where all styles are to be placed
-    /images         - where all images are to be placed
-    /javascript     - where all scripts are to be placed
-/cache              - where cached views are stored (must be writable to use)
-/components			- where components are placed
-/config				- where configuration files are to be stored
-/helpers			- where all helpers are located
-/language			- each language has its own directory in here
-	/en_us			- the default language directory
-/lib                - where all core files are located
-/logs               - where all logs files are located
-/plugins			- where all plugins are stored
-/vendors			- where vendor code is placed (i.e. third party libraries)
-</pre>
+Advandz has an extensive, clear and thorough documentation. The [Advandz documentation](http://documentation.advandz.com/) is thorough, complete, and makes it a breeze to get started learning the framework.
+
+## What if I find a bug?
+
+If you discover a bug or a security vulnerability within Advandz, please send an e-mail to the team at team@advandz.com. All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Advandz framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

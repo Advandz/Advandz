@@ -5,7 +5,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
     private $Record;
     
     public function setUp() {
-        $this->Record = new Record();
+        $this->Record = new Advandz\Component\Record();
     }
     
     /**

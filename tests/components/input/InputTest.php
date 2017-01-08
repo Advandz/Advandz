@@ -6,7 +6,7 @@ class InputTest extends PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->Input = new Input();
+        $this->Input = new Advandz\Component\Input();
     }
     
     /**

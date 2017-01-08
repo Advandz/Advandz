@@ -12,6 +12,8 @@ namespace Advandz\Component;
 
 use Loader;
 use Type;
+use PDO;
+use Configure;
 
 class Session {
     /**

@@ -18,6 +18,7 @@ namespace Advandz\Component;
 
 use Loader;
 use Type;
+use PDO;
 
 class Acl {
     /**

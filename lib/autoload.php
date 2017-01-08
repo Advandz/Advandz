@@ -14,7 +14,15 @@
  * Load the vendor classes managed by Composer
  */
 include_once VENDORDIR . "autoload.php";
-spl_autoload_register(['Loader', 'autoload'], true, true);
+//spl_autoload_register(['Loader', 'autoload'], true, true);
+
+/**
+ * Load the libraries classes
+ */
+$libraries_classes = array_diff(scandir(LIBDIR), ['.', '..', 'autoload.php', 'init.php']);
+foreach ($libraries_classes as $class) {
+    include_once LIBDIR . $class;
+}
 
 /**
  * Load the helper classes

@@ -130,7 +130,8 @@ final class Loader {
                 }
                 
                 // Instantiate the model
-                $parent->$model_name = call_user_func_array([new ReflectionClass($model_name), 'newInstance'], $value);
+                $namespace = "Advandz\\Model\\" . $model_name;
+                $parent->$model_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
             }
         }
     }
@@ -277,12 +278,9 @@ final class Loader {
                 require_once $object;
                 
                 // Initialize the object
-                if ($type == "helper") {
-                    $namespace = "Advandz\\Helper\\" . $object_name;
-                    $parent->$object_name = new $namespace();
-                } elseif ($type == "component") {
-                    $namespace = "Advandz\\Component\\" . $object_name;
-                    $parent->$object_name = new $namespace();
+                if ($type == "helper" || $type == "component") {
+                    $namespace = "Advandz\\" . self::toCamelCase($type) . "\\" . $object_name;
+                    $parent->$object_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
                 } else {
                     $parent->$object_name = call_user_func_array([new ReflectionClass($object_name), 'newInstance'], $value);
                 }

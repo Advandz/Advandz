@@ -77,7 +77,7 @@ class Http {
      * @return Http Reference to this class
      */
     public function port($port) {
-        if (is_numerical($port)) {
+        if (is_numeric($port)) {
             $this->port = $port;
         }
         

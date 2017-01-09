@@ -40,7 +40,7 @@ final class Loader {
         $plugin = null;
         if (($c = strpos($class, "."))) {
             $plugin = self::fromCamelCase(substr($class, 0, $c)) . DIRECTORY_SEPARATOR;
-            $class = substr($class, $c + 1);
+            $class  = substr($class, $c + 1);
         }
         
         if ($plugin !== null) {
@@ -54,7 +54,7 @@ final class Loader {
         }
         
         $class_file = self::fromCamelCase($class);
-        $file_name = $class_file . ".php";
+        $file_name  = $class_file . ".php";
         
         foreach ($paths as $path) {
             if (file_exists($path . $file_name)) {
@@ -94,11 +94,11 @@ final class Loader {
                 $plugin = null;
                 if (($c = strpos($model, "."))) {
                     $plugin = self::fromCamelCase(substr($model, 0, $c)) . DS;
-                    $model = substr($model, $c + 1);
+                    $model  = substr($model, $c + 1);
                 }
                 
                 $model_name_file = self::fromCamelCase($model);
-                $model_name = self::toCamelCase($model);
+                $model_name      = self::toCamelCase($model);
                 
                 if ($plugin) {
                     // Ensure the model exists
@@ -130,7 +130,7 @@ final class Loader {
                 }
                 
                 // Instantiate the model
-                $namespace = "Advandz\\App\\Model\\" . $model_name;
+                $namespace           = "Advandz\\App\\Model\\" . $model_name;
                 $parent->$model_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
             }
         }
@@ -242,7 +242,7 @@ final class Loader {
                     $object = $key;
                 } else {
                     $object = $value;
-                    $value = [];
+                    $value  = [];
                 }
                 
                 $plugin = null;
@@ -260,7 +260,7 @@ final class Loader {
                 $object_name = self::toCamelCase($object);
                 
                 // Include the object
-                $object = self::fromCamelCase($object);
+                $object      = self::fromCamelCase($object);
                 $object_file = $object . ".php";
                 
                 // Search for the object in the root object directory
@@ -279,7 +279,7 @@ final class Loader {
                 
                 // Initialize the object
                 if ($type == "helper" || $type == "component") {
-                    $namespace = "Advandz\\" . self::toCamelCase($type) . "\\" . $object_name;
+                    $namespace            = "Advandz\\" . self::toCamelCase($type) . "\\" . $object_name;
                     $parent->$object_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
                 } else {
                     $parent->$object_name = call_user_func_array([new ReflectionClass($object_name), 'newInstance'], $value);

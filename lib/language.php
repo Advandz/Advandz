@@ -172,5 +172,3 @@ class Language {
         return $prev_lang;
     }
 }
-
-?>

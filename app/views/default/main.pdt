@@ -1,7 +1,7 @@
 <div class="jumbotron round-corners-none">
     <div class="container">
         <h1 class="display-3">Hello, world!</h1>
-        <p>Advandz is an enterprise-class powerful and scalable MVC framework for people who build web applications using PHP with a built-in powerful template engine and a awesome Front-End framework.</p>
+        <p>Advandz is an enterprise-class powerful and scalable application development framework - a toolkit - for people who build web applications using PHP.</p>
         <p><a class="btn btn-primary btn-lg" href="http://advandz.com/" role="button">Learn more &raquo;</a></p>
     </div>
 </div>

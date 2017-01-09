@@ -96,14 +96,14 @@ class ViewTest extends PHPUnit_Framework_TestCase
         $expected_output = "1. value-\n2. 1,2,3-\n3. 1.2-\n4. -";
         $var1 = array(1, 2, 3);
         $var2 = 1.2;
-        $this->view->setDefaultView("../tests/app/");
+        $this->view->setDefaultView("tests/app/");
         $this->view->set("key", "value");
         $this->view->set(compact("var1", "var2"));
         $this->assertEquals($expected_output, $this->view->fetch("view_test"));
         
         $expected_output = "1. value-\n2. 1,2,3-\n3. 1.2-\n4. Hello World!-";
         $partial_view = new View("view_partial");
-        $partial_view->setDefaultView("../tests/app/");
+        $partial_view->setDefaultView("tests/app/");
         $this->view->set("partial", $partial_view);
         $this->assertEquals($expected_output, $this->view->fetch("view_test"));
     }

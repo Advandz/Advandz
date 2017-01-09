@@ -22,7 +22,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
      */
     public function testUri()
     {
-        $this->assertInstanceOf("Advandz\\Component\\Http", $this->Http->uri());
+        $this->assertInstanceOf("Advandz\\Component\\Http", $this->Http->uri('/'));
     }
     
     /**

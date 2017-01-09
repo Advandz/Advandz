@@ -16,7 +16,7 @@
  */
 namespace Advandz\Component;
 
-class Http extends \Model {
+class Http {
     /**
      * @var string The server to send te request
      */

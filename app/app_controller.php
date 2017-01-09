@@ -8,7 +8,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-namespace Advandz\Controller;
+namespace Advandz\App\Controller;
 
 use Controller;
 use Loader;

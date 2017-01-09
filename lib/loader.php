@@ -130,7 +130,7 @@ final class Loader {
                 }
                 
                 // Instantiate the model
-                $namespace = "Advandz\\Model\\" . $model_name;
+                $namespace = "Advandz\\App\\Model\\" . $model_name;
                 $parent->$model_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
             }
         }

@@ -86,7 +86,7 @@ class Dispatcher extends Controller {
         // If the first character of the controller is a number we must prepend the controller
         // with an underscore.
         $contrl = (is_numeric(substr($controller, 0, 1)) ? "_" : "") . Loader::toCamelCase($controller);
-        $namespace = "Advandz\\Controller\\" . $contrl;
+        $namespace = "Advandz\\App\\Controller\\" . $contrl;
         $ctrl = new $namespace($controller, $action, $is_cli);
         
         // Make the POST/GET/FILES available to the controller

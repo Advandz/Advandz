@@ -22,8 +22,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testSetField()
     {
-        $this->assertInstanceOf("Record", $this->Record->setField("name", array('type' => "int", 'size' => 10, 'unsigned' => true), true));
-        $this->assertInstanceOf("Record", $this->Record->setField("name", null, false));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->setField("name", array('type' => "int", 'size' => 10, 'unsigned' => true), true));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->setField("name", null, false));
     }
     
     /**
@@ -32,8 +32,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
     public function testSetKey()
     {
         $this->assertNull($this->Record->setKey(array(), "index"));
-        $this->assertInstanceOf("Record", $this->Record->setKey(array("id"), "primary", true, "id", true));
-        $this->assertInstanceOf("Record", $this->Record->setKey(array("id"), "primary", true, null, false));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->setKey(array("id"), "primary", true, "id", true));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->setKey(array("id"), "primary", true, null, false));
     }
     
     /**
@@ -118,8 +118,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testSet()
     {
-        $this->assertInstanceOf("Record", $this->Record->set("field", "value"));
-        $this->assertInstanceOf("Record", $this->Record->set("field", $this->Record->keywordValue("DEFAULT")));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->set("field", "value"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->set("field", $this->Record->keywordValue("DEFAULT")));
     }
     
     /**
@@ -199,7 +199,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testSelect()
     {
-        $this->assertInstanceOf("Record", $this->Record->select());
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->select());
     }
     
     /**
@@ -207,7 +207,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testFrom()
     {
-        $this->assertInstanceOf("Record", $this->Record->from("table"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->from("table"));
     }
     
     /**
@@ -218,7 +218,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testJoin()
     {
-        $this->assertInstanceOf("Record", $this->Record->join("table2", "table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->join("table2", "table1.field", "=", "table2.field"));
     }
 
     /**
@@ -229,7 +229,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testLeftJoin()
     {
-        $this->assertInstanceOf("Record", $this->Record->leftJoin("table2", "table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->leftJoin("table2", "table1.field", "=", "table2.field"));
     }
 
     /**
@@ -240,7 +240,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testRightJoin()
     {
-        $this->assertInstanceOf("Record", $this->Record->rightJoin("table2", "table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->rightJoin("table2", "table1.field", "=", "table2.field"));
     }
 
     /**
@@ -251,7 +251,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testInnerJoin()
     {
-        $this->assertInstanceOf("Record", $this->Record->innerJoin("table2", "table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->innerJoin("table2", "table1.field", "=", "table2.field"));
     }
     
     /**
@@ -260,7 +260,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOn()
     {
-        $this->assertInstanceOf("Record", $this->Record->on("table1.field", "=", "table2.field")->innerJoin("table2"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->on("table1.field", "=", "table2.field")->innerJoin("table2"));
     }
     
     
@@ -270,7 +270,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrOn()
     {
-        $this->assertInstanceOf("Record", $this->Record->orOn("table1.field", "=", "table2.field")->innerJoin("table2"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->orOn("table1.field", "=", "table2.field")->innerJoin("table2"));
     }
     
     /**
@@ -279,7 +279,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testWhere()
     {
-        $this->assertInstanceOf("Record", $this->Record->where("table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->where("table1.field", "=", "table2.field"));
     }
 
     /**
@@ -288,7 +288,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrWhere()
     {
-        $this->assertInstanceOf("Record", $this->Record->orWhere("table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->orWhere("table1.field", "=", "table2.field"));
     }
     
     /**
@@ -297,7 +297,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testDuplicate()
     {
-        $this->assertInstanceOf("Record", $this->Record->duplicate("table1.field", "=", "new value"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->duplicate("table1.field", "=", "new value"));
     }
     
     /**
@@ -306,7 +306,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testLike()
     {
-        $this->assertInstanceOf("Record", $this->Record->like("table1.field", "%value%"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->like("table1.field", "%value%"));
     }
 
     /**
@@ -315,7 +315,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testNotLike()
     {
-        $this->assertInstanceOf("Record", $this->Record->notLike("table1.field", "%value%"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->notLike("table1.field", "%value%"));
     }
 
     
@@ -325,7 +325,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrLike()
     {
-        $this->assertInstanceOf("Record", $this->Record->orLike("table1.field", "%value%"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->orLike("table1.field", "%value%"));
     }
 
     /**
@@ -334,7 +334,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrNotLike()
     {
-        $this->assertInstanceOf("Record", $this->Record->orNotLike("table1.field", "%value%"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->orNotLike("table1.field", "%value%"));
     }
     
     /**
@@ -343,7 +343,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testHaving()
     {
-        $this->assertInstanceOf("Record", $this->Record->having("table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->having("table1.field", "=", "table2.field"));
     }
 
     /**
@@ -352,7 +352,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrHaving()
     {
-        $this->assertInstanceOf("Record", $this->Record->orHaving("table1.field", "=", "table2.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->orHaving("table1.field", "=", "table2.field"));
     }
     
     /**
@@ -360,8 +360,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testGroup()
     {
-        $this->assertInstanceOf("Record", $this->Record->group("table1.field"));
-        $this->assertInstanceOf("Record", $this->Record->group(array("table1.field", "table1.field2")));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->group("table1.field"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->group(array("table1.field", "table1.field2")));
     }
     
     /**
@@ -369,8 +369,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOrder()
     {
-        $this->assertInstanceOf("Record", $this->Record->order(array('table1.field' => "asc")));
-        $this->assertInstanceOf("Record", $this->Record->order(array("table1.field", "table1.field2")));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->order(array('table1.field' => "asc")));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->order(array("table1.field", "table1.field2")));
     }
     
     /**
@@ -378,7 +378,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testLimit()
     {
-        $this->assertInstanceOf("Record", $this->Record->limit(30));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->limit(30));
     }
     
     /**
@@ -386,7 +386,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testOpen()
     {
-        $this->assertInstanceOf("Record", $this->Record->open());
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open());
     }
     
     /**
@@ -394,11 +394,11 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     public function testClose()
     {
-        $this->assertInstanceOf("Record", $this->Record->open()->close());
-        $this->assertInstanceOf("Record", $this->Record->open()->where("table1.field", "=", "table2.field")->close("where"));
-        $this->assertInstanceOf("Record", $this->Record->open()->on("table1.field", "=", "table2.field")->close("on"));
-        $this->assertInstanceOf("Record", $this->Record->open()->having("table1.field", "=", "table2.field")->close("having"));
-        $this->assertInstanceOf("Record", $this->Record->open()->duplicate("table1.field", "=", "new value")->close("duplicate"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open()->close());
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open()->where("table1.field", "=", "table2.field")->close("where"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open()->on("table1.field", "=", "table2.field")->close("on"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open()->having("table1.field", "=", "table2.field")->close("having"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->open()->duplicate("table1.field", "=", "new value")->close("duplicate"));
     }
     
     /**
@@ -407,7 +407,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
     public function testAppendValues()
     {
         $values = array(1, 2, 3, 'x', 'y', 'z');
-        $this->assertInstanceOf("Record", $this->Record->appendValues($values));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->appendValues($values));
         $this->assertEquals($values, $this->Record->values);
         
         $more_values = array('a', 'b', 'c');
@@ -451,7 +451,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
     public function testSetReturnRecordInstance()
     {
 
-        $this->assertInstanceOf("Record", $this->Record->set("field", "value"));
+        $this->assertInstanceOf("Advandz\\Component\\Record", $this->Record->set("field", "value"));
     }
     
     
@@ -464,7 +464,7 @@ class RecordTest extends PHPUnit_Framework_TestCase
      */
     protected function getQueryMock($query, $params = array(), $return = null)
     {
-        $record = $this->getMockBuilder("Record")
+        $record = $this->getMockBuilder("Advandz\\Component\\Record")
             ->disableOriginalConstructor()
             ->setMethods(array("query", "reset"))
             ->getMock();

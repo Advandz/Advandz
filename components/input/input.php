@@ -13,6 +13,7 @@
 namespace Advandz\Component;
 
 use Type;
+use Exception;
 
 class Input {
     /**

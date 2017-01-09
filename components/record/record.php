@@ -11,8 +11,10 @@
 namespace Advandz\Component;
 
 use Type;
+use Model;
+use stdClass;
 
-class Record extends \Model {
+class Record extends Model {
     /**
      * @var int The number of open parentheses in where statements yet to be applied
      */

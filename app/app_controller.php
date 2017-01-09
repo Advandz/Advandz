@@ -10,8 +10,8 @@
  */
 namespace Advandz\App\Controller;
 
-use Controller;
 use Loader;
+use Controller;
 
 class AppController extends Controller {
     /**

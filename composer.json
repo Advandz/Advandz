@@ -4,6 +4,8 @@
     "keywords": ["framework", "advandz"],
     "homepage": "http://advandz.com/",
     "type": "project",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4"
     },
@@ -24,6 +26,12 @@
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "vendor-dir": "vendors/composer"
+    },
+    "scripts": {
+        "post-package-install": [
+            "rm -rf tests; rm -rf build; rm -rf LICENSE.md; rm -rf README.md; rm -rf .travis.yml"
+        ]
     }
 }

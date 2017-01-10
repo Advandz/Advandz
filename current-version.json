@@ -1,8 +1,0 @@
-{  
-    "current-version":"1.0.0-alpha.1",
-    "release-date":"04-01-2017",
-    "min-php":"5.4",
-    "file-map":{  
-        "index.php":"1b23fa9a6474b7bbf2a14aea3594892e"
-    }
-}

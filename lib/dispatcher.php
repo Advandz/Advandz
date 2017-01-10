@@ -32,13 +32,13 @@ class Dispatcher extends Controller {
      * Dispatch the request to the proper controller
      *
      * @param string $request_uri The request URI string
-     * @param boolean $is_cli Whether or not this requests is a command line request
+     * @param bool $is_cli Whether or not this requests is a command line request
      * @throws Exception thrown when request can not be dispatched or Dispatcher::raiseError can not handle the error
      */
     public static function dispatch($request_uri, $is_cli = false) {
         self::cleanGlobals();
         
-        $_post = $_POST;
+        $_post  = $_POST;
         $_files = $_FILES;
         
         list($plugin, $controller, $action, $_get, $uri, $uri_str) = array_values(Router::routesTo($request_uri));
@@ -56,8 +56,8 @@ class Dispatcher extends Controller {
         
         // Initialize the AppModel and AppController, so they can be
         // automatically extended
-        Loader::load(ROOTWEBDIR . APPDIR . "app_model.php");
-        Loader::load(ROOTWEBDIR . APPDIR . "app_controller.php");
+        Loader::load(APPDIR . "app_model.php");
+        Loader::load(APPDIR . "app_controller.php");
         
         $plugin_path = null; // relative path to the plugin directory if it exists
         
@@ -85,20 +85,20 @@ class Dispatcher extends Controller {
         
         // If the first character of the controller is a number we must prepend the controller
         // with an underscore.
-        $contrl = (is_numeric(substr($controller, 0, 1)) ? "_" : "") . Loader::toCamelCase($controller);
+        $contrl    = (is_numeric(substr($controller, 0, 1)) ? "_" : "") . Loader::toCamelCase($controller);
         $namespace = "Advandz\\App\\Controller\\" . $contrl;
-        $ctrl = new $namespace($controller, $action, $is_cli);
+        $ctrl      = new $namespace($controller, $action, $is_cli);
         
         // Make the POST/GET/FILES available to the controller
-        $ctrl->uri = $uri;
-        $ctrl->uri_str = $uri_str;
-        $ctrl->get = $_get;
-        $ctrl->post = $_post;
-        $ctrl->files = $_files;
-        $ctrl->plugin = $plugin;
+        $ctrl->uri        = $uri;
+        $ctrl->uri_str    = $uri_str;
+        $ctrl->get        = $_get;
+        $ctrl->post       = $_post;
+        $ctrl->files      = $_files;
+        $ctrl->plugin     = $plugin;
         $ctrl->controller = $controller;
-        $ctrl->action = $action;
-        $ctrl->is_cli = $is_cli;
+        $ctrl->action     = $action;
+        $ctrl->is_cli     = $is_cli;
         
         if ($plugin_path) {
             $ctrl->setDefaultViewPath($plugin_path);

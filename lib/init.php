@@ -56,7 +56,7 @@ unset($script, $webdir, $path);
  * The name of the application directory where all models, views, and
  * controllers are placed.  Must end with a trailing directory separator
  */
-define("APPDIR", "app" . DS);
+define("APPDIR", ROOTWEBDIR . "app" . DS);
 
 /**
  * Sets the absolute path to the cache directory. Must be writable by the web
@@ -72,17 +72,17 @@ define("LIBDIR", ROOTWEBDIR . "lib" . DS);
 /**
  * Absolute path to the models directory, where all models are stored.
  */
-define("MODELDIR", ROOTWEBDIR . APPDIR . "models" . DS);
+define("MODELDIR", APPDIR . "models" . DS);
 
 /**
  * Absolute path to the views directory, where all views are stored.
  */
-define("VIEWDIR", ROOTWEBDIR . APPDIR . "views" . DS);
+define("VIEWDIR", APPDIR . "views" . DS);
 
 /**
  * Absolute path to the controllers directory, where all controllers are stored.
  */
-define("CONTROLLERDIR", ROOTWEBDIR . APPDIR . "controllers" . DS);
+define("CONTROLLERDIR", APPDIR . "controllers" . DS);
 
 /**
  * Absolute path to the components directory, where all components are stored.
@@ -112,7 +112,7 @@ define("PLUGINDIR", ROOTWEBDIR . "plugins" . DS);
 /**
  * Absolute path to the vendors directory, where vendor libraries are stored.
  */
-define("VENDORDIR", ROOTWEBDIR . "vendor" . DS);
+define("VENDORDIR", ROOTWEBDIR . "vendors" . DS);
 
 // Include core libraries
 include_once LIBDIR . "loader.php";

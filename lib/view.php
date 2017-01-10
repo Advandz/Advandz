@@ -13,32 +13,39 @@ class View extends Knife {
      * @var array Holds all the variables we will send to the view
      */
     protected $vars;
+    
     /**
      * @var string The file used in the view
      */
     public $file;
+    
     /**
      * @var string The file extension used in the view
      */
     public $view_ext = ".pdt";
+    
     /**
      * @var string The location of this view's files within the view path
      */
     public $view;
+    
     /**
      * @var string This view's relative path (useful in template to reference view related files [e.g. images,
      *     javascript, css])
      */
     public $view_dir;
+    
     /**
      * @var string This aasets relative path (useful in template to reference view related files [e.g. images,
      *     javascript, css])
      */
     public $assets_dir;
+    
     /**
      * @var string This view's partial path relative to the public web directory
      */
     public $view_path;
+    
     /**
      * @var string The default view path
      */
@@ -49,7 +56,7 @@ class View extends Knife {
      * @param string $view The view directory to use (plugins use PluginName.directory).
      */
     public function __construct($file = null, $view = null) {
-        $this->view = Configure::get("System.default_view");
+        $this->view     = Configure::get("System.default_view");
         $this->view_ext = Configure::get("System.view_ext");
         
         $this->setView($file, $view);
@@ -71,7 +78,7 @@ class View extends Knife {
      */
     public final function setDefaultView($path) {
         $this->default_view_path = $path;
-        $this->view_path = $path;
+        $this->view_path         = $path;
     }
     
     /**
@@ -88,9 +95,9 @@ class View extends Knife {
         
         // Overwrite the view directory if given
         list($view_path, $view) = $this->getViewPath($view);
-        $this->view = $view;
-        $this->view_path = $view_path;
-        $this->view_dir = Router::makeURI(str_replace("index.php/", "", WEBDIR) . $view_path . "views" . DS . $view . DS);
+        $this->view       = $view;
+        $this->view_path  = $view_path;
+        $this->view_dir   = Router::makeURI(str_replace("index.php/", "", WEBDIR) . $view_path . "views" . DS . $view . DS);
         $this->assets_dir = Router::makeURI(str_replace("index.php/", "", WEBDIR) . "assets" . DS);
     }
     
@@ -122,7 +129,7 @@ class View extends Knife {
     public final function fetch($file = null, $view = null) {
         $this->setView($file, $view);
         
-        $file = ROOTWEBDIR . $this->view_path . "views" . DS . $this->view . DS . $this->file . $this->view_ext;
+        $file = $this->view_path . "views" . DS . $this->view . DS . $this->file . $this->view_ext;
         
         if (is_array($this->vars)) {
             extract($this->vars);
@@ -157,7 +164,7 @@ class View extends Knife {
         
         if (count($view_parts) == 2) {
             $view_path = str_replace(ROOTWEBDIR, "", PLUGINDIR) . Loader::fromCamelCase($view_parts[0]) . DS;
-            $view = $view_parts[1];
+            $view      = $view_parts[1];
         }
         
         return [$view_path, $view];

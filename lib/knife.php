@@ -14,43 +14,44 @@ class Knife extends Language {
      * @var string The template code
      */
     public $template;
+    
     /**
      * @var array The tags with the equivalent PHP code
      */
     private $tags = [
-        '@lang' => "<?php echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
-        '!@lang' => "<?php \$this->_(\"%%STATEMENT%%\"); ?>",
-        '@yield' => "<?php echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
-        '!@yield' => "<?php echo \$this->%%STATEMENT%%; ?>",
-        '@raw' => "<?php echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
-        '!@raw' => "<?php print_r(\$%%STATEMENT%%); ?>",
-        '@var' => "<?php echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
-        '!@var' => "<?php echo \$%%STATEMENT%%; ?>",
-        '@this' => "<?php \$this->",
-        '!@this' => "<?php \$this->",
-        '@constant' => "<?php echo \$this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
+        '@lang'      => "<?php echo \$this->Html->safe(\$this->_(\"%%STATEMENT%%\", true)); ?>",
+        '!@lang'     => "<?php \$this->_(\"%%STATEMENT%%\"); ?>",
+        '@yield'     => "<?php echo \$this->Html->safe(\$this->%%STATEMENT%%); ?>",
+        '!@yield'    => "<?php echo \$this->%%STATEMENT%%; ?>",
+        '@raw'       => "<?php echo \$this->Html->safe(print_r(\$%%STATEMENT%%, true)); ?>",
+        '!@raw'      => "<?php print_r(\$%%STATEMENT%%); ?>",
+        '@var'       => "<?php echo \$this->Html->safe(\$%%STATEMENT%%); ?>",
+        '!@var'      => "<?php echo \$%%STATEMENT%%; ?>",
+        '@this'      => "<?php \$this->",
+        '!@this'     => "<?php \$this->",
+        '@constant'  => "<?php echo \$this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
         '!@constant' => "<?php echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : '%%STATEMENT%%'); ?>",
-        'include' => "<?php include %%STATEMENT%%; ?>",
-        '@include' => "<?php include_once %%STATEMENT%%; ?>",
-        'require' => "<?php require %%STATEMENT%%; ?>",
-        '@require' => "<?php require_once %%STATEMENT%%; ?>",
-        '@php' => "<?= \$this->Html->safe(%%STATEMENT%%); ?>",
-        '!@php' => "<?= %%STATEMENT%%; ?>",
-        'if' => "<?php if (%%STATEMENT%%) { ?>",
-        'elseif' => "<?php } elseif (%%STATEMENT%%) { ?>",
-        'else' => "<?php } else { ?>",
-        '/if' => "<?php } ?>",
-        'while' => "<?php while (%%STATEMENT%%) { ?>",
-        '/while' => "<?php } ?>",
-        'do' => "<?php do { ?>",
-        'dowhile' => "<?php } while (%%STATEMENT%%); ",
-        '/do' => "?>",
-        'for' => "<?php for (%%STATEMENT%%) { ?>",
-        '/for' => "<?php } ?>",
-        'foreach' => "<?php foreach (%%STATEMENT%%) { ?>",
-        '/foreach' => "<?php } ?>",
-        'php' => "<?php ",
-        '/php' => " ?>"
+        'include'    => "<?php include %%STATEMENT%%; ?>",
+        '@include'   => "<?php include_once %%STATEMENT%%; ?>",
+        'require'    => "<?php require %%STATEMENT%%; ?>",
+        '@require'   => "<?php require_once %%STATEMENT%%; ?>",
+        '@php'       => "<?= \$this->Html->safe(%%STATEMENT%%); ?>",
+        '!@php'      => "<?= %%STATEMENT%%; ?>",
+        'if'         => "<?php if (%%STATEMENT%%) { ?>",
+        'elseif'     => "<?php } elseif (%%STATEMENT%%) { ?>",
+        'else'       => "<?php } else { ?>",
+        '/if'        => "<?php } ?>",
+        'while'      => "<?php while (%%STATEMENT%%) { ?>",
+        '/while'     => "<?php } ?>",
+        'do'         => "<?php do { ?>",
+        'dowhile'    => "<?php } while (%%STATEMENT%%); ",
+        '/do'        => "?>",
+        'for'        => "<?php for (%%STATEMENT%%) { ?>",
+        '/for'       => "<?php } ?>",
+        'foreach'    => "<?php foreach (%%STATEMENT%%) { ?>",
+        '/foreach'   => "<?php } ?>",
+        'php'        => "<?php ",
+        '/php'       => " ?>"
     ];
     
     /**
@@ -71,7 +72,7 @@ class Knife extends Language {
             // Delete compiled view if is old
             if (Configure::get("Caching.on") && file_exists($compiled_file)) {
                 $build_date = filemtime($compiled_file); // Last modified date of the compiled view
-                $ttl = (!empty(Configure::get("Knife.ttl")) ? Configure::get("Knife.ttl") : 3600);
+                $ttl        = (!empty(Configure::get("Knife.ttl")) ? Configure::get("Knife.ttl") : 3600);
                 
                 if ($build_date + $ttl <= time()) {
                     unlink($compiled_file);

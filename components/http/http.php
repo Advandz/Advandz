@@ -79,7 +79,7 @@ class Http {
     /**
      * Sets the port to be used in the request
      *
-     * @param integer $port The request port
+     * @param int $port The request port
      * @return Http Reference to this class
      */
     public function port($port) {

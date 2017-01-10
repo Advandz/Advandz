@@ -146,8 +146,8 @@ class Session {
      *
      * @param string $path The path for this cookie, default is the current URI
      * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param boolean $secure Whether or not the cookie should be transmitted over a secure connection from the client
-     * @param boolean $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
      */
     public function setSessionCookie($path = "", $domain = "", $secure = false, $httponly = false) {
         if (version_compare(phpversion(), "5.2.0", ">=")) {
@@ -162,8 +162,8 @@ class Session {
      *
      * @param string $path The path for this cookie, default is the current URI
      * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param boolean $secure Whether or not the cookie should be transmitted over a secure connection from the client
-     * @param boolean $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
      */
     public function keepAliveSessionCookie($path = "", $domain = "", $secure = false, $httponly = false) {
         if (isset($_COOKIE[Configure::get("Session.cookie_name")])) {
@@ -176,7 +176,7 @@ class Session {
      *
      * @param string $path The path for this cookie, default is the current URI
      * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param boolean $secure Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
      */
     public function clearSessionCookie($path = "", $domain = "", $secure = false) {
         if (isset($_COOKIE[Configure::get("Session.cookie_name")])) {
@@ -192,7 +192,7 @@ class Session {
      * @param string $tblid Name of the session ID field
      * @param string $tblexpire Name of the session expire date field
      * @param string $tblvalue Name of the session value field
-     * @param boolean $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
      */
     private function sessionSet($ttl, $tbl, $tblid, $tblexpire, $tblvalue, $session_name, $httponly) {
         $this->ttl       = $ttl;

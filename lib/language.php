@@ -33,7 +33,7 @@ class Language {
      *
      * @see Language::getText()
      * @param string $lang_key The language key identifier for this requested text
-     * @param boolean $return Whether to return the text or output it
+     * @param bool $return Whether to return the text or output it
      * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
      *     that value is passed to sprintf().
      * @return mixed
@@ -50,7 +50,7 @@ class Language {
      * language file for the $lang_key text.
      *
      * @param string $lang_key The language key identifier for this requested text
-     * @param boolean $return Whether to return the text or output it
+     * @param bool $return Whether to return the text or output it
      * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
      *     that value is passed to sprintf().
      * @return string The resultant text

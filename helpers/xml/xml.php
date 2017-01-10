@@ -75,7 +75,7 @@ class Xml {
      *
      * @param mixed $value An array or string used for the current XML value
      * @param string $root_node The root node for this XML segment
-     * @param integer $tab_count The number of tabs for this XML segment
+     * @param int $tab_count The number of tabs for this XML segment
      * @return string The XML segement
      */
     private function buildXmlSegment($value, $root_node = "result", $tab_count = -1) {

@@ -120,7 +120,7 @@ class Record extends Model {
      *    - auto_increment Set to true to set this field to auto_increment (optional)
      *    - default Used to define a default value for the field (optional)
      *    - is_null Set to true if this field
-     * @param boolean $add True to add the field, false to drop the field
+     * @param bool $add True to add the field, false to drop the field
      * @return Record Reference to this class
      */
     public function setField($name, array $attributes = null, $add = true) {
@@ -135,7 +135,7 @@ class Record extends Model {
      * @param array $fields A numerical array of fields to set as a key
      * @param string $type The type of key ("index", "primary", "unique")
      * @param string $name The name of the key, will default to the first value in $fields if null
-     * @param boolean $add True to add the key, false to drop the key
+     * @param bool $add True to add the key, false to drop the key
      * @return Record Reference to this class
      */
     public function setKey(array $fields, $type, $name = null, $add = true) {
@@ -155,7 +155,7 @@ class Record extends Model {
      * Creates a table with the given name
      *
      * @param string $table The name of the table to create
-     * @param boolean $if_not_exists If true will create the table IFF the table does not exist
+     * @param bool $if_not_exists If true will create the table IFF the table does not exist
      * @return PDOStatement
      */
     public function create($table, $if_not_exists = false) {
@@ -204,7 +204,7 @@ class Record extends Model {
      * Drops a table with the given name
      *
      * @param string $table The name of the table to create
-     * @param boolean $if_exists If true will drop the table only if it exists
+     * @param bool $if_exists If true will drop the table only if it exists
      * @return PDOStatement
      */
     public function drop($table, $if_exists = false) {
@@ -222,9 +222,9 @@ class Record extends Model {
      *
      * @param string $field The field name, or table.field name
      * @param string $value The value to set or insert into this field
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function set($field, $value, $bind_value = true, $escape = true) {
@@ -287,7 +287,7 @@ class Record extends Model {
      * Deletes columns from the currently-set tables
      *
      * @param array $columns The tables to delete from, null to delete from all
-     * @param boolean $escape True to escape $columns, false otherwise
+     * @param bool $escape True to escape $columns, false otherwise
      * @return PDOStatement
      */
     public function delete(array $columns = null, $escape = true) {
@@ -304,7 +304,7 @@ class Record extends Model {
      * Sets the columns to select from
      *
      * @param mixed $columns The table columns to select, or a string containing a single column
-     * @param boolean $escape True to escape $columns, false otherwise
+     * @param bool $escape True to escape $columns, false otherwise
      * @return Record Reference to this class
      */
     public function select($columns = "*", $escape = true) {
@@ -333,9 +333,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function join($table, $field = null, $op = null, $value = null, $bind_value = true, $escape = true) {
@@ -351,9 +351,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function leftJoin($table, $field = null, $op = null, $value = null, $bind_value = true, $escape = true) {
@@ -369,9 +369,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function rightJoin($table, $field = null, $op = null, $value = null, $bind_value = true, $escape = true) {
@@ -387,9 +387,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function innerJoin($table, $field = null, $op = null, $value = null, $bind_value = true, $escape = true) {
@@ -404,9 +404,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function on($field, $op, $value, $bind_value = true, $escape = true) {
@@ -429,9 +429,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function orOn($field, $op, $value, $bind_value = true, $escape = true) {
@@ -454,9 +454,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function where($field, $op, $value, $bind_value = true, $escape = true) {
@@ -479,9 +479,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function orWhere($field, $op, $value, $bind_value = true, $escape = true) {
@@ -504,9 +504,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function duplicate($field, $op, $value, $bind_value = true, $escape = true) {
@@ -527,9 +527,9 @@ class Record extends Model {
      *
      * @param string $field The field for comparison
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function like($field, $value, $bind_value = true, $escape = true) {
@@ -551,9 +551,9 @@ class Record extends Model {
      *
      * @param string $field The field for comparison
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function notLike($field, $value, $bind_value = true, $escape = true) {
@@ -575,9 +575,9 @@ class Record extends Model {
      *
      * @param string $field The field for comparison
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function orLike($field, $value, $bind_value = true, $escape = true) {
@@ -599,9 +599,9 @@ class Record extends Model {
      *
      * @param string $field The field for comparison
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function orNotLike($field, $value, $bind_value = true, $escape = true) {
@@ -624,9 +624,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function having($field, $op, $value, $bind_value = true, $escape = true) {
@@ -649,9 +649,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      * @return Record Reference to this class
      */
     public function orHaving($field, $op, $value, $bind_value = true, $escape = true) {
@@ -945,7 +945,7 @@ class Record extends Model {
      *    -type The type of conditional (optional: "or", "and", null = comma separated)
      *    -bind_value Whether or not to bind the right hand value
      *    -escape Whether or not to escape the right hand value
-     * @param boolean $convert_nulls True to automatically convert nulls to IS NULL or IS NOT NULL
+     * @param bool $convert_nulls True to automatically convert nulls to IS NULL or IS NOT NULL
      * @return string The constructed SQL built using the given conditionals
      */
     private function buildConditionals($conditionals, $convert_nulls = true) {
@@ -1000,10 +1000,10 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param mixed $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
-     * @param boolean $convert_nulls True to automatically convert nulls to IS NULL or IS NOT NULL
+     * @param bool $escape True to escape the value, false otherwise
+     * @param bool $convert_nulls True to automatically convert nulls to IS NULL or IS NOT NULL
      * @return string The SQL that makes up this conditional statement
      */
     private function buildConditional($field, $op, $value, $bind_value = true, $escape = true, $convert_nulls = true) {
@@ -1108,7 +1108,7 @@ class Record extends Model {
     /**
      * Builds all fields, keys, and indexes required when creating or altering a table
      *
-     * @param boolean $create True if creating a table, false if altering
+     * @param bool $create True if creating a table, false if altering
      * @return string A partial SQL query to be used when creating or altering a table
      */
     private function buildFields($create = true) {
@@ -1198,9 +1198,9 @@ class Record extends Model {
      * @param string $field The field for comparison
      * @param string $op The operator to compare on
      * @param string $value The value to compare with
-     * @param boolean $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
+     * @param bool $bind_value True to treat $value as a bound value (i.e. a string or integer, rather than an table
      *     or table field)
-     * @param boolean $escape True to escape the value, false otherwise
+     * @param bool $escape True to escape the value, false otherwise
      */
     private function buildJoin($join, $table, $field = null, $op = null, $value = null, $bind_value = true, $escape = true) {
         
@@ -1472,7 +1472,7 @@ class Record extends Model {
         $this->values    = Type::_array();
         $this->duplicate = Type::_array();
         $this->having    = Type::_array();
-        $this->open      = Type::_integer();
+        $this->open      = Type::_int();
     }
     
     /**

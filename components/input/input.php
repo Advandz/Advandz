@@ -40,7 +40,7 @@ class Input {
      * Checks if the given string is a valid email address
      *
      * @param string $str The string to test
-     * @param boolean $check_record True to check DNS/MX record
+     * @param bool $check_record True to check DNS/MX record
      * @return boolean True if the email is valid, false otherwise
      */
     public static function isEmail($str, $check_record = true) {
@@ -201,7 +201,7 @@ class Input {
      * @param mixed $val The value to compare
      * @param mixed $min The lower value to compare against
      * @param mixed $max The higher value to compare against
-     * @param boolean $inclusive Set to false if $val must be strictly between $min and $max
+     * @param bool $inclusive Set to false if $val must be strictly between $min and $max
      * @return boolean True if $val is between $min and $max, false otherwise
      */
     public static function between($val, $min, $max, $inclusive = true) {
@@ -430,7 +430,7 @@ class Input {
         
         foreach ($params as &$param) {
             // The number of blank array indexes from the _linked rule value
-            $blank = Type::_integer();
+            $blank = Type::_int();
             // If the parameter given is linked, find the value of the linked field
             if (is_array($param) && isset($param['_linked'])) {
                 $data_set = $this->data;

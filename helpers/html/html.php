@@ -22,8 +22,8 @@ class Html {
      * Outputs or returns the given string in HTML safe format, if it exists
      *
      * @param string $str The string to print, if it exists
-     * @param boolean $return True to return the result as a string, else echo the result
-     * @param boolean $preserve_tags True to preserve tags
+     * @param bool $return True to return the result as a string, else echo the result
+     * @param bool $preserve_tags True to preserve tags
      * @return string The result (if $return is set to true)
      */
     public function _(&$str, $return = false, $preserve_tags = false) {
@@ -38,7 +38,7 @@ class Html {
      * Makes a given string HTML safe
      *
      * @param string $str The string to make HTML safe
-     * @param boolean $preserve_tags True to preserve tags
+     * @param bool $preserve_tags True to preserve tags
      * @return string The string in HTML safe format
      */
     public function safe($str, $preserve_tags = false) {
@@ -62,9 +62,9 @@ class Html {
      * @return boolean True if it is UTF8, false otherwise
      */
     public function isUtf8($str) {
-        $c    = Type::_integer();
-        $b    = Type::_integer();
-        $bits = Type::_integer();
+        $c    = Type::_int();
+        $b    = Type::_int();
+        $bits = Type::_int();
         $len  = strlen($str);
         for ($i = 0; $i < $len; $i++) {
             $c = ord($str[$i]);
@@ -195,7 +195,7 @@ class Html {
      *
      * @param string $html The HTML to wrap an expression around
      * @param string $expression The expression to use
-     * @param boolean $hidden True to hide the $html from all browsers by default, false to display by default
+     * @param bool $hidden True to hide the $html from all browsers by default, false to display by default
      * @return string The HTML block with the condition wrapped around it
      */
     public function addCondition($html, $expression, $hidden = true) {

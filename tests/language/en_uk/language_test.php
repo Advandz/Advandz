@@ -1,2 +1,3 @@
 <?php
-$lang['LanguageTest.a'] = "I like the colour green.";
+
+$lang['LanguageTest.a'] = 'I like the colour green.';

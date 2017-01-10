@@ -1,7 +1,5 @@
 <?php
-/**
- *
- */
+
 class DispatcherTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -37,7 +35,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         $dispatcher->expects($this->once())
             ->method("dispatch")
             ->with($expected, true);
-        
+
         $dispatcher->dispatchCli($args);
         */
         // But for now...
@@ -45,13 +43,13 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
             'Can not test static Dispatcher::DispatchCli.'
         );
     }
-    
+
     public function dispatchCliProvider()
     {
-        return array(
-            array(array("index.php", "a", "b", "c"), "a/b/c/"),
-            array(array("index.php", "-a", "--b", "c"), "-a/--b/c/")
-        );
+        return [
+            [['index.php', 'a', 'b', 'c'], 'a/b/c/'],
+            [['index.php', '-a', '--b', 'c'], '-a/--b/c/'],
+        ];
     }
 
     /**
@@ -73,41 +71,41 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     public function testRaiseError($e, $type)
     {
         switch ($type) {
-            case "output":
-                $this->expectOutputRegex("//i", $e->getMessage());
+            case 'output':
+                $this->expectOutputRegex('//i', $e->getMessage());
                 Dispatcher::raiseError($e);
                 break;
-            case "header":
+            case 'header':
                 /*
                 Dispatcher::raiseError() must be refactored to test with mocks
                 Configure::set("System.404_forwarding", true);
-                
+
                 Dispatcher::raiseError($e);
                 $this->assertTrue(headers_sent());
                 */
                 break;
-            case "exception":
+            case 'exception':
                 $exception = null;
-                Configure::set("System.error_view", "nonexistentview");
-                
+                Configure::set('System.error_view', 'nonexistentview');
+
                 try {
                     Dispatcher::raiseError($e);
-                }
-                catch (Exception $thrown) {
+                } catch (Exception $thrown) {
                     $exception = $thrown;
                 }
-                
+
                 $this->assertSame($e, $exception);
                 break;
         }
     }
-    
-    public function raiseErrorProvider() {
-        return array(
-            array(new UnknownException("test error", 1, null, null, 0), "output"),
-            array(new Exception("404", 404), "header"),
-            array(new Exception("error"), "exception"),
-        );
+
+    public function raiseErrorProvider()
+    {
+        return [
+            [new UnknownException('test error', 1, null, null, 0), 'output'],
+            [new Exception('404', 404), 'header'],
+            [new Exception('error'), 'exception'],
+        ];
     }
 
     /**
@@ -115,10 +113,10 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
      */
     public function testStripSlashes()
     {
-        $str = "I'm a clean string.";
+        $str     = "I'm a clean string.";
         $escaped = addslashes($str);
-        
+
         Dispatcher::stripSlashes($escaped);
-        $this->assertEquals($str, $escaped);
+        $this->assertSame($str, $escaped);
     }
 }

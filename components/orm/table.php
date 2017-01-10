@@ -9,42 +9,48 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-class Table {
+class Table
+{
     /**
      * @var string The current table name
      */
     private $table = null;
-    
-    public function __construct($table) {
+
+    public function __construct($table)
+    {
         Loader::loadComponents($this, ['Record']);
         $this->table = $table;
     }
-    
-    public function add() {
-        #
-        # TODO: Create add function
-        # This function allow add a new entry in the table.
-        #
+
+    public function add()
+    {
+        //
+        // TODO: Create add function
+        // This function allow add a new entry in the table.
+        //
     }
-    
-    public function read() {
-        #
-        # TODO: Create read function
-        # This function allow read a existent entry in the table.
-        #
+
+    public function read()
+    {
+        //
+        // TODO: Create read function
+        // This function allow read a existent entry in the table.
+        //
     }
-    
-    public function edit() {
-        #
-        # TODO: Create edit function
-        # This function allow edit a existent entry in the table.
-        #
+
+    public function edit()
+    {
+        //
+        // TODO: Create edit function
+        // This function allow edit a existent entry in the table.
+        //
     }
-    
-    public function remove() {
-        #
-        # TODO: Create remove function
-        # This function allow remove a existent entry in the table.
-        #
+
+    public function remove()
+    {
+        //
+        // TODO: Create remove function
+        // This function allow remove a existent entry in the table.
+        //
     }
 }

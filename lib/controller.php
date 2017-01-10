@@ -15,82 +15,66 @@ class Controller {
      * @var object The structure View for this instance
      */
     public $structure;
-    
     /**
      * @var string Name of the structure view file (overwritable by the controller)
      */
     public $structure_view;
-    
     /**
      * @var object The main View for this instance
      */
     public $view;
-    
     /**
      * @var array All parts of the Routed URI
      */
     public $uri;
-    
     /**
      * @var string Requested URI after being Routed
      */
     public $uri_str;
-    
     /**
      * @var array All GET parameters
      */
     public $get;
-    
     /**
      * @var array All POST data
      */
     public $post;
-    
     /**
      * @var array All FILE data
      */
     public $files;
-    
     /**
      * @var string Name of the plugin invoked by this request (if any)
      */
     public $plugin;
-    
     /**
      * @var string Name of the controller invoked by this request
      */
     public $controller;
-    
     /**
      * @var string Action invoked by this request
      */
     public $action;
-    
     /**
      * @var boolean Flag whether this is a CLI request
      */
     public $is_cli;
-    
     /**
      * @var array Names of all Models this Controller uses
      */
     protected $uses;
-    
     /**
      * @var array Names of all Components this Controller uses
      */
     protected $components;
-    
     /**
      * @var array Names of all Helpers this Controller and child Views use
      */
     protected $helpers; // All helpers this instance of this controller may access
-    
     /**
      * @var boolean Flag used to determine if the view has been rendered. Controller::render() may only be called once
      */
     private $rendered = false;
-    
     /**
      * @var mixed Amount of time in seconds to cache the current request, null otherwise
      */
@@ -277,9 +261,9 @@ class Controller {
         
         // Prepare the structure
         if (strpos($template, DS) > 0) {
-            $temp     = explode(DS, $template);
+            $temp = explode(DS, $template);
             $template = $temp[1];
-            $view     = $temp[0];
+            $view = $temp[0];
         }
         
         if ($file == null) {
@@ -320,7 +304,7 @@ class Controller {
      * @return boolean False if the redirects fail
      */
     protected static final function redirect($uri = WEBDIR) {
-        $parts    = parse_url($uri);
+        $parts = parse_url($uri);
         $relative = true;
         if (substr($uri, 0, 1) == "/") {
             $relative = false;

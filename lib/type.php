@@ -31,7 +31,7 @@ class Type {
      * @return string The value
      * @throws Exception When the argument passed is not an instance of integer
      */
-    static public function _int($value = 0) {
+    static public function _integer($value = 0) {
         if (!is_int($value)) {
             throw new Exception("Argument passed must be an instance of integer");
         }
@@ -72,11 +72,11 @@ class Type {
     /**
      * Set the data type of a variable as Boolean
      *
-     * @param bool $value The defined value of the variable
+     * @param boolean $value The defined value of the variable
      * @return string The value
      * @throws Exception When the argument passed is not an instance of boolean
      */
-    static public function _bool($value = false) {
+    static public function _boolean($value = false) {
         if (!is_bool($value)) {
             throw new Exception("Argument passed must be an instance of boolean");
         }
@@ -91,7 +91,7 @@ class Type {
      * @return string The value
      * @throws Exception When the argument passed is not an instance of array
      */
-    static public function _array(array $value = []) {
+    static public function _array($value = []) {
         if (!is_array($value)) {
             throw new Exception("Argument passed must be an instance of array");
         }
@@ -106,7 +106,7 @@ class Type {
      * @return string The value
      * @throws Exception When the argument passed is not an object
      */
-    static public function _object(&$value = null) {
+    static public function _object($value = null) {
         if (is_null($value)) {
             $value = new stdClass();
         }

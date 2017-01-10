@@ -112,7 +112,7 @@ define("PLUGINDIR", ROOTWEBDIR . "plugins" . DS);
 /**
  * Absolute path to the vendors directory, where vendor libraries are stored.
  */
-define("VENDORDIR", ROOTWEBDIR . "vendor" . DS);
+define("VENDORDIR", ROOTWEBDIR . "vendors" . DS);
 
 // Include core libraries
 include_once LIBDIR . "loader.php";

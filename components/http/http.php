@@ -6,7 +6,7 @@
  *  - GET
  *  - POST
  *  - PUT
- *  - DELETE.
+ *  - DELETE
  *
  * @package Advandz
  * @subpackage Advandz.components.http

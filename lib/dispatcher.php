@@ -10,6 +10,16 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>>
  */
+namespace Advandz;
+
+use Cache;
+use Loader;
+use Router;
+use Exception;
+use Configure;
+use Controller;
+use UnknownException;
+
 class Dispatcher extends Controller {
     /**
      * Dispatch a Command Line Interface request

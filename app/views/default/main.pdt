@@ -13,12 +13,12 @@
             <p>Advandz uses the Model-View-Controller approach, which allows great separation between logic and presentation. <br> This is particularly good for projects in which designers are working with your template files, as the code these files contain will be minimized.</p>
         </div>
         <div class="col-md-4">
-            <h2>Frontend</h2>
-            <p>Advandz helps you to build your web application including the user interface thanks to the built-in frontend framework. <br> Advandz also includes Knife, a simple and powerful templating engine that does not restrict you from using PHP code in your views.</p>
+            <h2>Documentation</h2>
+            <p>The Advandz User Guide comes with the download. It contains an introduction, tutorial, a number of "how to" guides, and then reference documentation for the components that make up the framework. <a href="http://documentation.advandz.com/">Read the Documentation</a>.</p>
         </div>
         <div class="col-md-4">
             <h2>Who is Advandz For?</h2>
-            <p>Advandz is the perfect framework if:</b>
+            <p>Advandz is the perfect framework for you if:</b>
             <ul>
                 <li>You need build a High-Performance and Scalable application.</li>
                 <li>You want a framework with a small footprint.</li>

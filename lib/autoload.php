@@ -13,7 +13,7 @@
 /**
  * Load the vendor classes managed by Composer
  */
-include_once VENDORDIR . "autoload.php";
+@include_once VENDORDIR . "autoload.php";
 
 /**
  * Load the libraries classes

@@ -11,28 +11,32 @@
  */
 namespace Advandz\Helper;
 
-use Advandz\Helper\Html as Html;
 use Type;
 use Loader;
+use Advandz\Helper\Html as Html;
 
 class Form extends Html {
     /**
      * @var string The string to use as the end of line character
      */
     private $eol = "\n";
+    
     /**
      * @var boolean Whether or not to return output from various form methods
      */
     private $return_output = false;
+    
     /**
      * @var string The CSRF Token name
      */
     private $csrf_token_name = "_csrf_token";
+    
     /**
      * @var boolean True to set the CSRF token automatically on create
      * @see Form::create()
      */
     private $csrf_auto_create = true;
+    
     /**
      * @var string The CSRF Token key used to make each token unique
      */
@@ -96,7 +100,7 @@ class Form extends Html {
     public function collapseObjectArray($obj_arr, $value_var, $key_var = null, $glue = null) {
         $result = Type::_array();
         foreach ($obj_arr as $key => $obj) {
-            $temp = get_object_vars($obj);
+            $temp  = get_object_vars($obj);
             $value = "";
             // Use either a list of values or a single value
             if (is_array($value_var)) {
@@ -135,7 +139,7 @@ class Form extends Html {
         }
         
         $default_attributes = ["method" => "post", "action" => $uri];
-        $attributes = array_merge($default_attributes, (array) $attributes);
+        $attributes         = array_merge($default_attributes, (array) $attributes);
         
         $html = "<form" . $this->buildAttributes($attributes) . ">" . $this->eol;
         
@@ -226,7 +230,7 @@ class Form extends Html {
         $output = $this->return_output;
         $this->setOutput(true);
         
-        $html = Type::_string();
+        $html       = Type::_string();
         $num_fields = count($fields);
         
         for ($i = 0; $i < $num_fields; $i++) {
@@ -320,7 +324,7 @@ class Form extends Html {
      */
     public function label($name, $for = null, array $attributes = null, $preserve_tags = false) {
         $default_attributes = ["for" => $for];
-        $attributes = array_merge($default_attributes, (array) $attributes);
+        $attributes         = array_merge($default_attributes, (array) $attributes);
         
         return $this->output("<label" . $this->buildAttributes($attributes) . ">" . $this->_($name, true, $preserve_tags) . "</label>" . $this->eol);
     }
@@ -359,7 +363,7 @@ class Form extends Html {
      */
     public function fieldImage($name, $value = null, $attributes = []) {
         $default_attributes = ["src" => "", "alt" => $value];
-        $attributes = array_merge($default_attributes, (array) $attributes);
+        $attributes         = array_merge($default_attributes, (array) $attributes);
         
         return $this->output($this->fieldInput("input", "image", $name, $value, $attributes));
     }
@@ -412,7 +416,7 @@ class Form extends Html {
      */
     public function fieldTextarea($name, $value = null, $attributes = []) {
         $default_attributes = ["name" => $name];
-        $attributes = array_merge($default_attributes, (array) $attributes);
+        $attributes         = array_merge($default_attributes, (array) $attributes);
         
         $html = "<textarea" . $this->buildAttributes($attributes) . ">" .
             $this->_($value, true) . "</textarea>" . $this->eol;
@@ -455,7 +459,7 @@ class Form extends Html {
      */
     public function fieldSelect($name, $options = [], $selected_value = null, $attributes = [], $option_attributes = []) {
         $default_attributes = ["name" => $name];
-        $attributes = array_merge($default_attributes, (array) $attributes);
+        $attributes         = array_merge($default_attributes, (array) $attributes);
         
         $html = "<select" . $this->buildAttributes($attributes) . ">" . $this->eol .
             $this->selectOptions($options, $selected_value, $option_attributes) . "</select>" . $this->eol;
@@ -556,7 +560,7 @@ class Form extends Html {
         
         $html = "";
         // Do we apply the given attributes to each option (e.g. "cover" each option) or apply individually
-        $temp_attr = (array) array_values($attributes);
+        $temp_attr        = (array) array_values($attributes);
         $cover_attributes = is_array(array_pop($temp_attr)) ? false : true;
         
         if (is_array($options)) {
@@ -567,7 +571,7 @@ class Form extends Html {
                 // Allow multi-dimensional array in addition to name/value pairs
                 if (is_array($name)) {
                     $value = $name['value'];
-                    $name = $name['name'];
+                    $name  = $name['name'];
                 }
                 
                 if ($cover_attributes) {

@@ -52,7 +52,7 @@ class Knife extends Language
         'foreach'    => '<?php foreach (%%STATEMENT%%) { ?>',
         '/foreach'   => '<?php } ?>',
         'php'        => '<?php ',
-        '/php'       => ' ?>',
+        '/php'       => ' ?>'
     ];
 
     /**
@@ -86,6 +86,10 @@ class Knife extends Language
                 // Check if the view exists and get the content
                 if (file_exists($file)) {
                     $this->template = file_get_contents($file);
+                    
+                    // Remove PHP tags
+                    $this->replaceTemplate('<?php', '&lt;?php');
+                    $this->replaceTemplate('?>', '?&gt;');
                 }
 
                 if (! $this->template) {

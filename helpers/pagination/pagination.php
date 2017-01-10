@@ -10,24 +10,27 @@
  */
 namespace Advandz\Helper;
 
-use Advandz\Helper\Html as Html;
 use Type;
 use Loader;
 use Language;
+use Advandz\Helper\Html as Html;
 
 class Pagination extends Html {
     /**
      * @var string The string to use as the end of line character
      */
     private $eol = "\n";
+    
     /**
      * @var boolean Whether or not to return output from various pagination methods
      */
     private $return_output = false;
+    
     /**
      * @var array Format settings
      */
     private $settings;
+    
     /**
      * @var array All get parameters for this request
      */
@@ -47,79 +50,79 @@ class Pagination extends Html {
         
         $this->settings = [
             // Wrapper to surround the link set
-            'wrapper' => [
-                'tag' => "div",
+            'wrapper'          => [
+                'tag'        => "div",
                 'attributes' => ['class' => "pagination"]
             ],
-            'navigation' => [
+            'navigation'       => [
                 // First page link
-                'first' => [
-                    'tag' => "li",
-                    'name' => Language::_("Pagination.first_link", true),
-                    'attributes' => [],
+                'first'     => [
+                    'tag'             => "li",
+                    'name'            => Language::_("Pagination.first_link", true),
+                    'attributes'      => [],
                     'link_attributes' => [],
-                    'show' => "if_needed", // options: if_needed, never, always
-                    'disabled' => "disabled" // class to use if show and not needed
+                    'show'            => "if_needed", // options: if_needed, never, always
+                    'disabled'        => "disabled" // class to use if show and not needed
                 ],
                 // Last page link
-                'last' => [
-                    'tag' => "li",
-                    'name' => Language::_("Pagination.last_link", true),
-                    'attributes' => [],
+                'last'      => [
+                    'tag'             => "li",
+                    'name'            => Language::_("Pagination.last_link", true),
+                    'attributes'      => [],
                     'link_attributes' => [],
-                    'show' => "if_needed", // Options: if_needed, never, always
-                    'disabled' => "disabled" // Class to use if show and not needed
+                    'show'            => "if_needed", // Options: if_needed, never, always
+                    'disabled'        => "disabled" // Class to use if show and not needed
                 ],
                 // Next page link
-                'next' => [
-                    'tag' => "li",
-                    'name' => Language::_("Pagination.next_link", true),
-                    'attributes' => [],
+                'next'      => [
+                    'tag'             => "li",
+                    'name'            => Language::_("Pagination.next_link", true),
+                    'attributes'      => [],
                     'link_attributes' => [],
-                    'show' => "if_needed", // Options: if_needed, never, always
-                    'disabled' => "disabled" // Class to use if show and not needed
+                    'show'            => "if_needed", // Options: if_needed, never, always
+                    'disabled'        => "disabled" // Class to use if show and not needed
                 ],
                 // Previous page link
-                'prev' => [
-                    'tag' => "li",
-                    'name' => Language::_("Pagination.prev_link", true),
-                    'attributes' => [],
+                'prev'      => [
+                    'tag'             => "li",
+                    'name'            => Language::_("Pagination.prev_link", true),
+                    'attributes'      => [],
                     'link_attributes' => [],
-                    'show' => "if_needed", // Options: if_needed, never, always
-                    'disabled' => "disabled" // Class to use if show and not needed
+                    'show'            => "if_needed", // Options: if_needed, never, always
+                    'disabled'        => "disabled" // Class to use if show and not needed
                 ],
                 // Surround for the set of links
-                'surround' => [
-                    'tag' => "ul",
-                    'attributes' => [],
+                'surround'  => [
+                    'tag'             => "ul",
+                    'attributes'      => [],
                     'link_attributes' => []
                 ],
                 // The currently active link
-                'current' => [
-                    'tag' => "li",
-                    'attributes' => ['class' => "current"],
+                'current'   => [
+                    'tag'             => "li",
+                    'attributes'      => ['class' => "current"],
                     'link_attributes' => [],
-                    'link' => false // Disable linking
+                    'link'            => false // Disable linking
                 ],
                 // All numeric links
                 'numerical' => [
-                    'tag' => "li",
-                    'attributes' => [],
+                    'tag'             => "li",
+                    'attributes'      => [],
                     'link_attributes' => []
                 ]
             ],
-            'merge_get' => true, // Merge get params from URI with those set in 'params'
-            'show' => "if_needed", // Options: if_needed, never, always
-            'pages_to_show' => 5, // Max number of numerical pages shown in the pagination
-            'total_pages' => 0, // Total number of pages (used instead of total results/result_per_page settings)
-            'total_results' => 0, // Total number of results in the pagination set
+            'merge_get'        => true, // Merge get params from URI with those set in 'params'
+            'show'             => "if_needed", // Options: if_needed, never, always
+            'pages_to_show'    => 5, // Max number of numerical pages shown in the pagination
+            'total_pages'      => 0, // Total number of pages (used instead of total results/result_per_page settings)
+            'total_results'    => 0, // Total number of results in the pagination set
             'results_per_page' => 1, // Number of result items per page
-            'uri' => "",
-            'uri_labels' => [ // Tags that will be substituted with their appropriate value
-                'page' => "page",
+            'uri'              => "",
+            'uri_labels'       => [ // Tags that will be substituted with their appropriate value
+                'page'     => "page",
                 'per_page' => "per_page"
             ],
-            'params' => [] // key => value pairs of additional uri query parameters (if set, overrides $get params)
+            'params'           => [] // key => value pairs of additional uri query parameters (if set, overrides $get params)
         ];
         
         $this->settings = $this->mergeArrays($this->settings, $format);
@@ -233,13 +236,13 @@ class Pagination extends Html {
         // Begin with surround tag
         $html .= $this->openTag($this->settings['navigation']['surround']);
         
-        $show = $this->settings['pages_to_show'];
-        $per_page = (isset($settings['per_page']) && !empty($settings['per_page'])) ? $settings['per_page'] : $this->settings['results_per_page'];
+        $show         = $this->settings['pages_to_show'];
+        $per_page     = (isset($settings['per_page']) && !empty($settings['per_page'])) ? $settings['per_page'] : $this->settings['results_per_page'];
         $current_page = $this->currentPage();
         
-        $page_label = $this->settings['uri_labels']['page'];
-        $per_page_label = $this->settings['uri_labels']['per_page'];
-        $settings[$page_label] = $current_page;
+        $page_label                = $this->settings['uri_labels']['page'];
+        $per_page_label            = $this->settings['uri_labels']['per_page'];
+        $settings[$page_label]     = $current_page;
         $settings[$per_page_label] = $per_page;
         
         if ($pages > 0) {
@@ -248,14 +251,14 @@ class Pagination extends Html {
                 $current_page = min(max(1, $current_page), $pages);
                 
                 $start = $current_page - floor($show / 2);
-                $end = $current_page + floor($show / 2) - ($show % 2 == 0 ? 1 : 0);
+                $end   = $current_page + floor($show / 2) - ($show % 2 == 0 ? 1 : 0);
                 
                 if ($start < 1) {
                     $start = 1;
-                    $end = min($pages, $show);
+                    $end   = min($pages, $show);
                 }
                 if ($end > $pages) {
-                    $end = $pages;
+                    $end   = $pages;
                     $start = max($end - $show + 1, 1);
                 }
                 
@@ -323,15 +326,15 @@ class Pagination extends Html {
      */
     private function currentPage() {
         $page = 1;
-        $uri = $this->getUri();
+        $uri  = $this->getUri();
         
-        $temp = explode("/", $uri);
+        $temp  = explode("/", $uri);
         $index = null;
         // Look for the index partition where the page label is located
         foreach ($temp as $i => $value) {
             if ($value == "[" . $this->settings['uri_labels']['page'] . "]") {
                 $index = $i;
-                $temp = explode("/", $_SERVER['REQUEST_URI']);
+                $temp  = explode("/", $_SERVER['REQUEST_URI']);
                 break;
             }
         }

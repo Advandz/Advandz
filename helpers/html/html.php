@@ -62,10 +62,10 @@ class Html {
      * @return boolean True if it is UTF8, false otherwise
      */
     public function isUtf8($str) {
-        $c = Type::_integer();
-        $b = Type::_integer();
+        $c    = Type::_integer();
+        $b    = Type::_integer();
         $bits = Type::_integer();
-        $len = strlen($str);
+        $len  = strlen($str);
         for ($i = 0; $i < $len; $i++) {
             $c = ord($str[$i]);
             if ($c > 128) {
@@ -128,7 +128,7 @@ class Html {
         $params = func_get_args();
         array_shift($params); // Shift the separator off of the list
         
-        $result = null;
+        $result     = null;
         $num_params = count($params);
         for ($i = 0, $j = 0; $i < $num_params; $i++) {
             if ($params[$i] == "") {
@@ -213,19 +213,19 @@ class Html {
      * @return string The content with hyperlinks as HTML
      */
     public function hyperlink($content) {
-        $pattern = Type::_array();
+        $pattern     = Type::_array();
         $replacement = Type::_array();
         
         // Convert email addresses to links
-        $pattern[] = "/[a-zA-Z0-9!#$%\*\/?\|^\{\}`~&'\+=_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10}/";
+        $pattern[]     = "/[a-zA-Z0-9!#$%\*\/?\|^\{\}`~&'\+=_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10}/";
         $replacement[] = "<a href=\"mailto:\\0\">\\0</a>";
         
         // Convert links where http is specified, into links
-        $pattern[] = "/(https?:\/\/)(w{0,3}[\.]{0,1}[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10})(.*)([!-\/:-@]+\s|[!-\/:-@]+$|\s|$)/iU";
+        $pattern[]     = "/(https?:\/\/)(w{0,3}[\.]{0,1}[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10})(.*)([!-\/:-@]+\s|[!-\/:-@]+$|\s|$)/iU";
         $replacement[] = "<a href=\"\\1\\2\\3\" target=\"_blank\">\\1\\2\\3</a>\\4";
         
         // Convert links where http is not specified, into links
-        $pattern[] = "/([^http:\/\/]|[^https:\/\/]|^)(www.[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10})(.*)([!-\/:-@]+\s|[!-\/:-@]+$|\s|$)/iU";
+        $pattern[]     = "/([^http:\/\/]|[^https:\/\/]|^)(www.[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10})(.*)([!-\/:-@]+\s|[!-\/:-@]+$|\s|$)/iU";
         $replacement[] = "\\1<a href=\"http://\\2\\3\" target=\"_blank\">\\2\\3</a>\\4";
         
         return preg_replace($pattern, $replacement, $content);

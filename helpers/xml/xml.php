@@ -17,6 +17,7 @@ class Xml {
      * @var string The string to repeat for every tab space
      */
     public $tab = "\t";
+    
     /**
      * @var string The default node for an element
      */
@@ -39,16 +40,16 @@ class Xml {
             for ($i = 0; $i < 32; $i++) {
                 // Encode numeric entities that can be encoded
                 if ($i == 9 || $i == 10 || $i == 13) {
-                    $search_chars[] = chr($i);
+                    $search_chars[]  = chr($i);
                     $replace_chars[] = "&#" . $i . ";";
                 } // Strip invalid characters from the document
                 else {
-                    $search_chars[] = chr($i);
+                    $search_chars[]  = chr($i);
                     $replace_chars[] = null;
                 }
             }
             
-            $search_chars = array_merge(["&", "<", ">", "\"", "`"], $search_chars);
+            $search_chars  = array_merge(["&", "<", ">", "\"", "`"], $search_chars);
             $replace_chars = array_merge(["&amp;", "&lt;", "&gt;", "&quot;", "&apos;"], $replace_chars);
         }
         

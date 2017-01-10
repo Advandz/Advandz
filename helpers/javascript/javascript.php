@@ -11,19 +11,21 @@
  */
 namespace Advandz\Helper;
 
-use Advandz\Helper\Html as Html;
 use Type;
 use Loader;
+use Advandz\Helper\Html as Html;
 
 class Javascript extends Html {
     /**
      * @var array A multi-dimensional array of locations and their respective javascript files
      */
     private $js_files = [];
+    
     /**
      * @var array An array of inline javascript blocks
      */
     private $js_inline = [];
+    
     /**
      * @var string The default path to use for javascript files
      */
@@ -45,7 +47,7 @@ class Javascript extends Html {
      * @return string The previous default path
      */
     public function setDefaultPath($default_path) {
-        $temp = $this->default_path;
+        $temp               = $this->default_path;
         $this->default_path = $default_path;
         
         return $temp;

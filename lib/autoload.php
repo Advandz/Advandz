@@ -11,11 +11,11 @@
  */
 
 /**
- * Load the Composer autoloader
+ * Load the Composer autoloader.
  */
-@include_once VENDORDIR . "composer" . DS . "autoload.php";
+@include_once VENDORDIR.'composer'.DS.'autoload.php';
 
-/**
+/*
  * Autoload the framework libraries
  */
 spl_autoload_register(['Loader', 'autoload'], true, true);

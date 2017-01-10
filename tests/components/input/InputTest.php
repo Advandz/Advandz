@@ -1,161 +1,161 @@
 <?php
+
 class InputTest extends PHPUnit_Framework_TestCase
 {
-
     private $Input;
-    
+
     public function setUp()
     {
         $this->Input = new Advandz\Component\Input();
     }
-    
+
     /**
      * @covers Input::isEmail
      */
     public function testIsEmail()
     {
-        $this->assertTrue($this->Input->isEmail("someone@somedomain.com", false));
-        $this->assertFalse($this->Input->isEmail("", false));
-        $this->assertFalse($this->Input->isEmail("a@b", false));
-        $this->assertTrue($this->Input->isEmail("someone@google.com"));
-        $this->assertFalse($this->Input->isEmail("someone@mnbvcxzljhgfdsapoiuytrewq.tld", true));
+        $this->assertTrue($this->Input->isEmail('someone@somedomain.com', false));
+        $this->assertFalse($this->Input->isEmail('', false));
+        $this->assertFalse($this->Input->isEmail('a@b', false));
+        $this->assertTrue($this->Input->isEmail('someone@google.com'));
+        $this->assertFalse($this->Input->isEmail('someone@mnbvcxzljhgfdsapoiuytrewq.tld', true));
     }
-    
+
     /**
      * @covers Input::isEmpty
      */
     public function testIsEmpty()
     {
         $this->assertTrue($this->Input->isEmpty(null));
-        $this->assertTrue($this->Input->isEmpty(""));
-        $this->assertFalse($this->Input->isEmpty("hello world"));
+        $this->assertTrue($this->Input->isEmpty(''));
+        $this->assertFalse($this->Input->isEmpty('hello world'));
         $this->assertFalse($this->Input->isEmpty(0));
     }
-    
+
     /**
      * @covers Input::isPassword
      * @dataProvider isPasswordProvider
      */
     public function testIsPassword($str, $length, $type, $regex, $result)
     {
-        $this->assertEquals($result, $this->Input->isPassword($str, $length, $type, $regex));
+        $this->assertSame($result, $this->Input->isPassword($str, $length, $type, $regex));
     }
-    
+
     /**
-     * Data provider for testIsPassword
+     * Data provider for testIsPassword.
      */
     public function isPasswordProvider()
     {
-        return array(
+        return [
             // any
-            array("password", 8, "any", null, true),
-            array("", 8, "any", null, false),
-            array("pass", 4, "any", null, true),
-            array("pass", 6, "any", null, false),
+            ['password', 8, 'any', null, true],
+            ['', 8, 'any', null, false],
+            ['pass', 4, 'any', null, true],
+            ['pass', 6, 'any', null, false],
             // alpha_num
-            array("password123", 8, "alpha_num", null, true),
-            array("password123_", 8, "alpha_num", null, false),
+            ['password123', 8, 'alpha_num', null, true],
+            ['password123_', 8, 'alpha_num', null, false],
             // alpha
-            array("password", 8, "alpha", null, true),
-            array("password1", 8, "alpha", null, false),
+            ['password', 8, 'alpha', null, true],
+            ['password1', 8, 'alpha', null, false],
             // any_no_space
-            array("password_123", 8, "any_no_space", null, true),
-            array("password 123", 8, "any_no_space", null, false),
+            ['password_123', 8, 'any_no_space', null, true],
+            ['password 123', 8, 'any_no_space', null, false],
             // num
-            array("12345678", 8, "num", null, true),
-            array("1234567.8", 8, "num", null, false),
+            ['12345678', 8, 'num', null, true],
+            ['1234567.8', 8, 'num', null, false],
             // custom
-            array("123-4567", 0, "custom", "/[0-9]{3}-[0-9]{4}/i", true),
-            array("1234-567", 0, "custom", "/[0-9]{3}-[0-9]{4}/i", false)
-        );
+            ['123-4567', 0, 'custom', '/[0-9]{3}-[0-9]{4}/i', true],
+            ['1234-567', 0, 'custom', '/[0-9]{3}-[0-9]{4}/i', false],
+        ];
     }
-    
+
     /**
      * @covers Input::isDate()
      * @dataProvider isDateProvider
      */
     public function testIsDate($date, $min, $max, $result)
     {
-        $this->assertEquals($result, $this->Input->isDate($date, $min, $max));
+        $this->assertSame($result, $this->Input->isDate($date, $min, $max));
     }
-    
+
     /**
-     * Data provider for testIsDate
+     * Data provider for testIsDate.
      */
     public function isDateProvider()
     {
-        return array(
-            array(time(), null, null, true),
-            array(null, null, null, false),
-            array("2011-01-01", null, null, true),
-            array("non-date-string", null, null, false),
-            array("2011-01-01T00:00:00Z", "2011-01-01T00:00:00-07:00", null, false),
-            array("2011-01-01T00:00:00Z", "2011-01-01T00:00:00-00:00", null, true),
-            array("2011-01-31T00:00:00Z", null, "2011-01-31T00:00:00-00:00", true),
-            array("2011-01-31T00:00:00Z", null, "2011-02-01T00:00:00-00:00", true),
-            array("2111-01-31T00:00:00Z", null, "2011-02-01T00:00:00-00:00", false)
-        );
+        return [
+            [time(), null, null, true],
+            [null, null, null, false],
+            ['2011-01-01', null, null, true],
+            ['non-date-string', null, null, false],
+            ['2011-01-01T00:00:00Z', '2011-01-01T00:00:00-07:00', null, false],
+            ['2011-01-01T00:00:00Z', '2011-01-01T00:00:00-00:00', null, true],
+            ['2011-01-31T00:00:00Z', null, '2011-01-31T00:00:00-00:00', true],
+            ['2011-01-31T00:00:00Z', null, '2011-02-01T00:00:00-00:00', true],
+            ['2111-01-31T00:00:00Z', null, '2011-02-01T00:00:00-00:00', false],
+        ];
     }
-    
+
     /**
      * @covers Input::matches
      */
     public function testMatches()
     {
-        $this->assertTrue($this->Input->matches("abc", "/^[a][b][c]$/"));
-        $this->assertFalse($this->Input->matches("ABC", "/^[a][b][c]$/"));
+        $this->assertTrue($this->Input->matches('abc', '/^[a][b][c]$/'));
+        $this->assertFalse($this->Input->matches('ABC', '/^[a][b][c]$/'));
     }
-    
+
     /**
      * @covers Input::compares
      * @dataProvider comparesProvider
      */
     public function testCompares($a, $op, $b, $result)
     {
-        $this->assertEquals($result, $this->Input->compares($a, $op, $b));
+        $this->assertSame($result, $this->Input->compares($a, $op, $b));
     }
-    
+
     /**
      * @expectedException Exception
      */
     public function testComparesException()
     {
-        $this->Input->compares(1, "&", 0);
+        $this->Input->compares(1, '&', 0);
     }
-    
+
     /**
-     * Data provider for testCompares
+     * Data provider for testCompares.
      */
     public function comparesProvider()
     {
-        return array(
+        return [
             // >
-            array(1, ">", 0, true),
-            array(1, ">", 2, false),
+            [1, '>', 0, true],
+            [1, '>', 2, false],
             // <
-            array(1, "<", 2, true),
-            array(1, "<", 0, false),
+            [1, '<', 2, true],
+            [1, '<', 0, false],
             // >=
-            array(1, ">=", 1, true),
-            array(1, ">=", 2, false),
+            [1, '>=', 1, true],
+            [1, '>=', 2, false],
             // <=
-            array(1, "<=", 1, true),
-            array(1, "<=", 0, false),
+            [1, '<=', 1, true],
+            [1, '<=', 0, false],
             // ==
-            array(1, "==", "1", true),
-            array(1, "==", 2, false),
+            [1, '==', '1', true],
+            [1, '==', 2, false],
             // ===
-            array(1, "===", 1, true),
-            array(1, "===", "1", false),
+            [1, '===', 1, true],
+            [1, '===', '1', false],
             // !=
-            array(1, "!=", 2, true),
-            array(1, "!=", 1, false),
+            [1, '!=', 2, true],
+            [1, '!=', 1, false],
             // !===
-            array(1, "!==", 2, true),
-            array(1, "!==", 1, false)
-        );
+            [1, '!==', 2, true],
+            [1, '!==', 1, false],
+        ];
     }
-    
+
     /**
      * @covers Input::between
      */
@@ -164,50 +164,50 @@ class InputTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->Input->between(3, 1, 3, true));
         $this->assertFalse($this->Input->between(3, 1, 3, false));
     }
-    
+
     /**
      * @covers Input::minLength
      */
     public function testMinLength()
     {
-        $this->assertTrue($this->Input->minLength("hello", 5));
-        $this->assertFalse($this->Input->minLength("hello world", 12));
+        $this->assertTrue($this->Input->minLength('hello', 5));
+        $this->assertFalse($this->Input->minLength('hello world', 12));
     }
-    
+
     /**
      * @covers Input::maxLength
      */
     public function testMaxLength()
     {
-        $this->assertTrue($this->Input->maxLength("hello", 5));
-        $this->assertFalse($this->Input->maxLength("hello world", 5));
+        $this->assertTrue($this->Input->maxLength('hello', 5));
+        $this->assertFalse($this->Input->maxLength('hello world', 5));
     }
-    
+
     /**
      * @covers Input::betweenLength
      */
     public function testBetweenLength()
     {
-        $this->assertTrue($this->Input->betweenLength("hello", 5, 11));
-        $this->assertTrue($this->Input->betweenLength("hello world", 5, 11));
-        $this->assertFalse($this->Input->betweenLength("hello world!", 5, 11));
+        $this->assertTrue($this->Input->betweenLength('hello', 5, 11));
+        $this->assertTrue($this->Input->betweenLength('hello world', 5, 11));
+        $this->assertFalse($this->Input->betweenLength('hello world!', 5, 11));
     }
-    
+
     /**
      * @covers Input::setErrors
      * @covers Input::errors
      */
     public function testSetErrors()
     {
-        $errors = array(
-            'key' => array(
-                'type' => "Error Message"
-            )
-        );
+        $errors = [
+            'key' => [
+                'type' => 'Error Message',
+            ],
+        ];
         $this->Input->setErrors($errors);
-        $this->assertEquals($errors, $this->Input->errors());
+        $this->assertSame($errors, $this->Input->errors());
     }
-    
+
     /**
      * @covers Input::setRules
      * @covers Input::validates
@@ -224,12 +224,12 @@ class InputTest extends PHPUnit_Framework_TestCase
     {
         // Set the rules to test
         $this->Input->setRules($rules);
-        
+
         // Attempt to validate $data against $rules
         $this->Input->validates($data);
-        
+
         // Ensure that data is now modified such that is matches our expected $formatted_data
-        $this->assertEquals($formatted_data, $data);
+        $this->assertSame($formatted_data, $data);
     }
 
     /**
@@ -243,19 +243,19 @@ class InputTest extends PHPUnit_Framework_TestCase
      * @covers Input::replaceLinkedParams
      * @covers Input::processValidation
      * @dataProvider inputPostFormatProvider
-     */    
+     */
     public function testPostFormat($rules, $data, $formatted_data)
     {
         // Set the rules to test
         $this->Input->setRules($rules);
-        
+
         // Attempt to validate $data against $rules
         $this->Input->validates($data);
-        
+
         // Ensure that data is now modified such that is matches our expected $formatted_data
-        $this->assertEquals($formatted_data, $data);
+        $this->assertSame($formatted_data, $data);
     }
-    
+
     /**
      * @covers Input::setRules
      * @covers Input::validates
@@ -272,12 +272,11 @@ class InputTest extends PHPUnit_Framework_TestCase
     {
         // Set the rules to test
         $this->Input->setRules($rules);
-        
-        // Attempt to validate $data against $rules
-        $this->assertEquals($result, $this->Input->validates($data));
 
+        // Attempt to validate $data against $rules
+        $this->assertSame($result, $this->Input->validates($data));
     }
-    
+
     /**
      * @covers Input::setRules
      * @covers Input::validates
@@ -285,100 +284,99 @@ class InputTest extends PHPUnit_Framework_TestCase
      */
     public function testValidationLinkedParams()
     {
-        $rules = array(
-            'items[][name]' => array(
-                'valid' => array(
-                    'rule' => array(
-                        function($name, $price) {
+        $rules = [
+            'items[][name]' => [
+                'valid' => [
+                    'rule' => [
+                        function ($name, $price) {
                             return $name !== null && is_numeric($price);
                         },
-                        array('_linked' => "items[][price]")
-                    )
-                )
-            )
-        );
-        $data = array(
-            'items' => array(
-                array('name' => "Item 1", 'price' => 1.50),
-                array('name' => "Item 2", 'price' => 2.75),
-            )
-        );
-        
+                        ['_linked' => 'items[][price]'],
+                    ],
+                ],
+            ],
+        ];
+        $data = [
+            'items' => [
+                ['name' => 'Item 1', 'price' => 1.50],
+                ['name' => 'Item 2', 'price' => 2.75],
+            ],
+        ];
+
         $this->Input->setRules($rules);
         $this->assertTrue($this->Input->validates($data));
-        
+
         unset($data['items'][1]['price']);
         $this->assertFalse($this->Input->validates($data));
     }
 
     public function inputPreFormatProvider()
     {
-        return $this->getInputDataFormatting("pre_format");
+        return $this->getInputDataFormatting('pre_format');
     }
 
     public function inputPostFormatProvider()
     {
-        return $this->getInputDataFormatting("post_format");
+        return $this->getInputDataFormatting('post_format');
     }
-    
+
     protected function getInputDataFormatting($action)
     {
-        
-        $rule_sets = array(
-            array(
-                'name' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+        $rule_sets = [
+            [
+                'name' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        $action => "strtolower"
-                    )
-                ),
-                'company' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+                        $action => 'strtolower',
+                    ],
+                ],
+                'company' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        $action => "strtoupper"
-                    )
-                )
-            ),
-            array(
-                'name[]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+                        $action => 'strtoupper',
+                    ],
+                ],
+            ],
+            [
+                'name[]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        $action => "strtolower"
-                    )
-                ),
-                'company[]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+                        $action => 'strtolower',
+                    ],
+                ],
+                'company[]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        $action => array("strtoupper")
-                    )
-                )
-            )
-        );
-        
-        $data_sets = array(
-            array(
-                'name' => "Person Name",
-                'company' => "Company Name"
-            ),
-            array(
-                'name' => array(
+                        $action => ['strtoupper'],
+                    ],
+                ],
+            ],
+        ];
+
+        $data_sets = [
+            [
+                'name' => 'Person Name',
+                'company' => 'Company Name',
+            ],
+            [
+                'name' => [
                     'Person Name 1',
-                    'Person Name 2'
-                ),
-                'company' => array(
+                    'Person Name 2',
+                ],
+                'company' => [
                     'Company Name 1',
-                    'Company Name 2'
-                )
-            )
-        );
-        
+                    'Company Name 2',
+                ],
+            ],
+        ];
+
         $formatted_data = $data_sets;
-        
-        $formatted_data[0]['name'] = strtolower($formatted_data[0]['name']);
+
+        $formatted_data[0]['name']    = strtolower($formatted_data[0]['name']);
         $formatted_data[0]['company'] = strtoupper($formatted_data[0]['company']);
         foreach ($formatted_data[1]['name'] as &$result) {
             $result = strtolower($result);
@@ -386,201 +384,199 @@ class InputTest extends PHPUnit_Framework_TestCase
         foreach ($formatted_data[1]['company'] as &$result) {
             $result = strtoupper($result);
         }
-        
-        $data = array();
+
+        $data = [];
         foreach ($rule_sets as $i => $value) {
-            $data[] = array($rule_sets[$i], $data_sets[$i], $formatted_data[$i]);
+            $data[] = [$rule_sets[$i], $data_sets[$i], $formatted_data[$i]];
         }
-        
+
         return $data;
     }
-    
+
     public function inputValidationProvider()
     {
-        
-        $rule_sets = array(
+        $rule_sets = [
             // scalar
-            array(
-                'name' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+            [
+                'name' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        'message' => "name can not be empty"
-                    )
-                ),
-                'company'=>array(
-                    'format' => array(
-                        'rule' => "isEmpty",
-                        'message' => "company must be empty"
-                    )
-                )
-            ),
+                        'message' => 'name can not be empty',
+                    ],
+                ],
+                'company'=>[
+                    'format' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'company must be empty',
+                    ],
+                ],
+            ],
             // array
-            array(
-                'name[]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+            [
+                'name[]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        'message' => "name can not be empty"
-                    )
-                ),
-                'company[]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
-                        'message' => "company must be empty"
-                    )
-                ),
-                'nonexistent[]'  =>  array(
-                    
-                )
-            ),
+                        'message' => 'name can not be empty',
+                    ],
+                ],
+                'company[]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'company must be empty',
+                    ],
+                ],
+                'nonexistent[]'  =>  [
+
+                ],
+            ],
             // multi-dimensional array
-            array(
-                'data[name][]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
+            [
+                'data[name][]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
                         'negate' => true,
-                        'message' => "name can not be empty"
-                    )
-                ),
-                'data[company][]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
-                        'message' => "company must be empty"
-                    )
-                )
-            ),
+                        'message' => 'name can not be empty',
+                    ],
+                ],
+                'data[company][]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'company must be empty',
+                    ],
+                ],
+            ],
             // alternative array
-            array(
-                'name[1]' => array(
-                    'format' => array(
-                        'rule' => array(array($this, "callBackTestMethod")),
-                        'message' => "name[1] can not be empty"
-                    )
-                ),
-                'name[2]' => array(
-                    'format' => array(
-                        'rule' => array(array($this, "callBackTestMethod")),
-                        'message' => "name[2] must be empty"
-                    )
-                )
-            ),
+            [
+                'name[1]' => [
+                    'format' => [
+                        'rule' => [[$this, 'callBackTestMethod']],
+                        'message' => 'name[1] can not be empty',
+                    ],
+                ],
+                'name[2]' => [
+                    'format' => [
+                        'rule' => [[$this, 'callBackTestMethod']],
+                        'message' => 'name[2] must be empty',
+                    ],
+                ],
+            ],
             // alternative multi-dimensional array
-            array(
-                'data[][name]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
-                        'negate' => "true",
-                        'message' => "name can not be empty"
-                    )
-                ),
-                'data[][company]' => array(
-                    'format' => array(
-                        'rule' => "isEmpty",
-                        'message' => "company must be empty"
-                    )
-                )
-            ),
+            [
+                'data[][name]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
+                        'negate' => 'true',
+                        'message' => 'name can not be empty',
+                    ],
+                ],
+                'data[][company]' => [
+                    'format' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'company must be empty',
+                    ],
+                ],
+            ],
             // failure data set
-            array(
-                'name' => array(
-                    'empty' => array(
-                        'rule' => "isEmpty",
-                        'message' => "name can not be empty",
+            [
+                'name' => [
+                    'empty' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'name can not be empty',
                         'negate' => true,
-                        'last' => true
-                    ),
-                    'too_short' => array(
-                        'rule' => array("minLength", 5),
-                        'message' => "name must be at least 5 chars"
-                    )
-                ),
-                'company' => array(
-                    'empty' => array(
-                        'rule' => "isEmpty",
-                        'message' => "company can not be empty",
+                        'last' => true,
+                    ],
+                    'too_short' => [
+                        'rule' => ['minLength', 5],
+                        'message' => 'name must be at least 5 chars',
+                    ],
+                ],
+                'company' => [
+                    'empty' => [
+                        'rule' => 'isEmpty',
+                        'message' => 'company can not be empty',
                         'negate' => true,
-                        'final' => true
-                    )
-                )
-            )
-        );
-        
-        $data_sets = array(
-            array(
-                'name' => "Firstname Lastname",
-                'company' => ""
-            ),
-            array(
-                'name' => array(
-                    "Firstname Lastname",
-                    "Secondname Lastname",
-                    "Thirdname Lastname"
-                ),
-                'company' => array(
-                    "",
-                    "",
-                    ""
-                )
-            ),
-            array(
-                'data' => array(
-                    'name' => array(
-                        "Firstname Lastname",
-                        "Secondname Lastname",
-                        "Thirdname Lastname"
-                    ),
-                    'company' => array(
-                        "",
-                        "",
-                        ""
-                    )
-                )
-            ),
-            array(
-                'name' => array(
-                    '1' => "Firstname Lastname",
-                    '2' => "Secondname Lastname"
-                )
-            ),
-            array(
-                'data' => array(
-                    array(
-                        'name' => "Firstname Lastname",
-                        'company' => ""
-                    ),
-                    array(
-                        'name' => "Secondname Lastname",
-                        'company' => ""
-                    ),
-                    array(
-                        'name' => "Thirdname Lastname",
-                        'company' => ""
-                    )
-                )
-            ),
-            array(
-                'name' => "Name"
-            )
-        );
-        $result_sets = array(
+                        'final' => true,
+                    ],
+                ],
+            ],
+        ];
+
+        $data_sets = [
+            [
+                'name' => 'Firstname Lastname',
+                'company' => '',
+            ],
+            [
+                'name' => [
+                    'Firstname Lastname',
+                    'Secondname Lastname',
+                    'Thirdname Lastname',
+                ],
+                'company' => [
+                    '',
+                    '',
+                    '',
+                ],
+            ],
+            [
+                'data' => [
+                    'name' => [
+                        'Firstname Lastname',
+                        'Secondname Lastname',
+                        'Thirdname Lastname',
+                    ],
+                    'company' => [
+                        '',
+                        '',
+                        '',
+                    ],
+                ],
+            ],
+            [
+                'name' => [
+                    '1' => 'Firstname Lastname',
+                    '2' => 'Secondname Lastname',
+                ],
+            ],
+            [
+                'data' => [
+                    [
+                        'name' => 'Firstname Lastname',
+                        'company' => '',
+                    ],
+                    [
+                        'name' => 'Secondname Lastname',
+                        'company' => '',
+                    ],
+                    [
+                        'name' => 'Thirdname Lastname',
+                        'company' => '',
+                    ],
+                ],
+            ],
+            [
+                'name' => 'Name',
+            ],
+        ];
+        $result_sets = [
             true,
             true,
             true,
             true,
             true,
-            false
-        );
-        
-        $data = array();
+            false,
+        ];
+
+        $data = [];
         foreach ($rule_sets as $i => $set) {
-            $data[] = array($rule_sets[$i], $data_sets[$i], $result_sets[$i]);
+            $data[] = [$rule_sets[$i], $data_sets[$i], $result_sets[$i]];
         }
-        
+
         return $data;
-        
     }
-    
+
     public function callBackTestMethod($value)
     {
         return true;

@@ -1,10 +1,7 @@
 <?php
-/**
- *
- */
+
 class AppControllerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -20,11 +17,12 @@ class AppControllerTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
     }
-    
+
     /**
      * @covers AppController::__construct
      */
-    public function test__construct() {
+    public function test__construct()
+    {
         $this->assertInstanceOf('Advandz\App\Controller\AppController', new Advandz\App\Controller\AppController());
     }
 }

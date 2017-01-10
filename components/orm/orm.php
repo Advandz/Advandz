@@ -9,28 +9,30 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
 namespace Advandz\Component;
 
 use Loader;
-use Advandz\Component\Record as Record;
 
-class Orm extends Record {
+class Orm extends Record
+{
     /**
-     * Initializes a Table Class
+     * Initializes a Table Class.
      *
      * @param string $table Called function
      * @return mixed Returns a Table Object if the table exists
      */
-    public function loadTable($table) {
-        Loader::load(COMPONENTDIR . "orm" . DS . "table.php");
-        
+    public function loadTable($table)
+    {
+        Loader::load(COMPONENTDIR.'orm'.DS.'table.php');
+
         $table_exists = $this->select()->from(Loader::fromCamelCase($table))->numResults();
         if ($table_exists) {
             $this->{Loader::toCamelCase($table)} = new Table(Loader::fromCamelCase($table));
-            
+
             return $this->{Loader::toCamelCase($table)};
         }
-        
+
         return null;
     }
 }

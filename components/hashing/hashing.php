@@ -8,9 +8,11 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
 namespace Advandz\Component;
 
-class Hashing {
+class Hashing
+{
     /**
      * Calculate a keyed hash using HMAC.
      *
@@ -20,10 +22,11 @@ class Hashing {
      * @param bool $raw Outputs the hash as raw binary data.
      * @return string Return a keyed hash using HMAC.
      */
-    public function hmacHash($algorithm, $data, $key, $raw = false) {
+    public function hmacHash($algorithm, $data, $key, $raw = false)
+    {
         return hash_hmac($algorithm, $data, $key, $raw);
     }
-    
+
     /**
      * Calculate the Hash of a specific data.
      *
@@ -32,7 +35,8 @@ class Hashing {
      * @param bool $raw Outputs the hash as raw binary data.
      * @return string Return the Hash of a specific data.
      */
-    public function hash($algorithm, $data, $raw = false) {
+    public function hash($algorithm, $data, $raw = false)
+    {
         return hash($algorithm, $data, $raw);
     }
 }

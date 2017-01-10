@@ -1,10 +1,7 @@
 <?php
-/**
- *
- */
+
 class UnknownExceptionTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -38,10 +35,10 @@ class UnknownExceptionTest extends PHPUnit_Framework_TestCase
      */
     public function testSetExceptionHandler()
     {
-        $message = "Testing Error";
-        $e = new Exception($message);
-        $this->expectOutputRegex("/" . $message . "/");
-        
+        $message = 'Testing Error';
+        $e       = new Exception($message);
+        $this->expectOutputRegex('/'.$message.'/');
+
         UnknownException::setExceptionHandler($e);
     }
 

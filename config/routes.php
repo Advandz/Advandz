@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * All routes may be defined here.  Routes have the following syntax:
  * Router::route($orig_uri, $mapped_uri);
  *
@@ -19,6 +19,6 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-#
-# TODO: Define your application routes
+//
+// TODO: Define your application routes
 #

@@ -1,10 +1,7 @@
 <?php
-/**
- *
- */
+
 class AppModelTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -20,11 +17,12 @@ class AppModelTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
     }
-    
+
     /**
      * @covers AppModel::__construct
      */
-    public function test__construct() {
+    public function test__construct()
+    {
         $this->assertInstanceOf('Advandz\App\Model\AppModel', new Advandz\App\Model\AppModel());
     }
 }

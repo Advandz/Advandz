@@ -8,18 +8,21 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
 namespace Advandz\Component;
 
-class Cashier {
+class Cashier
+{
     /**
-     * Initializes a Gateways Class
+     * Initializes a Gateways Class.
      *
      * @param string $table Called function
      * @return mixed Returns a Table Object if the table exists
      */
-    public function loadGateway($table) {
-        #
-        # TODO: Create the Gateway classes for PayPal, BitPay and Stripe.
-        #
+    public function loadGateway($table)
+    {
+        //
+        // TODO: Create the Gateway classes for PayPal, BitPay and Stripe.
+        //
     }
 }

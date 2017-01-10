@@ -19,62 +19,77 @@ class Record extends Model {
      * @var int The number of open parentheses in where statements yet to be applied
      */
     private $open = 0;
+    
     /**
      * @var string The type of query (select, update, delete, insert)
      */
     private $type = null;
+    
     /**
      * @var string The SQL for a join
      */
     private $join_sql = null;
+    
     /**
      * @var array The tables involved in the query
      */
     private $tables = [];
+    
     /**
      * @var array An array of keys to be used when creating or altering a table
      */
     private $keys = [];
+    
     /**
      * @var array The columns involved in the query
      */
     private $columns = [];
+    
     /**
      * @var array Key/value pairs of the fields involved in the query.
      */
     private $fields = [];
+    
     /**
      * @var array Key/value pairs for the where clause
      */
     private $where = [];
+    
     /**
      * @var array Key/value pairs for the on clause
      */
     private $on = [];
+    
     /**
      * @var array Key/value pairs for the on duplicate key clause
      */
     private $duplicate = [];
+    
     /**
      * @var array Key/value pairs for the order clause
      */
     private $order = [];
+    
     /**
      * @var array Key/value pairs for the group clause
      */
     private $group = [];
+    
     /**
      * @var array Key/value pairs for the having clause
      */
     private $having = [];
+    
     /**
      * @var array An array, 'start', 'records' to hold limit values
      */
     private $limit = [];
+    
     /**
      * @var string The character to use to quote identifiers
      */
     protected $ident_quote_chr = "`";
+    
     /**
      * @var array All values, in the order added appended to the PDO::query() method
      */
@@ -88,7 +103,7 @@ class Record extends Model {
      * @return stdClass An object used to identify the keyword value
      */
     public static function keywordValue($keyword = "DEFAULT") {
-        $type = new stdClass();
+        $type          = new stdClass();
         $type->keyword = $keyword;
         
         return $type;
@@ -144,7 +159,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function create($table, $if_not_exists = false) {
-        $this->type = "create" . ($if_not_exists ? "_if_not_exists" : "");
+        $this->type     = "create" . ($if_not_exists ? "_if_not_exists" : "");
         $this->tables[] = $table;
         
         $statement = $this->query($this->buildQuery(), $this->values);
@@ -160,7 +175,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function alter($table) {
-        $this->type = "alter";
+        $this->type     = "alter";
         $this->tables[] = $table;
         
         $statement = $this->query($this->buildQuery(), $this->values);
@@ -176,7 +191,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function truncate($table) {
-        $this->type = "truncate";
+        $this->type     = "truncate";
         $this->tables[] = $table;
         
         $statement = $this->query($this->buildQuery());
@@ -193,7 +208,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function drop($table, $if_exists = false) {
-        $this->type = "drop" . ($if_exists ? "_if_exists" : "");
+        $this->type     = "drop" . ($if_exists ? "_if_exists" : "");
         $this->tables[] = $table;
         
         $statement = $this->query($this->buildQuery());
@@ -215,9 +230,9 @@ class Record extends Model {
     public function set($field, $value, $bind_value = true, $escape = true) {
         // If this is a keyword value, don't bind or escape it
         if ($value instanceof stdClass && isset($value->keyword)) {
-            $value = $value->keyword;
+            $value      = $value->keyword;
             $bind_value = false;
-            $escape = false;
+            $escape     = false;
         }
         $this->fields[$field] = ['value' => $value, 'bind_value' => $bind_value, 'escape' => $escape];
         
@@ -234,7 +249,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function insert($table, $values = null, array $value_keys = null) {
-        $this->type = "insert";
+        $this->type     = "insert";
         $this->tables[] = $table;
         
         $this->setFields($values, $value_keys);
@@ -276,7 +291,7 @@ class Record extends Model {
      * @return PDOStatement
      */
     public function delete(array $columns = null, $escape = true) {
-        $this->type = "delete";
+        $this->type      = "delete";
         $this->columns[] = ["fields" => (array) $columns, "escape" => $escape];
         
         $statement = $this->query($this->buildQuery(), $this->values);
@@ -293,7 +308,7 @@ class Record extends Model {
      * @return Record Reference to this class
      */
     public function select($columns = "*", $escape = true) {
-        $this->type = "select";
+        $this->type      = "select";
         $this->columns[] = ["fields" => (array) $columns, "escape" => $escape];
         
         return $this;
@@ -396,12 +411,12 @@ class Record extends Model {
      */
     public function on($field, $op, $value, $bind_value = true, $escape = true) {
         $on = [
-            'type' => "and",
+            'type'       => "and",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("on", $on);
         
@@ -421,12 +436,12 @@ class Record extends Model {
      */
     public function orOn($field, $op, $value, $bind_value = true, $escape = true) {
         $on = [
-            'type' => "or",
+            'type'       => "or",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("on", $on);
         
@@ -446,12 +461,12 @@ class Record extends Model {
      */
     public function where($field, $op, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "and",
+            'type'       => "and",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -471,12 +486,12 @@ class Record extends Model {
      */
     public function orWhere($field, $op, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "or",
+            'type'       => "or",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -497,10 +512,10 @@ class Record extends Model {
     public function duplicate($field, $op, $value, $bind_value = true, $escape = true) {
         $duplicate = [
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("duplicate", $duplicate);
         
@@ -519,12 +534,12 @@ class Record extends Model {
      */
     public function like($field, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "and",
+            'type'       => "and",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => "like",
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => "like",
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -543,12 +558,12 @@ class Record extends Model {
      */
     public function notLike($field, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "and",
+            'type'       => "and",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => "notlike",
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => "notlike",
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -567,12 +582,12 @@ class Record extends Model {
      */
     public function orLike($field, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "or",
+            'type'       => "or",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => "like",
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => "like",
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -591,12 +606,12 @@ class Record extends Model {
      */
     public function orNotLike($field, $value, $bind_value = true, $escape = true) {
         $where = [
-            'type' => "or",
+            'type'       => "or",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => "notlike",
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => "notlike",
+            'value'      => $value
         ];
         $this->setConditional("where", $where);
         
@@ -616,12 +631,12 @@ class Record extends Model {
      */
     public function having($field, $op, $value, $bind_value = true, $escape = true) {
         $having = [
-            'type' => "and",
+            'type'       => "and",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("having", $having);
         
@@ -641,12 +656,12 @@ class Record extends Model {
      */
     public function orHaving($field, $op, $value, $bind_value = true, $escape = true) {
         $having = [
-            'type' => "or",
+            'type'       => "or",
             'bind_value' => $bind_value,
-            'escape' => $escape,
-            'field' => $field,
-            'op' => $op,
-            'value' => $value
+            'escape'     => $escape,
+            'field'      => $field,
+            'op'         => $op,
+            'value'      => $value
         ];
         $this->setConditional("having", $having);
         
@@ -698,7 +713,7 @@ class Record extends Model {
      * @return Record Reference to this class
      */
     public function limit($records, $start = 0) {
-        $this->limit['start'] = $start;
+        $this->limit['start']   = $start;
         $this->limit['records'] = $records;
         
         return $this;
@@ -712,7 +727,7 @@ class Record extends Model {
      * @see PDOStatement::setFetchMode()
      */
     public function fetch() {
-        $args = func_get_args();
+        $args      = func_get_args();
         $statement = $this->query($this->buildQuery(), $this->values);
         
         if (!empty($args)) {
@@ -734,7 +749,7 @@ class Record extends Model {
      * @see PDOStatement::setFetchMode()
      */
     public function fetchAll() {
-        $args = func_get_args();
+        $args      = func_get_args();
         $statement = $this->query($this->buildQuery(), $this->values);
         
         if (!empty($args)) {
@@ -802,15 +817,16 @@ class Record extends Model {
      */
     public function numResults() {
         // Fetch the given query and its values, then reset
-        $sql = $this->get();
+        $sql    = $this->get();
         $values = $this->values;
         $this->reset();
         
         // Add the values back in, this serves as our subquery values
         $this->values = $values;
         // Wrap the original query and COUNT those values
-        $result = (array) $this->select(["COUNT(*)" => "total"], false)->
-        from(["(" . $sql . ")" => "t_" . mt_rand()])->fetch();
+        $result = (array) $this->select(["COUNT(*)" => "total"], false)
+            ->from(["(" . $sql . ")" => "t_" . mt_rand()])
+            ->fetch();
         
         return (int) $result['total'];
     }
@@ -872,9 +888,9 @@ class Record extends Model {
                     continue;
                 }
                 
-                $val = $value;
+                $val        = $value;
                 $bind_value = true;
-                $escape = true;
+                $escape     = true;
                 if (is_array($value)) {
                     $val = $value['value'];
                     
@@ -887,8 +903,8 @@ class Record extends Model {
                 } // If this field value is a Record object, substitute the query
                 elseif ($value instanceof self) {
                     $bind_value = false; // Can't bind queries
-                    $escape = false; // Can't escape queries
-                    $val = $this->buildSubquery([$value->get()]);
+                    $escape     = false; // Can't escape queries
+                    $val        = $this->buildSubquery([$value->get()]);
                 }
                 $this->set($field, $val, $bind_value, $escape);
             }
@@ -936,9 +952,9 @@ class Record extends Model {
         $sql = "";
         
         for ($i = 0; $i < count($conditionals); $i++) {
-            $clause = $conditionals[$i];
+            $clause     = $conditionals[$i];
             $bind_value = true;
-            $escape = true;
+            $escape     = true;
             
             if (isset($clause['bind_value']) && !$clause['bind_value']) {
                 $bind_value = false;
@@ -1138,7 +1154,7 @@ class Record extends Model {
                     $action = isset($field['add']) ? "add" : "drop";
                     
                     $field_str = "";
-                    $i = 0;
+                    $i         = 0;
                     foreach ($field[$action] as $field_name) {
                         $field_str .= ($i++ > 0 ? ", " : "") . $this->escapeField($field_name);
                     }
@@ -1381,7 +1397,7 @@ class Record extends Model {
     private function buildValues() {
         $sql = "";
         if (!empty($this->fields)) {
-            $i = 0;
+            $i      = 0;
             $fields = "";
             $values = "";
             foreach ($this->fields as $field => $value) {
@@ -1442,21 +1458,21 @@ class Record extends Model {
      * Reset the object, making ready for the next query
      */
     public function reset() {
-        $this->type = null;
-        $this->join_sql = null;
-        $this->tables = Type::_array();
-        $this->columns = Type::_array();
-        $this->fields = Type::_array();
-        $this->keys = Type::_array();
-        $this->where = Type::_array();
-        $this->on = Type::_array();
-        $this->order = Type::_array();
-        $this->group = Type::_array();
-        $this->limit = Type::_array();
-        $this->values = Type::_array();
+        $this->type      = null;
+        $this->join_sql  = null;
+        $this->tables    = Type::_array();
+        $this->columns   = Type::_array();
+        $this->fields    = Type::_array();
+        $this->keys      = Type::_array();
+        $this->where     = Type::_array();
+        $this->on        = Type::_array();
+        $this->order     = Type::_array();
+        $this->group     = Type::_array();
+        $this->limit     = Type::_array();
+        $this->values    = Type::_array();
         $this->duplicate = Type::_array();
-        $this->having = Type::_array();
-        $this->open = Type::_integer();
+        $this->having    = Type::_array();
+        $this->open      = Type::_integer();
     }
     
     /**

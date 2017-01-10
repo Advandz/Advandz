@@ -10,9 +10,6 @@
  */
 namespace Advandz\Component;
 
-use Loader;
-use Type;
-
 class Cashier {
     /**
      * Initializes a Gateways Class

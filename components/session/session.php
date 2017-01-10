@@ -10,9 +10,9 @@
  */
 namespace Advandz\Component;
 
-use Loader;
-use Type;
 use PDO;
+use Type;
+use Loader;
 use Configure;
 
 class Session {
@@ -20,34 +20,42 @@ class Session {
      * @var Record Record object class
      */
     private $Record;
+    
     /**
      * @var integer Time to Live (seconds)
      */
     private $ttl;
+    
     /**
      * @var string Name of the session table
      */
     private $tbl;
+    
     /**
      * @var string Name of the session ID field
      */
     private $tblid;
+    
     /**
      * @var string Name of the session expire date field
      */
     private $tblexpire;
+    
     /**
      * @var string Name of the session value field
      */
     private $tblvalue;
+    
     /**
      * @var string The cookie session ID
      */
     private $csid;
+    
     /**
      * @var string The session ID
      */
     private $sid;
+    
     /**
      * @var integer Session instances
      */
@@ -187,11 +195,11 @@ class Session {
      * @param boolean $httponly Whether or not the cookie should be flagged for HTTP only
      */
     private function sessionSet($ttl, $tbl, $tblid, $tblexpire, $tblvalue, $session_name, $httponly) {
-        $this->ttl = $ttl;
-        $this->tbl = $tbl;
-        $this->tblid = $tblid;
+        $this->ttl       = $ttl;
+        $this->tbl       = $tbl;
+        $this->tblid     = $tblid;
         $this->tblexpire = $tblexpire;
-        $this->tblvalue = $tblvalue;
+        $this->tblvalue  = $tblvalue;
         
         if (Session::$instances == 0) {
             
@@ -246,8 +254,11 @@ class Session {
      * @return boolean If Keep-Alive has been set
      */
     private function setKeepAlive($csid) {
-        $row = $this->Record->select($this->tblvalue)->from($this->tbl)->
-        where($this->tblid, "=", $csid)->where($this->tblexpire, ">", date("Y-m-d H:i:s"))->fetch();
+        $row = $this->Record->select($this->tblvalue)
+            ->from($this->tbl)
+            ->where($this->tblid, "=", $csid)
+            ->where($this->tblexpire, ">", date("Y-m-d H:i:s"))
+            ->fetch();
         
         if ($row) {
             // Set the session ID to that from our cookie so when we start
@@ -288,9 +299,11 @@ class Session {
         //  We need to use the sid set so we can write a cookie if needed
         $this->sid = $sid;
         
-        $row = $this->Record->select($this->tblvalue)->from($this->tbl)->
-        where($this->tblid, "=", $this->sid)->
-        where($this->tblexpire, ">", date("Y-m-d H:i:s"))->fetch();
+        $row = $this->Record->select($this->tblvalue)
+            ->from($this->tbl)
+            ->where($this->tblid, "=", $this->sid)
+            ->where($this->tblexpire, ">", date("Y-m-d H:i:s"))
+            ->fetch();
         
         if ($row) {
             return $row->{$this->tblvalue};
@@ -312,9 +325,9 @@ class Session {
         
         $expiration = date("Y-m-d H:i:s", time() + $this->ttl);
         
-        $this->Record->duplicate($this->tblexpire, "=", $expiration)->
-        duplicate($this->tblvalue, "=", $value)->
-        insert($this->tbl, [$this->tblid => $sid, $this->tblexpire => $expiration, $this->tblvalue => $value]);
+        $this->Record->duplicate($this->tblexpire, "=", $expiration)
+            ->duplicate($this->tblvalue, "=", $value)
+            ->insert($this->tbl, [$this->tblid => $sid, $this->tblexpire => $expiration, $this->tblvalue => $value]);
     }
     
     /**
@@ -333,8 +346,9 @@ class Session {
      * @return int Affected rows
      */
     private function sessionGarbageCollect($lifetime) {
-        $this->Record->from($this->tbl)->
-        where($this->tblexpire, "<", date("Y-m-d H:i:s", time() - $lifetime))->delete();
+        $this->Record->from($this->tbl)
+            ->where($this->tblexpire, "<", date("Y-m-d H:i:s", time() - $lifetime))
+            ->delete();
         
         return $this->Record->affectedRows();
     }

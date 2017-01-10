@@ -11,9 +11,8 @@
  */
 namespace Advandz\Component;
 
-use Advandz\Component\Record as Record;
 use Loader;
-use Type;
+use Advandz\Component\Record as Record;
 
 class Orm extends Record {
     /**

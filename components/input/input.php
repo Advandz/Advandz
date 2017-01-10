@@ -20,14 +20,17 @@ class Input {
      * @var array All errors violated in the Input::validates() method
      */
     private $errors = [];
+    
     /**
      * @var array All rules set in Input::setRules()
      */
     private $rules = [];
+    
     /**
      * @var boolean Flag whether or not checking should cease
      */
     private $end_checks = false;
+    
     /**
      * @var mixed A set of data that this instance is currently validating
      */
@@ -251,7 +254,7 @@ class Input {
      * @see Input::validates()
      */
     public function setRules($rules) {
-        $this->rules = $rules;
+        $this->rules  = $rules;
         $this->errors = Type::_array();
     }
     
@@ -289,7 +292,7 @@ class Input {
      */
     public function validates(&$data) {
         $this->end_checks = false;
-        $this->data = $data;
+        $this->data       = $data;
         
         if (is_array($this->rules) && is_array($data)) {
             // Test each rule
@@ -320,8 +323,8 @@ class Input {
                     $val_exists = true;
                     // If the value doesn't exist, create it temporarily so the rule can be evaluated
                     if (!$this->pathSet($data, $field)) {
-                        $orig_data = $data;
-                        $data = $field; // $field makes a perfect substitute, it's already null
+                        $orig_data  = $data;
+                        $data       = $field; // $field makes a perfect substitute, it's already null
                         $val_exists = false;
                     }
                     
@@ -485,7 +488,7 @@ class Input {
             if (is_array($rule_set['rule'])) {
                 $method = array_shift($rule_set['rule']);
             } else {
-                $method = $rule_set['rule'];
+                $method           = $rule_set['rule'];
                 $rule_set['rule'] = [];
             }
             

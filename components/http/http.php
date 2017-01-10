@@ -21,26 +21,32 @@ class Http {
      * @var string The server to send te request
      */
     private $server = '';
+    
     /**
      * @var string The URI request
      */
     private $uri = '';
+    
     /**
      * @var integer Server port
      */
     private $port = null;
+    
     /**
      * @var boolean Use SSL in the request
      */
     private $ssl = false;
+    
     /**
      * @var array The request headers
      */
     private $headers = [];
+    
     /**
      * @var array Basic authentification
      */
     private $auth = [];
+    
     /**
      * @var string Request method
      */

@@ -16,9 +16,9 @@
  */
 namespace Advandz\Component;
 
-use Loader;
-use Type;
 use PDO;
+use Type;
+use Loader;
 
 class Acl {
     /**
@@ -81,29 +81,29 @@ class Acl {
      * @return array An array of ARO/ACO hierachy relationships
      */
     public function getAccessList($aro_alias, $aco_alias) {
-        $aco = explode("/", $aco_alias);
+        $aco         = explode("/", $aco_alias);
         $access_list = Type::_array();
         
         // Attempt to find an entry for the given ACO, if no results, attempt for a subset of that ACO path
-        $temp_aco = $aco_alias;
+        $temp_aco  = $aco_alias;
         $aco_count = count($aco);
         for ($i = 0; $i < $aco_count; $i++) {
             // Build temp subquery
-            $fields = [
-                "acl_aro.id", "acl_aro.alias", "acl_aro.lineage", 'ancestor.id' => "ancestor_id",
-                'ancestor.alias' => "ancestor_alias", 'ancestor.lineage' => "ancestor_lineage"
+            $fields        = [
+                "acl_aro.id", "acl_aro.alias", "acl_aro.lineage", 'ancestor.id'    => "ancestor_id",
+                                                                  'ancestor.alias' => "ancestor_alias", 'ancestor.lineage' => "ancestor_lineage"
             ];
-            $temp = $this->Record->select($fields)
+            $temp          = $this->Record->select($fields)
                 ->from("acl_aro")
                 ->leftJoin(["acl_aro" => "ancestor"], "acl_aro.lineage", "like", "CONCAT('%/', ancestor.id, '/%')", false, false)
                 ->where("acl_aro.alias", "=", $aro_alias);
             $temp_subquery = $temp->get();
-            $values = $temp->values;
+            $values        = $temp->values;
             $this->Record->reset();
             $this->Record->values = $values;
             
             // Build aro subquery (containing temp)
-            $aro = $this->Record->select(["acl_aro.id", "acl_aro.alias", "acl_aro.lineage"])
+            $aro          = $this->Record->select(["acl_aro.id", "acl_aro.alias", "acl_aro.lineage"])
                 ->from("acl_aro")
                 ->on("acl_aro.id", "=", "temp.id", false)
                 ->orOn("acl_aro.id", "=", "temp.ancestor_id", false)
@@ -111,11 +111,11 @@ class Acl {
                 ->group("acl_aro.id")
                 ->order(['acl_aro.lineage' => "desc"]);
             $aro_subquery = $aro->get();
-            $values = $aro->values;
+            $values       = $aro->values;
             $this->Record->reset();
             
             // Build query (containing aro subquery)
-            $fields = ["aro.*", "acl_acl.action", "acl_acl.permission"];
+            $fields      = ["aro.*", "acl_acl.action", "acl_acl.permission"];
             $access_list = $this->Record->select($fields)
                 ->from("acl_acl")
                 ->on("acl_acl.aco_id", "=", "acl_aco.id", false)
@@ -176,7 +176,7 @@ class Acl {
         if ($parent != null && !is_numeric($parent)) {
             $aro = $this->getAroByAlias($parent);
             if ($aro) {
-                $parent = $aro->id;
+                $parent  = $aro->id;
                 $lineage = $aro->lineage . $parent . "/";
             } else {
                 $parent = null;

@@ -11,27 +11,11 @@
  */
 
 /**
- * Load the vendor classes managed by Composer
+ * Load the Composer autoloader
  */
 @include_once VENDORDIR . "autoload.php";
 
 /**
- * Load the libraries classes
+ * Autoload the framework libraries
  */
 spl_autoload_register(['Loader', 'autoload'], true, true);
-
-/**
- * Load the helper classes
- */
-$helper_classes = array_diff(scandir(HELPERDIR), ['.', '..']);
-foreach ($helper_classes as $class) {
-    include_once HELPERDIR . $class . DIRECTORY_SEPARATOR . $class . '.php';
-}
-
-/**
- * Load the components classes
- */
-$components_classes = array_diff(scandir(COMPONENTDIR), ['.', '..']);
-foreach ($components_classes as $class) {
-    include_once COMPONENTDIR . $class . DIRECTORY_SEPARATOR . $class . '.php';
-}

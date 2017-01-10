@@ -23,11 +23,6 @@ final class Loader {
      * @return boolean True if loaded, false otherwise
      */
     public static function autoload($class) {
-        // Skip namespaces
-        if (strpos($class, "\\") !== false) {
-            return false;
-        }
-        
         $paths = [
             LIBDIR,
             ROOTWEBDIR . APPDIR,
@@ -53,9 +48,16 @@ final class Loader {
             ];
         }
         
-        $class_file = self::fromCamelCase($class);
-        $file_name  = $class_file . ".php";
+        if (strpos($class, "\\") !== false) { // PSR-4 Autoload
+            $class      = explode("\\", $class);
+            $class_file = self::fromCamelCase(end($class));
+            $file_name  = $class_file . ".php";
+        } else { // PSR-0 Autoload
+            $class_file = self::fromCamelCase($class);
+            $file_name  = $class_file . ".php";
+        }
         
+        // Include Files
         foreach ($paths as $path) {
             if (file_exists($path . $file_name)) {
                 include $path . $file_name;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Handles mapping of URIs from one type to another
  *
@@ -34,7 +33,7 @@ final class Router {
             throw new Exception("Illegal URI specified in Router::route()");
         }
         
-        self::$routes['orig'][]   = "/" . self::escape($orig_uri) . "/i";
+        self::$routes['orig'][] = "/" . self::escape($orig_uri) . "/i";
         self::$routes['mapped'][] = self::escape($mapped_uri);
     }
     
@@ -117,7 +116,7 @@ final class Router {
             }
             
             try {
-                $meth           = $ref->getMethod($method);
+                $meth = $ref->getMethod($method);
                 $declared_class = $meth->getDeclaringClass();
                 
                 // Methods that must be declared public due to bug in PHP < 5.2 [#37632], but are not
@@ -153,12 +152,12 @@ final class Router {
      *    - uri_str A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri) {
-        $plugin     = null;
+        $plugin = null;
         $controller = Configure::get("System.default_controller");
-        $action     = null;
-        $get        = [];
-        $uri        = [];
-        $uri_str    = null;
+        $action = null;
+        $get = [];
+        $uri = [];
+        $uri_str = null;
         
         // Filter the URI, removing any part of the web root
         $filtered_uri = Router::filterURI($request_uri);
@@ -171,7 +170,7 @@ final class Router {
         // Parse the URI into its many parts
         $temp = Router::parseURI($filtered_uri);
         
-        $uri     = [];
+        $uri = [];
         $uri_str = "";
         if (is_array($temp)) {
             foreach ($temp as $key => $value) {
@@ -218,8 +217,8 @@ final class Router {
             $uri[$i] = rawurldecode($uri[$i]);
             
             if (($loc = strpos($uri[$i], ":")) !== false) {
-                $key       = substr($uri[$i], 0, $loc);
-                $value     = substr($uri[$i], $loc + 1);
+                $key = substr($uri[$i], 0, $loc);
+                $value = substr($uri[$i], $loc + 1);
                 $get[$key] = $value;
             } else {
                 $get[$j++] = $uri[$i];
@@ -231,13 +230,6 @@ final class Router {
             $get[$key] = $value;
         }
         
-        return [
-            'plugin'     => $plugin,
-            'controller' => $controller,
-            'action'     => $action,
-            'get'        => $get,
-            'uri'        => $uri,
-            'uri_str'    => $uri_str
-        ];
+        return ['plugin' => $plugin, 'controller' => $controller, 'action' => $action, 'get' => $get, 'uri' => $uri, 'uri_str' => $uri_str];
     }
 }

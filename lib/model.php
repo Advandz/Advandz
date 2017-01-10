@@ -14,35 +14,30 @@ class Model {
      * @var object PDO connection
      */
     private $connection;
-    
     /**
      * @var array An array of all database connections established
      */
     private static $connections = [];
-    
     /**
      * @var array An array of all database connection info (used to find a matching connection)
      */
     private static $db_infos = [];
-    
     /**
      * @var object PDO Statement
      */
     private $statement;
-    
     /**
      * @var mixed Fetch Mode the PDO:FETCH_* constant (int) to fetch records by, null to use default setting
      */
     private $fetch_mode = null;
-    
     /**
      * @var array Default PDO attribute settings
      */
     private $default_pdo_options = [
-        PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_CASE              => PDO::CASE_LOWER,
-        PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
-        PDO::ATTR_PERSISTENT        => false,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_CASE => PDO::CASE_LOWER,
+        PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
+        PDO::ATTR_PERSISTENT => false,
         PDO::ATTR_STRINGIFY_FETCHES => false
     ];
     
@@ -72,7 +67,7 @@ class Model {
      * @return mixed The fetch mode
      */
     public function setFetchMode($fetch_mode) {
-        $cur              = $this->fetch_mode;
+        $cur = $this->fetch_mode;
         $this->fetch_mode = $fetch_mode;
         
         return $cur;
@@ -287,7 +282,7 @@ class Model {
                 
                 // Record the connection
                 self::$connections[] =& $this->connection;
-                self::$db_infos[]    = $db_info;
+                self::$db_infos[] = $db_info;
                 
                 // Run a character set query to override the database server's default character set
                 if (isset($db_info['charset_query']) && $db_info['charset_query'] != "") {

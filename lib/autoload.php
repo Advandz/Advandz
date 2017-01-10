@@ -1,6 +1,7 @@
 <?php
 /**
- * Load the necessary libraries for the framework and the vendor ibraries.
+ * Load the necessary libraries for the framework and the vendor
+ * libraries.
  *
  * @package Advandz
  * @subpackage Advandz.lib

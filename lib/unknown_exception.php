@@ -40,9 +40,7 @@ class UnknownException extends ErrorException {
             return;
         }
         
-        echo "Uncaught " . get_class($e) . ", code: " . $e->getCode() . " in <strong>" . $e->getFile()
-            . "</strong> on line <strong>" . $e->getLine() . "</strong><br />Message: "
-            . htmlentities($e->getMessage()) . "<br />";
+        echo "Uncaught " . get_class($e) . ", code: " . $e->getCode() . " in <strong>" . $e->getFile() . "</strong> on line <strong>" . $e->getLine() . "</strong><br />Message: " . htmlentities($e->getMessage()) . "<br />";
     }
     
     /**

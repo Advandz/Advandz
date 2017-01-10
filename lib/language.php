@@ -17,12 +17,10 @@ class Language {
      * and the language they pertain to
      */
     private static $lang_files;
-    
     /**
      * @var array The text for the given language
      */
     private static $lang_text;
-    
     /**
      * @var string The current language (ISO 639-1/2) e.g. "en_us"
      */

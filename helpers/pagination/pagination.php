@@ -10,11 +10,10 @@
  */
 namespace Advandz\Helper;
 
+use Advandz\Helper\Html as Html;
 use Type;
 use Loader;
 use Language;
-Loader::load(HELPERDIR . 'html' . DS . 'html.php');
-use Advandz\Helper\Html as Html;
 
 class Pagination extends Html {
     /**

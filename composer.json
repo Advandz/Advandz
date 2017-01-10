@@ -4,7 +4,6 @@
     "keywords": ["framework", "advandz"],
     "homepage": "http://advandz.com/",
     "type": "project",
-    "minimum-stability" : "stable",
     "require": {
         "php": ">=5.4"
     },
@@ -24,7 +23,6 @@
         ]
     },
     "config": {
-        "vendor-dir": "vendors/composer",
         "preferred-install": "dist",
         "sort-packages": true
     }

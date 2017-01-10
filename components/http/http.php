@@ -2,11 +2,7 @@
 /**
  * A HTTP client that makes it easy to send HTTP requests and trivial to
  * integrate with web services.
- * Available Methods:
- *  - GET
- *  - POST
- *  - PUT
- *  - DELETE
+ * Available Methods: GET, POST, PUT, DELETE.
  *
  * @package Advandz
  * @subpackage Advandz.components.http

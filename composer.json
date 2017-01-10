@@ -30,8 +30,17 @@
         "vendor-dir": "vendors/composer"
     },
     "scripts": {
-        "post-package-install": [
-            "rm -rf tests; rm -rf build; rm -rf LICENSE.md; rm -rf README.md; rm -rf .travis.yml"
+        "post-install-cmd": [
+            "rm -rf tests",
+            "rm -rf LICENSE.md",
+            "rm -rf README.md",
+            "rm -rf .travis.yml"
+        ],
+        "post-update-cmd": [
+            "rm -rf tests",
+            "rm -rf LICENSE.md",
+            "rm -rf README.md",
+            "rm -rf .travis.yml"
         ]
     }
 }

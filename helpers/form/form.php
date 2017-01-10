@@ -11,9 +11,10 @@
  */
 namespace Advandz\Helper;
 
-use Advandz\Helper\Html as Html;
 use Type;
 use Loader;
+Loader::load(HELPERDIR . 'html' . DS . 'html.php');
+use Advandz\Helper\Html as Html;
 
 class Form extends Html {
     /**

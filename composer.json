@@ -31,18 +31,14 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "rm -rf build",
-            "rm -rf tests",
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf .travis.yml"
+            "rm -rf .gitignore"
         ],
         "post-update-cmd": [
-            "rm -rf build",
-            "rm -rf tests",
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf .travis.yml"
+            "rm -rf .gitignore"
         ]
     }
 }

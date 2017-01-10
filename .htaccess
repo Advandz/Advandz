@@ -3,20 +3,20 @@
 # filename:   .htaccess
 ########################################################
 
-# Enable Rewrite Engine
+# Enable the rewrite engine
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php
 
-# Deny Access to “.knife” Files
+# Deny direct access to the Knife template files
 <Files ~ "\.(knife)$">
    order deny,allow
    deny from all
 </Files>
 
-# Deny Access to “spaceman” Script
+# Deny direct access to "spaceman" script
 <Files "spaceman">
    order deny,allow
    deny from all

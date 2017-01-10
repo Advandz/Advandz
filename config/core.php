@@ -27,8 +27,8 @@ Configure::set("System.default_view", "default");
 // View directory to use for all errors that are raised either through uncaught
 // exceptions, or explicitly called by invoking Dispatcher::raiseError();
 Configure::set("System.error_view", "errors");
-// File extension for view files, default is .pdt (PHP Data Template)
-Configure::set("System.view_ext", ".pdt");
+// File extension for view files, default is .knife
+Configure::set("System.view_ext", ".knife");
 // Forward to /404/ when an invalid controller is given
 // To change where 404s are sent define a route using Router::route()
 Configure::set("System.404_forwarding", true);

@@ -22,7 +22,7 @@ class View extends Knife {
     /**
      * @var string The file extension used in the view
      */
-    public $view_ext = ".pdt";
+    public $view_ext = ".knife";
     
     /**
      * @var string The location of this view's files within the view path

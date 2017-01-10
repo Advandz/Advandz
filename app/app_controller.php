@@ -18,7 +18,7 @@ class AppController extends Controller {
      * Pre-Action, This method called before the index method, or controller specified action.
      */
     public function preAction() {
-        Loader::loadHelpers($this, ['Cdnjs']);
+        Loader::loadHelpers($this, ['Cdnjs', 'Form', 'Html', 'Javascript', 'Pagination', 'Xml']);
         
         $libs = $this->Cdnjs->loadLibraries(['jquery']);
         $this->structure->set("libs", $libs);

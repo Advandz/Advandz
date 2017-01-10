@@ -38,7 +38,7 @@ class Dispatcher extends Controller {
     public static function dispatch($request_uri, $is_cli = false) {
         self::cleanGlobals();
         
-        $_post = $_POST;
+        $_post  = $_POST;
         $_files = $_FILES;
         
         list($plugin, $controller, $action, $_get, $uri, $uri_str) = array_values(Router::routesTo($request_uri));
@@ -85,20 +85,20 @@ class Dispatcher extends Controller {
         
         // If the first character of the controller is a number we must prepend the controller
         // with an underscore.
-        $contrl = (is_numeric(substr($controller, 0, 1)) ? "_" : "") . Loader::toCamelCase($controller);
+        $contrl    = (is_numeric(substr($controller, 0, 1)) ? "_" : "") . Loader::toCamelCase($controller);
         $namespace = "Advandz\\App\\Controller\\" . $contrl;
-        $ctrl = new $namespace($controller, $action, $is_cli);
+        $ctrl      = new $namespace($controller, $action, $is_cli);
         
         // Make the POST/GET/FILES available to the controller
-        $ctrl->uri = $uri;
-        $ctrl->uri_str = $uri_str;
-        $ctrl->get = $_get;
-        $ctrl->post = $_post;
-        $ctrl->files = $_files;
-        $ctrl->plugin = $plugin;
+        $ctrl->uri        = $uri;
+        $ctrl->uri_str    = $uri_str;
+        $ctrl->get        = $_get;
+        $ctrl->post       = $_post;
+        $ctrl->files      = $_files;
+        $ctrl->plugin     = $plugin;
         $ctrl->controller = $controller;
-        $ctrl->action = $action;
-        $ctrl->is_cli = $is_cli;
+        $ctrl->action     = $action;
+        $ctrl->is_cli     = $is_cli;
         
         if ($plugin_path) {
             $ctrl->setDefaultViewPath($plugin_path);

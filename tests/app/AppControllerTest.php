@@ -23,6 +23,6 @@ class AppControllerTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertInstanceOf('Advandz\App\Controller\AppController', new Advandz\App\Controller\AppController());
+        $this->assertInstanceOf('Advandz\\App\\Controller\\AppController', new Advandz\App\Controller\AppController());
     }
 }

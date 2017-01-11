@@ -23,6 +23,6 @@ class AppModelTest extends PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $this->assertInstanceOf('Advandz\App\Model\AppModel', new Advandz\App\Model\AppModel());
+        $this->assertInstanceOf('Advandz\\App\\Model\\AppModel', new Advandz\App\Model\AppModel());
     }
 }

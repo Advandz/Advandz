@@ -13,7 +13,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->dispatcher = new Dispatcher();
+        $this->dispatcher = new Advandz\Dispatcher();
     }
 
     /**
@@ -73,7 +73,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         switch ($type) {
             case 'output':
                 $this->expectOutputRegex('//i', $e->getMessage());
-                Dispatcher::raiseError($e);
+                Advandz\Dispatcher::raiseError($e);
                 break;
             case 'header':
                 /*
@@ -89,7 +89,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
                 Configure::set('System.error_view', 'nonexistentview');
 
                 try {
-                    Dispatcher::raiseError($e);
+                    Advandz\Dispatcher::raiseError($e);
                 } catch (Exception $thrown) {
                     $exception = $thrown;
                 }
@@ -115,8 +115,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $str     = "I'm a clean string.";
         $escaped = addslashes($str);
-
-        Dispatcher::stripSlashes($escaped);
+    
+        Advandz\Dispatcher::stripSlashes($escaped);
         $this->assertSame($str, $escaped);
     }
 }

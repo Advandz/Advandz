@@ -62,7 +62,7 @@ class Model
         $this->fetch_mode = Configure::get('Database.fetch_mode');
 
         // Only connect now if lazy connecting is disabled or if db info was given
-        if (! Configure::get('Database.lazy_connecting') || $db_info !== null) {
+        if (!Configure::get('Database.lazy_connecting') || $db_info !== null) {
             $this->makeConnection($db_info);
         }
     }
@@ -90,7 +90,7 @@ class Model
      */
     public function lastInsertId($name = null)
     {
-        if (! ($this->connection instanceof PDO)) {
+        if (!($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::lastInsertId when connection has not been instantiated');
         }
 
@@ -106,7 +106,7 @@ class Model
      */
     public function setAttribute($attribute, $value)
     {
-        if (! ($this->connection instanceof PDO)) {
+        if (!($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::setAttribute when connection has not been instantiated');
         }
 
@@ -132,7 +132,7 @@ class Model
         }
 
         // Ensure PDO connection exists
-        if ($this->lazyConnect() && ! ($this->connection instanceof PDO)) {
+        if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::query when connection has not been instantiated');
         }
 
@@ -159,7 +159,7 @@ class Model
     public function prepare($sql, $fetch_mode = null)
     {
         // Ensure PDO connection exists
-        if ($this->lazyConnect() && ! ($this->connection instanceof PDO)) {
+        if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::prepare when connection has not been instantiated');
         }
 
@@ -183,7 +183,7 @@ class Model
     public function begin()
     {
         // Ensure PDO connection exists
-        if ($this->lazyConnect() && ! ($this->connection instanceof PDO)) {
+        if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::begin when connection has not been instantiated');
         }
 
@@ -199,7 +199,7 @@ class Model
     public function rollBack()
     {
         // Ensure PDO connection exists
-        if ($this->lazyConnect() && ! ($this->connection instanceof PDO)) {
+        if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::rollBack when connection has not been instantiated');
         }
 
@@ -215,7 +215,7 @@ class Model
     public function commit()
     {
         // Ensure PDO connection exists
-        if ($this->lazyConnect() && ! ($this->connection instanceof PDO)) {
+        if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
             throw new Exception('Call to Model::commit when connection has not been instantiated');
         }
 
@@ -246,7 +246,7 @@ class Model
             $statement = $this->statement;
         }
 
-        if (! ($statement instanceof PDOStatement)) {
+        if (!($statement instanceof PDOStatement)) {
             throw new Exception('Call to Model::affectedRows before initializing a statement, call Model::query first');
         }
 
@@ -262,7 +262,7 @@ class Model
      */
     public static function makeDSN($db_params)
     {
-        if (! isset($db_params['driver']) || ! isset($db_params['database']) || ! isset($db_params['host'])) {
+        if (!isset($db_params['driver']) || !isset($db_params['database']) || !isset($db_params['host'])) {
             throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
         }
 
@@ -288,7 +288,7 @@ class Model
         }
 
         // Only attempt to set up a new connection if none exists
-        if (! ($this->connection instanceof PDO)) {
+        if (!($this->connection instanceof PDO)) {
 
             // Override any default settings with those provided
             $options = (array) (isset($db_info['options']) ? $db_info['options'] : null) + $this->default_pdo_options;
@@ -318,7 +318,7 @@ class Model
      */
     private function lazyConnect()
     {
-        if (Configure::get('Database.lazy_connecting') && ! ($this->connection instanceof PDO)) {
+        if (Configure::get('Database.lazy_connecting') && !($this->connection instanceof PDO)) {
             $this->makeConnection();
         }
     }

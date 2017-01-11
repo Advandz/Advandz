@@ -24,15 +24,15 @@ Configure::set('Database.reuse_connection', true);
 // Default database profile
 //###############################################################################
 $default = [
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'port' => '3306',
-    'database' => 'advandz',
-    'user' => 'root',
-    'pass' => 'root',
-    'persistent' => false,
+    'driver'        => 'mysql',
+    'host'          => 'localhost',
+    'port'          => '3306',
+    'database'      => 'advandz',
+    'user'          => 'root',
+    'pass'          => 'root',
+    'persistent'    => false,
     'charset_query' => "SET NAMES 'utf8'",
-    'options' => [], // an array of PDO specific options for this connection
+    'options'       => [], // an array of PDO specific options for this connection
 ];
 
 //###############################################################################

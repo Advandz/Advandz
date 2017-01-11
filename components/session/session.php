@@ -235,7 +235,7 @@ class Session
 
             // If a cookie is available, attempt to use that session and reset
             // the ttl to use the cookie ttl, but only if we don't have a current session cookie as well
-            if (isset($_COOKIE[Configure::get('Session.cookie_name')]) && ! isset($_COOKIE[session_name()])) {
+            if (isset($_COOKIE[Configure::get('Session.cookie_name')]) && !isset($_COOKIE[session_name()])) {
                 if ($this->setKeepAlive($_COOKIE[Configure::get('Session.cookie_name')])) {
                     $this->setCsid($_COOKIE[Configure::get('Session.cookie_name')]);
                     $this->ttl = Configure::get('Session.cookie_ttl');

@@ -54,9 +54,9 @@ class Input
                 // Append "." to the host name to prevent DNS server from creating the record
                 $host = substr(strstr($check[0], '@'), 1).'.';
 
-                if (function_exists('getmxrr') && ! getmxrr($host, $mxhosts)) {
+                if (function_exists('getmxrr') && !getmxrr($host, $mxhosts)) {
                     // This will catch DNSs that are not MX
-                    if (function_exists('checkdnsrr') && ! checkdnsrr($host, 'ANY')) {
+                    if (function_exists('checkdnsrr') && !checkdnsrr($host, 'ANY')) {
                         return false;
                     }
                 }
@@ -76,7 +76,7 @@ class Input
      */
     public static function isEmpty($str)
     {
-        if (! isset($str) || strlen($str) == 0) {
+        if (!isset($str) || strlen($str) == 0) {
             return true;
         }
 
@@ -135,7 +135,7 @@ class Input
         if (isset($str)) {
             // Convert to UNIX time
             $time = $str;
-            if (! is_numeric($str)) {
+            if (!is_numeric($str)) {
                 $time = strtotime($str);
             }
 
@@ -145,10 +145,10 @@ class Input
             }
 
             // Check range
-            if ($min !== null && (! is_numeric($min) ? $min = strtotime($min) : true) && $time < $min) {
+            if ($min !== null && (!is_numeric($min) ? $min = strtotime($min) : true) && $time < $min) {
                 return false;
             }
-            if ($max !== null && (! is_numeric($max) ? $max = strtotime($max) : true) && $time > $max) {
+            if ($max !== null && (!is_numeric($max) ? $max = strtotime($max) : true) && $time > $max) {
                 return false;
             }
 
@@ -337,7 +337,7 @@ class Input
 
                     $val_exists = true;
                     // If the value doesn't exist, create it temporarily so the rule can be evaluated
-                    if (! $this->pathSet($data, $field)) {
+                    if (!$this->pathSet($data, $field)) {
                         $orig_data  = $data;
                         $data       = $field; // $field makes a perfect substitute, it's already null
                         $val_exists = false;
@@ -347,18 +347,18 @@ class Input
                     $this->array_walk_recursive($data[$index], [$this, 'processValidation'], ['index' => $index, 'raw_index' => $raw_index, 'rule' => $rule], $depth);
 
                     // Destroy the temporary value created in order to validate rules
-                    if (! $val_exists) {
+                    if (!$val_exists) {
                         $data = $orig_data;
                     }
                 } // Validate scalar rules
                 else {
                     $val_exists = true;
-                    if (! array_key_exists($index, $data)) {
+                    if (!array_key_exists($index, $data)) {
                         $val_exists = false;
                     }
 
                     $this->validateRule($index, $rule, $data[$index], $index);
-                    if (! $val_exists) {
+                    if (!$val_exists) {
                         unset($data[$index]);
                     }
                 }
@@ -469,7 +469,7 @@ class Input
                         $index = $numeric_paths[$blank++];
                     }
 
-                    if (! array_key_exists($index, $data_set)) {
+                    if (!array_key_exists($index, $data_set)) {
                         break;
                     }
                     $data_set =&$data_set[$index];
@@ -501,7 +501,7 @@ class Input
         foreach ($rule as $type => $rule_set) {
 
             // Ensure that we are allowed to validate this rule, even if the value is not set
-            if (! isset($value) && isset($rule_set['if_set']) && $rule_set['if_set']) {
+            if (!isset($value) && isset($rule_set['if_set']) && $rule_set['if_set']) {
                 continue;
             }
 
@@ -532,15 +532,15 @@ class Input
 
             // Process boolean rules (true / false)
             if (is_bool($method)) {
-                $response = ! $method;
+                $response = !$method;
             } // Process callback rules
             else {
-                $response = ! call_user_func_array($method, $rule_set['rule']);
+                $response = !call_user_func_array($method, $rule_set['rule']);
             }
 
             // A response is considered an error if it returns false, so by default we negate
             // responses. If the rule set is configured to negate responses then we look for a 'true' response instead
-            if ((isset($rule_set['negate']) && $rule_set['negate'] && ! $response) || ((! isset($rule_set['negate']) || ! $rule_set['negate']) && $response)) {
+            if ((isset($rule_set['negate']) && $rule_set['negate'] && !$response) || ((!isset($rule_set['negate']) || !$rule_set['negate']) && $response)) {
                 // If the rule is apart of a larger array set the full path to avoid overwriting other errors
                 $error_key = $index;
                 foreach ($path as $path_value) {
@@ -582,7 +582,7 @@ class Input
      */
     private static function array_walk_recursive(&$input, $callback, $params = null, $max_depth = null, $cur_depth = 0, $path = [])
     {
-        if (! is_array($input)) {
+        if (!is_array($input)) {
             return false;
         }
 
@@ -605,7 +605,7 @@ class Input
             $path[] = $key;
 
             // Invoke the callback, emulating the array_walk_recursive function
-            if (! is_array($input[$key]) || $cur_depth >= $max_depth) {
+            if (!is_array($input[$key]) || $cur_depth >= $max_depth) {
                 call_user_func_array($callback, [&$input[$key], $key, $params, $max_depth, $cur_depth, $path]);
             }
 

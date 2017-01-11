@@ -763,7 +763,7 @@ class Record extends Model
         $args      = func_get_args();
         $statement = $this->query($this->buildQuery(), $this->values);
 
-        if (! empty($args)) {
+        if (!empty($args)) {
             call_user_func_array([$statement, 'setFetchMode'], $args);
         }
 
@@ -786,7 +786,7 @@ class Record extends Model
         $args      = func_get_args();
         $statement = $this->query($this->buildQuery(), $this->values);
 
-        if (! empty($args)) {
+        if (!empty($args)) {
             call_user_func_array([$statement, 'setFetchMode'], $args);
         }
 
@@ -891,7 +891,7 @@ class Record extends Model
     {
         $i = count($this->$conditional) - 1;
         if (isset($this->{$conditional}[$i])) {
-            if (! isset($this->{$conditional}[$i]['close'])) {
+            if (!isset($this->{$conditional}[$i]['close'])) {
                 $this->{$conditional}[$i]['close'] = 0;
             }
             $this->{$conditional}[$i]['close']++;
@@ -926,7 +926,7 @@ class Record extends Model
         if (is_array($values)) {
             foreach ($values as $field => $value) {
                 // If $value_keys given and field is not set, then skip this value
-                if (is_array($value_keys) && ! in_array($field, $value_keys, true)) {
+                if (is_array($value_keys) && !in_array($field, $value_keys, true)) {
                     continue;
                 }
 
@@ -969,7 +969,7 @@ class Record extends Model
 
         $i = count($this->{$conditional}) - 1;
         if (isset($this->{$conditional}[$i])) {
-            if (! isset($this->{$conditional}[$i]['open'])) {
+            if (!isset($this->{$conditional}[$i]['open'])) {
                 $this->{$conditional}[$i]['open'] = 0;
             }
             $this->{$conditional}[$i]['open'] += $this->open;
@@ -1000,10 +1000,10 @@ class Record extends Model
             $bind_value = true;
             $escape     = true;
 
-            if (isset($clause['bind_value']) && ! $clause['bind_value']) {
+            if (isset($clause['bind_value']) && !$clause['bind_value']) {
                 $bind_value = false;
             }
-            if (isset($clause['escape']) && ! $clause['escape']) {
+            if (isset($clause['escape']) && !$clause['escape']) {
                 $escape = false;
             }
 
@@ -1194,7 +1194,7 @@ class Record extends Model
         }
 
         // Build keys/indexes
-        if (! empty($this->keys)) {
+        if (!empty($this->keys)) {
             foreach ($this->keys as $type => $key) {
                 foreach ($key as $name => $field) {
                     $action = isset($field['add']) ? 'add' : 'drop';
@@ -1257,7 +1257,7 @@ class Record extends Model
 
         $this->join_sql .= ($this->join_sql != '' ? ' ' : '').($join ? $join.' ' : '').'JOIN '.(is_array($table) ? $this->buildSubquery($table) : $this->escapeField($table));
 
-        if (! empty($this->on)) {
+        if (!empty($this->on)) {
             $this->join_sql .= ' ON '.$this->buildConditionals($this->on);
         }
 
@@ -1275,13 +1275,13 @@ class Record extends Model
         $sql = '';
         if (is_array($this->columns)) {
             for ($i = 0, $j = 0; $i < count($this->columns); $i++) {
-                if (! isset($this->columns[$i]['fields']) || ! is_array($this->columns[$i]['fields'])) {
+                if (!isset($this->columns[$i]['fields']) || !is_array($this->columns[$i]['fields'])) {
                     continue;
                 }
 
                 foreach ($this->columns[$i]['fields'] as $key => $value) {
                     $sql .= ($j++ > 0 ? ', ' : '');
-                    if (! is_numeric($key)) {
+                    if (!is_numeric($key)) {
                         $sql .= ($this->columns[$i]['escape'] ? $this->escapeField($key) : $key).' AS '.$this->escapeField($value);
                     } else {
                         $sql .= ($this->columns[$i]['escape'] ? $this->escapeField($value) : $value);
@@ -1325,7 +1325,7 @@ class Record extends Model
     {
         $sql = '';
 
-        if (! empty($this->duplicate)) {
+        if (!empty($this->duplicate)) {
             $sql .= ' ON DUPLICATE KEY UPDATE '.$this->buildConditionals($this->duplicate, false);
         }
 
@@ -1341,7 +1341,7 @@ class Record extends Model
     {
         $sql = '';
 
-        if (! empty($this->where)) {
+        if (!empty($this->where)) {
             $sql .= ' WHERE '.$this->buildConditionals($this->where);
         }
 
@@ -1357,7 +1357,7 @@ class Record extends Model
     {
         $sql = '';
 
-        if (! empty($this->order)) {
+        if (!empty($this->order)) {
             $sql .= ' ORDER BY ';
             for ($i = 0; $i < count($this->order); $i++) {
                 $sql .= ($i > 0 ? ', ' : '').
@@ -1378,7 +1378,7 @@ class Record extends Model
     {
         $sql = '';
 
-        if (! empty($this->group)) {
+        if (!empty($this->group)) {
             $sql .= ' GROUP BY ';
             for ($i = 0; $i < count($this->group); $i++) {
                 $sql .= ($i > 0 ? ', ' : '').$this->escapeField($this->group[$i]);
@@ -1397,7 +1397,7 @@ class Record extends Model
     {
         $sql = '';
 
-        if (! empty($this->having)) {
+        if (!empty($this->having)) {
             $sql .= ' HAVING '.$this->buildConditionals($this->having);
         }
 
@@ -1453,7 +1453,7 @@ class Record extends Model
     private function buildValues()
     {
         $sql = '';
-        if (! empty($this->fields)) {
+        if (!empty($this->fields)) {
             $i      = 0;
             $fields = '';
             $values = '';
@@ -1489,7 +1489,7 @@ class Record extends Model
     private function buildValuePairs($pairs)
     {
         $sql = '';
-        if (! empty($pairs)) {
+        if (!empty($pairs)) {
             $i = 0;
             foreach ($pairs as $key => $value) {
                 $sql .= ($i > 0 ? ', ' : '').$this->escapeField($key).'=';

@@ -49,7 +49,7 @@ define('HTACCESS', file_exists(ROOTWEBDIR.'.htaccess'));
  * may include index.php if HTACCESS is set to false.
  */
 $script = isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : (isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null);
-define('WEBDIR', ($webdir = (! HTACCESS ? $script : (($path = dirname($script)) == '/' || $path == DS ? '' : $path)).'/') == ROOTWEBDIR ? '/' : $webdir);
+define('WEBDIR', ($webdir = (!HTACCESS ? $script : (($path = dirname($script)) == '/' || $path == DS ? '' : $path)).'/') == ROOTWEBDIR ? '/' : $webdir);
 unset($script, $webdir, $path);
 
 /*

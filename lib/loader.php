@@ -108,7 +108,7 @@ final class Loader
 
                 if ($plugin) {
                     // Ensure the model exists
-                    if (! file_exists(PLUGINDIR.$plugin.'models'.DS.$model_name_file.'.php')) {
+                    if (!file_exists(PLUGINDIR.$plugin.'models'.DS.$model_name_file.'.php')) {
                         throw new Exception('<strong>'.$model_name.'</strong> model not found');
                     }
 
@@ -123,7 +123,7 @@ final class Loader
                     require_once PLUGINDIR.$plugin.'models'.DS.$model_name_file.'.php';
                 } else {
                     // Ensure the model exists
-                    if (! file_exists(MODELDIR.$model_name_file.'.php')) {
+                    if (!file_exists(MODELDIR.$model_name_file.'.php')) {
                         throw new Exception('<strong>'.$model_name.'</strong> model not found');
                     }
 

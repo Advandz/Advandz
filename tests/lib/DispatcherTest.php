@@ -115,7 +115,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     {
         $str     = "I'm a clean string.";
         $escaped = addslashes($str);
-    
+
         Advandz\Dispatcher::stripSlashes($escaped);
         $this->assertSame($str, $escaped);
     }

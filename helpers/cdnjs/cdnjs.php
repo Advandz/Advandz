@@ -66,7 +66,7 @@ class Cdnjs
                     }
 
                     // Load the latest version if the provided version is invalid
-                    if (empty($loaded_libs[$library->name]) || ! @file_get_contents($loaded_libs[$library->name])) {
+                    if (empty($loaded_libs[$library->name]) || !@file_get_contents($loaded_libs[$library->name])) {
                         $loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/'.$library->name
                             .'/'.$library->version.'/'.$library->filename;
                     }
@@ -98,7 +98,7 @@ class Cdnjs
                 ->execute(['search' => $lib]);
             $search = json_decode($search);
 
-            if (json_last_error() === JSON_ERROR_NONE && ! empty($search->results)) {
+            if (json_last_error() === JSON_ERROR_NONE && !empty($search->results)) {
                 return $search->results;
             }
 

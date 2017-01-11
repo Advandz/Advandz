@@ -19,7 +19,7 @@ class Type
      */
     public static function _string($value = '')
     {
-        if (! is_string($value)) {
+        if (!is_string($value)) {
             throw new Exception('Argument passed must be an instance of string');
         }
 
@@ -35,7 +35,7 @@ class Type
      */
     public static function _int($value = 0)
     {
-        if (! is_int($value)) {
+        if (!is_int($value)) {
             throw new Exception('Argument passed must be an instance of integer');
         }
 
@@ -51,7 +51,7 @@ class Type
      */
     public static function _float($value = 0.0)
     {
-        if (! is_float($value)) {
+        if (!is_float($value)) {
             throw new Exception('Argument passed must be an instance of float');
         }
 
@@ -67,7 +67,7 @@ class Type
      */
     public static function _double($value = 0.0)
     {
-        if (! is_float($value)) {
+        if (!is_float($value)) {
             throw new Exception('Argument passed must be an instance of double');
         }
 
@@ -83,7 +83,7 @@ class Type
      */
     public static function _bool($value = false)
     {
-        if (! is_bool($value)) {
+        if (!is_bool($value)) {
             throw new Exception('Argument passed must be an instance of boolean');
         }
 
@@ -99,7 +99,7 @@ class Type
      */
     public static function _array($value = [])
     {
-        if (! is_array($value)) {
+        if (!is_array($value)) {
             throw new Exception('Argument passed must be an instance of array');
         }
 
@@ -119,7 +119,7 @@ class Type
             $value = new stdClass();
         }
 
-        if (! is_object($value)) {
+        if (!is_object($value)) {
             throw new Exception('Argument passed must be an object');
         }
 

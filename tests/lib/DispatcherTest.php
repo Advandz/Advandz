@@ -25,12 +25,12 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Dispatcher::dispatchCli
+     * @covers Advandz\Dispatcher::dispatchCli
      * @dataProvider dispatchCliProvider
      */
     public function testDispatchCli(array $args, $expected)
     {
-        /* Uncomment this block when Dispatcher::DispatchCli is no longer static
+        /* Uncomment this block when Advandz\Dispatcher::DispatchCli is no longer static
         $dispatcher = $this->getMock("Dispatcher", array("dispatch"));
         $dispatcher->expects($this->once())
             ->method("dispatch")
@@ -40,7 +40,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         */
         // But for now...
         $this->markTestIncomplete(
-            'Can not test static Dispatcher::DispatchCli.'
+            'Can not test static Advandz\Dispatcher::DispatchCli.'
         );
     }
 
@@ -53,7 +53,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Dispatcher::dispatch
+     * @covers Advandz\Dispatcher::dispatch
      * @todo   Implement testDispatch().
      */
     public function testDispatch()
@@ -65,7 +65,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Dispatcher::raiseError
+     * @covers Advandz\Dispatcher::raiseError
      * @dataProvider raiseErrorProvider
      */
     public function testRaiseError($e, $type)
@@ -77,10 +77,10 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
                 break;
             case 'header':
                 /*
-                Dispatcher::raiseError() must be refactored to test with mocks
+                Advandz\Dispatcher::raiseError() must be refactored to test with mocks
                 Configure::set("System.404_forwarding", true);
 
-                Dispatcher::raiseError($e);
+                Advandz\Dispatcher::raiseError($e);
                 $this->assertTrue(headers_sent());
                 */
                 break;
@@ -109,7 +109,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Dispatcher::stripSlashes
+     * @covers Advandz\Dispatcher::stripSlashes
      */
     public function testStripSlashes()
     {

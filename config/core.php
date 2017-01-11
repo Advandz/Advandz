@@ -25,7 +25,7 @@ Configure::set('System.default_controller', 'main');
 // Controller::render() or View::partial().
 Configure::set('System.default_view', 'default');
 // View directory to use for all errors that are raised either through uncaught
-// exceptions, or explicitly called by invoking Dispatcher::raiseError();
+// exceptions, or explicitly called by invoking Advandz\Dispatcher::raiseError();
 Configure::set('System.error_view', 'errors');
 // File extension for view files, default is .knife
 Configure::set('System.view_ext', '.knife');

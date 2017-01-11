@@ -47,7 +47,7 @@ class UnknownException extends ErrorException
     }
 
     /**
-     * Attempt to raise an error via Dispatcher::raiseError() for fatal errors
+     * Attempt to raise an error via Advandz\Dispatcher::raiseError() for fatal errors
      * caught using PHP's register_shutdown_function() function.
      */
     public static function setFatalErrorHandler()
@@ -63,7 +63,7 @@ class UnknownException extends ErrorException
         if (! empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
             $e = new self($error['message'], 0, $error['type'], $error['file'], $error['line']);
             try {
-                Dispatcher::raiseError($e);
+                Advandz\Dispatcher::raiseError($e);
             } catch (Exception $e) {
                 if (Configure::get('System.debug')) {
                     print $e->getMessage().' on line <strong>'.$e->getLine().

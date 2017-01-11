@@ -420,10 +420,10 @@ class RecordTest extends PHPUnit_Framework_TestCase
     public function testReset()
     {
         $record = clone $this->Record;
-        $this->Record->where('table1.field', '=', 'table2.field');
-        $this->assertNotSame($record->where, $this->Record->where);
+        $this->Record->appendValues(['table1.field', 'table2.field']);
+        $this->assertNotSame($record->values, $this->Record->values);
         $this->Record->reset();
-        $this->assertSame($record->where, $this->Record->where);
+        $this->assertSame($record->values, $this->Record->values);
     }
 
     /**

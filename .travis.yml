@@ -12,5 +12,8 @@ php:
 script: php phpunit.phar -c ./build/phpunit.xml --coverage-text
 
 before_install:
+  - PHP_VERSION=$(php -r '$php = explode(".",phpversion()); echo $php[0].".".$php[1];');
+  - if [ "${PHP_VERSION}" = "5.6" ] || [ "${PHP_VERSION}" = "7.0" ] || [ "${PHP_VERSION}" = "7.1" ]; then
   - wget https://phar.phpunit.de/phpunit.phar
   - chmod +x phpunit.phar
+  - fi

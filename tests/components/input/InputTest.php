@@ -326,32 +326,32 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'name' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'   => 'isEmpty',
                         'negate' => true,
-                        $action => 'strtolower',
+                        $action  => 'strtolower',
                     ],
                 ],
                 'company' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'   => 'isEmpty',
                         'negate' => true,
-                        $action => 'strtoupper',
+                        $action  => 'strtoupper',
                     ],
                 ],
             ],
             [
                 'name[]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'   => 'isEmpty',
                         'negate' => true,
-                        $action => 'strtolower',
+                        $action  => 'strtolower',
                     ],
                 ],
                 'company[]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'   => 'isEmpty',
                         'negate' => true,
-                        $action => ['strtoupper'],
+                        $action  => ['strtoupper'],
                     ],
                 ],
             ],
@@ -359,7 +359,7 @@ class InputTest extends PHPUnit_Framework_TestCase
 
         $data_sets = [
             [
-                'name' => 'Person Name',
+                'name'    => 'Person Name',
                 'company' => 'Company Name',
             ],
             [
@@ -400,14 +400,14 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'name' => [
                     'format' => [
-                        'rule' => 'isEmpty',
-                        'negate' => true,
+                        'rule'    => 'isEmpty',
+                        'negate'  => true,
                         'message' => 'name can not be empty',
                     ],
                 ],
-                'company'=>[
+                'company'=> [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'company must be empty',
                     ],
                 ],
@@ -416,18 +416,18 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'name[]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
-                        'negate' => true,
+                        'rule'    => 'isEmpty',
+                        'negate'  => true,
                         'message' => 'name can not be empty',
                     ],
                 ],
                 'company[]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'company must be empty',
                     ],
                 ],
-                'nonexistent[]'  =>  [
+                'nonexistent[]'  => [
 
                 ],
             ],
@@ -435,14 +435,14 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'data[name][]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
-                        'negate' => true,
+                        'rule'    => 'isEmpty',
+                        'negate'  => true,
                         'message' => 'name can not be empty',
                     ],
                 ],
                 'data[company][]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'company must be empty',
                     ],
                 ],
@@ -451,13 +451,13 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'name[1]' => [
                     'format' => [
-                        'rule' => [[$this, 'callBackTestMethod']],
+                        'rule'    => [[$this, 'callBackTestMethod']],
                         'message' => 'name[1] can not be empty',
                     ],
                 ],
                 'name[2]' => [
                     'format' => [
-                        'rule' => [[$this, 'callBackTestMethod']],
+                        'rule'    => [[$this, 'callBackTestMethod']],
                         'message' => 'name[2] must be empty',
                     ],
                 ],
@@ -466,14 +466,14 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'data[][name]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
-                        'negate' => 'true',
+                        'rule'    => 'isEmpty',
+                        'negate'  => 'true',
                         'message' => 'name can not be empty',
                     ],
                 ],
                 'data[][company]' => [
                     'format' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'company must be empty',
                     ],
                 ],
@@ -482,22 +482,22 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'name' => [
                     'empty' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'name can not be empty',
-                        'negate' => true,
-                        'last' => true,
+                        'negate'  => true,
+                        'last'    => true,
                     ],
                     'too_short' => [
-                        'rule' => ['minLength', 5],
+                        'rule'    => ['minLength', 5],
                         'message' => 'name must be at least 5 chars',
                     ],
                 ],
                 'company' => [
                     'empty' => [
-                        'rule' => 'isEmpty',
+                        'rule'    => 'isEmpty',
                         'message' => 'company can not be empty',
-                        'negate' => true,
-                        'final' => true,
+                        'negate'  => true,
+                        'final'   => true,
                     ],
                 ],
             ],
@@ -505,7 +505,7 @@ class InputTest extends PHPUnit_Framework_TestCase
 
         $data_sets = [
             [
-                'name' => 'Firstname Lastname',
+                'name'    => 'Firstname Lastname',
                 'company' => '',
             ],
             [
@@ -543,15 +543,15 @@ class InputTest extends PHPUnit_Framework_TestCase
             [
                 'data' => [
                     [
-                        'name' => 'Firstname Lastname',
+                        'name'    => 'Firstname Lastname',
                         'company' => '',
                     ],
                     [
-                        'name' => 'Secondname Lastname',
+                        'name'    => 'Secondname Lastname',
                         'company' => '',
                     ],
                     [
-                        'name' => 'Thirdname Lastname',
+                        'name'    => 'Thirdname Lastname',
                         'company' => '',
                     ],
                 ],

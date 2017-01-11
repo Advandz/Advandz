@@ -8,7 +8,7 @@ class CacheTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        if (! is_dir(CACHEDIR)) {
+        if (!is_dir(CACHEDIR)) {
             mkdir(CACHEDIR, 0777, true);
         }
     }

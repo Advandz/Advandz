@@ -173,7 +173,7 @@ class Http
         // Build GET request
         if ($this->method == 'GET') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-            if (! empty($data)) {
+            if (!empty($data)) {
                 $get = '?'.http_build_query($data);
             }
         }
@@ -182,7 +182,7 @@ class Http
         if ($this->method == 'POST') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
             curl_setopt($curl, CURLOPT_POST, true);
-            if (! empty($data)) {
+            if (!empty($data)) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             }
         }
@@ -191,7 +191,7 @@ class Http
         if ($this->method == 'PUT') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
             curl_setopt($curl, CURLOPT_POST, true);
-            if (! empty($data)) {
+            if (!empty($data)) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             }
         }
@@ -199,7 +199,7 @@ class Http
         // Build DELETE request
         if ($this->method == 'DELETE') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            if (! empty($data)) {
+            if (!empty($data)) {
                 $get = '?'.http_build_query($data);
             }
         }

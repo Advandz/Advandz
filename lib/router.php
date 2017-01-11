@@ -133,8 +133,8 @@ final class Router
                 $public_protected = ['preaction', 'postaction'];
 
                 // A method may be required to inherit from the given class
-                if (($inherits_from != null && ($declared_class->getName() != $inherits_from && ! $declared_class->isSubclassOf($inherits_from)))
-                    || ! $meth->isPublic() || $meth->isProtected() || $meth->isConstructor()
+                if (($inherits_from != null && ($declared_class->getName() != $inherits_from && !$declared_class->isSubclassOf($inherits_from)))
+                    || !$meth->isPublic() || $meth->isProtected() || $meth->isConstructor()
                     || $meth->isDestructor() || $meth->isAbstract() || in_array(strtolower($method), (array) $public_protected)
                 ) {
                     return false;
@@ -192,7 +192,7 @@ final class Router
         }
 
         // If the controller was not passed in the URI add it to the URI string
-        if (! isset($uri[0])) {
+        if (!isset($uri[0])) {
             $uri_str = $controller.'/'.$uri_str;
         }
 

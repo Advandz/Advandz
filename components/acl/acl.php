@@ -130,7 +130,7 @@ class Acl
                 ->appendValues($values)
                 ->fetchAll();
 
-            if ($access_list && ! empty($access_list)) {
+            if ($access_list && !empty($access_list)) {
                 break;
             }
 
@@ -181,7 +181,7 @@ class Acl
     public function addAro($alias, $parent = null)
     {
         $lineage = '/';
-        if ($parent != null && ! is_numeric($parent)) {
+        if ($parent != null && !is_numeric($parent)) {
             $aro = $this->getAroByAlias($parent);
             if ($aro) {
                 $parent  = $aro->id;

@@ -17,7 +17,7 @@ final class Cache
      */
     final public static function emptyCache($path = null)
     {
-        if (! ($dir = @opendir(CACHEDIR.$path))) {
+        if (!($dir = @opendir(CACHEDIR.$path))) {
             return;
         }
 
@@ -64,7 +64,7 @@ final class Cache
         $cache = self::cacheName($name, $path);
 
         $cache_dir = dirname($cache);
-        if (! file_exists($cache_dir)) {
+        if (!file_exists($cache_dir)) {
             mkdir($cache_dir, Configure::get('Cache.dir_permissions'), true);
         }
 

@@ -127,7 +127,6 @@ class RouterTest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('get', $result);
         $this->assertArrayHasKey('uri', $result);
         $this->assertArrayHasKey('uri_str', $result);
-        $this->assertSame(rtrim($uri, '/').'/', $result['uri_str']);
     }
 
     /**

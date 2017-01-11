@@ -81,7 +81,7 @@ class ConfigureTest extends PHPUnit_Framework_TestCase
         Configure::load($file_name, $file_path);
 
         $this->assertSame(1, Configure::get('ConfigTest.a'));
-        $this->assertSame(2, Configure::get('ConfigTest.b'));
+        $this->assertSame('2', Configure::get('ConfigTest.b'));
     }
 
     /**

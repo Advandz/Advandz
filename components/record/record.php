@@ -1519,19 +1519,19 @@ class Record extends Model
     {
         $this->type      = null;
         $this->join_sql  = null;
-        $this->tables    = Type::_array();
-        $this->columns   = Type::_array();
-        $this->fields    = Type::_array();
-        $this->keys      = Type::_array();
-        $this->where     = Type::_array();
-        $this->on        = Type::_array();
-        $this->order     = Type::_array();
-        $this->group     = Type::_array();
-        $this->limit     = Type::_array();
-        $this->values    = Type::_array();
-        $this->duplicate = Type::_array();
-        $this->having    = Type::_array();
-        $this->open      = Type::_int();
+        $this->tables    = [];
+        $this->columns   = [];
+        $this->fields    = [];
+        $this->keys      = [];
+        $this->where     = [];
+        $this->on        = [];
+        $this->order     = [];
+        $this->group     = [];
+        $this->limit     = [];
+        $this->values    = [];
+        $this->duplicate = [];
+        $this->having    = [];
+        $this->open      = 0;
     }
 
     /**

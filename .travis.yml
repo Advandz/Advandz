@@ -3,11 +3,8 @@ language: php
 os:
   - linux
   - osx
-  
+
 php:
-  - 5.3
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
   - 7.1
@@ -16,6 +13,5 @@ php:
 script: php phpunit.phar -c ./build/phpunit.xml --coverage-text
 
 before_install:
-  - PHP_VERSION=$(php -r '$php = explode(".",phpversion()); echo $php[0].".".$php[1];');
-  - if [ "${PHP_VERSION}" = "5.6" ] || [ "${PHP_VERSION}" = "7.0" ] || [ "${PHP_VERSION}" = "7.1" ]; then wget https://phar.phpunit.de/phpunit.phar; else wget https://phar.phpunit.de/phpunit-4.8.9.phar; mv phpunit-4.8.9.phar phpunit.phar; fi
+  - wget https://phar.phpunit.de/phpunit.phar;
   - chmod +x phpunit.phar

@@ -137,7 +137,7 @@ class Language
             self::$lang_files[$lang_dir.$lang_file][] = $language;
 
             if (isset($lang) && is_array($lang)) {
-                if (! isset(self::$lang_text[$language])) {
+                if (!isset(self::$lang_text[$language])) {
                     self::$lang_text[$language] = [];
                 }
 

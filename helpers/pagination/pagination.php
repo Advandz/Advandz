@@ -233,7 +233,7 @@ class Pagination extends Html
         }
 
         // Ensure nav should be shown
-        if (! $this->hasPages()) {
+        if (!$this->hasPages()) {
             return null;
         }
 
@@ -244,7 +244,7 @@ class Pagination extends Html
         $html .= $this->openTag($this->settings['navigation']['surround']);
 
         $show         = $this->settings['pages_to_show'];
-        $per_page     = (isset($settings['per_page']) && ! empty($settings['per_page'])) ? $settings['per_page'] : $this->settings['results_per_page'];
+        $per_page     = (isset($settings['per_page']) && !empty($settings['per_page'])) ? $settings['per_page'] : $this->settings['results_per_page'];
         $current_page = $this->currentPage();
 
         $page_label                = $this->settings['uri_labels']['page'];
@@ -276,13 +276,13 @@ class Pagination extends Html
 
                 // Build first, prev links, merge with disabled settings if not needed but shown
                 if ($this->settings['navigation']['first']['show'] == 'always' || ($this->settings['navigation']['first']['show'] == 'if_needed' && $prev_needed)) {
-                    if (! $prev_needed) {
+                    if (!$prev_needed) {
                         $this->settings['navigation']['first']['attributes']['class'] = (isset($this->settings['navigation']['first']['attributes']['class']) ? $this->settings['navigation']['first']['attributes']['class'] : '').' '.$this->settings['navigation']['first']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['first'], 1);
                 }
                 if ($this->settings['navigation']['prev']['show'] == 'always' || ($this->settings['navigation']['prev']['show'] == 'if_needed' && $prev_needed)) {
-                    if (! $prev_needed) {
+                    if (!$prev_needed) {
                         $this->settings['navigation']['prev']['attributes']['class'] = (isset($this->settings['navigation']['prev']['attributes']['class']) ? $this->settings['navigation']['prev']['attributes']['class'] : '').' '.$this->settings['navigation']['prev']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['prev'], $prev);
@@ -299,13 +299,13 @@ class Pagination extends Html
 
                 // Build next, last links, merge with disabled settings if not needed but shown
                 if ($this->settings['navigation']['next']['show'] == 'always' || ($this->settings['navigation']['next']['show'] == 'if_needed' && $next_needed)) {
-                    if (! $next_needed) {
+                    if (!$next_needed) {
                         $this->settings['navigation']['next']['attributes']['class'] = (isset($this->settings['navigation']['next']['attributes']['class']) ? $this->settings['navigation']['next']['attributes']['class'] : '').' '.$this->settings['navigation']['next']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['next'], $next);
                 }
                 if ($this->settings['navigation']['last']['show'] == 'always' || ($this->settings['navigation']['last']['show'] == 'if_needed' && $next_needed)) {
-                    if (! $next_needed) {
+                    if (!$next_needed) {
                         $this->settings['navigation']['last']['attributes']['class'] = (isset($this->settings['navigation']['last']['attributes']['class']) ? $this->settings['navigation']['last']['attributes']['class'] : '').' '.$this->settings['navigation']['last']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['last'], $pages);
@@ -365,7 +365,7 @@ class Pagination extends Html
      */
     private function createNavItem($nav_item, $page)
     {
-        return $this->output($this->openTag($nav_item).(isset($nav_item['link']) && ! $nav_item['link'] ? $page : $this->createLink($nav_item, $page)).$this->closeTag($nav_item));
+        return $this->output($this->openTag($nav_item).(isset($nav_item['link']) && !$nav_item['link'] ? $page : $this->createLink($nav_item, $page)).$this->closeTag($nav_item));
     }
 
     /**

@@ -28,7 +28,7 @@ try {
     include dirname(__FILE__).'/lib/init.php';
 
     // Dispatch the Web request
-    if (! empty($_SERVER['REQUEST_URI'])) {
+    if (!empty($_SERVER['REQUEST_URI'])) {
         Dispatcher::dispatch($_SERVER['REQUEST_URI']);
     } else {
         // Dispatch the CLI request

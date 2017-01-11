@@ -243,20 +243,20 @@ class Form extends Html
         $num_fields = count($fields);
 
         for ($i = 0; $i < $num_fields; $i++) {
-            if (! isset($fields[$i]['type']) || ! isset($fields[$i]['name'])) {
+            if (!isset($fields[$i]['type']) || !isset($fields[$i]['name'])) {
                 continue;
             }
 
-            if (! isset($fields[$i]['attributes'])) {
+            if (!isset($fields[$i]['attributes'])) {
                 $fields[$i]['attributes'] = null;
             }
-            if (! isset($fields[$i]['value'])) {
+            if (!isset($fields[$i]['value'])) {
                 $fields[$i]['value'] = null;
             }
-            if (! isset($fields[$i]['checked'])) {
+            if (!isset($fields[$i]['checked'])) {
                 $fields[$i]['checked'] = null;
             }
-            if (! isset($fields[$i]['selected_values'])) {
+            if (!isset($fields[$i]['selected_values'])) {
                 $fields[$i]['selected_values'] = null;
             }
 
@@ -297,13 +297,13 @@ class Form extends Html
                     break;
                 case 'select':
                 case 'multiselect':
-                    if (! isset($fields[$i]['options'])) {
+                    if (!isset($fields[$i]['options'])) {
                         $fields[$i]['options'] = null;
                     }
-                    if (! isset($fields[$i]['selected_value'])) {
+                    if (!isset($fields[$i]['selected_value'])) {
                         $fields[$i]['selected_value'] = null;
                     }
-                    if (! isset($fields[$i]['selected_values'])) {
+                    if (!isset($fields[$i]['selected_values'])) {
                         $fields[$i]['selected_values'] = null;
                     }
 
@@ -579,7 +579,7 @@ class Form extends Html
     {
         $open_group_tag = false;
 
-        if (! is_array($selected_values)) {
+        if (!is_array($selected_values)) {
             $selected_values = (array) $selected_values;
         }
 
@@ -616,7 +616,7 @@ class Form extends Html
 
                     $html .= '<option';
 
-                    if (! empty($selected_values) && $this->inArray($value, $selected_values)) {
+                    if (!empty($selected_values) && $this->inArray($value, $selected_values)) {
                         $attr['selected'] = 'selected';
                     }
 
@@ -687,7 +687,7 @@ class Form extends Html
     private function inArray($needle, array $haystack, $strict = false)
     {
         foreach ($haystack as $key => $value) {
-            if (! $strict && (string) $needle == (string) $value) {
+            if (!$strict && (string) $needle == (string) $value) {
                 return true;
             }
             if ($strict && $needle === $value) {

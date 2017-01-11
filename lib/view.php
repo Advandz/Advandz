@@ -142,7 +142,7 @@ class View extends Knife
             extract($this->vars);
         } // Extract the vars to local namespace
 
-        if (! file_exists($file)) {
+        if (!file_exists($file)) {
             throw new Exception('Files does not exist: '.$file);
         }
 

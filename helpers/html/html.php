@@ -46,7 +46,7 @@ class Html
      */
     public function safe($str, $preserve_tags = false)
     {
-        if (! $this->isUtf8($str)) {
+        if (!$this->isUtf8($str)) {
             $str = utf8_encode($str);
         }
 
@@ -186,7 +186,7 @@ class Html
     {
         $html = Type::_string();
 
-        if (! empty($attributes)) {
+        if (!empty($attributes)) {
             foreach ($attributes as $key => $value) {
                 if (is_array($value)) {
                     $value = implode($glue, $value);
@@ -212,7 +212,7 @@ class Html
             return $html;
         }
 
-        return '<!--[if '.$expression.']>'.(! $hidden ? '<!-->'.$html.'<!--' : $html).'<![endif]-->';
+        return '<!--[if '.$expression.']>'.(!$hidden ? '<!-->'.$html.'<!--' : $html).'<![endif]-->';
     }
 
     /**

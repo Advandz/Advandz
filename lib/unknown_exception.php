@@ -60,7 +60,7 @@ class UnknownException extends ErrorException
         }
 
         // Only raise error if last registered error was Fatal
-        if (! empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
+        if (!empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
             $e = new self($error['message'], 0, $error['type'], $error['file'], $error['line']);
             try {
                 Dispatcher::raiseError($e);

@@ -74,7 +74,7 @@ class Knife extends Language
             // Delete compiled view if is old
             if (Configure::get('Caching.on') && file_exists($compiled_file)) {
                 $build_date = filemtime($compiled_file); // Last modified date of the compiled view
-                $ttl        = (! empty(Configure::get('Knife.ttl')) ? Configure::get('Knife.ttl') : 3600);
+                $ttl        = (!empty(Configure::get('Knife.ttl')) ? Configure::get('Knife.ttl') : 3600);
 
                 if ($build_date + $ttl <= time()) {
                     unlink($compiled_file);
@@ -82,17 +82,17 @@ class Knife extends Language
             }
 
             // Create compiled view
-            if (! file_exists($compiled_file)) {
+            if (!file_exists($compiled_file)) {
                 // Check if the view exists and get the content
                 if (file_exists($file)) {
                     $this->template = file_get_contents($file);
-                    
+
                     // Remove PHP tags
                     $this->replaceTemplate('<?php', '&lt;?php');
                     $this->replaceTemplate('?>', '?&gt;');
                 }
 
-                if (! $this->template) {
+                if (!$this->template) {
                     throw new Exception("File is not a valid view or you don't have the permissions to read them: ".$file);
                 }
 
@@ -104,7 +104,7 @@ class Knife extends Language
             }
 
             // Halt compiler
-            if (! Configure::get('Caching.on')) {
+            if (!Configure::get('Caching.on')) {
                 register_shutdown_function(
                     function () use ($compiled_file) {
                         unlink($compiled_file);

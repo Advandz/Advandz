@@ -234,11 +234,11 @@ class Controller
      */
     final protected function startCaching($time)
     {
-        if (! Configure::get('Caching.on')) {
+        if (!Configure::get('Caching.on')) {
             return false;
         }
 
-        if (! is_numeric($time)) {
+        if (!is_numeric($time)) {
             $time = strtotime($time) - time();
         }
         $this->cache_for = $time;
@@ -344,7 +344,7 @@ class Controller
         }
 
         // If not scheme is specified, assume http(s)
-        if (! isset($parts['scheme'])) {
+        if (!isset($parts['scheme'])) {
             $uri = 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '').'://'.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']).($relative ? WEBDIR : '').$uri;
         }
 

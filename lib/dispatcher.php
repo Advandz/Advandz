@@ -75,8 +75,8 @@ class Dispatcher extends Controller
 
         $plugin_path = null; // relative path to the plugin directory if it exists
 
-        if (! $plugin) {
-            if (! Loader::load(CONTROLLERDIR.$controller.'.php')) {
+        if (!$plugin) {
+            if (!Loader::load(CONTROLLERDIR.$controller.'.php')) {
                 throw new Exception('<strong>'.$controller.'</strong> is not a valid controller', 404);
             }
         } else {
@@ -144,7 +144,7 @@ class Dispatcher extends Controller
         $ctrl->postAction();
 
         // Only render if the action returned void or something other than false and this is not a CLI request
-        if ($action_return !== false && (! $is_cli || Configure::get('System.cli_render_views'))) {
+        if ($action_return !== false && (!$is_cli || Configure::get('System.cli_render_views'))) {
             $ctrl->render();
         }
     }

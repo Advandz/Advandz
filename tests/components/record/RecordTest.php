@@ -421,9 +421,9 @@ class RecordTest extends PHPUnit_Framework_TestCase
     {
         $record = clone $this->Record;
         $this->Record->where('table1.field', '=', 'table2.field');
-        $this->assertNotSame($record, $this->Record);
+        $this->assertNotSame($record->where, $this->Record->where);
         $this->Record->reset();
-        $this->assertSame($record, $this->Record);
+        $this->assertSame($record->where, $this->Record->where);
     }
 
     /**

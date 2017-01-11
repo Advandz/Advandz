@@ -119,7 +119,7 @@ class Input
                 break;
         }
 
-        return preg_match($regex, $str);
+        return (preg_match($regex, $str) == true);
     }
 
     /**

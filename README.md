@@ -1,7 +1,7 @@
 # Advandz Framework #
 [![Build Status](https://img.shields.io/travis/Advandz/Advandz-Framework.svg?style=flat-square)](https://travis-ci.org/Advandz/Advandz-Framework)
 [![StyleCI](https://styleci.io/repos/72899907/shield?branch=master)](https://styleci.io/repos/72899907)
-[![Codacy Badge](https://img.shields.io/codacy/grade/46f5e9c0ffd2445ea5e5ba66ef89ca5d/master.svg?style=flat-square)](https://www.codacy.com/app/yosoy/Advandz-Framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Advandz/Advandz-Framework&amp;utm_campaign=Badge_Grade)
+[![Codacy](https://img.shields.io/codacy/grade/46f5e9c0ffd2445ea5e5ba66ef89ca5d/master.svg?style=flat-square)](https://www.codacy.com/app/yosoy/Advandz-Framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Advandz/Advandz-Framework&amp;utm_campaign=Badge_Grade)
 [![The MIT License](https://img.shields.io/github/license/advandz/advandz-framework.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D5.6-8c198c.svg?style=flat-square)](http://php.net)
 [![HHVM Version](https://img.shields.io/badge/hhvm-%3E%3D3.10.0-orange.svg?style=flat-square)](http://hhvm.com)

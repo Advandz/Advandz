@@ -11,7 +11,6 @@
 
 namespace Advandz\App\Controller;
 
-use Loader;
 use Controller;
 
 class AppController extends Controller
@@ -21,7 +20,7 @@ class AppController extends Controller
      */
     public function preAction()
     {
-        Loader::loadHelpers($this, ['Cdnjs']);
+        $this->helpers(['Cdnjs']);
 
         $libs = $this->Cdnjs->loadLibraries(['jquery']);
         $this->structure->set('libs', $libs);

@@ -3,9 +3,10 @@
  *
  * @package Advandz
  * @version 1.0.0
- * @copyright Copyright 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+ * @copyright Copyright 2011-2017 Daniel Eden (https://github.com/daneden)
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  */
+
 .af-animation {
 	-webkit-animation-duration: 1s;
 	animation-duration: 1s;

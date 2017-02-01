@@ -12,7 +12,7 @@
  * @subpackage Advandz.components.acl
  * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
- * @author Cody Phillips <therealclphillips.woop@gmail.com>>
+ * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
 
 namespace Advandz\Component;
@@ -95,8 +95,12 @@ class Acl
         for ($i = 0; $i < $aco_count; $i++) {
             // Build temp subquery
             $fields        = [
-                'acl_aro.id', 'acl_aro.alias', 'acl_aro.lineage', 'ancestor.id'    => 'ancestor_id',
-                                                                  'ancestor.alias' => 'ancestor_alias', 'ancestor.lineage' => 'ancestor_lineage',
+                'acl_aro.id',
+                'acl_aro.alias',
+                'acl_aro.lineage',
+                'ancestor.id'       => 'ancestor_id',
+                'ancestor.alias'    => 'ancestor_alias',
+                'ancestor.lineage'  => 'ancestor_lineage'
             ];
             $temp          = $this->Record->select($fields)
                 ->from('acl_aro')

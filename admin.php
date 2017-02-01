@@ -30,7 +30,6 @@ $videos = [
     'UcRtFYAz2Yo',
     'zEaxNfkLUUQ',
     '3-GsefjiKtE',
-    '3-GsefjiKtE',
     'mPBzujm-cF8',
     'VWurRZ_Aj5g',
     'NDcj8Ub3SV8',

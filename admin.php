@@ -1,14 +1,13 @@
 <?php
 /**
  * Yeah, This is an easter egg. You can safely remove this file... or not =O
- * Inspired in https://stackoverflow/admin.php
+ * Inspired in https://stackoverflow/admin.php.
  *
  * @package Advandz
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-
 $videos = [
     '9UZbGgXvCCA',
     'wbby9coDRCk',
@@ -46,4 +45,4 @@ $videos = [
 
 $video = $videos[rand(0, (count($videos) - 1))];
 
-header('Location: https://www.youtube.com/watch?v=' . $video);
+header('Location: https://www.youtube.com/watch?v='.$video);

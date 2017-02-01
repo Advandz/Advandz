@@ -15,7 +15,7 @@
  */
 $start = microtime(true);
 
-/**
+/*
  * Initialize the system
  */
 try {
@@ -50,7 +50,7 @@ try {
  */
 $end = microtime(true);
 
-/**
+/*
  * Display rendering time if benchmarking is enabled
  */
 if (Configure::get('System.benchmark')) {

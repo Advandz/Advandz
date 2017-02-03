@@ -11,7 +11,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-/**
+/*
  * Sets the default error reporting level (everything).  This value should
  * remain as-is.  If the error level needs to be changed it should be done so
  * using Configure::errorReporting(), but only after Configure has been

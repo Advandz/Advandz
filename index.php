@@ -10,7 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-/**
+/*
  * Start benchmark counter.
  */
 $start = microtime(true);
@@ -45,7 +45,7 @@ try {
     }
 }
 
-/**
+/*
  * Stop benchmark counter.
  */
 $end = microtime(true);

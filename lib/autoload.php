@@ -10,7 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-/**
+/*
  * Load the Composer autoloader.
  */
 @include_once VENDORDIR.'composer'.DS.'autoload.php';

@@ -10,7 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-/**
+/*
  * Set the default timezone to satisfy PHP strict standards on servers with this
  * capability.
  */

@@ -13,7 +13,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->dispatcher = new Advandz\Dispatcher();
+        $this->dispatcher = new Dispatcher();
     }
 
     /**
@@ -25,12 +25,12 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Advandz\Dispatcher::dispatchCli
+     * @covers Dispatcher::dispatchCli
      * @dataProvider dispatchCliProvider
      */
     public function testDispatchCli(array $args, $expected)
     {
-        /* Uncomment this block when Advandz\Dispatcher::DispatchCli is no longer static
+        /* Uncomment this block when Dispatcher::DispatchCli is no longer static
         $dispatcher = $this->getMock("Dispatcher", array("dispatch"));
         $dispatcher->expects($this->once())
             ->method("dispatch")
@@ -40,7 +40,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         */
         // But for now...
         $this->markTestIncomplete(
-            'Can not test static Advandz\Dispatcher::DispatchCli.'
+            'Can not test static Dispatcher::DispatchCli.'
         );
     }
 
@@ -53,7 +53,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Advandz\Dispatcher::dispatch
+     * @covers Dispatcher::dispatch
      * @todo   Implement testDispatch().
      */
     public function testDispatch()
@@ -65,7 +65,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Advandz\Dispatcher::raiseError
+     * @covers Dispatcher::raiseError
      * @dataProvider raiseErrorProvider
      */
     public function testRaiseError($e, $type)
@@ -73,14 +73,14 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
         switch ($type) {
             case 'output':
                 $this->expectOutputRegex('//i', $e->getMessage());
-                Advandz\Dispatcher::raiseError($e);
+                Dispatcher::raiseError($e);
                 break;
             case 'header':
                 /*
-                Advandz\Dispatcher::raiseError() must be refactored to test with mocks
+                Dispatcher::raiseError() must be refactored to test with mocks
                 Configure::set("System.404_forwarding", true);
 
-                Advandz\Dispatcher::raiseError($e);
+                Dispatcher::raiseError($e);
                 $this->assertTrue(headers_sent());
                 */
                 break;
@@ -89,7 +89,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
                 Configure::set('System.error_view', 'nonexistentview');
 
                 try {
-                    Advandz\Dispatcher::raiseError($e);
+                    Dispatcher::raiseError($e);
                 } catch (Exception $thrown) {
                     $exception = $thrown;
                 }
@@ -109,14 +109,14 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Advandz\Dispatcher::stripSlashes
+     * @covers Dispatcher::stripSlashes
      */
     public function testStripSlashes()
     {
         $str     = "I'm a clean string.";
         $escaped = addslashes($str);
 
-        Advandz\Dispatcher::stripSlashes($escaped);
+        Dispatcher::stripSlashes($escaped);
         $this->assertSame($str, $escaped);
     }
 }

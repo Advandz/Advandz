@@ -6,8 +6,8 @@ php:
   - 7.1
   - hhvm
 
-script: php phpunit.phar -c ./build/phpunit.xml --coverage-text
+script: php phpunit-5.7.phar -c ./build/phpunit.xml --coverage-text
 
 before_install:
-  - wget https://phar.phpunit.de/phpunit.phar;
-  - chmod +x phpunit.phar
+  - wget https://phar.phpunit.de/phpunit-5.7.phar;
+  - chmod +x phpunit-5.7.phar

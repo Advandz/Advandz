@@ -79,7 +79,7 @@ class Hashing
      * Pump data into an active hashing context.
      *
      * @param mixed $data Data or file to be hashed.
-     * @param bool $file True, to generate a keyed hash value using the contents of a given file. 
+     * @param bool $file True, to generate a keyed hash value using the contents of a given file.
      */
     public function addDataToHash($data, $file = false)
     {
@@ -97,7 +97,7 @@ class Hashing
      */
     public function finishHash()
     {
-        $hash = hash_final($this->data);
+        $hash       = hash_final($this->data);
         $this->data = null;
 
         return $hash;

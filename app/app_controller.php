@@ -11,9 +11,7 @@
 
 namespace Advandz\App\Controller;
 
-use Controller;
-
-class AppController extends Controller
+class AppController extends \Controller
 {
     /**
      * Pre-Action, This method called before the index method, or controller specified action.

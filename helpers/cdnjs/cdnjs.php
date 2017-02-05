@@ -13,10 +13,7 @@
 
 namespace Advandz\Helper;
 
-use Type;
-use Loader;
-
-class Cdnjs
+class Cdnjs extends \Controller
 {
     /**
      * Load a library.
@@ -26,7 +23,7 @@ class Cdnjs
      */
     public function loadLibraries($libs = [])
     {
-        $loaded_libs = Type::_array();
+        $loaded_libs = [];
         if (is_array($libs)) {
             foreach ($libs as $key => $value) {
                 // Fetch library
@@ -87,7 +84,7 @@ class Cdnjs
     public function searchLibrary($lib)
     {
         // Load components
-        Loader::loadComponents($this, ['Http']);
+        $this->components(['Http']);
 
         // Search the library in CDNJS
         if (isset($lib)) {
@@ -118,7 +115,7 @@ class Cdnjs
     public function getLibrary($lib)
     {
         // Load components
-        Loader::loadComponents($this, ['Http']);
+        $this->components(['Http']);
 
         // Get the library from CDNJS
         if (isset($lib)) {

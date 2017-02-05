@@ -28,16 +28,18 @@ class Password
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         // Numbers
-        if($numbers)
+        if ($numbers) {
             $chars .= '0123456789';
+        }
 
         // Symbols
-        if($symbols)
+        if ($symbols) {
             $chars .= '@#&%?!-$_^*()[]';
+        }
 
         $count = mb_strlen($chars);
 
-        for($i = 0, $result = ''; $i < $length; $i++) {
+        for ($i = 0, $result = ''; $i < $length; $i++) {
             $index = rand(0, $count - 1);
             $result .= mb_substr($chars, $index, 1);
         }
@@ -101,7 +103,7 @@ class Password
         if (strlen($hash) === 0) {
             return false;
         }
-        
+
         return password_verify($password, $hash);
     }
 }

@@ -143,7 +143,7 @@ class Http
         if ($method == 'GET' || $method == 'POST' || $method == 'DELETE' || $method == 'PUT') {
             $this->method = $method;
         } else {
-            throw new Exception('Invalid method');
+            throw new Exception('HTTP Invalid method');
         }
 
         return $this;

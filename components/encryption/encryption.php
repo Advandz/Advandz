@@ -24,6 +24,19 @@ class Encryption
     private $algorithm = 'AES-128-CBC';
 
     /**
+     * Constructs a new Encryption object.
+     */
+    public function __construct()
+    {
+        // Fetch default encryption key
+        $key = \Configure::get('Encryption.key');
+
+        if (!empty($key)) {
+            $this->setKey($key);
+        }
+    }
+
+    /**
      * Encrypt a value using OpenSSL and the selected algorithm.
      *
      * @param mixed $data The data to be encrypted, A string, an array or an object
@@ -31,6 +44,11 @@ class Encryption
      */
     public function encrypt($data)
     {
+        // Check if a valid key is set
+        if (empty($this->key)) {
+            throw new \Exception('An encryption key isn\'t provided');
+        }
+
         // Generate a random IV
         $iv = hex2bin($this->generateKey(16));
 
@@ -79,6 +97,11 @@ class Encryption
      */
     public function decrypt($data)
     {
+        // Check if a valid key is set
+        if (empty($this->key)) {
+            throw new \Exception('An encryption key isn\'t provided');
+        }
+
         // Decode the encrypted data
         $data = json_decode(base64_decode($data), true);
 
@@ -145,11 +168,11 @@ class Encryption
     public function generateKey($length = 16)
     {
         if (function_exists('random_bytes')) {
-            // First we will try to use the default random bytes generator.
+            // First we will try to use the default random bytes generator
             $bytes = random_bytes($length);
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
             // If the first option is not available, We will try to use the
-            // OpenSSL random bytes generator.
+            // OpenSSL random bytes generator
             $bytes = openssl_random_pseudo_bytes($length);
         } elseif (function_exists('mcrypt_create_iv')) {
             // If OpenSSL is not available, We will try to generate a IV

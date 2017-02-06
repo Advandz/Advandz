@@ -3,8 +3,6 @@
 class EncryptionTest extends PHPUnit_Framework_TestCase
 {
     private $Encryption;
-    private $string;
-    private $encrypted;
 
     public function setUp()
     {

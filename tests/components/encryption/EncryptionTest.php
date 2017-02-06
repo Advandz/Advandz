@@ -34,6 +34,8 @@ class EncryptionTest extends PHPUnit_Framework_TestCase
         $expected = 'test';
         $encrypted = 'eyJpdiI6Im9CTnVOTEZwZjNXSEs1dVlRMUhuYUE9PSIsIm1hYyI6ImJiZTAwZmM1ZjhlMDI5ZmZmNWQzNTBlN2ZhNzc0NmRjZGE2ZjQzMWNmMGI0ZTExNzg4NjQ4ZGFkZjA3YWRiNmMiLCJkYXRhIjoiYTlLaVNMKzNVc0FOXC9SM0dqWHVmdHc9PSIsInNlcmlhbGl6ZSI6ZmFsc2V9';
 
+        $this->Encryption->setKey($key);
+        
         $this->assertSame($expected, $this->Encryption->decrypt($encrypted));
     }
 

@@ -56,6 +56,12 @@ Configure::set('Knife.on', true);
 Configure::set('Knife.ttl', 3600);
 
 //###############################################################################
+// Security
+//###############################################################################
+// A binary pseudo-random key hexadecimally encoded.
+Configure::set('Encryption.key', '');
+
+//###############################################################################
 // Language
 //###############################################################################
 // Default language (ISO 639-1/2) to use. If a particular language or string is

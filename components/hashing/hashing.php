@@ -102,4 +102,15 @@ class Hashing
 
         return $hash;
     }
+
+    /**
+     * Compares two strings using the same time whether they're equal or not.
+     *
+     * @param string $hash The string of known length to compare against
+     * @param string $user_hash The user-supplied string
+     * @param bool True if hash is equal
+     */
+    public function compareHash($hash, $user_hash) {
+        return hash_equals($hash, $user_hash);
+    }
 }

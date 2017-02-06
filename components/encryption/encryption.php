@@ -54,13 +54,13 @@ class Encryption
         }
 
         // Calculate a MAC for the encrypted data
-        $mac = hash_hmac('sha256', base64_encode($iv) . $data, $this->key);
+        $mac = hash_hmac('sha256', base64_encode($iv).$data, $this->key);
 
         // Build an array with the encrypted data
         $result = json_encode([
-            'iv' => base64_encode($iv),
-            'mac' => $mac,
-            'data' => $data,
+            'iv'        => base64_encode($iv),
+            'mac'       => $mac,
+            'data'      => $data,
             'serialize' => $serialize
         ]);
 
@@ -85,7 +85,7 @@ class Encryption
         // Check if the encrypted data is valid
         if (is_array($data) && isset($data['iv'], $data['mac'], $data['data'], $data['serialize'])) {
             // Check if the HMAC is valid
-            $mac = hash_hmac('sha256', $data['iv'] . $data['data'], $this->key);
+            $mac = hash_hmac('sha256', $data['iv'].$data['data'], $this->key);
 
             if ($mac === $data['mac']) {
                 $decrypted = openssl_decrypt($data['data'], $this->algorithm, hex2bin($this->key), 0, base64_decode($data['iv']));

@@ -50,7 +50,7 @@ class PasswordTest extends PHPUnit_Framework_TestCase
     public function testVerify()
     {
         $password = '0cXGx-cUhhBu';
-        $hash = '$2y$10$Vjn3Bui2l8og8T5UAcU2kei0UKhHOgwf/UQZzkj7NT5a2xew/5KJy';
+        $hash     = '$2y$10$Vjn3Bui2l8og8T5UAcU2kei0UKhHOgwf/UQZzkj7NT5a2xew/5KJy';
         $this->assertTrue($this->Password->verify($password, $hash));
     }
 }

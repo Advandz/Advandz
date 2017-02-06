@@ -15,7 +15,7 @@ class HashingTest extends PHPUnit_Framework_TestCase
     public function testHmacHash()
     {
         $expected = '63d6baf65df6bdee8f32b332e0930669';
-        $this->assertEquals($expected, $this->Hashing->hmacHash('md5', 'test', 'secret'));
+        $this->assertSame($expected, $this->Hashing->hmacHash('md5', 'test', 'secret'));
     }
 
     /**
@@ -24,7 +24,7 @@ class HashingTest extends PHPUnit_Framework_TestCase
     public function testHash()
     {
         $expected = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08';
-        $this->assertEquals($expected, $this->Hashing->hash('sha256', 'test'));
+        $this->assertSame($expected, $this->Hashing->hash('sha256', 'test'));
     }
 
     /**

@@ -110,7 +110,8 @@ class Hashing
      * @param string $user_hash The user-supplied string
      * @param bool True if hash is equal
      */
-    public function compareHash($hash, $user_hash) {
+    public function compareHash($hash, $user_hash)
+    {
         return hash_equals($hash, $user_hash);
     }
 }

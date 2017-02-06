@@ -30,7 +30,7 @@ class EncryptionTest extends PHPUnit_Framework_TestCase
      */
     public function testDecrypt()
     {
-        $this->assertEquals($this->string, $this->Encryption->decrypt($this->encrypted));
+        $this->assertSame($this->string, $this->Encryption->decrypt($this->encrypted));
     }
 
     /**

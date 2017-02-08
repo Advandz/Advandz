@@ -51,22 +51,22 @@ class Upload
                 foreach ($file['name'] as $file_key => $value) {
                     if (!empty($file['name'][$file_key]) && !empty($file['tmp_name'][$file_key])) {
                         $files_array[$key][] = [
-                            'name' => $file['name'][$file_key],
-                            'type' => $file['type'][$file_key],
+                            'name'     => $file['name'][$file_key],
+                            'type'     => $file['type'][$file_key],
                             'tmp_name' => $file['tmp_name'][$file_key],
-                            'error' => $file['error'][$file_key],
-                            'size' => $file['size'][$file_key]
+                            'error'    => $file['error'][$file_key],
+                            'size'     => $file['size'][$file_key]
                         ];
                     }
                 }
             } else {
                 if (!empty($file['name'][$key]) && !empty($file['tmp_name'][$key])) {
                     $files_array[] = [
-                        'name' => $file['name'][$key],
-                        'type' => $file['type'][$key],
+                        'name'     => $file['name'][$key],
+                        'type'     => $file['type'][$key],
                         'tmp_name' => $file['tmp_name'][$key],
-                        'error' => $file['error'][$key],
-                        'size' => $file['size'][$key]
+                        'error'    => $file['error'][$key],
+                        'size'     => $file['size'][$key]
                     ];
                 }
             }
@@ -87,30 +87,30 @@ class Upload
      */
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
     {
-        $path = dirname(__FILE__) . '/../..' . $this->upload_dir . '/';
+        $path = dirname(__FILE__).'/../..'.$this->upload_dir.'/';
 
         // Check if exits the upload directory, If not exists then create it
         if (!is_dir($path)) {
             try {
                 mkdir($path);
             } catch (Exception $e) {
-                throw new \Exception("Failed to create the uploads directory");
+                throw new \Exception('Failed to create the uploads directory');
             }
         }
 
         // Validate the file size
         if ($file['size'] > $this->file_size) {
-            throw new \Exception("The uploaded file exceeds the " . $this->file_size . " limit size");
+            throw new \Exception('The uploaded file exceeds the '.$this->file_size.' limit size');
         }
 
         // Write the file to the upload directory
-        if (!file_exists($path . $file['name']) || ($overwrite && file_exists($path . $file['name']))) {
+        if (!file_exists($path.$file['name']) || ($overwrite && file_exists($path.$file['name']))) {
             if ($hash_name) {
                 $file_extension = $this->getExtension($file['name']);
                 $file_hash      = $this->hash($file['tmp_name']);
-                $new_path       = $path . $file_hash . $file_extension;
+                $new_path       = $path.$file_hash.$file_extension;
             } else {
-                $new_path = $path . $file['name'];
+                $new_path = $path.$file['name'];
             }
 
             // Move and chmod the file to the upload directory
@@ -119,7 +119,7 @@ class Upload
 
             return $new_path;
         } else {
-            throw new \Exception("Another file with the same name exists in the uploads directory");
+            throw new \Exception('Another file with the same name exists in the uploads directory');
         }
     }
 
@@ -134,7 +134,7 @@ class Upload
         if (is_int($max_size) && !empty($max_size)) {
             $this->file_size = $max_size;
         } else {
-            throw new \Exception("Invalid maximum size, Maximum size must be a non-zero integer value");
+            throw new \Exception('Invalid maximum size, Maximum size must be a non-zero integer value');
         }
     }
 
@@ -161,7 +161,7 @@ class Upload
         if (file_exists($file)) {
             return hash_file('sha256', $file);
         } else {
-            throw new \Exception("The given file not exists or has been moved");
+            throw new \Exception('The given file not exists or has been moved');
         }
     }
 
@@ -173,6 +173,6 @@ class Upload
      */
     private function getExtension($file_name)
     {
-        return '.' . explode('.', $file_name, 2)[1];
+        return '.'.explode('.', $file_name, 2)[1];
     }
 }

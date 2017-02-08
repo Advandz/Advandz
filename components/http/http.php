@@ -136,14 +136,14 @@ class Http
      *
      * @param string $method Request method
      * @return Http Reference to this class
-     * @throws Exception When a invalid HTTP method is given
+     * @throws Exception When an invalid HTTP method is given
      */
     public function method($method)
     {
         if ($method == 'GET' || $method == 'POST' || $method == 'DELETE' || $method == 'PUT') {
             $this->method = $method;
         } else {
-            throw new Exception('HTTP Invalid method');
+            throw new \Exception('HTTP Invalid method');
         }
 
         return $this;

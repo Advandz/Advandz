@@ -41,6 +41,7 @@ class Encryption
      *
      * @param mixed $data The data to be encrypted, A string, an array or an object
      * @return string The encrypted data
+     * @throws Exception When the data cannot be encrypted
      */
     public function encrypt($data)
     {
@@ -94,6 +95,7 @@ class Encryption
      *
      * @param string $data The data to be decrypted, A string, an array or an object
      * @return mixed The decrypted data, A string, an array or an object
+     * @throws Exception When the data cannot be decrypted
      */
     public function decrypt($data)
     {
@@ -135,6 +137,7 @@ class Encryption
      * Set the key to be used in the encryption and decryption process.
      *
      * @param string $key A binary pseudo-random key hexadecimally encoded
+     * @throws Exception When the algorithm or key is invalid
      */
     public function setAlgorithm($algorithm)
     {
@@ -149,6 +152,7 @@ class Encryption
      * Set the key to be used in the encryption and decryption process.
      *
      * @param string $key A binary pseudo-random key hexadecimally encoded
+     * @throws Exception When the algorithm or key is invalid
      */
     public function setKey($key)
     {

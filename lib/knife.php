@@ -58,8 +58,8 @@ class Knife extends Language
     /**
      * Compiles the template into PHP code.
      *
-     * @param string $file The template file used as our view
-     * @return string The file location to the compiled code
+     * @param  string    $file The template file used as our view
+     * @return string    The file location to the compiled code
      * @throws Exception When is not a valid view or you don't have the permissions to read them
      */
     final public function compile($file = null)
@@ -150,8 +150,8 @@ class Knife extends Language
     /**
      * Replace a tag in the template for a PHP code.
      *
-     * @param string $tag The tag to be replaced
-     * @param string $code The PHP code
+     * @param string $tag       The tag to be replaced
+     * @param string $code      The PHP code
      * @param string $statement The called function arguments
      */
     private function replaceTag($tag, $code, $statement)
@@ -163,9 +163,9 @@ class Knife extends Language
     /**
      * Replace a string in the template code.
      *
-     * @param mixed $search The value being searched for. An array may be used to designate multiple needles.
+     * @param mixed $search  The value being searched for. An array may be used to designate multiple needles.
      * @param mixed $replace The replacement value that replaces found search values. An array may be used to
-     *     designate multiple replacements.
+     *                       designate multiple replacements.
      */
     private function replaceTemplate($search, $replace)
     {
@@ -175,10 +175,10 @@ class Knife extends Language
     /**
      * Replace a value in the given data.
      *
-     * @param mixed $search The value being searched for. An array may be used to designate multiple needles.
-     * @param mixed $replace The replacement value that replaces found search values. An array may be used to
-     *     designate multiple replacements.
-     * @param mixed $data The string or array being searched and replaced on.
+     * @param  mixed $search  The value being searched for. An array may be used to designate multiple needles.
+     * @param  mixed $replace The replacement value that replaces found search values. An array may be used to
+     *                        designate multiple replacements.
+     * @param  mixed $data    The string or array being searched and replaced on.
      * @return mixed Returns a string with all occurrences of search in data replaced with the given replace value.
      */
     private function replace($search, $replace, $data)

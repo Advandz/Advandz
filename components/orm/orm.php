@@ -17,8 +17,8 @@ class Orm extends Record
     /**
      * Initializes a Table Class.
      *
-     * @param string $table The database table to use
-     * @return Table Returns a Table Object if the table exists
+     * @param  string    $table The database table to use
+     * @return Table     Returns a Table Object if the table exists
      * @throws Exception If the table not exists in the database
      */
     public function _($table)
@@ -32,12 +32,12 @@ class Orm extends Record
         // Check if table exists
         if ($this->select()->from($table)->numResults() > 0) {
             // Initialize the table class
-            $table_cc = \Loader::toCamelCase($table);
+            $table_cc          = \Loader::toCamelCase($table);
             $this->{$table_cc} = new Table($table);
 
             return $this->{$table_cc};
         } else {
-            throw new \Exception("Table \"".$table."\" doesn't exist");
+            throw new \Exception('Table "'.$table."\" doesn't exist");
         }
     }
 }

@@ -42,7 +42,7 @@ class Javascript extends Html
     /**
      * Sets the default path to use for all javascript requests.
      *
-     * @param string $default_path The default path to use for javascript files
+     * @param  string $default_path The default path to use for javascript files
      * @return string The previous default path
      */
     public function setDefaultPath($default_path)
@@ -56,7 +56,7 @@ class Javascript extends Html
     /**
      * Return the HTML used to create the script tags and load the set javascript.
      *
-     * @param string $location The location where the script resides (generally "head" or "body")
+     * @param  string $location The location where the script resides (generally "head" or "body")
      * @return string The HTML used to load all of the set javascript files
      */
     public function getFiles($location)
@@ -93,9 +93,9 @@ class Javascript extends Html
     /**
      * Sets the given javascript file into the structure view.
      *
-     * @param string $file The name of the javascript file to load
-     * @param string $location The location to set the given file (genearlly "head" or "body")
-     * @param string $path The path to the javascript file, if null will use the default path set in the constructor
+     * @param  string     $file     The name of the javascript file to load
+     * @param  string     $location The location to set the given file (genearlly "head" or "body")
+     * @param  string     $path     The path to the javascript file, if null will use the default path set in the constructor
      * @return Javascript Returns the instance of this object
      */
     public function setFile($file, $location = 'head', $path = null, $condition = null, $hidden = true)
@@ -112,7 +112,7 @@ class Javascript extends Html
     /**
      * Sets the given javascript data to be appended to the list of javascript data.
      *
-     * @param string $data The javascript data to set
+     * @param  string     $data The javascript data to set
      * @return Javascript Returns the instance of this object
      */
     public function setInline($data, $condition = null, $hidden = true)

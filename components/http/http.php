@@ -53,8 +53,8 @@ class Http
     /**
      * Set the server to send the request.
      *
-     * @param string $server The server to send the request
-     * @return Http Reference to this class
+     * @param  string $server The server to send the request
+     * @return Http   Reference to this class
      */
     public function server($server)
     {
@@ -66,8 +66,8 @@ class Http
     /**
      * Sets the request URI.
      *
-     * @param string $uri The request URI
-     * @return Http Reference to this class
+     * @param  string $uri The request URI
+     * @return Http   Reference to this class
      */
     public function uri($uri)
     {
@@ -79,7 +79,7 @@ class Http
     /**
      * Sets the port to be used in the request.
      *
-     * @param int $port The request port
+     * @param  int  $port The request port
      * @return Http Reference to this class
      */
     public function port($port)
@@ -104,8 +104,8 @@ class Http
     /**
      * Sets the headers to be sent in the request.
      *
-     * @param array $headers The request headers
-     * @return Http Reference to this class
+     * @param  array $headers The request headers
+     * @return Http  Reference to this class
      */
     public function headers($headers = [])
     {
@@ -119,8 +119,8 @@ class Http
     /**
      * Sets the basic authentication to the request.
      *
-     * @param array $auth The authentication details
-     * @return Http Reference to this class
+     * @param  array $auth The authentication details
+     * @return Http  Reference to this class
      */
     public function auth($auth = [])
     {
@@ -134,8 +134,8 @@ class Http
     /**
      * Sets the method to send the request.
      *
-     * @param string $method Request method
-     * @return Http Reference to this class
+     * @param  string    $method Request method
+     * @return Http      Reference to this class
      * @throws Exception When an invalid HTTP method is given
      */
     public function method($method)
@@ -152,7 +152,7 @@ class Http
     /**
      * Execute the request.
      *
-     * @param array $data The data to send
+     * @param  array $data The data to send
      * @return mixed The result of the request
      */
     public function execute($data = [])

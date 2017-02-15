@@ -24,8 +24,9 @@ class Table extends Record
         $this->table = $table;
     }
 
-    public function __call($method_name, $args) {
-        if(!function_exists($method_name)) {
+    public function __call($method_name, $args)
+    {
+        if (!function_exists($method_name)) {
             if (!empty($args)) {
                 return $this->get($method_name, [$method_name, '=', $args[0]])->fetchAll();
             }

@@ -30,8 +30,8 @@ final class Configure
     /**
      * Fetches a setting set using Configure::set().
      *
-     * @param string $name The name of the setting to get
-     * @return mixed The setting specified by $name, or null if $name was not set
+     * @param  string $name The name of the setting to get
+     * @return mixed  The setting specified by $name, or null if $name was not set
      */
     public static function get($name)
     {
@@ -45,8 +45,8 @@ final class Configure
     /**
      * Checks if the setting exists.
      *
-     * @param string $name The name of the setting to check existance
-     * @return bool true if $name was set, false otherwise
+     * @param  string $name The name of the setting to check existance
+     * @return bool   true if $name was set, false otherwise
      */
     public static function exists($name)
     {
@@ -73,9 +73,9 @@ final class Configure
     /**
      * Adds the given $value to the configuration using the $name given.
      *
-     * @param string $name The name to give this setting. Use Configure::exists()
-     * to check for pre-existing settings with the same name
-     * @param mixed $value The value to set
+     * @param string $name  The name to give this setting. Use Configure::exists()
+     *                      to check for pre-existing settings with the same name
+     * @param mixed  $value The value to set
      */
     public static function set($name, $value)
     {
@@ -86,7 +86,7 @@ final class Configure
      * Loads the given file and extracts all $config array elements, adding each
      * to Configure::$config.
      *
-     * @param string $file The file name in CONFIGDIR to load (without extension)
+     * @param string $file       The file name in CONFIGDIR to load (without extension)
      * @param string $config_dir The directory from which to load the given config file, defaults to CONFIGDIR
      */
     public static function load($file, $config_dir = CONFIGDIR)

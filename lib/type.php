@@ -13,8 +13,8 @@ class Type
     /**
      * Set the data type of a variable as String.
      *
-     * @param string $value The defined value of the variable
-     * @return string The value
+     * @param  string    $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of string
      */
     public static function _string($value = '')
@@ -29,8 +29,8 @@ class Type
     /**
      * Set the data type of a variable as Integer.
      *
-     * @param int $value The defined value of the variable
-     * @return string The value
+     * @param  int       $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of integer
      */
     public static function _int($value = 0)
@@ -45,8 +45,8 @@ class Type
     /**
      * Set the data type of a variable as Float.
      *
-     * @param float $value The defined value of the variable
-     * @return string The value
+     * @param  float     $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of float
      */
     public static function _float($value = 0.0)
@@ -61,8 +61,8 @@ class Type
     /**
      * Set the data type of a variable as Double.
      *
-     * @param float $value The defined value of the variable
-     * @return string The value
+     * @param  float     $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of double
      */
     public static function _double($value = 0.0)
@@ -77,8 +77,8 @@ class Type
     /**
      * Set the data type of a variable as Boolean.
      *
-     * @param bool $value The defined value of the variable
-     * @return string The value
+     * @param  bool      $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of boolean
      */
     public static function _bool($value = false)
@@ -93,8 +93,8 @@ class Type
     /**
      * Set the data type of a variable as Array.
      *
-     * @param array $value The defined value of the variable
-     * @return string The value
+     * @param  array     $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an instance of array
      */
     public static function _array($value = [])
@@ -109,8 +109,8 @@ class Type
     /**
      * Set the data type of a variable as Object.
      *
-     * @param string $value The defined value of the variable
-     * @return string The value
+     * @param  string    $value The defined value of the variable
+     * @return string    The value
      * @throws Exception When the argument passed is not an object
      */
     public static function _object($value = null)

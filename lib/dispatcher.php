@@ -33,8 +33,8 @@ class Dispatcher extends Controller
     /**
      * Dispatch the request to the proper controller.
      *
-     * @param string $request_uri The request URI string
-     * @param bool $is_cli Whether or not this requests is a command line request
+     * @param  string    $request_uri The request URI string
+     * @param  bool      $is_cli      Whether or not this requests is a command line request
      * @throws Exception thrown when request can not be dispatched or Dispatcher::raiseError can not handle the error
      */
     public static function dispatch($request_uri, $is_cli = false)
@@ -141,8 +141,8 @@ class Dispatcher extends Controller
     /**
      * Print an exception thrown error page.
      *
-     * @param Exception $e An exception thrown
-     * @return bool False if the redirects fail
+     * @param  Exception $e An exception thrown
+     * @return bool      False if the redirects fail
      * @throws Exception Throw our original error, since the error can not be handled cleanly
      */
     public static function raiseError($e)

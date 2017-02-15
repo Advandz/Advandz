@@ -39,8 +39,8 @@ class Encryption
     /**
      * Encrypt a value using OpenSSL and the selected algorithm.
      *
-     * @param mixed $data The data to be encrypted, A string, an array or an object
-     * @return string The encrypted data
+     * @param  mixed     $data The data to be encrypted, A string, an array or an object
+     * @return string    The encrypted data
      * @throws Exception When the data cannot be encrypted
      */
     public function encrypt($data)
@@ -93,8 +93,8 @@ class Encryption
     /**
      * Decrypt a value using OpenSSL and the selected algorithm.
      *
-     * @param string $data The data to be decrypted, A string, an array or an object
-     * @return mixed The decrypted data, A string, an array or an object
+     * @param  string    $data The data to be decrypted, A string, an array or an object
+     * @return mixed     The decrypted data, A string, an array or an object
      * @throws Exception When the data cannot be decrypted
      */
     public function decrypt($data)
@@ -136,7 +136,7 @@ class Encryption
     /**
      * Set the key to be used in the encryption and decryption process.
      *
-     * @param string $key A binary pseudo-random key hexadecimally encoded
+     * @param  string    $key A binary pseudo-random key hexadecimally encoded
      * @throws Exception When the algorithm or key is invalid
      */
     public function setAlgorithm($algorithm)
@@ -151,7 +151,7 @@ class Encryption
     /**
      * Set the key to be used in the encryption and decryption process.
      *
-     * @param string $key A binary pseudo-random key hexadecimally encoded
+     * @param  string    $key A binary pseudo-random key hexadecimally encoded
      * @throws Exception When the algorithm or key is invalid
      */
     public function setKey($key)
@@ -166,7 +166,7 @@ class Encryption
     /**
      * Generates cryptographically secure pseudo-random key.
      *
-     * @param int $length Hashing algorithm
+     * @param  int    $length Hashing algorithm
      * @return string A binary pseudo-random key hexadecimally encoded
      */
     public function generateKey($length = 16)
@@ -189,9 +189,9 @@ class Encryption
     /**
      * Determine if the given key and cipher algorithm combination is valid.
      *
-     * @param string $key A binary pseudo-random key hexadecimally encoded
-     * @param string $algorithm The algorithm used for encryption
-     * @return bool True if the key is valid for the algorithm
+     * @param  string $key       A binary pseudo-random key hexadecimally encoded
+     * @param  string $algorithm The algorithm used for encryption
+     * @return bool   True if the key is valid for the algorithm
      */
     public function supportedKey($key, $algorithm)
     {

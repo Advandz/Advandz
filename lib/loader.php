@@ -21,8 +21,8 @@ final class Loader
     /**
      * Autoload classes.
      *
-     * @param string $class
-     * @return bool True if loaded, false otherwise
+     * @param  string $class
+     * @return bool   True if loaded, false otherwise
      */
     public static function autoload($class)
     {
@@ -81,8 +81,8 @@ final class Loader
      * name. First looks in the plugin directory, if no match is found, looks
      * in the models directory.
      *
-     * @param object $parent The object to which to attach the given models
-     * @param array $models An array of models to load and initialize
+     * @param  object    $parent The object to which to attach the given models
+     * @param  array     $models An array of models to load and initialize
      * @throws Exception
      */
     public static function loadModels(&$parent, $models)
@@ -145,8 +145,8 @@ final class Loader
     /**
      * Loads the given components, attaching them to the given parent object.
      *
-     * @param object $parent The parent to which to attach the given components
-     * @param array $components An array of components and [optionally] their parameters
+     * @param object $parent     The parent to which to attach the given components
+     * @param array  $components An array of components and [optionally] their parameters
      */
     public static function loadComponents(&$parent, $components)
     {
@@ -156,8 +156,8 @@ final class Loader
     /**
      * Loads the given helpers, attaching them to the given parent object.
      *
-     * @param object $parent The parent to which to attach the given helpers
-     * @param array $helpers An array of helpers and [optionally] their parameters
+     * @param object $parent  The parent to which to attach the given helpers
+     * @param array  $helpers An array of helpers and [optionally] their parameters
      */
     public static function loadHelpers(&$parent, $helpers)
     {
@@ -167,7 +167,7 @@ final class Loader
     /**
      * Convert a string to "CamelCase" from "file_case".
      *
-     * @param string $str the string to convert
+     * @param  string $str the string to convert
      * @return string the converted string
      */
     public static function toCamelCase($str)
@@ -188,7 +188,7 @@ final class Loader
     /**
      * Convert a string to "file_case" from "CamelCase".
      *
-     * @param string $str the string to convert
+     * @param  string $str the string to convert
      * @return string the converted string
      */
     public static function fromCamelCase($str)
@@ -209,8 +209,8 @@ final class Loader
     /**
      * Attempts to include the given file, if it exists.
      *
-     * @param string $file The file to include
-     * @return bool Returns true if the file exists and could be included, false otherwise
+     * @param  string $file The file to include
+     * @return bool   Returns true if the file exists and could be included, false otherwise
      */
     public static function load($file)
     {
@@ -227,9 +227,9 @@ final class Loader
      * Loads an initializes the named objects of the given type to the given parent object.
      * Recognized types include "component" and "helper".
      *
-     * @param object $parent The parent object to attach the named objects
-     * @param string $type The collection the named objects belong to
-     * @param array $objects The named objects to load and initialize
+     * @param  object    $parent  The parent object to attach the named objects
+     * @param  string    $type    The collection the named objects belong to
+     * @param  array     $objects The named objects to load and initialize
      * @throws Exception Throw when invoked with unrecognized $type
      */
     private static function loadAndInitialize(&$parent, $type, $objects)

@@ -21,11 +21,11 @@ class Hashing
     /**
      * Calculate a keyed hash using HMAC.
      *
-     * @param string $algorithm Hashing algorithm.
-     * @param mixed $data Data or file to be hashed.
-     * @param string $key Shared secret key.
-     * @param bool $raw Outputs the hash as raw binary data.
-     * @param bool $file True, to generate a keyed hash value using the HMAC method and the contents of a given file.
+     * @param  string $algorithm Hashing algorithm.
+     * @param  mixed  $data      Data or file to be hashed.
+     * @param  string $key       Shared secret key.
+     * @param  bool   $raw       Outputs the hash as raw binary data.
+     * @param  bool   $file      True, to generate a keyed hash value using the HMAC method and the contents of a given file.
      * @return string Return a keyed hash using HMAC.
      */
     public function hmacHash($algorithm, $data, $key, $raw = false, $file = false)
@@ -40,10 +40,10 @@ class Hashing
     /**
      * Calculate the Hash of a specific data.
      *
-     * @param string $algorithm Hashing algorithm.
-     * @param mixed $data Data or file to be hashed.
-     * @param bool $raw Outputs the hash as raw binary data.
-     * @param bool $file True, to generate a keyed hash value using the contents of a given file.
+     * @param  string $algorithm Hashing algorithm.
+     * @param  mixed  $data      Data or file to be hashed.
+     * @param  bool   $raw       Outputs the hash as raw binary data.
+     * @param  bool   $file      True, to generate a keyed hash value using the contents of a given file.
      * @return string Return the Hash of a specific data.
      */
     public function hash($algorithm, $data, $raw = false, $file = false)
@@ -79,7 +79,7 @@ class Hashing
      * Pump data into an active hashing context.
      *
      * @param mixed $data Data or file to be hashed.
-     * @param bool $file True, to generate a keyed hash value using the contents of a given file.
+     * @param bool  $file True, to generate a keyed hash value using the contents of a given file.
      */
     public function addDataToHash($data, $file = false)
     {
@@ -106,7 +106,7 @@ class Hashing
     /**
      * Compares two strings using the same time whether they're equal or not.
      *
-     * @param string $hash The string of known length to compare against
+     * @param string $hash      The string of known length to compare against
      * @param string $user_hash The user-supplied string
      * @param bool True if hash is equal
      */

@@ -31,10 +31,10 @@ final class Cache
     /**
      * Removes the given cache file from the cache.
      *
-     * @param string $name The name of the cache file to remove (note: the original file name, not the cached name of
-     *     the file)
-     * @param string $path The path within CACHEDIR to clear a given file from
-     * @return bool True if removed, false if no such file exists
+     * @param  string $name The name of the cache file to remove (note: the original file name, not the cached name of
+     *                      the file)
+     * @param  string $path The path within CACHEDIR to clear a given file from
+     * @return bool   True if removed, false if no such file exists
      * @see Cache::cacheName()
      */
     final public static function clearCache($name, $path = null)
@@ -52,11 +52,11 @@ final class Cache
     /**
      * Writes the given data to the cache using the name given.
      *
-     * @param string $name The name of the cache file to create (note: the original file name, not the cached name of
-     *     the file)
+     * @param string $name   The name of the cache file to create (note: the original file name, not the cached name of
+     *                       the file)
      * @param string $output The data to write to the cache
-     * @param int $ttl The cache file's time to live
-     * @param string $path The path within CACHEDIR to write the file to
+     * @param int    $ttl    The cache file's time to live
+     * @param string $path   The path within CACHEDIR to write the file to
      * @see Cache::cacheName()
      */
     final public static function writeCache($name, $output, $ttl, $path = null)
@@ -77,11 +77,11 @@ final class Cache
     /**
      * Fetches the contents of a cache, if it exists and is valid.
      *
-     * @param string $name The name of the cache file to fetch (note: not the actual name of the file on the file
-     *     system)
-     * @param string $path The path within CACHEDIR to read the file from
+     * @param  string $name The name of the cache file to fetch (note: not the actual name of the file on the file
+     *                      system)
+     * @param  string $path The path within CACHEDIR to read the file from
      * @return string A string containing the file contents if the cache file exists and has not yet expired, false
-     *     otherwise.
+     *                     otherwise.
      * @see Cache::cacheName()
      */
     final public static function fetchCache($name, $path = null)
@@ -97,8 +97,8 @@ final class Cache
     /**
      * Builds the file name of the cache file based on the name given.
      *
-     * @param string $name The name to use when creating the cache file name
-     * @param string $path The path within CACHEDIR to construct the cache file path in
+     * @param  string $name The name to use when creating the cache file name
+     * @param  string $path The path within CACHEDIR to construct the cache file path in
      * @return string A fully qualified cache file name
      */
     final private static function cacheName($name, $path = null)

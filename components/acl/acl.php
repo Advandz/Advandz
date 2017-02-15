@@ -31,10 +31,10 @@ class Acl
     /**
      * Check whether the ARO is allowed access to the ACO.
      *
-     * @param string $aco_alias The alias of the ACO
-     * @param string $aro_alias The alias of the ARO
-     * @param string $action The action to verify on the ACO
-     * @return bool True if the ARO is allowed to access the ACO, else false
+     * @param  string $aco_alias The alias of the ACO
+     * @param  string $aro_alias The alias of the ARO
+     * @param  string $action    The action to verify on the ACO
+     * @return bool   True if the ARO is allowed to access the ACO, else false
      */
     public function check($aro_alias, $aco_alias, $action = '*')
     {
@@ -74,9 +74,9 @@ class Acl
     /**
      * Fetches the Access List for the ARO on the given ACO.
      *
-     * @param string $aco_alias The alias of the ACO
-     * @param string $aro_alias The alias of the ARO
-     * @return array An array of ARO/ACO hierachy relationships
+     * @param  string $aco_alias The alias of the ACO
+     * @param  string $aro_alias The alias of the ARO
+     * @return array  An array of ARO/ACO hierachy relationships
      */
     public function getAccessList($aro_alias, $aco_alias)
     {
@@ -144,7 +144,7 @@ class Acl
      *
      * @param string $aco_alias The alias of the ACO
      * @param string $aro_alias The alias of the ARO
-     * @param string $action The action to allow
+     * @param string $action    The action to allow
      */
     public function allow($aro_alias, $aco_alias, $action = '*')
     {
@@ -159,7 +159,7 @@ class Acl
      *
      * @param string $aco_alias The alias of the ACO
      * @param string $aro_alias The alias of the ARO
-     * @param string $action The action to deny
+     * @param string $action    The action to deny
      */
     public function deny($aro_alias, $aco_alias, $action = '*')
     {
@@ -172,9 +172,9 @@ class Acl
     /**
      * Add a new ARO as a child to the given parent.
      *
-     * @param string $alias The alias of the ARO
-     * @param mixed $parent The parent of this ARO, either the int ID, or a string alias of the parent ARO
-     * @return int The ID of the ARO added
+     * @param  string $alias  The alias of the ARO
+     * @param  mixed  $parent The parent of this ARO, either the int ID, or a string alias of the parent ARO
+     * @return int    The ID of the ARO added
      */
     public function addAro($alias, $parent = null)
     {
@@ -214,8 +214,8 @@ class Acl
     /**
      * Add a new ACO.
      *
-     * @param string $alias The alias of the ACO
-     * @return int The ID of the ACO added
+     * @param  string $alias The alias of the ACO
+     * @return int    The ID of the ACO added
      */
     public function addAco($alias)
     {
@@ -244,7 +244,7 @@ class Acl
      *
      * @param string $aro_alias The ARO alias
      * @param string $aco_alias The ACO alias
-     * @param string $action The action
+     * @param string $action    The action
      */
     public function removeAcl($aro_alias = null, $aco_alias = null, $action = null)
     {
@@ -275,9 +275,9 @@ class Acl
     /**
      * Retrieve the ARO and ACO using the given ARO and ACO aliases.
      *
-     * @param string $aro_alias The ARO alias
-     * @param string $aco_alias The ACO alias
-     * @return mixed An array of the ARO/ACO combo, false otherwise
+     * @param  string $aro_alias The ARO alias
+     * @param  string $aco_alias The ACO alias
+     * @return mixed  An array of the ARO/ACO combo, false otherwise
      */
     private function getAroAcoByAlias($aro_alias, $aco_alias)
     {
@@ -294,8 +294,8 @@ class Acl
     /**
      * Retrieve the ARO with the given alias.
      *
-     * @param string $alias The alias of the ARO
-     * @return mixed An array containing the ARO, false if no match found
+     * @param  string $alias The alias of the ARO
+     * @return mixed  An array containing the ARO, false if no match found
      */
     public function getAroByAlias($alias)
     {
@@ -310,8 +310,8 @@ class Acl
     /**
      * Retrieve the ACO with the given alias.
      *
-     * @param string $alias The alias of the ACO
-     * @return mixed An array containing the ACO, false if no match found
+     * @param  string $alias The alias of the ACO
+     * @return mixed  An array containing the ACO, false if no match found
      */
     public function getAcoByAlias($alias)
     {
@@ -326,9 +326,9 @@ class Acl
     /**
      * Record the given ARO and ACO IDs for the action and permission given.
      *
-     * @param int $aro_id The ARO ID
-     * @param int $aco_id The ACO ID
-     * @param string $action The action to allow or deny
+     * @param int    $aro_id     The ARO ID
+     * @param int    $aco_id     The ACO ID
+     * @param string $action     The action to allow or deny
      * @param string $permission "allow" or "deny"
      */
     private function addAcl($aro_id, $aco_id, $action, $permission)

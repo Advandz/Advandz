@@ -44,9 +44,9 @@ class Form extends Html
      * Sets the CSRF Token options.
      *
      * @param array $options An array of CSRF token options including:
-     *    - token_name The field name of the CSRF token
-     *    - set_on_create True to automatically set the CSRF token on create
-     *    - token_key The CSRF token key used to make each token unique
+     *                       - token_name The field name of the CSRF token
+     *                       - set_on_create True to automatically set the CSRF token on create
+     *                       - token_key The CSRF token key used to make each token unique
      */
     public function setCsrfOptions(array $options)
     {
@@ -89,14 +89,14 @@ class Form extends Html
      * Collapses an object array down to a simple key/value array or numerically indexed array
      * whose values are member variables of the given object array.
      *
-     * @param array $obj_arr The object array to collapse
-     * @param mixed $value_var A string representing the name of the member variable, or an array of member variable
-     *     values to concatenate
-     * @param string $key_var The name of the member variable to use as the key in the array, null for numerically
-     *     indexed array
-     * @param string $glue The value to use to concat multiple $value_var values together, if null, will simply print
-     *     only the first non-null value in $value_var
-     * @return array An array in key/value form
+     * @param  array  $obj_arr   The object array to collapse
+     * @param  mixed  $value_var A string representing the name of the member variable, or an array of member variable
+     *                           values to concatenate
+     * @param  string $key_var   The name of the member variable to use as the key in the array, null for numerically
+     *                           indexed array
+     * @param  string $glue      The value to use to concat multiple $value_var values together, if null, will simply print
+     *                           only the first non-null value in $value_var
+     * @return array  An array in key/value form
      */
     public function collapseObjectArray($obj_arr, $value_var, $key_var = null, $glue = null)
     {
@@ -131,8 +131,8 @@ class Form extends Html
     /**
      * Begins a new form. Default method='post', but $attributes may overwrite that.
      *
-     * @param string $uri The $uri for the form to post to, defaults to $_SERVER['REQUEST_URI']
-     * @param array $attributes The attributes and values to add in the <form> tag, in key=value pairs
+     * @param  string $uri        The $uri for the form to post to, defaults to $_SERVER['REQUEST_URI']
+     * @param  array  $attributes The attributes and values to add in the <form> tag, in key=value pairs
      * @return string The HTML for the <form> tag, void if output enabled
      */
     public function create($uri = null, $attributes = [])
@@ -165,7 +165,7 @@ class Form extends Html
     /**
      * Ends a form, appends an optional $end_str.
      *
-     * @param string $end_str The string to add after the </form> tag
+     * @param  string $end_str The string to add after the </form> tag
      * @return string The </form> tag, void if output enabled
      */
     public function end($end_str = null)
@@ -178,7 +178,7 @@ class Form extends Html
     /**
      * Generates a CSRF token.
      *
-     * @param string $key The key used to generate the CSRF token
+     * @param  string $key The key used to generate the CSRF token
      * @return string The computed CSRF token
      */
     public function getCsrfToken($key = null)
@@ -205,9 +205,9 @@ class Form extends Html
     /**
      * Verifies that the given CSRF token is valid.
      *
-     * @param string $key The key used to generate the original CSRF token
-     * @param string $csrf_token The given CSRF token, null to automatically pull the CSRF token from the $_POST data
-     * @return bool True if the token is valid, false otherwise
+     * @param  string $key        The key used to generate the original CSRF token
+     * @param  string $csrf_token The given CSRF token, null to automatically pull the CSRF token from the $_POST data
+     * @return bool   True if the token is valid, false otherwise
      */
     public function verifyCsrfToken($key = null, $csrf_token = null)
     {
@@ -228,7 +228,7 @@ class Form extends Html
     /**
      * Allows fields to be created from an array of fields.
      *
-     * @param array $fields An array of fields to set
+     * @param  array  $fields An array of fields to set
      * @return string The fields given, void if output enabled
      */
     public function fields($fields)
@@ -323,10 +323,10 @@ class Form extends Html
     /**
      * Creates a label with the given name and marks it for the given field.
      *
-     * @param string $name The name of this label
-     * @param string $for The ID of the form element this label is part of
-     * @param array $attributes Attributes for this label
-     * @param bool $preserve_tags True to preserve tags in the label name
+     * @param  string $name          The name of this label
+     * @param  string $for           The ID of the form element this label is part of
+     * @param  array  $attributes    Attributes for this label
+     * @param  bool   $preserve_tags True to preserve tags in the label name
      * @return string The label specified, void if output enabled
      */
     public function label($name, $for = null, array $attributes = null, $preserve_tags = false)
@@ -340,9 +340,9 @@ class Form extends Html
     /**
      * Creates a text input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The text field specified, void if output enabled
      */
     public function fieldText($name, $value = null, $attributes = [])
@@ -353,9 +353,9 @@ class Form extends Html
     /**
      * Creates a hidden input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The hidden field specified, void if output enabled
      */
     public function fieldHidden($name, $value = null, $attributes = [])
@@ -366,9 +366,9 @@ class Form extends Html
     /**
      * Creates an image input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The image field specified, void if output enabled
      */
     public function fieldImage($name, $value = null, $attributes = [])
@@ -382,9 +382,9 @@ class Form extends Html
     /**
      * Creates a reset input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The reset field specified, void if output enabled
      */
     public function fieldReset($name, $value = null, $attributes = [])
@@ -395,10 +395,10 @@ class Form extends Html
     /**
      * Creates a checkbox.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param bool $checked True to set this field as checked
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  bool   $checked    True to set this field as checked
+     * @param  array  $attributes Attributes for this input field
      * @return string The checkbox field specified, void if output enabled
      */
     public function fieldCheckbox($name, $value = null, $checked = false, $attributes = [])
@@ -409,10 +409,10 @@ class Form extends Html
     /**
      * Creates a radio box.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param bool $checked True to set this field as checked
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  bool   $checked    True to set this field as checked
+     * @param  array  $attributes Attributes for this input field
      * @return string The radio field specified, void if output enabled
      */
     public function fieldRadio($name, $value = null, $checked = false, $attributes = [])
@@ -423,9 +423,9 @@ class Form extends Html
     /**
      * Creates a textarea field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in this textarea
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in this textarea
+     * @param  array  $attributes Attributes for this input field
      * @return string The textarea field, void if output enabled
      */
     public function fieldTextarea($name, $value = null, $attributes = [])
@@ -442,8 +442,8 @@ class Form extends Html
     /**
      * Creates a password input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  array  $attributes Attributes for this input field
      * @return string The password field, void if output enabled
      */
     public function fieldPassword($name, $attributes = [])
@@ -454,8 +454,8 @@ class Form extends Html
     /**
      * Creates a file input field.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  array  $attributes Attributes for this input field
      * @return string The file field, void if output enabled
      */
     public function fieldFile($name, $attributes = [])
@@ -466,12 +466,12 @@ class Form extends Html
     /**
      * Creates a select list.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param array $options The options to place in this select list
-     * @param mixed $selected_value The option(s) to set as selected
-     * @param array $attributes Attributes for this input field
-     * @param array $option_attributes Attributes for each option to set. If single dimension will set the attributes
-     *     for every option, if multi-dimensional will set option for each element key that matches in $options
+     * @param  string $name              The name to set in the HTML name field
+     * @param  array  $options           The options to place in this select list
+     * @param  mixed  $selected_value    The option(s) to set as selected
+     * @param  array  $attributes        Attributes for this input field
+     * @param  array  $option_attributes Attributes for each option to set. If single dimension will set the attributes
+     *                                   for every option, if multi-dimensional will set option for each element key that matches in $options
      * @return string The select field, void if output enabled
      */
     public function fieldSelect($name, $options = [], $selected_value = null, $attributes = [], $option_attributes = [])
@@ -488,12 +488,12 @@ class Form extends Html
     /**
      * Creates a select list with multiple selectable options.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param array $options The options to place in this select list
-     * @param string $selected_value The option to set as selected
-     * @param array $attributes Attributes for this input field
-     * @param array $option_attributes Attributes for each option to set. If single dimension will set the attributes
-     *     for every option, if multi-dimensional will set option for each element key that matches in $options
+     * @param  string $name              The name to set in the HTML name field
+     * @param  array  $options           The options to place in this select list
+     * @param  string $selected_value    The option to set as selected
+     * @param  array  $attributes        Attributes for this input field
+     * @param  array  $option_attributes Attributes for each option to set. If single dimension will set the attributes
+     *                                   for every option, if multi-dimensional will set option for each element key that matches in $options
      * @return string The multi-select field, void if output enabled
      */
     public function fieldMultiSelect($name, $options = [], $selected_values = [], $attributes = [], $option_attributes = [])
@@ -506,9 +506,9 @@ class Form extends Html
     /**
      * Creates a button with default type=button, can be overriden by attirbutes.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The button field, void if output enabled
      */
     public function fieldButton($name, $value = null, $attributes = [])
@@ -519,9 +519,9 @@ class Form extends Html
     /**
      * Creates a button of type submit.
      *
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param array $attributes Attributes for this input field
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  array  $attributes Attributes for this input field
      * @return string The submit field, void if output enabled
      */
     public function fieldSubmit($name, $value = null, $attributes = [])
@@ -532,11 +532,11 @@ class Form extends Html
     /**
      * Builds a field for input or button.
      *
-     * @param string $tag The HTML tag of this input field ("input" or "button")
-     * @param string $type The input type to set in the type field
-     * @param string $name The name of this form field
-     * @param string $value The value of this field
-     * @param array $attributes A list of attributes to set for this field
+     * @param  string $tag        The HTML tag of this input field ("input" or "button")
+     * @param  string $type       The input type to set in the type field
+     * @param  string $name       The name of this form field
+     * @param  string $value      The value of this field
+     * @param  array  $attributes A list of attributes to set for this field
      * @return string The input or button field of the given type
      */
     private function fieldInput($tag, $type, $name, $value = null, $attributes = [])
@@ -567,10 +567,10 @@ class Form extends Html
      * Builds select options and optgroups if given. An optgroup will continue
      * until the end of the select options, or until the next optgroup begins.
      *
-     * @param array $options A list of 'name'=>'value' options to set into <option> tags, if 'name' is 'optgroup' an
-     *     <optgroup> tag is created instead
-     * @param array $selected_values Values corresponding to an option's value to set as selected
-     * @param array $attributes Attributes for each option field
+     * @param  array  $options         A list of 'name'=>'value' options to set into <option> tags, if 'name' is 'optgroup' an
+     *                                 <optgroup> tag is created instead
+     * @param  array  $selected_values Values corresponding to an option's value to set as selected
+     * @param  array  $attributes      Attributes for each option field
      * @return string The option fields along with any optgroups
      */
     private function selectOptions($options, $selected_values = [], $attributes = [])
@@ -634,11 +634,11 @@ class Form extends Html
     /**
      * Creates a radio or check box.
      *
-     * @param string $type The type of box to create: radio or checkbox
-     * @param string $name The name to set in the HTML name field
-     * @param string $value The value to set in the HTML value field
-     * @param bool $checked True to set this box as checked
-     * @param array $attributes Attributes for this input field
+     * @param  string $type       The type of box to create: radio or checkbox
+     * @param  string $name       The name to set in the HTML name field
+     * @param  string $value      The value to set in the HTML value field
+     * @param  bool   $checked    True to set this box as checked
+     * @param  array  $attributes Attributes for this input field
      * @return string The radio or checkbox field
      */
     private function radioCheck($type, $name, $value = null, $checked = false, $attributes = [])
@@ -662,7 +662,7 @@ class Form extends Html
     /**
      * Handles whether to output or return $html.
      *
-     * @param string $html The HTML to output/return
+     * @param  string $html The HTML to output/return
      * @return string The HTML given, void if output enabled
      */
     private function output($html)
@@ -677,10 +677,10 @@ class Form extends Html
      * An alternative to PHP's in_array function that checks if $needle
      * exists in $haystack.
      *
-     * @param mixed $needle A value to look for
-     * @param array $haystack An array of key=>value pairs
-     * @param bool $strict True to also check the type of $needle in $haystack, false to ignore type (default false)
-     * @return bool True if $needle is in $haystack, false otherwise
+     * @param  mixed $needle   A value to look for
+     * @param  array $haystack An array of key=>value pairs
+     * @param  bool  $strict   True to also check the type of $needle in $haystack, false to ignore type (default false)
+     * @return bool  True if $needle is in $haystack, false otherwise
      */
     private function inArray($needle, array $haystack, $strict = false)
     {

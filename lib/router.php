@@ -26,8 +26,8 @@ final class Router
     /**
      * Sets a route from $orig_uri to $mapped_uri.
      *
-     * @param string $orig_uri The original URI to map from
-     * @param string $mapped_uri The destination URI to map to
+     * @param  string    $orig_uri   The original URI to map from
+     * @param  string    $mapped_uri The destination URI to map to
      * @throws Exception Illegal URI specified
      */
     public static function route($orig_uri, $mapped_uri)
@@ -43,7 +43,7 @@ final class Router
     /**
      * Maps the requested URI to the proper re-mapped URI, if available.
      *
-     * @param string $request
+     * @param  string $request
      * @return string The new URI, or the requested URI if no mapping exists for this request
      */
     public static function match($request)
@@ -58,7 +58,7 @@ final class Router
     /**
      * Escapes a URI, making it safe for preg (regex) functions.
      *
-     * @param string $uri The URI to be escaped
+     * @param  string $uri The URI to be escaped
      * @return string the escaped $uri string
      */
     public static function escape($uri)
@@ -69,7 +69,7 @@ final class Router
     /**
      * Unescapes a URI that has been escaped with Router::escape().
      *
-     * @param string $uri The URI to be unescaped
+     * @param  string $uri The URI to be unescaped
      * @return string the unescaped $uri string
      */
     public static function unescape($uri)
@@ -88,8 +88,8 @@ final class Router
     /**
      * Parses the given URI into an array of its components.
      *
-     * @param string $uri The URI to parse
-     * @return array The URI broken into its many parts
+     * @param  string $uri The URI to parse
+     * @return array  The URI broken into its many parts
      */
     public static function parseURI($uri)
     {
@@ -99,7 +99,7 @@ final class Router
     /**
      * Filters out any part of the web root from the uri path.
      *
-     * @param string $uri The URI to filter
+     * @param  string $uri The URI to filter
      * @return string The filtered URI
      */
     public static function filterURI($uri)
@@ -111,10 +111,10 @@ final class Router
      * Uses PHP's ReflectionClass to test the given object for the given method's callability.
      * Only public, non-abstract, non-constructor/destructors are considered callable.
      *
-     * @param object $obj The object we're searching
-     * @param string $method The name of the method we're looking for in $obj
-     * @param string $inherits_from The class that $obj must inherit from, null otherwise.
-     * @return bool true if the method is callable, false otherwise.
+     * @param  object $obj           The object we're searching
+     * @param  string $method        The name of the method we're looking for in $obj
+     * @param  string $inherits_from The class that $obj must inherit from, null otherwise.
+     * @return bool   true if the method is callable, false otherwise.
      */
     public static function isCallable($obj, $method, $inherits_from = 'Controller')
     {
@@ -152,13 +152,13 @@ final class Router
     /**
      * Finds the controller and action and all get parameters that the given URI routes to.
      *
-     * @param string $request_uri A URI to parse
-     * @return array An array containing the following indexes:
-     *    - controller The name of the controller this URI maps to
-     *    - action The action method this URI maps to
-     *    - get An array of get parameters this URI maps to
-     *    - uri An array of URI parts
-     *    - uri_str A string representation of the URI containing the controller requested (if no passed in the URI)
+     * @param  string $request_uri A URI to parse
+     * @return array  An array containing the following indexes:
+     *                            - controller The name of the controller this URI maps to
+     *                            - action The action method this URI maps to
+     *                            - get An array of get parameters this URI maps to
+     *                            - uri An array of URI parts
+     *                            - uri_str A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri)
     {
@@ -202,7 +202,7 @@ final class Router
         }
 
         if (is_dir(PLUGINDIR.$controller.DS)) {
-            $i = 0;
+            $i      = 0;
             $plugin = $controller;
             if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
                 $controller = $uri[$i++];

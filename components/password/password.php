@@ -17,9 +17,9 @@ class Password
     /**
      * Generates a secure and strong password.
      *
-     * @param int $length Length of the password
-     * @param bool $numbers Include numbers in the password
-     * @param bool $symbols Include symbols in the password
+     * @param  int    $length  Length of the password
+     * @param  bool   $numbers Include numbers in the password
+     * @param  bool   $symbols Include symbols in the password
      * @return string A secure password
      */
     public function generate($length = 12, $numbers = true, $symbols = true)
@@ -53,8 +53,8 @@ class Password
     /**
      * Creates a new password hash using a strong one-way hashing algorithm.
      *
-     * @param string $password Password to be hashed
-     * @param int $cost Denotes the algorithmic cost that should be used
+     * @param  string $password Password to be hashed
+     * @param  int    $cost     Denotes the algorithmic cost that should be used
      * @return string The password hash
      */
     public function hash($password, $cost = 10)
@@ -71,8 +71,8 @@ class Password
     /**
      * Returns an array of information about that hash.
      *
-     * @param string $hash The password hash
-     * @return array Returns information about the given hash
+     * @param  string $hash The password hash
+     * @return array  Returns information about the given hash
      */
     public function getHashInfo($hash)
     {
@@ -82,9 +82,9 @@ class Password
     /**
      * Determine if the work factor used by the hasher has changed since the password was hashed.
      *
-     * @param string $hash The password hash
-     * @param int $cost Denotes the algorithmic cost that should be used
-     * @return bool True if the hash need be rehashed
+     * @param  string $hash The password hash
+     * @param  int    $cost Denotes the algorithmic cost that should be used
+     * @return bool   True if the hash need be rehashed
      */
     public function needsRehash($hash, $cost = 10)
     {
@@ -94,9 +94,9 @@ class Password
     /**
      * Verifies that a password matches a hash.
      *
-     * @param string $password Password to be hashed
-     * @param string $hash The created hash
-     * @return bool True if the password is valid
+     * @param  string $password Password to be hashed
+     * @param  string $hash     The created hash
+     * @return bool   True if the password is valid
      */
     public function verify($password, $hash)
     {

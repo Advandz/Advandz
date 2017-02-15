@@ -27,7 +27,7 @@ class Xml
      * Converts special characters with special meaning in XML to their entity
      * equivalent.
      *
-     * @param string $str The string to convert
+     * @param  string $str The string to convert
      * @return string The converted string
      */
     public function xmlEntities($str)
@@ -60,8 +60,8 @@ class Xml
     /**
      * Convert the given array into an XML document.
      *
-     * @param mixed $vars An object, array or string of data to convert into an XML document
-     * @param string $encoding The characer encoding of this document (must be the same encoding as in $vars)
+     * @param  mixed  $vars     An object, array or string of data to convert into an XML document
+     * @param  string $encoding The characer encoding of this document (must be the same encoding as in $vars)
      * @return string An XML document
      */
     public function makeXml($vars, $encoding = 'UTF-8')
@@ -75,9 +75,9 @@ class Xml
     /**
      * Recursively convert the array into an XML structure segment.
      *
-     * @param mixed $value An array or string used for the current XML value
-     * @param string $root_node The root node for this XML segment
-     * @param int $tab_count The number of tabs for this XML segment
+     * @param  mixed  $value     An array or string used for the current XML value
+     * @param  string $root_node The root node for this XML segment
+     * @param  int    $tab_count The number of tabs for this XML segment
      * @return string The XML segement
      */
     private function buildXmlSegment($value, $root_node = 'result', $tab_count = -1)

@@ -21,9 +21,9 @@ class Html
     /**
      * Outputs or returns the given string in HTML safe format, if it exists.
      *
-     * @param string $str The string to print, if it exists
-     * @param bool $return True to return the result as a string, else echo the result
-     * @param bool $preserve_tags True to preserve tags
+     * @param  string $str           The string to print, if it exists
+     * @param  bool   $return        True to return the result as a string, else echo the result
+     * @param  bool   $preserve_tags True to preserve tags
      * @return string The result (if $return is set to true)
      */
     public function _(&$str, $return = false, $preserve_tags = false)
@@ -38,8 +38,8 @@ class Html
     /**
      * Makes a given string HTML safe.
      *
-     * @param string $str The string to make HTML safe
-     * @param bool $preserve_tags True to preserve tags
+     * @param  string $str           The string to make HTML safe
+     * @param  bool   $preserve_tags True to preserve tags
      * @return string The string in HTML safe format
      */
     public function safe($str, $preserve_tags = false)
@@ -60,8 +60,8 @@ class Html
     /**
      * Tests whether the given string is in UTF8 format.
      *
-     * @param string $str The string to test
-     * @return bool True if it is UTF8, false otherwise
+     * @param  string $str The string to test
+     * @return bool   True if it is UTF8, false otherwise
      */
     public function isUtf8($str)
     {
@@ -110,8 +110,8 @@ class Html
      * alternative value may be returned if the given $str does not exist. It's
      * useful for passing into methods that expect raw text.
      *
-     * @param string $str The string to print, if it exists
-     * @param string $alt The alternate string to use if $str is not set
+     * @param  string $str The string to print, if it exists
+     * @param  string $alt The alternate string to use if $str is not set
      * @return string The result
      * @see Html::_()
      */
@@ -124,7 +124,7 @@ class Html
      * Concatenate multiple strings together, with an optional separator.
      *
      * @param mixed $separator A string to be placed between each element or an array, containing 'start', 'before',
-     *     'between', after', and 'end' separators -- all optional
+     *                         'between', after', and 'end' separators -- all optional
      * @param string [optional] Pieces to concatenate [$param1, $param2, ..., $paramN]
      * @return string The concatenated string
      */
@@ -199,9 +199,9 @@ class Html
     /**
      * Add conditional operation around a block of HTML.
      *
-     * @param string $html The HTML to wrap an expression around
-     * @param string $expression The expression to use
-     * @param bool $hidden True to hide the $html from all browsers by default, false to display by default
+     * @param  string $html       The HTML to wrap an expression around
+     * @param  string $expression The expression to use
+     * @param  bool   $hidden     True to hide the $html from all browsers by default, false to display by default
      * @return string The HTML block with the condition wrapped around it
      */
     public function addCondition($html, $expression, $hidden = true)
@@ -216,7 +216,7 @@ class Html
     /**
      * Converts hyperlinks found into HTML.
      *
-     * @param string $content Content containing hyperlinks
+     * @param  string $content Content containing hyperlinks
      * @return string The content with hyperlinks as HTML
      */
     public function hyperlink($content)

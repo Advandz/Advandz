@@ -16,7 +16,7 @@ class Arrayment
     /**
      * Return the first element of an array.
      *
-     * @param array $array The array to fetch the element
+     * @param  array $array The array to fetch the element
      * @return mixed The first element of the given array, false if it's not an array.
      */
     public function first(array $array)
@@ -33,14 +33,14 @@ class Arrayment
     /**
      * Return the last element of an array.
      *
-     * @param array $array The array to fetch the element
+     * @param  array $array The array to fetch the element
      * @return mixed The last element of the given array, false if it's not an array.
      */
     public function last(array $array)
     {
         if (is_array($array)) {
             $array = array_reverse($array);
-            
+
             return $this->first($array);
         }
 
@@ -50,13 +50,13 @@ class Arrayment
     /**
      * Checks if the given key exists in the array.
      *
-     * @param string $key Name key in the array
-     * @param array $array The array
-     * @return mixed True if exists the key, false otherwise
+     * @param  string $key   Name key in the array
+     * @param  array  $array The array
+     * @return mixed  True if exists the key, false otherwise
      */
     public function keyExists($key, array $array)
     {
-        if (is_string($key) && is_array($array)) {            
+        if (is_string($key) && is_array($array)) {
             return array_key_exists($key, $array);
         }
 
@@ -66,8 +66,8 @@ class Arrayment
     /**
      * Checks if the given value exists in the array.
      *
-     * @param mixed $value The value to find in the array
-     * @param array $array The array
+     * @param  mixed $value The value to find in the array
+     * @param  array $array The array
      * @return mixed True if exists the value, false otherwise
      */
     public function valueExists($value, array $array)
@@ -86,10 +86,10 @@ class Arrayment
     /**
      * Adds (or updates) a given key/value pair to the array.
      *
-     * @param array $array The array to add the element
-     * @param mixed $value The value to add to the array
-     * @param string $key The key to add to the array
-     * @return array The resultant array
+     * @param  array  $array The array to add the element
+     * @param  mixed  $value The value to add to the array
+     * @param  string $key   The key to add to the array
+     * @return array  The resultant array
      */
     public function add(&$array, $value, $key = null)
     {
@@ -107,9 +107,9 @@ class Arrayment
     /**
      * Removes a element from the array.
      *
-     * @param array $array The array with the element
-     * @param string $key The key to delete
-     * @return array The resultant array
+     * @param  array  $array The array with the element
+     * @param  string $key   The key to delete
+     * @return array  The resultant array
      */
     public function remove(&$array, $key)
     {
@@ -123,9 +123,9 @@ class Arrayment
     /**
      * Fetches a element from the array.
      *
-     * @param array $array The array with the element
-     * @param string $key The key to fetch
-     * @return mixed The selected array element
+     * @param  array  $array The array with the element
+     * @param  string $key   The key to fetch
+     * @return mixed  The selected array element
      */
     public function get(array $array, $key)
     {
@@ -139,7 +139,8 @@ class Arrayment
      *
      * @param array $array The array
      */
-    public function random(array $array) {
+    public function random(array $array)
+    {
         if (is_array($array)) {
             return $array[array_rand($array)];
         }
@@ -150,9 +151,9 @@ class Arrayment
     /**
      * Merge two arrays.
      *
-     * @param array $array1 The first array
-     * @param array $array2 The second array
-     * @param bool $matrix_merge True, to combine the arrays in to key=>value pairs.
+     * @param  array $array1       The first array
+     * @param  array $array2       The second array
+     * @param  bool  $matrix_merge True, to combine the arrays in to key=>value pairs.
      * @return mixed The resultant array, False if fails.
      */
     public function merge(array $array1, array $array2, $matrix_merge = false)
@@ -171,11 +172,12 @@ class Arrayment
     /**
      * Collapse an array of arrays into a single array.
      *
-     * @param array $array The array to collapse
-     * @param bool $multi_level Collapse all the levels of the matrix
+     * @param  array $array       The array to collapse
+     * @param  bool  $multi_level Collapse all the levels of the matrix
      * @return mixed The resultant array
      */
-    function collapse($array, $multi_level = false) {
+    public function collapse($array, $multi_level = false)
+    {
         $result = [];
 
         if (is_array($array)) {
@@ -192,34 +194,36 @@ class Arrayment
                     $result[] = $sub_array;
                 }
             }
-            
+
             return $result;
         }
-        
+
         return $array;
     }
 
     /**
      * Returns two arrays, one containing the keys, and the other containing the values of the original array.
      *
-     * @param array $array The array to split
+     * @param  array $array The array to split
      * @return mixed The resultant array
      */
-    public function split($array) {
+    public function split($array)
+    {
         return [array_keys($array), array_values($array)];
     }
 
     /**
      * Flatten a matrix with dots.
      *
-     * @param array $array The array to split
+     * @param  array $array The array to split
      * @return array The resultant array
      */
-    public function dotMatrix(array $array, $prepend = '') {
+    public function dotMatrix(array $array, $prepend = '')
+    {
         $results = [];
 
         foreach ($array as $key => $value) {
-            if (is_array($value) && ! empty($value)) {
+            if (is_array($value) && !empty($value)) {
                 $results = array_merge($results, $this->dotMatrix($value, $prepend.$key.'.'));
             } else {
                 $results[$prepend.$key] = $value;

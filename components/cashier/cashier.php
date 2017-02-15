@@ -16,8 +16,8 @@ class Cashier
     /**
      * Initializes a Gateways Class.
      *
-     * @param string $table Called function
-     * @return mixed Returns a Table Object if the table exists
+     * @param  string $table Called function
+     * @return mixed  Returns a Table Object if the table exists
      */
     public function loadGateway($table)
     {

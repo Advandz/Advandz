@@ -38,9 +38,9 @@ class Input
     /**
      * Checks if the given string is a valid email address.
      *
-     * @param string $str The string to test
-     * @param bool $check_record True to check DNS/MX record
-     * @return bool True if the email is valid, false otherwise
+     * @param  string $str          The string to test
+     * @param  bool   $check_record True to check DNS/MX record
+     * @return bool   True if the email is valid, false otherwise
      */
     public static function isEmail($str, $check_record = true)
     {
@@ -68,8 +68,8 @@ class Input
     /**
      * Checks if the given string is empty or otherwise not set.
      *
-     * @param string $str The string to test
-     * @return bool True if the string is empty or not set, false otherwise
+     * @param  string $str The string to test
+     * @return bool   True if the string is empty or not set, false otherwise
      */
     public static function isEmpty($str)
     {
@@ -83,12 +83,12 @@ class Input
     /**
      * Tests whether the given string meets the requirements to be considered a password.
      *
-     * @param string $str The string to test
-     * @param int $min_length The minimum length of the string
-     * @param string $type Types include "any", "any_no_space", "alpha_num", "alpha", "num", and "custom"
-     * @param string $custom_regex Used when $type is set to "custom". Does not use $min_length, any length requirement
-     *     must be included in the regex
-     * @return bool True if it meets the given requirements, false otherwise
+     * @param  string $str          The string to test
+     * @param  int    $min_length   The minimum length of the string
+     * @param  string $type         Types include "any", "any_no_space", "alpha_num", "alpha", "num", and "custom"
+     * @param  string $custom_regex Used when $type is set to "custom". Does not use $min_length, any length requirement
+     *                              must be included in the regex
+     * @return bool   True if it meets the given requirements, false otherwise
      */
     public static function isPassword($str, $min_length = 6, $type = 'any', $custom_regex = null)
     {
@@ -122,10 +122,10 @@ class Input
     /**
      * Tests whether the given string is considered a valid date suitable to strtotime().
      *
-     * @param string $str The string to test
-     * @param mixed $min The minimum acceptable date (string) or unix time stamp (int)
-     * @param mixed $min The maximum acceptable date (string) or unix time stamp (int)
-     * @return bool True if $str is a valid date, false otherwise
+     * @param  string $str The string to test
+     * @param  mixed  $min The minimum acceptable date (string) or unix time stamp (int)
+     * @param  mixed  $min The maximum acceptable date (string) or unix time stamp (int)
+     * @return bool   True if $str is a valid date, false otherwise
      */
     public static function isDate($str, $min = null, $max = null)
     {
@@ -158,9 +158,9 @@ class Input
     /**
      * Tests wether the given string satisfies the given regular expression.
      *
-     * @param string $str The string to test
-     * @param string $regex The regular expression to satisfy
-     * @return bool True when the string passes the regex, false otherwise
+     * @param  string $str   The string to test
+     * @param  string $regex The regular expression to satisfy
+     * @return bool   True when the string passes the regex, false otherwise
      */
     public static function matches($str, $regex)
     {
@@ -170,10 +170,10 @@ class Input
     /**
      * Tests how the given values compare.
      *
-     * @param mixed $a The value to compare
-     * @param string $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
-     * @param mixed $b The value to compare against
-     * @return bool True if $a validates $op against $b, false otherwise
+     * @param  mixed     $a  The value to compare
+     * @param  string    $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
+     * @param  mixed     $b  The value to compare against
+     * @return bool      True if $a validates $op against $b, false otherwise
      * @throws Exception Thrown when an unrecognized operator, $op, is given
      */
     public static function compares($a, $op, $b)
@@ -203,11 +203,11 @@ class Input
     /**
      * Tests that $val is between $min and $max.
      *
-     * @param mixed $val The value to compare
-     * @param mixed $min The lower value to compare against
-     * @param mixed $max The higher value to compare against
-     * @param bool $inclusive Set to false if $val must be strictly between $min and $max
-     * @return bool True if $val is between $min and $max, false otherwise
+     * @param  mixed $val       The value to compare
+     * @param  mixed $min       The lower value to compare against
+     * @param  mixed $max       The higher value to compare against
+     * @param  bool  $inclusive Set to false if $val must be strictly between $min and $max
+     * @return bool  True if $val is between $min and $max, false otherwise
      */
     public static function between($val, $min, $max, $inclusive = true)
     {
@@ -221,9 +221,9 @@ class Input
     /**
      * Test whether $str is at least $length bytes.
      *
-     * @param string $str The string to check
-     * @param int $length The number of bytes required in $str
-     * @return bool True if $str is at least $length bytes
+     * @param  string $str    The string to check
+     * @param  int    $length The number of bytes required in $str
+     * @return bool   True if $str is at least $length bytes
      */
     public static function minLength($str, $length)
     {
@@ -233,9 +233,9 @@ class Input
     /**
      * Test whether $str is no more than $length bytes.
      *
-     * @param string $str The string to check
-     * @param int $length The number of bytes allowed in $str
-     * @return bool True if $str is no more than $length bytes
+     * @param  string $str    The string to check
+     * @param  int    $length The number of bytes allowed in $str
+     * @return bool   True if $str is no more than $length bytes
      */
     public static function maxLength($str, $length)
     {
@@ -245,10 +245,10 @@ class Input
     /**
      * Test whether $str is between $min_length and $max_length.
      *
-     * @param string $str The string to check
-     * @param int $min_length The number of bytes required in $str
-     * @param int $max_length The number of bytes allowed in $str
-     * @return bool True if $str is between $min_length and $max_length
+     * @param  string $str        The string to check
+     * @param  int    $min_length The number of bytes required in $str
+     * @param  int    $max_length The number of bytes allowed in $str
+     * @return bool   True if $str is between $min_length and $max_length
      */
     public static function betweenLength($str, $min_length, $max_length)
     {
@@ -259,7 +259,7 @@ class Input
      * Set rules, overriding any existing rules set and empting any existing errors.
      *
      * @param array $rules A multi-deminsional array, where the 1st dimension is the index value of the data given to
-     *     Input::validates()
+     *                     Input::validates()
      * @see Input::validates()
      */
     public function setRules($rules)
@@ -273,13 +273,13 @@ class Input
      * This method formatted for use by array_walk_recusrive to process elements
      * recusively.
      *
-     * @param mixed $value The value to evaluate
-     * @param string $key The most immediate key to the given value
-     * @param array $var An array containing the full string index of the rule to evaluate ('index') and the complete
-     *     rule ('rule')
-     * @param int $max_depth The maximum depth to travel
-     * @param int $cur_depth The current depth traveled
-     * @param array $path A list of all array indexes encountered
+     * @param mixed  $value     The value to evaluate
+     * @param string $key       The most immediate key to the given value
+     * @param array  $var       An array containing the full string index of the rule to evaluate ('index') and the complete
+     *                          rule ('rule')
+     * @param int    $max_depth The maximum depth to travel
+     * @param int    $cur_depth The current depth traveled
+     * @param array  $path      A list of all array indexes encountered
      */
     public function processValidation(&$value, $key, $var, $max_depth = null, $cur_depth = 0, $path = [])
     {
@@ -297,8 +297,8 @@ class Input
      * post_format pre_format and post_format accept a typical PHP callback parameter, post_format will only be called
      * if the rule passes validation.
      *
-     * @param array $data An array of data such as POST
-     * @return bool true if all rules pass, false if any rule is broken
+     * @param  array $data An array of data such as POST
+     * @return bool  true if all rules pass, false if any rule is broken
      * @see Input::errors()
      */
     public function validates(&$data)
@@ -401,11 +401,11 @@ class Input
     /**
      * Format Data from Input::validates() with the given $callback.
      *
-     * @param mixed $callback A string whose function accepts a single parameter,
-     * or an array whose format is that of a PHP callback with the addition of optional parameters
-     * @param mixed $data The data to be formatted
-     * @param string $key The most immediate key to the given value
-     * @param array $path A list of all array indexes encountered
+     * @param mixed  $callback A string whose function accepts a single parameter,
+     *                         or an array whose format is that of a PHP callback with the addition of optional parameters
+     * @param mixed  $data     The data to be formatted
+     * @param string $key      The most immediate key to the given value
+     * @param array  $path     A list of all array indexes encountered
      * @param return mixed The result returned by the callback
      * @return mixed The formatted data
      */
@@ -432,7 +432,7 @@ class Input
      * Replaces all linked params in rules identified by an array with an index of '_linked'.
      *
      * @param array $params An array of paramters to pass to the callback, possibly containing linked params
-     * @param array $path A list of all array indexes encountered
+     * @param array $path   A list of all array indexes encountered
      */
     private function replaceLinkedParams(&$params, $path)
     {
@@ -482,10 +482,10 @@ class Input
      * Validate the rule against the given index and value, sets any errors into this object's $errors class variable.
      *
      * @param string $index The index set for this rule
-     * @param array $rule the Rule to validate against
-     * @param mixed $value The value given by the data element to which the rule is applied
-     * @param string $key The most immediate key to the given value
-     * @param array $path A list of all array indexes encountered
+     * @param array  $rule  the Rule to validate against
+     * @param mixed  $value The value given by the data element to which the rule is applied
+     * @param string $key   The most immediate key to the given value
+     * @param array  $path  A list of all array indexes encountered
      */
     private function validateRule($index, $rule, &$value, $key, $path = [])
     {
@@ -568,14 +568,14 @@ class Input
      * Emulates the standard array_walk_recursive function, with the added functionality
      * of passing array elements through when no further recusion can be made.
      *
-     * @param array $input The input array to recurse through
-     * @param callback $callback The callback function to apply to each member of $input
-     * @param array $params An array of additional parameters to be passed to the callback
-     * @param int $max_depth The maximum permitted depth to recurse
-     * @param int $cur_depth The current depth
-     * @param array $path A list of all array indexes encountered
-     * @return bool False if the input is no longer an array and therefore can not be recursed through, true
-     *     otherwise
+     * @param  array    $input     The input array to recurse through
+     * @param  callback $callback  The callback function to apply to each member of $input
+     * @param  array    $params    An array of additional parameters to be passed to the callback
+     * @param  int      $max_depth The maximum permitted depth to recurse
+     * @param  int      $cur_depth The current depth
+     * @param  array    $path      A list of all array indexes encountered
+     * @return bool     False if the input is no longer an array and therefore can not be recursed through, true
+     *                            otherwise
      */
     private static function array_walk_recursive(&$input, $callback, $params = null, $max_depth = null, $cur_depth = 0, $path = [])
     {
@@ -622,10 +622,10 @@ class Input
     /**
      * Recursively evaluates whether the path defined by $field is defined in $data.
      *
-     * @param mixed $data An array of data, or a scalar value if the array has been fully traversed
-     * @param mixed $field An array defining a path that $data should define, scalar if the array has been fully
-     *     traversed
-     * @return bool True if $field is fully defined in $data, false otherwise.
+     * @param  mixed $data  An array of data, or a scalar value if the array has been fully traversed
+     * @param  mixed $field An array defining a path that $data should define, scalar if the array has been fully
+     *                      traversed
+     * @return bool  True if $field is fully defined in $data, false otherwise.
      */
     private static function pathSet($data, $field)
     {
@@ -648,7 +648,7 @@ class Input
      * Recursively sets all leaf elements of the given array to null.
      *
      * @param mixed $data An array of data whose leaves to set to null, or a scalar value if the array has been fully
-     *     traversed
+     *                    traversed
      */
     private static function clearLeaves(&$data)
     {

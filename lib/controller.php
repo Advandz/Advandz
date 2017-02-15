@@ -179,7 +179,7 @@ class Controller
     /**
      * Invokes View::set() on $this->view.
      *
-     * @param mixed $name The name of the variable to set in this view
+     * @param mixed $name  The name of the variable to set in this view
      * @param mixed $value The value to assign to the variable set in this view
      * @see View::set()
      */
@@ -207,9 +207,9 @@ class Controller
     /**
      * Returns the given template file using the supplied params from the given view.
      *
-     * @param string $file The template file to render
-     * @param array $params An array of parameters to set in the template
-     * @param string $view The view to find the given template file in
+     * @param  string $file   The template file to render
+     * @param  array  $params An array of parameters to set in the template
+     * @param  string $view   The view to find the given template file in
      * @return string The rendered template
      */
     final protected function partial($file, $params = null, $view = null)
@@ -228,9 +228,9 @@ class Controller
     /**
      * Starts caching for the current request.
      *
-     * @param mixed $time The amount of time to cache for, either an integer (seconds) or a proper strtotime string
-     *     (e.g. "1 hour").
-     * @return bool True if caching is enabled, false otherwise.
+     * @param  mixed $time The amount of time to cache for, either an integer (seconds) or a proper strtotime string
+     *                     (e.g. "1 hour").
+     * @return bool  True if caching is enabled, false otherwise.
      */
     final protected function startCaching($time)
     {
@@ -332,8 +332,8 @@ class Controller
      * WEBDIR to $uri if $uri is relative (e.g. does not start with a '/' and is
      * not a url).
      *
-     * @param string $uri The URI or URL to redirect to. Default is WEBDIR
-     * @return bool False if the redirects fail
+     * @param  string $uri The URI or URL to redirect to. Default is WEBDIR
+     * @return bool   False if the redirects fail
      */
     final protected static function redirect($uri = WEBDIR)
     {

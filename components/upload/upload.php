@@ -78,11 +78,11 @@ class Upload
     /**
      * Writes a file to the uploads directory from the given set files.
      *
-     * @param array $file An array of file information
-     * @param int $permissions The permission value in octets, null to default to user permissions
-     * @param bool $overwrite Whether or not to overwrite the file if it already exists
-     * @param bool $hash_name Use the SHA-256 sum of the file, as file's name
-     * @return string The path to the uploaded file
+     * @param  array     $file        An array of file information
+     * @param  int       $permissions The permission value in octets, null to default to user permissions
+     * @param  bool      $overwrite   Whether or not to overwrite the file if it already exists
+     * @param  bool      $hash_name   Use the SHA-256 sum of the file, as file's name
+     * @return string    The path to the uploaded file
      * @throws Exception If the file can't be writed
      */
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
@@ -127,7 +127,7 @@ class Upload
     /**
      * Set the maximum upload size.
      *
-     * @param int $max_size The maximum upload size in bytes
+     * @param  int       $max_size The maximum upload size in bytes
      * @throws Exception When an invalid maximum size is given
      */
     public function setMaxSize($max_size)
@@ -142,7 +142,7 @@ class Upload
     /**
      * Set the upload directory.
      *
-     * @param string $dir The new upload directory
+     * @param  string    $dir The new upload directory
      * @throws Exception When an invalid maximum size is given
      */
     public function setUploadDir($dir)
@@ -153,8 +153,8 @@ class Upload
     /**
      * Calculates the hash sum of a file.
      *
-     * @param string $file The full path of the file
-     * @return string The SHA-256 hash of the file
+     * @param  string    $file The full path of the file
+     * @return string    The SHA-256 hash of the file
      * @throws Exception If the file not exits
      */
     public function hash($file)
@@ -169,7 +169,7 @@ class Upload
     /**
      * Get the extension of a file.
      *
-     * @param string $file_name The name of the file
+     * @param  string $file_name The name of the file
      * @return string The file extension
      */
     private function getExtension($file_name)

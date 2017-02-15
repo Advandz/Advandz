@@ -1,7 +1,9 @@
 <?php
+
 namespace Advandz\App\Controller;
 
-class TestController extends AppController {
+class TestController extends AppController
+{
     public function preAction()
     {
         $this->structure->setDefaultView(APPDIR);

@@ -455,8 +455,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
     /**
      * Generates a Record mock with Record::query and Record::reset mocked.
      *
-     * @param string $query The SQL before substitution
-     * @param array $params The parameters to substitute
+     * @param  string $query  The SQL before substitution
+     * @param  array  $params The parameters to substitute
      * @return object
      */
     protected function getQueryMock($query, $params = [], $return = null)

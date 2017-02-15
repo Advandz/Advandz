@@ -70,7 +70,7 @@ class Model
     /**
      * Sets the fetch mode to the given value, returning the old value.
      *
-     * @param mixed $fetch_mode The PDO:FETCH_* constant (int) to fetch records by, null to use default setting
+     * @param  mixed $fetch_mode The PDO:FETCH_* constant (int) to fetch records by, null to use default setting
      * @return mixed The fetch mode
      */
     public function setFetchMode($fetch_mode)
@@ -84,9 +84,9 @@ class Model
     /**
      * Get the last inserted ID.
      *
-     * @param string $name The name of the sequence object from which the ID should be returned
+     * @param  string    $name The name of the sequence object from which the ID should be returned
      * @throws Exception Thrown when no PDO connection has been established
-     * @return string The last ID inserted, if available
+     * @return string    The last ID inserted, if available
      */
     public function lastInsertId($name = null)
     {
@@ -100,8 +100,8 @@ class Model
     /**
      * Sets the given value to the given attribute for this connection.
      *
-     * @param string $attribute The attribute to set
-     * @param int $value The value to assign to the attribute
+     * @param  string    $attribute The attribute to set
+     * @param  int       $value     The value to assign to the attribute
      * @throws Exception Thrown when no PDO connection has been established
      */
     public function setAttribute($attribute, $value)
@@ -116,9 +116,9 @@ class Model
     /**
      * Query the Database using the given prepared statement and argument list.
      *
-     * @param string $sql The SQL to execute
+     * @param  string       $sql The SQL to execute
      * @return PDOStatement The resulting PDOStatement from the execution of this query
-     * @throws Exception Thrown when no PDO connection has been established
+     * @throws Exception    Thrown when no PDO connection has been established
      */
     public function query($sql)
     {
@@ -150,10 +150,10 @@ class Model
      * Prepares an SQL statement to be executed by the PDOStatement::execute() method.
      * Useful when executing the same query with different bound parameters.
      *
-     * @param string $sql The SQL statement to prepare
-     * @param int $fetch_mode The PDO::FETCH_* constant, defaults to "Database.fetch_mode" config setting
+     * @param  string       $sql        The SQL statement to prepare
+     * @param  int          $fetch_mode The PDO::FETCH_* constant, defaults to "Database.fetch_mode" config setting
      * @return PDOStatement The resulting PDOStatement from the preparation of this query
-     * @throws Exception When connection has not been instantiated
+     * @throws Exception    When connection has not been instantiated
      * @see PDOStatement::execute()
      */
     public function prepare($sql, $fetch_mode = null)
@@ -177,7 +177,7 @@ class Model
     /**
      * Begin a transaction.
      *
-     * @return bool True if the transaction was successfully opened, false otherwise
+     * @return bool      True if the transaction was successfully opened, false otherwise
      * @throws Exception When connection has not been instantiated
      */
     public function begin()
@@ -193,7 +193,7 @@ class Model
     /**
      * Rolls back and closes the transaction.
      *
-     * @return bool True if the transaction was successfully rolled back and closed, false otherwise
+     * @return bool      True if the transaction was successfully rolled back and closed, false otherwise
      * @throws Exception When connection has not been instantiated
      */
     public function rollBack()
@@ -209,7 +209,7 @@ class Model
     /**
      * Commits a transaction.
      *
-     * @return bool True if the transaction was successfully commited and closed, false otherwise
+     * @return bool      True if the transaction was successfully commited and closed, false otherwise
      * @throws Exception When connection has not been instantiated
      */
     public function commit()
@@ -235,10 +235,10 @@ class Model
     /**
      * Get the number of rows affected by the last query.
      *
-     * @param PDOStatement $statement The statement to count affected rows on,
-     * if null the last Model::query() statement will be used.
-     * @return int The number of rows affected by the previous query
-     * @throws Exception Thrown when called prior to Model::query()
+     * @param  PDOStatement $statement The statement to count affected rows on,
+     *                                 if null the last Model::query() statement will be used.
+     * @return int          The number of rows affected by the previous query
+     * @throws Exception    Thrown when called prior to Model::query()
      */
     public function affectedRows($statement = null)
     {
@@ -256,8 +256,8 @@ class Model
     /**
      * Build a DSN string using the given array of parameters.
      *
-     * @param array $db_params An array of parameters
-     * @return string The DSN string
+     * @param  array     $db_params An array of parameters
+     * @return string    The DSN string
      * @throws Exception Thrown when $db contains invalid parameters
      */
     public static function makeDSN($db_params)
@@ -273,7 +273,7 @@ class Model
      * Establish a new PDO connection using the given array of information. If
      * a connection already exists, no new connection will be created.
      *
-     * @param array $db_info Database information for this connection
+     * @param  array     $db_info Database information for this connection
      * @throws Exception Throw when PDOException is encountered
      */
     private function makeConnection($db_info = null)

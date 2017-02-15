@@ -36,7 +36,7 @@ class Pagination extends Html
     /**
      * Sets default settings.
      *
-     * @param array $get The GET parameters for the current request
+     * @param array $get    The GET parameters for the current request
      * @param array $format Format settings to overwrite default settings with (optional)
      */
     public function __construct(array $get = [], array $format = [])
@@ -130,8 +130,8 @@ class Pagination extends Html
      * Extends one array using another to overwrite existing values. Recursively merges
      * data.
      *
-     * @param array $arr1 The array (default) to be merged into
-     * @param array $arr2 The array to merge into $arr1
+     * @param  array $arr1 The array (default) to be merged into
+     * @param  array $arr2 The array to merge into $arr1
      * @return array The merged arrays
      */
     private function mergeArrays(array $arr1, array $arr2)
@@ -356,8 +356,8 @@ class Pagination extends Html
     /**
      * Creates a page nav item.
      *
-     * @param array $nav_item Navigation settings for a specific nav link
-     * @param string $page The page number or symbol
+     * @param  array  $nav_item Navigation settings for a specific nav link
+     * @param  string $page     The page number or symbol
      * @return string The HTML for the nav item, void if output enabled
      */
     private function createNavItem($nav_item, $page)
@@ -368,7 +368,7 @@ class Pagination extends Html
     /**
      * Opens a new tag.
      *
-     * @param array $tag The tag setting to open
+     * @param  array  $tag The tag setting to open
      * @return string The HTML for an open tag, void if output enabled
      */
     private function openTag($tag)
@@ -384,7 +384,7 @@ class Pagination extends Html
     /**
      * Closes a tag.
      *
-     * @param string $tag The tag setting to close
+     * @param  string $tag The tag setting to close
      * @return string The HTML for a closing tag, void if output enabled
      */
     private function closeTag($tag)
@@ -400,8 +400,8 @@ class Pagination extends Html
     /**
      * Creates a new link.
      *
-     * @param array $link The link settings
-     * @param int $page The page number
+     * @param  array  $link The link settings
+     * @param  int    $page The page number
      * @return string The HTML for the <a> tag, void if output enabled
      */
     private function createLink(array $link, $page)
@@ -448,7 +448,7 @@ class Pagination extends Html
     /**
      * Create the URI for the current page number, replacing any labels as needed.
      *
-     * @param int $page The page number
+     * @param  int    $page The page number
      * @return string The completed URI
      */
     public function getPageUri($page)
@@ -476,7 +476,7 @@ class Pagination extends Html
     /**
      * Handles whether to output or return $html.
      *
-     * @param string $html The HTML to output/return
+     * @param  string $html The HTML to output/return
      * @return string The HTML given, void if output enabled
      */
     private function output($html)

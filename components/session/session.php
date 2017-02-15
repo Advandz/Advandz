@@ -11,8 +11,8 @@
 
 namespace Advandz\Component;
 
-use Configure;
 use PDO;
+use Configure;
 
 class Session
 {
@@ -107,8 +107,8 @@ class Session
     /**
      * Read Session information for the given index.
      *
-     * @param string $name The name of the index to read
-     * @return mixed The value stored in $name of the session, or an empty string.
+     * @param  string $name The name of the index to read
+     * @return mixed  The value stored in $name of the session, or an empty string.
      */
     public function read($name)
     {
@@ -122,8 +122,8 @@ class Session
     /**
      * Writes the given session information to the given index.
      *
-     * @param string $name The index to write to
-     * @param mixed $value The value to write
+     * @param string $name  The index to write to
+     * @param mixed  $value The value to write
      */
     public function write($name, $value)
     {
@@ -150,10 +150,10 @@ class Session
     /**
      * Set the session cookie.
      *
-     * @param string $path The path for this cookie, default is the current URI
-     * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
-     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param string $path     The path for this cookie, default is the current URI
+     * @param string $domain   The domain that the cookie is available to, default is the current domain
+     * @param bool   $secure   Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool   $httponly Whether or not the cookie should be flagged for HTTP only
      */
     public function setSessionCookie($path = '', $domain = '', $secure = false, $httponly = false)
     {
@@ -167,10 +167,10 @@ class Session
     /**
      * Updates the session cookie expiration date so that it remains active without expiring.
      *
-     * @param string $path The path for this cookie, default is the current URI
-     * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
-     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param string $path     The path for this cookie, default is the current URI
+     * @param string $domain   The domain that the cookie is available to, default is the current domain
+     * @param bool   $secure   Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool   $httponly Whether or not the cookie should be flagged for HTTP only
      */
     public function keepAliveSessionCookie($path = '', $domain = '', $secure = false, $httponly = false)
     {
@@ -182,9 +182,9 @@ class Session
     /**
      * Deletes the session cookie.
      *
-     * @param string $path The path for this cookie, default is the current URI
+     * @param string $path   The path for this cookie, default is the current URI
      * @param string $domain The domain that the cookie is available to, default is the current domain
-     * @param bool $secure Whether or not the cookie should be transmitted over a secure connection from the client
+     * @param bool   $secure Whether or not the cookie should be transmitted over a secure connection from the client
      */
     public function clearSessionCookie($path = '', $domain = '', $secure = false)
     {
@@ -196,12 +196,12 @@ class Session
     /**
      * Set session handler callback methods and start the session.
      *
-     * @param int $ttl Time to Live (seconds)
-     * @param string $tbl Name of the session table
-     * @param string $tblid Name of the session ID field
+     * @param int    $ttl       Time to Live (seconds)
+     * @param string $tbl       Name of the session table
+     * @param string $tblid     Name of the session ID field
      * @param string $tblexpire Name of the session expire date field
-     * @param string $tblvalue Name of the session value field
-     * @param bool $httponly Whether or not the cookie should be flagged for HTTP only
+     * @param string $tblvalue  Name of the session value field
+     * @param bool   $httponly  Whether or not the cookie should be flagged for HTTP only
      */
     private function sessionSet($ttl, $tbl, $tblid, $tblexpire, $tblvalue, $session_name, $httponly)
     {
@@ -261,8 +261,8 @@ class Session
     /**
      * Reawake the session using the given cookie session id.
      *
-     * @param string $csid The cookie session ID
-     * @return bool If Keep-Alive has been set
+     * @param  string $csid The cookie session ID
+     * @return bool   If Keep-Alive has been set
      */
     private function setKeepAlive($csid)
     {
@@ -306,7 +306,7 @@ class Session
     /**
      * Reads the session data from the database.
      *
-     * @param int $sid Session ID
+     * @param  int    $sid Session ID
      * @return string
      */
     private function sessionSelect($sid)
@@ -331,7 +331,7 @@ class Session
      * Writes the session data to the database.
      * If that SID already exists, then the existing data will be updated.
      *
-     * @param string $sid The session ID
+     * @param string $sid   The session ID
      * @param string $value The value to write to the session
      */
     private function sessionWrite($sid, $value)
@@ -359,7 +359,7 @@ class Session
     /**
      * Deletes all sessions that have expired.
      *
-     * @param int $lifetime TTL of the session
+     * @param  int $lifetime TTL of the session
      * @return int Affected rows
      */
     private function sessionGarbageCollect($lifetime)

@@ -15,7 +15,7 @@ class Language
 {
     /**
      * @var array An associative array containing name of all of the language files loaded
-     * and the language they pertain to
+     *            and the language they pertain to
      */
     private static $lang_files;
 
@@ -33,10 +33,10 @@ class Language
      * Alias of Language::getText().
      *
      * @see Language::getText()
-     * @param string $lang_key The language key identifier for this requested text
-     * @param bool $return Whether to return the text or output it
-     * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
-     *     that value is passed to sprintf().
+     * @param  string $lang_key The language key identifier for this requested text
+     * @param  bool   $return   Whether to return the text or output it
+     * @param  mixed  $args     Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
+     *                          that value is passed to sprintf().
      * @return mixed
      */
     final public static function _($lang_key, $return = false)
@@ -51,10 +51,10 @@ class Language
      * language file first, if not found in there, then will search the default
      * language file for the $lang_key text.
      *
-     * @param string $lang_key The language key identifier for this requested text
-     * @param bool $return Whether to return the text or output it
-     * @param mixed $args Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
-     *     that value is passed to sprintf().
+     * @param  string $lang_key The language key identifier for this requested text
+     * @param  bool   $return   Whether to return the text or output it
+     * @param  mixed  $args     Values to substitute in the language result. Uses sprintf(). If parameter is an array, only
+     *                          that value is passed to sprintf().
      * @return string The resultant text
      */
     final public static function getText($lang_key, $return = false)
@@ -97,10 +97,10 @@ class Language
     /**
      * Loads a language file whose properties may then be invoked.
      *
-     * @param mixed $lang_file A string as a single language file or array containing a list of language files to load
-     * @param string $language The ISO 639-1/2 language to load the $lang_file for (e.g. en_us), default is
-     *     "Language.default" config value
-     * @param string $lang_dir The directory from which to load the given language file(s), defaults to LANGDIR
+     * @param mixed  $lang_file A string as a single language file or array containing a list of language files to load
+     * @param string $language  The ISO 639-1/2 language to load the $lang_file for (e.g. en_us), default is
+     *                          "Language.default" config value
+     * @param string $lang_dir  The directory from which to load the given language file(s), defaults to LANGDIR
      */
     final public static function loadLang($lang_file, $language = null, $lang_dir = LANGDIR)
     {
@@ -165,8 +165,8 @@ class Language
     /**
      * Sets the language to load when not explicitly defined in the requested method.
      *
-     * @param string $language The ISO 639-1/2 language to use (e.g. en_us) for all future requests if not explicitly
-     *     given to the requested method
+     * @param  string $language The ISO 639-1/2 language to use (e.g. en_us) for all future requests if not explicitly
+     *                          given to the requested method
      * @return string The previously set language, null if not previously defined
      */
     final public static function setLang($language)

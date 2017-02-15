@@ -11,6 +11,9 @@
 
 namespace Advandz\Component;
 
+use Configure;
+use PDO;
+
 class Session
 {
     /**
@@ -63,19 +66,20 @@ class Session
      */
     public function __construct()
     {
-        []load('session');
+        \Loader::load(COMPONENTDIR.'record'.DS.'record.php');
+        Configure::load('session');
 
         $this->Record = new Record();
-        $this->Record->setFetchMode(\PDO::FETCH_OBJ);
+        $this->Record->setFetchMode(PDO::FETCH_OBJ);
 
         $this->sessionSet(
-            \Configure::get('Session.ttl'),
-            \Configure::get('Session.tbl'),
-            \Configure::get('Session.tbl_id'),
-            \Configure::get('Session.tbl_exp'),
-            \Configure::get('Session.tbl_val'),
-            \Configure::get('Session.session_name'),
-            \Configure::get('Session.session_httponly')
+            Configure::get('Session.ttl'),
+            Configure::get('Session.tbl'),
+            Configure::get('Session.tbl_id'),
+            Configure::get('Session.tbl_exp'),
+            Configure::get('Session.tbl_val'),
+            Configure::get('Session.session_name'),
+            Configure::get('Session.session_httponly')
         );
     }
 
@@ -154,9 +158,9 @@ class Session
     public function setSessionCookie($path = '', $domain = '', $secure = false, $httponly = false)
     {
         if (version_compare(phpversion(), '5.2.0', '>=')) {
-            setcookie(\Configure::get('Session.cookie_name'), $this->getSid(), time() + \Configure::get('Session.cookie_ttl'), $path, $domain, $secure, $httponly);
+            setcookie(Configure::get('Session.cookie_name'), $this->getSid(), time() + Configure::get('Session.cookie_ttl'), $path, $domain, $secure, $httponly);
         } else {
-            setcookie(\Configure::get('Session.cookie_name'), $this->getSid(), time() + \Configure::get('Session.cookie_ttl'), $path, $domain, $secure);
+            setcookie(Configure::get('Session.cookie_name'), $this->getSid(), time() + Configure::get('Session.cookie_ttl'), $path, $domain, $secure);
         }
     }
 
@@ -170,7 +174,7 @@ class Session
      */
     public function keepAliveSessionCookie($path = '', $domain = '', $secure = false, $httponly = false)
     {
-        if (isset($_COOKIE[\Configure::get('Session.cookie_name')])) {
+        if (isset($_COOKIE[Configure::get('Session.cookie_name')])) {
             $this->setSessionCookie($path, $domain, $secure, $httponly);
         }
     }
@@ -184,8 +188,8 @@ class Session
      */
     public function clearSessionCookie($path = '', $domain = '', $secure = false)
     {
-        if (isset($_COOKIE[\Configure::get('Session.cookie_name')])) {
-            setcookie(\Configure::get('Session.cookie_name'), '', time() - \Configure::get('Session.cookie_ttl'), $path, $domain, $secure);
+        if (isset($_COOKIE[Configure::get('Session.cookie_name')])) {
+            setcookie(Configure::get('Session.cookie_name'), '', time() - Configure::get('Session.cookie_ttl'), $path, $domain, $secure);
         }
     }
 
@@ -229,13 +233,13 @@ class Session
 
             // If a cookie is available, attempt to use that session and reset
             // the ttl to use the cookie ttl, but only if we don't have a current session cookie as well
-            if (isset($_COOKIE[\Configure::get('Session.cookie_name')]) && !isset($_COOKIE[session_name()])) {
-                if ($this->setKeepAlive($_COOKIE[\Configure::get('Session.cookie_name')])) {
-                    $this->setCsid($_COOKIE[\Configure::get('Session.cookie_name')]);
-                    $this->ttl = \Configure::get('Session.cookie_ttl');
+            if (isset($_COOKIE[Configure::get('Session.cookie_name')]) && !isset($_COOKIE[session_name()])) {
+                if ($this->setKeepAlive($_COOKIE[Configure::get('Session.cookie_name')])) {
+                    $this->setCsid($_COOKIE[Configure::get('Session.cookie_name')]);
+                    $this->ttl = Configure::get('Session.cookie_ttl');
                 }
-            } elseif (isset($_COOKIE[\Configure::get('Session.cookie_name')]) && isset($_COOKIE[session_name()]) && $_COOKIE[\Configure::get('Session.cookie_name')] == $_COOKIE[session_name()]) {
-                $this->ttl = \Configure::get('Session.cookie_ttl');
+            } elseif (isset($_COOKIE[Configure::get('Session.cookie_name')]) && isset($_COOKIE[session_name()]) && $_COOKIE[Configure::get('Session.cookie_name')] == $_COOKIE[session_name()]) {
+                $this->ttl = Configure::get('Session.cookie_ttl');
             }
 
             // Start the session

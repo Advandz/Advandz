@@ -11,7 +11,7 @@
 
 namespace Advandz\Helper;
 
-class Array
+class Arrayment
 {
     /**
      * Return the first element of an array.

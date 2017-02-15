@@ -14,14 +14,14 @@ namespace Advandz\Component;
 class Upload
 {
     /**
-     * @var int Maximum upload size in bytes (default: 5MB)
+     * @var int Maximum upload size in bytes (Default: 5MB)
      */
     private $file_size = 5120000;
 
     /**
      * @var string The upload directory
      */
-    private $upload_dir = '/uploads';
+    private $upload_dir = 'uploads';
 
     /**
      * Constructs a new Upload object.
@@ -32,7 +32,7 @@ class Upload
         $upload_dir = \Configure::get('Upload.upload_dir');
 
         if (!empty($upload_dir)) {
-            $thos->upload_dir = $upload_dir;
+            $this->upload_dir = $upload_dir;
         }
     }
 
@@ -87,7 +87,8 @@ class Upload
      */
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
     {
-        $path = dirname(__FILE__).'/../..'.$this->upload_dir.'/';
+        // Full path to the upload directory
+        $path = ROOTWEBDIR.$this->upload_dir;
 
         // Check if exits the upload directory, If not exists then create it
         if (!is_dir($path)) {

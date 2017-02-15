@@ -63,7 +63,7 @@ class UnknownException extends ErrorException
         if (!empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
             $e = new self($error['message'], 0, $error['type'], $error['file'], $error['line']);
             try {
-                Advandz\Dispatcher::raiseError($e);
+                Dispatcher::raiseError($e);
             } catch (Exception $e) {
                 if (Configure::get('System.debug')) {
                     print $e->getMessage().' on line <strong>'.$e->getLine().

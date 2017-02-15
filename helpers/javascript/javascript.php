@@ -12,8 +12,6 @@
 
 namespace Advandz\Helper;
 
-use Type;
-
 class Javascript extends Html
 {
     /**
@@ -63,7 +61,7 @@ class Javascript extends Html
      */
     public function getFiles($location)
     {
-        $html = Type::_string();
+        $html = null;
         if (isset($this->js_files[$location])) {
             $num_docs = count($this->js_files[$location]);
             for ($i = 0; $i < $num_docs; $i++) {
@@ -81,7 +79,7 @@ class Javascript extends Html
      */
     public function getInline()
     {
-        $html = Type::_string();
+        $html = null;
 
         $num_docs = count($this->js_inline);
 
@@ -131,7 +129,7 @@ class Javascript extends Html
      */
     public function unsetFiles()
     {
-        $this->js_files = Type::_array();
+        $this->js_files = [];
 
         return $this;
     }
@@ -143,7 +141,7 @@ class Javascript extends Html
      */
     public function unsetInline()
     {
-        $this->js_inline = Type::_array();
+        $this->js_inline = [];
 
         return $this;
     }

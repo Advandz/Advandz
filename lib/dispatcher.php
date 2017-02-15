@@ -64,7 +64,7 @@ class Dispatcher extends Controller
 
         $plugin_path = null; // relative path to the plugin directory if it exists
 
-        if (!$plugin) {
+        if (empty($plugin)) {
             if (!Loader::load(CONTROLLERDIR.$controller.'.php')) {
                 throw new Exception('<strong>'.$controller.'</strong> is not a valid controller', 404);
             }

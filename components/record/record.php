@@ -11,11 +11,9 @@
 
 namespace Advandz\Component;
 
-use Type;
-use Model;
 use stdClass;
 
-class Record extends Model
+class Record extends \Model
 {
     /**
      * @var int The number of open parentheses in where statements yet to be applied
@@ -1164,7 +1162,7 @@ class Record extends Model
         }
 
         // Build fields
-        $fields = Type::_array();
+        $fields = [];
         foreach ($this->fields as $name => $field) {
             $action = isset($field['add']) ? 'add' : 'drop';
 
@@ -1262,7 +1260,7 @@ class Record extends Model
         }
 
         // Reset the conditionals
-        $this->on = Type::_array();
+        $this->on = [];
     }
 
     /**
@@ -1596,7 +1594,7 @@ class Record extends Model
             $identifier = explode('.', $identifier);
         }
 
-        $parts = Type::_array();
+        $parts = [];
         if (is_array($identifier)) {
             foreach ($identifier as $part) {
                 $parts[] = $q.str_replace($q, $q.$q, $part).$q;

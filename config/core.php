@@ -46,14 +46,14 @@ Configure::set('Caching.on', true);
 Configure::set('Cache.dir_permissions', 0755);
 // File extension for cache files
 Configure::set('Caching.ext', '.html');
+// The cached file life-time in seconds
+Configure::set('Caching.ttl', 3600);
 
 //###############################################################################
-// Knife Template Engine
+// Knife
 //###############################################################################
 // Enable the Knife template engine (true/false).
 Configure::set('Knife.on', true);
-// The compiled cached file life-time in seconds.
-Configure::set('Knife.ttl', 3600);
 
 //###############################################################################
 // Encryption
@@ -65,7 +65,7 @@ Configure::set('Encryption.key', '');
 // Upload
 //###############################################################################
 // The upload directory.
-Configure::set('Upload.upload_dir', '/uploads');
+Configure::set('Upload.upload_dir', 'uploads');
 
 //###############################################################################
 // Language

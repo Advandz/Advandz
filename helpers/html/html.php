@@ -4,14 +4,12 @@
  *
  * @package Advandz
  * @subpackage Advandz.helpers.html
- * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
+ * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
- * @author The Advandz Team <team@advandz.com>
+ * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
 
 namespace Advandz\Helper;
-
-use Type;
 
 class Html
 {
@@ -67,9 +65,9 @@ class Html
      */
     public function isUtf8($str)
     {
-        $c    = Type::_int();
-        $b    = Type::_int();
-        $bits = Type::_int();
+        $c    = 0;
+        $b    = 0;
+        $bits = 0;
         $len  = strlen($str);
         for ($i = 0; $i < $len; $i++) {
             $c = ord($str[$i]);
@@ -184,7 +182,7 @@ class Html
      */
     public function buildAttributes(array $attributes = null, $glue = ' ')
     {
-        $html = Type::_string();
+        $html = null;
 
         if (!empty($attributes)) {
             foreach ($attributes as $key => $value) {
@@ -223,8 +221,8 @@ class Html
      */
     public function hyperlink($content)
     {
-        $pattern     = Type::_array();
-        $replacement = Type::_array();
+        $pattern     = [];
+        $replacement = [];
 
         // Convert email addresses to links
         $pattern[]     = "/[a-zA-Z0-9!#$%\*\/?\|^\{\}`~&'\+=_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,10}/";

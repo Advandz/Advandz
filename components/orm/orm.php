@@ -1,7 +1,7 @@
 <?php
 /**
- * Provides a number of methods for manage your database with a Object-relational mapping that lets you query and
- * manipulate data from a database using an object-oriented paradigm.
+ * Provides a number of methods for manage your database with a Object-relational mapping
+ * that lets you query and manipulate data from a database using an object-oriented paradigm.
  *
  * @package Advandz
  * @subpackage Advandz.components.orm
@@ -12,27 +12,32 @@
 
 namespace Advandz\Component;
 
-use Loader;
-
 class Orm extends Record
 {
     /**
      * Initializes a Table Class.
      *
-     * @param string $table Called function
-     * @return mixed Returns a Table Object if the table exists
+     * @param string $table The database table to use
+     * @return Table Returns a Table Object if the table exists
+     * @throws Exception If the table not exists in the database
      */
-    public function loadTable($table)
+    public function _($table)
     {
-        Loader::load(COMPONENTDIR.'orm'.DS.'table.php');
+        // Load the table class
+        \Loader::load(COMPONENTDIR.'orm'.DS.'table.php');
 
-        $table_exists = $this->select()->from(Loader::fromCamelCase($table))->numResults();
-        if ($table_exists) {
-            $this->{Loader::toCamelCase($table)} = new Table(Loader::fromCamelCase($table));
+        // Convert table name
+        $table = \Loader::fromCamelCase($table);
 
-            return $this->{Loader::toCamelCase($table)};
+        // Check if table exists
+        if ($this->select()->from($table)->numResults() > 0) {
+            // Initialize the table class
+            $table_cc = \Loader::toCamelCase($table);
+            $this->{$table_cc} = new Table($table);
+
+            return $this->{$table_cc};
+        } else {
+            throw new \Exception("Table \"".$table."\" doesn't exist");
         }
-
-        return null;
     }
 }

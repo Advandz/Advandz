@@ -10,6 +10,7 @@ enabled:
  - align_equals
  - align_double_arrow
  - no_short_echo_tag
+ - phpdoc_align
 
 disabled:
  - whitespace_after_comma_in_array

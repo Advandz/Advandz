@@ -17,10 +17,6 @@
 
 namespace Advandz\Component;
 
-use PDO;
-use Type;
-use Loader;
-
 class Acl
 {
     /**
@@ -28,10 +24,8 @@ class Acl
      */
     public function __construct()
     {
-        Loader::load(COMPONENTDIR.'record'.DS.'record.php');
-
         $this->Record = new Record();
-        $this->Record->setFetchMode(PDO::FETCH_OBJ);
+        $this->Record->setFetchMode(\PDO::FETCH_OBJ);
     }
 
     /**
@@ -87,7 +81,7 @@ class Acl
     public function getAccessList($aro_alias, $aco_alias)
     {
         $aco         = explode('/', $aco_alias);
-        $access_list = Type::_array();
+        $access_list = [];
 
         // Attempt to find an entry for the given ACO, if no results, attempt for a subset of that ACO path
         $temp_aco  = $aco_alias;

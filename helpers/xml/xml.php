@@ -11,8 +11,6 @@
 
 namespace Advandz\Helper;
 
-use Type;
-
 class Xml
 {
     /**
@@ -84,7 +82,7 @@ class Xml
      */
     private function buildXmlSegment($value, $root_node = 'result', $tab_count = -1)
     {
-        $xml = Type::_string();
+        $xml = null;
         $tab = $this->tab;
 
         if (is_numeric($root_node)) {

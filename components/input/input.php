@@ -13,9 +13,6 @@
 
 namespace Advandz\Component;
 
-use Type;
-use Exception;
-
 class Input
 {
     /**
@@ -95,7 +92,7 @@ class Input
      */
     public static function isPassword($str, $min_length = 6, $type = 'any', $custom_regex = null)
     {
-        $regex = Type::_string();
+        $regex = null;
 
         switch ($type) {
             default:
@@ -199,7 +196,7 @@ class Input
             case '!==':
                 return $a !== $b;
             default:
-                throw new Exception('Unrecognized operator: '.$op);
+                throw new \Exception('Unrecognized operator: '.$op);
         }
     }
 
@@ -268,7 +265,7 @@ class Input
     public function setRules($rules)
     {
         $this->rules  = $rules;
-        $this->errors = Type::_array();
+        $this->errors = [];
     }
 
     /**
@@ -317,7 +314,7 @@ class Input
                 if (strpos($index, '[') !== false) {
                     $depth = substr_count($index, '[');
 
-                    $field = Type::_array();
+                    $field = [];
                     // Turn rule index into array
                     parse_str($index, $field);
 
@@ -414,7 +411,7 @@ class Input
      */
     private function formatData($callback, $data, $key, $path)
     {
-        $params = Type::_array();
+        $params = [];
 
         if (is_array($callback)) {
             $method = array_shift($callback);
@@ -449,7 +446,7 @@ class Input
 
         foreach ($params as &$param) {
             // The number of blank array indexes from the _linked rule value
-            $blank = Type::_int();
+            $blank = 0;
             // If the parameter given is linked, find the value of the linked field
             if (is_array($param) && isset($param['_linked'])) {
                 $data_set = $this->data;

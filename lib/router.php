@@ -202,6 +202,7 @@ final class Router
         }
 
         if (is_dir(PLUGINDIR.$controller.DS)) {
+            $i = 0;
             $plugin = $controller;
             if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
                 $controller = $uri[$i++];

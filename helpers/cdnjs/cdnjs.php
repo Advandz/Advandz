@@ -13,7 +13,9 @@
 
 namespace Advandz\Helper;
 
-class Cdnjs extends \Controller
+use Advandz\Component\Http;
+
+class Cdnjs extends Http
 {
     /**
      * Load a library.
@@ -83,12 +85,9 @@ class Cdnjs extends \Controller
      */
     public function searchLibrary($lib)
     {
-        // Load components
-        $this->components(['Http']);
-
         // Search the library in CDNJS
         if (isset($lib)) {
-            $search = $this->Http->server('api.cdnjs.com')
+            $search = $this->server('api.cdnjs.com')
                 ->uri('libraries')
                 ->useSsl()
                 ->method('GET')
@@ -114,12 +113,9 @@ class Cdnjs extends \Controller
      */
     public function getLibrary($lib)
     {
-        // Load components
-        $this->components(['Http']);
-
         // Get the library from CDNJS
         if (isset($lib)) {
-            $library = $this->Http->server('api.cdnjs.com')
+            $library = $this->server('api.cdnjs.com')
                 ->uri('libraries/'.$lib)
                 ->useSsl()
                 ->method('GET')

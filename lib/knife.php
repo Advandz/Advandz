@@ -74,7 +74,7 @@ class Knife extends Language
             // Delete compiled view if is old
             if (Configure::get('Caching.on') && file_exists($compiled_file)) {
                 $build_date = filemtime($compiled_file); // Last modified date of the compiled view
-                $ttl        = (!empty(Configure::get('Knife.ttl')) ? Configure::get('Knife.ttl') : 3600);
+                $ttl        = (!empty(Configure::get('Caching.ttl')) ? Configure::get('Caching.ttl') : 3600);
 
                 if ($build_date + $ttl <= time()) {
                     unlink($compiled_file);

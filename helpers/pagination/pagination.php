@@ -11,9 +11,6 @@
 
 namespace Advandz\Helper;
 
-use Type;
-use Language;
-
 class Pagination extends Html
 {
     /**
@@ -45,7 +42,7 @@ class Pagination extends Html
     public function __construct(array $get = [], array $format = [])
     {
         // Load the language for the pagination
-        Language::loadLang('pagination');
+        \Language::loadLang('pagination');
 
         $this->setGet($get);
 
@@ -59,7 +56,7 @@ class Pagination extends Html
                 // First page link
                 'first'     => [
                     'tag'             => 'li',
-                    'name'            => Language::_('Pagination.first_link', true),
+                    'name'            => \Language::_('Pagination.first_link', true),
                     'attributes'      => [],
                     'link_attributes' => [],
                     'show'            => 'if_needed', // options: if_needed, never, always
@@ -68,7 +65,7 @@ class Pagination extends Html
                 // Last page link
                 'last'      => [
                     'tag'             => 'li',
-                    'name'            => Language::_('Pagination.last_link', true),
+                    'name'            => \Language::_('Pagination.last_link', true),
                     'attributes'      => [],
                     'link_attributes' => [],
                     'show'            => 'if_needed', // Options: if_needed, never, always
@@ -77,7 +74,7 @@ class Pagination extends Html
                 // Next page link
                 'next'      => [
                     'tag'             => 'li',
-                    'name'            => Language::_('Pagination.next_link', true),
+                    'name'            => \Language::_('Pagination.next_link', true),
                     'attributes'      => [],
                     'link_attributes' => [],
                     'show'            => 'if_needed', // Options: if_needed, never, always
@@ -86,7 +83,7 @@ class Pagination extends Html
                 // Previous page link
                 'prev'      => [
                     'tag'             => 'li',
-                    'name'            => Language::_('Pagination.prev_link', true),
+                    'name'            => \Language::_('Pagination.prev_link', true),
                     'attributes'      => [],
                     'link_attributes' => [],
                     'show'            => 'if_needed', // Options: if_needed, never, always
@@ -196,7 +193,7 @@ class Pagination extends Html
      */
     public function hasPages()
     {
-        $pages = Type::_int();
+        $pages = 0;
         if (isset($this->settings['total_pages']) && $this->settings['total_pages'] > 0) {
             $pages = $this->settings['total_pages'];
         } else {
@@ -376,7 +373,7 @@ class Pagination extends Html
      */
     private function openTag($tag)
     {
-        $html = Type::_string();
+        $html = null;
         if (is_array($tag) && isset($tag['tag'])) {
             $html .= '<'.$this->_($tag['tag'], true).$this->buildAttributes($tag['attributes']).'>'.$this->eol;
         }
@@ -392,7 +389,7 @@ class Pagination extends Html
      */
     private function closeTag($tag)
     {
-        $html = Type::_string();
+        $html = null;
         if (is_array($tag) && isset($tag['tag'])) {
             $html .= '</'.$this->_($tag['tag'], true).'>'.$this->eol;
         }
@@ -409,7 +406,7 @@ class Pagination extends Html
      */
     private function createLink(array $link, $page)
     {
-        $html = Type::_string();
+        $html = null;
         if (is_array($link)) {
             $link['link_attributes']['href'] = $this->getPageUri($page);
             $html .= '<a'.$this->buildAttributes($link['link_attributes']).'>'.

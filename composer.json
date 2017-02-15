@@ -33,12 +33,22 @@
         "post-install-cmd": [
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf .gitignore"
+            "rm -rf .gitignore",
+            "rm -rf build",
+            "rm -rf tests",
+	        "rm -rf .styleci.yml",
+	        "rm -rf .travis.yml",
+	        "rm -rf .gitignore"
         ],
         "post-update-cmd": [
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf .gitignore"
+            "rm -rf .gitignore",
+            "rm -rf build",
+            "rm -rf tests",
+            "rm -rf .styleci.yml",
+	        "rm -rf .travis.yml",
+	        "rm -rf .gitignore"
         ]
     }
 }

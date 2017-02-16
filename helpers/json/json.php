@@ -21,16 +21,16 @@ class Json
     /**
      * Encodes any Object or Array in to a valid JSON string.
      *
-     * @param  mixed $object The array/object to be encoded
+     * @param  mixed  $object The array/object to be encoded
      * @return string The encoded JSON string
      */
     public function jsonEncode($object)
     {
         $json = json_encode($object);
 
-
         if ($this->jsonError()) {
             $this->json = $json;
+
             return $this->json;
         }
     }
@@ -39,7 +39,7 @@ class Json
      * Decodes a valid JSON string.
      *
      * @param  string $json The JSON string to be decoded
-     * @return mixed The resultant array/object
+     * @return mixed  The resultant array/object
      */
     public function jsonDecode($json)
     {
@@ -55,15 +55,17 @@ class Json
      *
      * @return string The JSON string
      */
-    public function printJson() {
+    public function printJson()
+    {
         print $this->json;
+
         return $this->json;
     }
 
     /**
      * Check the JSON latest error.
      *
-     * @return bool True if is a valid JSON
+     * @return bool      True if is a valid JSON
      * @throws Exception When the JSON parser returns the last error occurred
      */
     private function jsonError()
@@ -85,6 +87,6 @@ class Json
                 throw new Exception('A value of a type that cannot be encoded was given');
         }
 
-        return (json_last_error() === JSON_ERROR_NONE);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 }

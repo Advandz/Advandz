@@ -13,17 +13,6 @@ namespace Advandz\App\Controller;
 
 class AppController extends \Controller
 {
-    /**
-     * Pre-Action, This method called before the index method, or controller specified action.
-     */
-    public function preAction()
-    {
-        $this->helpers(['Cdnjs']);
-
-        $libs = $this->Cdnjs->loadLibraries(['jquery']);
-        $this->structure->set('libs', $libs);
-    }
-
     //
     // TODO: Define any methods, load any models or components or anything else
     // here that you would like to be available to all controllers that extend

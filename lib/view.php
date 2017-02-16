@@ -8,7 +8,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
-class View extends Knife
+class View extends Language
 {
     /**
      * @var array Holds all the variables we will send to the view
@@ -148,7 +148,7 @@ class View extends Knife
 
         ob_start(); // Start output buffering
 
-        include $this->compile($file); // Include the file
+        include $file; // Include the file
 
         $contents = ob_get_clean(); // Get the contents of the buffer and close buffer.
 

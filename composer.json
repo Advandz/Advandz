@@ -1,13 +1,13 @@
 {
-    "name": "advandz/advandz-framework",
+    "name": "advandz/advandz",
     "description": "Advandz is an enterprise-class powerful and scalable MVC framework for people who love building well-written web applications using PHP.",
-    "keywords": ["framework", "advandz"],
+    "keywords": ["framework", "advandz", "php", "hhvm", "mvc", "hmvc"],
     "homepage": "http://advandz.com/",
     "type": "project",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.6"
     },
     "license": "MIT",
     "authors": [

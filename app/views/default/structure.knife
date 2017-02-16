@@ -2,28 +2,42 @@
 <html lang="en-us" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Advandz Framework</title>
 
         <!-- Styles -->
-        <style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-                font-weight: lighter;
-                font-size: 1rem;
-                line-height: 1.5;
-                color: #373a3c;
-                background-color: #ffffff;
-            }
-            a {
-                color: #666 !important;
-            }
-            .title {
-                font-weight: lighter;
-                font-size: 50px;
-            }
-        </style>
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-icons.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-animations.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-ui.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/styles.css">
+
+        <!-- Scripts -->
+        {{foreach $libs as $lib}}
+            <script src="{{!@var lib}}"></script>
+        {{/foreach}}
+        <script src="{{@yield assets_dir}}javascript/advandz-ui.js"></script>
+        <script src="{{@yield assets_dir}}javascript/script.js"></script>
     </head>
     <body>
-        <?php echo $content; ?>
+        <nav class="navbar navbar-static-top navbar-dark bg-inverse round-corners-none">
+            <a class="navbar-brand" href="#">Advandz Framework</a>
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+            </ul>
+        </nav>
+
+        {{!@var content}}
+
+        <div class="container">
+            <hr>
+            <footer>
+                <center>
+                    <i class="af-icon icon-advandz text-muted font-size-xl padding-top-10 padding-bottom-15"></i>
+                </center>
+            </footer>
+        </div>
     </body>
 </html>

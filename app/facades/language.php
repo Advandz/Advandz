@@ -30,6 +30,14 @@ class Language
     private static $current_language;
 
     /**
+     * Protected constructor to prevent instance creation.
+     */
+    protected function __construct()
+    {
+        // Nothing to do
+    }
+    
+    /**
      * Alias of Language::getText().
      *
      * @see Language::getText()

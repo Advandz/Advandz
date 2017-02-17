@@ -65,12 +65,12 @@ class Knife extends Language
      * @return string    The file location to the compiled code
      * @throws Exception When is not a valid view or you don't have the permissions to read them
      */
-    final public function compile($file = null)
+    public function compile($file = null)
     {
-        // Initialize HTML Helper
-        $this->Html = new Html();
-
         if (Configure::get('Knife.on')) {
+            // Initialize HTML Helper
+            $this->Html = new Html();
+
             // Set compiled view file
             $compiled_file = CACHEDIR.md5($file).'.php';
 

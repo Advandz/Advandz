@@ -11,6 +11,14 @@
 final class Cache
 {
     /**
+     * Protected constructor to prevent instance creation.
+     */
+    protected function __construct()
+    {
+        // Nothing to do
+    }
+
+    /**
      * Empties the entire cache of all files (directories excluded, not recursive).
      *
      * @param string $path The path within CACHEDIR to empty

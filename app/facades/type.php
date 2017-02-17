@@ -11,13 +11,21 @@
 class Type
 {
     /**
+     * Protected constructor to prevent instance creation.
+     */
+    protected function __construct()
+    {
+        // Nothing to do
+    }
+
+    /**
      * Set the data type of a variable as String.
      *
      * @param  string    $value The defined value of the variable
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of string
      */
-    public static function _string($value = '')
+    final public static function _string($value = '')
     {
         if (!is_string($value)) {
             throw new Exception('Argument passed must be an instance of string');
@@ -33,7 +41,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of integer
      */
-    public static function _int($value = 0)
+    final public static function _int($value = 0)
     {
         if (!is_int($value)) {
             throw new Exception('Argument passed must be an instance of integer');
@@ -49,7 +57,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of float
      */
-    public static function _float($value = 0.0)
+    final public static function _float($value = 0.0)
     {
         if (!is_float($value)) {
             throw new Exception('Argument passed must be an instance of float');
@@ -65,7 +73,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of double
      */
-    public static function _double($value = 0.0)
+    final public static function _double($value = 0.0)
     {
         if (!is_float($value)) {
             throw new Exception('Argument passed must be an instance of double');
@@ -81,7 +89,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of boolean
      */
-    public static function _bool($value = false)
+    final public static function _bool($value = false)
     {
         if (!is_bool($value)) {
             throw new Exception('Argument passed must be an instance of boolean');
@@ -97,7 +105,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an instance of array
      */
-    public static function _array($value = [])
+    final public static function _array($value = [])
     {
         if (!is_array($value)) {
             throw new Exception('Argument passed must be an instance of array');
@@ -113,7 +121,7 @@ class Type
      * @return string    The value
      * @throws Exception When the argument passed is not an object
      */
-    public static function _object($value = null)
+    final public static function _object($value = null)
     {
         if (is_null($value)) {
             $value = new stdClass();
@@ -131,7 +139,7 @@ class Type
      *
      * @return null
      */
-    public static function _null()
+    final public static function _null()
     {
         return null;
     }

@@ -53,6 +53,8 @@ class View extends Knife
     public $default_view_path = APPDIR;
 
     /**
+     * Creates a new View object.
+     *
      * @param string $file The file name you want to load.
      * @param string $view The view directory to use (plugins use PluginName.directory).
      */

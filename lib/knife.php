@@ -9,6 +9,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
+use Advandz\Helper\Html;
+
 class Knife extends Language
 {
     /**
@@ -64,6 +67,9 @@ class Knife extends Language
      */
     final public function compile($file = null)
     {
+        // Initialize HTML Helper
+        $this->Html = new Html();
+
         if (Configure::get('Knife.on')) {
             // Set compiled view file
             $compiled_file = CACHEDIR.md5($file).'.php';

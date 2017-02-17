@@ -33,6 +33,7 @@ final class Loader
             MODELDIR,
             COMPONENTDIR,
             HELPERDIR,
+            FACADEDIR
         ];
 
         $plugin = null;
@@ -48,12 +49,13 @@ final class Loader
                 PLUGINDIR.$plugin.'controllers'.DIRECTORY_SEPARATOR,
                 PLUGINDIR.$plugin.'components'.DIRECTORY_SEPARATOR,
                 PLUGINDIR.$plugin.'helpers'.DIRECTORY_SEPARATOR,
+                PLUGINDIR.$plugin.'facades'.DIRECTORY_SEPARATOR
             ];
         }
 
         if (strpos($class, '\\') !== false) { // PSR-4 Autoload
-            $class      = explode('\\', $class);
-            $class_file = self::fromCamelCase(end($class));
+            $class_file = explode('\\', $class);
+            $class_file = self::fromCamelCase(end($class_file));
             $file_name  = $class_file.'.php';
         } else { // PSR-0 Autoload
             $class_file = self::fromCamelCase($class);

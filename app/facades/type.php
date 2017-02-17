@@ -3,7 +3,7 @@
  * This class helps to define a pseudo-explicit type in variable declaration.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.app.facades
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>

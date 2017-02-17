@@ -3,7 +3,7 @@
  * Handles mapping of URIs from one type to another.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.app.facades
  * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>

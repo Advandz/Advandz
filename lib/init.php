@@ -89,7 +89,6 @@ define('CONTROLLERDIR', ROOTWEBDIR.APPDIR.'controllers'.DS);
  */
 define('FACADEDIR', ROOTWEBDIR.APPDIR.'facades'.DS);
 
-
 /*
  * Absolute path to the components directory, where all components are stored.
  */

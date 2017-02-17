@@ -36,7 +36,7 @@ class Language
     {
         // Nothing to do
     }
-    
+
     /**
      * Alias of Language::getText().
      *

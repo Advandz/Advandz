@@ -9,7 +9,6 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-
 use Advandz\Helper\Html;
 
 class Knife extends Language

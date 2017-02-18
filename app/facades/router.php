@@ -27,17 +27,46 @@ final class Router
      * Sets a route from $orig_uri to $mapped_uri.
      *
      * @param  string    $orig_uri   The original URI to map from
-     * @param  string    $mapped_uri The destination URI to map to
+     * @param  mixed     $mapped_uri The destination URI to map to or a anonymous function
+     * @param  array     $middlewares An array containing the name of the middleware
+     * @param  mixed     $params Parameters for the middleware
      * @throws Exception Illegal URI specified
      */
-    public static function route($orig_uri, $mapped_uri)
+    public static function route($orig_uri, $mapped_uri, $middlewares = null, ...$params)
     {
-        if (strlen($orig_uri) == 0 || strlen($mapped_uri) == 0) {
-            throw new Exception('Illegal URI specified in Router::route()');
+        // Load Middleware
+        if (isset($middlewares) && is_array($middlewares)) {
+            foreach ($middlewares as $middleware) {
+                $file_name = Loader::fromCamelCase($middleware);
+                if (Loader::load(MIDDLEWAREDIR.$file_name.'.php')) {
+                    $namespace = 'Advandz\\App\\Middleware\\'.$middleware;
+
+                    // Execute handle function
+                    if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
+                        $middleware_class = new $namespace();
+
+                        call_user_func_array([$middleware_class, 'handle'], array_merge([$orig_uri], $params));
+                    } else {
+                        throw new Exception($middleware. ' Middleware is invalid or is not callable');
+                    }
+                } else {
+                    throw new Exception($middleware. ' Middleware not exists');
+                }
+            }
         }
 
-        self::$routes['orig'][]   = '/'.self::escape($orig_uri).'/i';
-        self::$routes['mapped'][] = self::escape($mapped_uri);
+        if (is_callable($mapped_uri)) {
+            call_user_func($mapped_uri);
+            exit();
+        } else {
+            // Validate URI
+            if (strlen($orig_uri) == 0 || strlen($mapped_uri) == 0) {
+                throw new Exception('Illegal URI specified in Router::route()');
+            }
+
+            self::$routes['orig'][]   = '/'.self::escape($orig_uri).'/i';
+            self::$routes['mapped'][] = self::escape($mapped_uri);
+        }
     }
 
     /**

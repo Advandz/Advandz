@@ -90,6 +90,11 @@ define('CONTROLLERDIR', ROOTWEBDIR.APPDIR.'controllers'.DS);
 define('FACADEDIR', ROOTWEBDIR.APPDIR.'facades'.DS);
 
 /*
+ * Absolute path to the middleware directory, where all facades are stored.
+ */
+define('MIDDLEWAREDIR', ROOTWEBDIR.APPDIR.'middleware'.DS);
+
+/*
  * Absolute path to the components directory, where all components are stored.
  */
 define('COMPONENTDIR', ROOTWEBDIR.'components'.DS);
@@ -123,6 +128,7 @@ define('VENDORDIR', ROOTWEBDIR.'vendors'.DS);
 include_once LIBDIR.'loader.php';
 include_once LIBDIR.'autoload.php';
 include_once LIBDIR.'stdlib.php';
+include_once LIBDIR.'functions.php';
 
 // Load core configuration
 include_once CONFIGDIR.'core.php';

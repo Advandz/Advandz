@@ -32,7 +32,7 @@ class Knife extends Language
         '!@var'      => '<?php echo $%%STATEMENT%%; ?>',
         '@this'      => '<?php $this->%%STATEMENT%%; ?>',
         '!@this'     => '<?php $this->%%STATEMENT%%; ?>',
-        '@constant'  => '<?php echo \$this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : \'%%STATEMENT%%\'); ?>',
+        '@constant'  => '<?php echo $this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : \'%%STATEMENT%%\'); ?>',
         '!@constant' => '<?php echo (defined(%%STATEMENT%%) ? %%STATEMENT%% : \'%%STATEMENT%%\'); ?>',
         '@include'   => '<?php include %%STATEMENT%%; ?>',
         '!@include'  => '<?php include_once %%STATEMENT%%; ?>',
@@ -145,8 +145,6 @@ class Knife extends Language
         // Replace escaped tags
         $this->replaceTemplate('{\{', '{{');
         $this->replaceTemplate('}\}', '}}');
-        $this->replaceTemplate('{\\{', '{\{');
-        $this->replaceTemplate('}\\}', '}\}');
     }
 
     /**

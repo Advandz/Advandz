@@ -8,7 +8,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
-class Type
+final class Type
 {
     /**
      * Protected constructor to prevent instance creation.

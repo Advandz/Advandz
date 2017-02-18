@@ -1,6 +1,6 @@
 <?php
 /**
- * Main Page Controller.
+ * Main page controller.
  *
  * @package Advandz
  * @subpackage Advandz.app.controllers
@@ -15,9 +15,7 @@ class Main extends AppController
 {
     //
     // TODO: Define any methods, load any models or components or anything else
-    // here that you would like to be available to all controllers that extend
-    // this special AppController.  This is great for loading certain language
-    // files that are used throughout the application.
-    // (e.g. $this->loadLang("langfile", "en_us"))
+    // in the preAction method, that you would like to be available to all methods 
+    // of this controller.
     //
 }

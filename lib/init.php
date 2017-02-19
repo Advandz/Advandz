@@ -95,6 +95,11 @@ define('FACADEDIR', ROOTWEBDIR.APPDIR.'facades'.DS);
 define('MIDDLEWAREDIR', ROOTWEBDIR.APPDIR.'middleware'.DS);
 
 /*
+ * Absolute path to the plugins directory, where plugins are stored.
+ */
+define('PLUGINDIR', ROOTWEBDIR.APPDIR.'plugins'.DS);
+
+/*
  * Absolute path to the components directory, where all components are stored.
  */
 define('COMPONENTDIR', ROOTWEBDIR.'components'.DS);
@@ -113,11 +118,6 @@ define('HELPERDIR', ROOTWEBDIR.'helpers'.DS);
  * Absolute path to the language directory, where all language files are stored.
  */
 define('LANGDIR', ROOTWEBDIR.'language'.DS);
-
-/*
- * Absolute path to the plugins directory, where plugins are stored.
- */
-define('PLUGINDIR', ROOTWEBDIR.'plugins'.DS);
 
 /*
  * Absolute path to the vendors directory, where vendor libraries are stored.

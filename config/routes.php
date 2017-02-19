@@ -1,7 +1,7 @@
 <?php
 /*
  * All routes may be defined here.  Routes have the following syntax:
- * Router::route($orig_uri, $mapped_uri [, $middleware]);
+ * Router::route($orig_uri, $mapped_uri [, $middleware, ...$params]);
  *
  * For example:
  * Router::route("foo/bar", "bar/foo");

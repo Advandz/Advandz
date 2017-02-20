@@ -23,7 +23,6 @@ class Spaceman
 
         // Check given parameters
         if (!empty($args)) {
-            
             @$function = $args[1];
 
             if (!empty($function) && is_callable('Spaceman::'.$function)) {
@@ -127,65 +126,13 @@ class Spaceman
             $plugin_file = Loader::fromCamelCase($name);
             $plugin_class = Loader::toCamelCase($name);
 
-            if (mkdir(PLUGINDIR.$plugin_file) && mkdir(PLUGINDIR.$plugin_file.DS.'controllers')
-                && mkdir(PLUGINDIR.$plugin_file.DS.'models')
-                && mkdir(PLUGINDIR.$plugin_file.DS.'views')
-                && mkdir(PLUGINDIR.$plugin_file.DS.'views'.DS.'default')) {
+            if (mkdir(PLUGINDIR.$plugin_file) && mkdir(PLUGINDIR.$plugin_file.DS.'controllers') && mkdir(PLUGINDIR.$plugin_file.DS.'models') && mkdir(PLUGINDIR.$plugin_file.DS.'views') && mkdir(PLUGINDIR.$plugin_file.DS.'views'.DS.'default')) {
                 // Plugin files code
-                $main_controller = '<?php
-
-namespace Advandz\App\Controller;
-
-class '.$plugin_class.'Controller extends AppController
-{
-    public function preAction()
-    {
-        $this->structure->setDefaultView(APPDIR);
-        parent::preAction();
-    }
-
-    //
-    // TODO: Define any methods, load any models or components or anything else
-    // here that you would like to be available to all controllers that extend
-    // this special AppController.  This is great for loading certain language
-    // files that are used throughout the application.
-    // (e.g. $this->loadLang("langfile", "en_us"))
-    //
-}
-';
-                $main_model = '<?php
-
-namespace Advandz\App\Model;
-
-class '.$plugin_class.'Model extends AppModel
-{
-    //
-    // TODO: Define any methods that you would like to use in any of your other
-    // models that extend this class.
-    //
-}
-';
-                $main_plugin_controller = '<?php
-
-namespace Advandz\App\Controller;
-
-class '.$plugin_class.' extends '.$plugin_class.'Controller
-{
-    public function index()
-    {
-        //
-        // TODO: Define any methods, load any models or components or anything else
-        // in the preAction method, that you would like to be available to all methods 
-        // of this controller.
-        //
-    }
-}
-';
+                $main_controller = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$plugin_class.'Controller extends AppController'."\n".'{'."\n".'    public function preAction()'."\n".'    {'."\n".'        $this->structure->setDefaultView(APPDIR);'."\n".'        parent::preAction();'."\n".'    }'."\n".''."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // here that you would like to be available to all controllers that extend'."\n".'    // this special AppController.  This is great for loading certain language'."\n".'    // files that are used throughout the application.'."\n".'    // (e.g. $this->loadLang("langfile", "en_us"))'."\n".'    //'."\n".'}';
+                $main_model = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$plugin_class.'Model extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would like to use in any of your other'."\n".'    // models that extend this class.'."\n".'    //'."\n".'}';
+                $main_plugin_controller = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$plugin_class.' extends '.$plugin_class.'Controller'."\n".'{'."\n".'    public function index()'."\n".'    {'."\n".'        //'."\n".'        // TODO: Define any methods, load any models or components or anything else'."\n".'        // in the preAction method, that you would like to be available to all methods '."\n".'        // of this controller.'."\n".'        //'."\n".'    }'."\n".'}';
                 $structure_knife = '{{!@var content}}';
-                $main_knife = '<div class="container padding-top-30 padding-bottom-20">
-    <h1>Hello World!</h1>
-    <p class="margin-0">This is the "'.$plugin_class.'" plugin.</p>
-</div>';
+                $main_knife = '<div class="container padding-top-30 padding-bottom-20">'."\n".'    <h1>Hello World!</h1>'."\n".'    <p class="margin-0">This is the "'.$plugin_class.'" plugin.</p>'."\n".'</div>';
                 
                 // Create plugin files
                 file_put_contents(PLUGINDIR.$plugin_file.DS.$plugin_file.'_controller.php', $main_controller);
@@ -203,25 +150,8 @@ class '.$plugin_class.' extends '.$plugin_class.'Controller
             // Create middleware
             $middleware_file = Loader::fromCamelCase($name);
             $middleware_class = Loader::toCamelCase($name);
-            $middleware = '<?php
+            $middleware = '<?php'."\n\n".'namespace Advandz\App\Middleware;'."\n\n".'class '.$middleware_class."\n".'{'."\n".'    public function handle($request)'."\n".'    {'."\n".'        //'."\n".'        // TODO: Manage the HTTP request before dispatch it.'."\n".'        // '."\n".'    }'."\n".''."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // here that you would use for the request management.'."\n".'    //'."\n".'}';
 
-namespace Advandz\App\Middleware;
-
-class '.$middleware_class.'
-{
-    public function handle($request)
-    {
-        //
-        // TODO: Manage the HTTP request before dispatch it.
-        // 
-    }
-
-    //
-    // TODO: Define any methods, load any models or components or anything else
-    // here that you would use for the request management.
-    //
-}
-';
             if (!file_exists(MIDDLEWAREDIR.$middleware_file.'.php')) {
                 file_put_contents(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
                 self::printText("\n".'Middleware created successfully at '.MIDDLEWAREDIR, 'green');
@@ -232,21 +162,8 @@ class '.$middleware_class.'
             // Create model
             $model_file = Loader::fromCamelCase($name);
             $model_class = Loader::toCamelCase($name);
-            $model = '<?php
+            $model = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$model_file.' extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would use to process information'."\n".'    // in your application, load any components or helpers or anything else'."\n".'    // here that you would be use in your functions.'."\n".'    // All the public functions will be available to all controllers that imports'."\n".'    // this model.  '."\n".'    //'."\n".'}';
 
-namespace Advandz\App\Model;
-
-class '.$model_file.' extends AppModel
-{
-    //
-    // TODO: Define any methods that you would use to process information
-    // in your application, load any components or helpers or anything else
-    // here that you would be use in your functions.
-    // All the public functions will be available to all controllers that imports
-    // this model.  
-    //
-}
-';
             if (!file_exists(MODELDIR.$model_file.'.php')) {
                 file_put_contents(MODELDIR.$model_file.'.php', $model);
                 self::printText("\n".'Model created successfully at '.MODELDIR, 'green');
@@ -257,19 +174,8 @@ class '.$model_file.' extends AppModel
             // Create controller
             $controller_file = Loader::fromCamelCase($name);
             $controller_class = Loader::toCamelCase($name);
-            $controller = '<?php
+            $controller = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$controller_class.' extends AppController'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // in the preAction method, that you would like to be available to all methods '."\n".'    // of this controller.'."\n".'    //'."\n".'}';
 
-namespace Advandz\App\Controller;
-
-class '.$controller_class.' extends AppController
-{
-    //
-    // TODO: Define any methods, load any models or components or anything else
-    // in the preAction method, that you would like to be available to all methods 
-    // of this controller.
-    //
-}
-';
             if (!file_exists(CONTROLLERDIR.$controller_file.'.php')) {
                 file_put_contents(CONTROLLERDIR.$controller_file.'.php', $controller);
                 self::printText("\n".'Controller created successfully at '.CONTROLLERDIR, 'green');
@@ -280,21 +186,8 @@ class '.$controller_class.' extends AppController
             // Create facade
             $facade_file = Loader::fromCamelCase($name);
             $facade_class = Loader::toCamelCase($name);
-            $facade = '<?php
+            $facade = '<?php'."\n\n".'namespace Advandz\App\Facade;'."\n\n".'final class '.$facade_class.''."\n".'{'."\n".'    /**'."\n".'     * Protected constructor to prevent instance creation.'."\n".'     */'."\n".'    protected function __construct()'."\n".'    {'."\n".'        // Nothing to do'."\n".'    }'."\n".'}';
 
-namespace Advandz\App\Facade;
-
-final class '.$facade_class.'
-{
-    /**
-     * Protected constructor to prevent instance creation.
-     */
-    protected function __construct()
-    {
-        // Nothing to do
-    }
-}
-';
             if (!file_exists(FACADEDIR.$facade_file.'.php')) {
                 file_put_contents(FACADEDIR.$facade_file.'.php', $facade);
                 self::printText("\n".'Facade created successfully at '.FACADEDIR, 'green');

@@ -35,7 +35,7 @@ class Dispatcher extends Controller
      *
      * @param  string    $request_uri The request URI string
      * @param  bool      $is_cli      Whether or not this requests is a command line request
-     * @throws Exception thrown when request can not be dispatched or Dispatcher::raiseError can not handle the error
+     * @throws Exception Thrown when request can not be dispatched or Dispatcher::raiseError can not handle the error
      */
     public static function dispatch($request_uri, $is_cli = false)
     {

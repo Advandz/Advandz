@@ -8,6 +8,8 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+namespace Advandz\App\Facade;
+
 final class Type
 {
     /**

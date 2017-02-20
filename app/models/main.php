@@ -18,6 +18,6 @@ class Main extends AppModel
     // in your application, load any components or helpers or anything else
     // here that you would be use in your functions.
     // All the public functions will be available to all controllers that imports
-    // this model.  
+    // this model.
     //
 }

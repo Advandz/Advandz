@@ -26,10 +26,10 @@ final class Router
     /**
      * Sets a route from $orig_uri to $mapped_uri.
      *
-     * @param  string    $orig_uri   The original URI to map from
-     * @param  mixed     $mapped_uri The destination URI to map to or a anonymous function
+     * @param  string    $orig_uri    The original URI to map from
+     * @param  mixed     $mapped_uri  The destination URI to map to or a anonymous function
      * @param  array     $middlewares An array containing the name of the middleware
-     * @param  mixed     $params Parameters for the middleware
+     * @param  mixed     $params      Parameters for the middleware
      * @throws Exception Illegal URI specified
      */
     public static function route($orig_uri, $mapped_uri, $middlewares = null, ...$params)
@@ -47,10 +47,10 @@ final class Router
 
                         call_user_func_array([$middleware_class, 'handle'], array_merge([$orig_uri], $params));
                     } else {
-                        throw new Exception($middleware. ' Middleware is invalid or is not callable');
+                        throw new Exception($middleware.' Middleware is invalid or is not callable');
                     }
                 } else {
-                    throw new Exception($middleware. ' Middleware not exists');
+                    throw new Exception($middleware.' Middleware not exists');
                 }
             }
         }

@@ -17,7 +17,7 @@ class Main
     {
         //
         // TODO: Manage the HTTP request before dispatch it.
-        // 
+        //
     }
 
     //

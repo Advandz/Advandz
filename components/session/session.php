@@ -115,11 +115,11 @@ class Session
         if (isset($_SESSION[$name])) {
             $val = $_SESSION[$name];
 
-            if($persist == false){
+            if ($persist == false) {
                 $this->clear($name);
             }
 
- 			return $val;
+            return $val;
         }
 
         return null;

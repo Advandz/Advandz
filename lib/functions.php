@@ -15,7 +15,8 @@
  * @param  string $url The URL to redirect
  * @return bool   False if the redirects fail
  */
-function redirect($uri = WEBDIR) {
+function redirect($uri = WEBDIR)
+{
     $parts    = parse_url($uri);
     $relative = true;
     if (substr($uri, 0, 1) == '/') {

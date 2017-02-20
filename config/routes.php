@@ -21,7 +21,7 @@
  */
 
 // Main Middleware
-Router::route("^", "$1", ['Main']);
+Router::route('^', '$1', ['Main']);
 
 //
 // TODO: Define your application routes

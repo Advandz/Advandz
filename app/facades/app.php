@@ -25,6 +25,7 @@ final class App
      * Process the GET requests.
      *
      * @param string $pattern The URI pattern to execute the request
+     * @param callable $callable The anonymous function to process the request
      */
     final public static function get($pattern, $callable)
     {
@@ -41,6 +42,7 @@ final class App
      * Process the POST requests.
      *
      * @param string $pattern The URI pattern to execute the request
+     * @param callable $callable The anonymous function to process the request
      */
     final public static function post($pattern, $callable)
     {
@@ -57,6 +59,7 @@ final class App
      * Process the PUT requests.
      *
      * @param string $pattern The URI pattern to execute the request
+     * @param callable $callable The anonymous function to process the request
      */
     final public static function put($pattern, $callable)
     {
@@ -73,6 +76,7 @@ final class App
      * Process the PATCH requests.
      *
      * @param string $pattern The URI pattern to execute the request
+     * @param callable $callable The anonymous function to process the request
      */
     final public static function patch($pattern, $callable)
     {
@@ -89,6 +93,7 @@ final class App
      * Process the DELETE requests.
      *
      * @param string $pattern The URI pattern to execute the request
+     * @param callable $callable The anonymous function to process the request
      */
     final public static function delete($pattern, $callable)
     {

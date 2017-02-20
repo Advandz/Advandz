@@ -8,6 +8,7 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
 namespace Advandz\App\Facade;
 
 final class App
@@ -23,7 +24,7 @@ final class App
     /**
      * Process the GET requests.
      *
-     * @param  string $pattern The URI pattern to execute the request
+     * @param string $pattern The URI pattern to execute the request
      */
     final public static function get($pattern, $callable)
     {
@@ -39,7 +40,7 @@ final class App
     /**
      * Process the POST requests.
      *
-     * @param  string $pattern The URI pattern to execute the request
+     * @param string $pattern The URI pattern to execute the request
      */
     final public static function post($pattern, $callable)
     {
@@ -55,7 +56,7 @@ final class App
     /**
      * Process the PUT requests.
      *
-     * @param  string $pattern The URI pattern to execute the request
+     * @param string $pattern The URI pattern to execute the request
      */
     final public static function put($pattern, $callable)
     {
@@ -71,7 +72,7 @@ final class App
     /**
      * Process the PATCH requests.
      *
-     * @param  string $pattern The URI pattern to execute the request
+     * @param string $pattern The URI pattern to execute the request
      */
     final public static function patch($pattern, $callable)
     {
@@ -87,7 +88,7 @@ final class App
     /**
      * Process the DELETE requests.
      *
-     * @param  string $pattern The URI pattern to execute the request
+     * @param string $pattern The URI pattern to execute the request
      */
     final public static function delete($pattern, $callable)
     {
@@ -113,7 +114,7 @@ final class App
      */
     final public static function getUri()
     {
-        return trim(trim(filter_input(INPUT_SERVER, 'REQUEST_URI'), WEBDIR), "/");
+        return trim(trim(filter_input(INPUT_SERVER, 'REQUEST_URI'), WEBDIR), '/');
     }
 
     /**
@@ -124,8 +125,8 @@ final class App
      */
     final private static function parsePattern($pattern)
     {
-        $blocks = explode("/", trim($pattern, "/"));
-        $uri = explode("/", self::getUri());
+        $blocks = explode('/', trim($pattern, '/'));
+        $uri    = explode('/', self::getUri());
 
         $result = [];
 
@@ -148,8 +149,8 @@ final class App
      */
     final private static function validatePattern($pattern)
     {
-        $blocks = explode("/", trim($pattern, "/"));
-        $uri = explode("/", self::getUri());
+        $blocks = explode('/', trim($pattern, '/'));
+        $uri    = explode('/', self::getUri());
 
         foreach ($blocks as $key => $value) {
             if ($value !== $uri[$key] && !(bool) preg_match('/\\{([^{}]+)\\}/', $value)) {

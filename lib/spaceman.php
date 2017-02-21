@@ -27,7 +27,7 @@ class Spaceman
             unset($args[0]);
 
             // Welcome message
-            self::printText('Advandz Spaceman 1.0 Development Tool', 'blue');
+            self::printText('Advandz Spaceman 1.0 Development Tool'."\n", 'blue');
 
             // Check given parameters
             if (!empty($args)) {
@@ -73,7 +73,7 @@ class Spaceman
                     flush();
                 }
             } else {
-                self::printText("\n".'Usage:', 'brown');
+                self::printText('Usage:', 'brown');
                 self::printText('server [port]');
             }
         }
@@ -121,17 +121,17 @@ class Spaceman
             foreach ($files as $file) {
                 if (is_file($file)) {
                     unlink($file);
-                    self::printText("\n".$file.' deleted.', 'brown');
+                    self::printText($file.' deleted.', 'brown');
                 }
             }
 
-            self::printText("\n".'Cache flushed successfully.', 'green');
+            self::printText('Cache flushed successfully.', 'green');
 
             return true;
         } elseif ($action == 'rebuild') {
             self::cache('flush');
 
-            self::printText("\n".'Rebuilding cache...');
+            self::printText('Rebuilding cache...');
 
             // Call the dispatcher, to generate the cache files
             ob_start();
@@ -140,16 +140,16 @@ class Spaceman
             ob_end_clean();
 
             if (!empty($output)) {
-                self::printText("\n".'Cache rebuilded successfully.', 'green');
+                self::printText('Cache rebuilded successfully.', 'green');
 
                 return true;
             } else {
-                self::printText("\n".'Cache rebuilds failed.', 'red');
+                self::printText('Cache rebuilds failed.', 'red');
 
                 return false;
             }
         } else {
-            self::printText("\n".'Usage:', 'brown');
+            self::printText('Usage:', 'brown');
             self::printText('cache ["flush"|"rebuild"]');
 
             return false;
@@ -188,11 +188,11 @@ class Spaceman
 
                 $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.'structure.knife', $structure_knife);
                 $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.$plugin_file.'.knife', $main_knife);
-                self::printText("\n".'Plugin created successfully at '.PLUGINDIR, 'green');
+                self::printText('Plugin created successfully at '.PLUGINDIR, 'green');
 
                 return true;
             } else {
-                self::printText("\n".'The plugin "'.$plugin_class.'" already exists.', 'red');
+                self::printText('The plugin "'.$plugin_class.'" already exists.', 'red');
 
                 return false;
             }
@@ -204,11 +204,11 @@ class Spaceman
 
             if (!file_exists(MIDDLEWAREDIR.$middleware_file.'.php')) {
                 $filesystem->saveFile(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
-                self::printText("\n".'Middleware created successfully at '.MIDDLEWAREDIR, 'green');
+                self::printText('Middleware created successfully at '.MIDDLEWAREDIR, 'green');
 
                 return true;
             } else {
-                self::printText("\n".MIDDLEWAREDIR.$middleware_file.'.php file exists.', 'red');
+                self::printText(MIDDLEWAREDIR.$middleware_file.'.php file exists.', 'red');
 
                 return false;
             }
@@ -220,11 +220,11 @@ class Spaceman
 
             if (!file_exists(MODELDIR.$model_file.'.php')) {
                 $filesystem->saveFile(MODELDIR.$model_file.'.php', $model);
-                self::printText("\n".'Model created successfully at '.MODELDIR, 'green');
+                self::printText('Model created successfully at '.MODELDIR, 'green');
 
                 return true;
             } else {
-                self::printText("\n".MODELDIR.$model_file.'.php file exists.', 'red');
+                self::printText(MODELDIR.$model_file.'.php file exists.', 'red');
 
                 return false;
             }
@@ -236,11 +236,11 @@ class Spaceman
 
             if (!file_exists(CONTROLLERDIR.$controller_file.'.php')) {
                 $filesystem->saveFile(CONTROLLERDIR.$controller_file.'.php', $controller);
-                self::printText("\n".'Controller created successfully at '.CONTROLLERDIR, 'green');
+                self::printText('Controller created successfully at '.CONTROLLERDIR, 'green');
 
                 return true;
             } else {
-                self::printText("\n".CONTROLLERDIR.$controller_file.'.php file exists.', 'red');
+                self::printText(CONTROLLERDIR.$controller_file.'.php file exists.', 'red');
 
                 return false;
             }
@@ -252,16 +252,16 @@ class Spaceman
 
             if (!file_exists(FACADEDIR.$facade_file.'.php')) {
                 $filesystem->saveFile(FACADEDIR.$facade_file.'.php', $facade);
-                self::printText("\n".'Facade created successfully at '.FACADEDIR, 'green');
+                self::printText('Facade created successfully at '.FACADEDIR, 'green');
 
                 return true;
             } else {
-                self::printText("\n".FACADEDIR.$facade_file.'.php file exists.', 'red');
+                self::printText(FACADEDIR.$facade_file.'.php file exists.', 'red');
 
                 return false;
             }
         } else {
-            self::printText("\n".'Usage:', 'brown');
+            self::printText('Usage:', 'brown');
             self::printText('create ["plugin"|"middleware"|"model"|"controller"|"facade"] [name]');
 
             return false;
@@ -284,35 +284,52 @@ class Spaceman
         return $encryption->generateKey($size);
     }
 
+    final public static function app(...$controller)
+    {
+        $args = array_merge(['cli'], $controller);
+
+        ob_start();
+        Dispatcher::dispatchCli($args);
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        self::printText($output);
+
+        return $output;
+    }
+
     /**
      * Prints the help message.
      */
     final public static function help()
     {
-        self::printText("\n".'Usage:', 'brown');
+        self::printText('Usage:', 'brown');
         self::printText('command :[action] [parameters]');
 
         self::printText("\n".'Available commands:', 'brown');
-        self::printText("\033[32m".'server'."\033[0m".'            - Starts a development web server.');
-        self::printText("\033[33m".'   :[port]'."\033[0m".'        - The port number to start the server.');
+        self::printText("\033[32m".'server'."\033[0m".'             - Starts a development web server.');
+        self::printText("\033[33m".'   :[port]'."\033[0m".'         - The port number to start the server.');
 
-        self::printText("\033[32m".'inspire'."\033[0m".'           - Show an inspiring quote.');
+        self::printText("\033[32m".'inspire'."\033[0m".'            - Show an inspiring quote.');
 
-        self::printText("\033[32m".'cache'."\033[0m".'             - Rebuild or flush the cache.');
-        self::printText("\033[33m".'   :flush'."\033[0m".'         - Flush the saved cache.');
-        self::printText("\033[33m".'   :rebuild'."\033[0m".'       - Rebuilds the cache.');
+        self::printText("\033[32m".'app'."\033[0m".'                - Execute the app.');
+        self::printText("\033[33m".'   :[controller]'."\033[0m".'   - The controller to execute.');
 
-        self::printText("\033[32m".'create'."\033[0m".'            - Create a new class.');
-        self::printText("\033[33m".'   :plugin'."\033[0m".'        - Create a new plugin.');
-        self::printText("\033[33m".'   :middleware'."\033[0m".'    - Create a new middleware.');
-        self::printText("\033[33m".'   :model'."\033[0m".'         - Create a new model.');
-        self::printText("\033[33m".'   :controller'."\033[0m".'    - Create a new controller.');
-        self::printText("\033[33m".'   :facade'."\033[0m".'        - Create a new facade.');
+        self::printText("\033[32m".'cache'."\033[0m".'              - Rebuild or flush the cache.');
+        self::printText("\033[33m".'   :flush'."\033[0m".'          - Flush the saved cache.');
+        self::printText("\033[33m".'   :rebuild'."\033[0m".'        - Rebuilds the cache.');
 
-        self::printText("\033[32m".'key'."\033[0m".'               - Generates a new encryption key.');
-        self::printText("\033[33m".'   :[size]'."\033[0m".'        - The size of the key. (Default = 16)');
+        self::printText("\033[32m".'create'."\033[0m".'             - Create a new class.');
+        self::printText("\033[33m".'   :plugin'."\033[0m".'         - Create a new plugin.');
+        self::printText("\033[33m".'   :middleware'."\033[0m".'     - Create a new middleware.');
+        self::printText("\033[33m".'   :model'."\033[0m".'          - Create a new model.');
+        self::printText("\033[33m".'   :controller'."\033[0m".'     - Create a new controller.');
+        self::printText("\033[33m".'   :facade'."\033[0m".'         - Create a new facade.');
 
-        self::printText("\033[32m".'help'."\033[0m".'              - Shows this message.');
+        self::printText("\033[32m".'key'."\033[0m".'                - Generates a new encryption key.');
+        self::printText("\033[33m".'   :[size]'."\033[0m".'         - The size of the key. (Default = 16)');
+
+        self::printText("\033[32m".'help'."\033[0m".'               - Shows this message.');
     }
 
     /**

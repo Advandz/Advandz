@@ -3,7 +3,7 @@
  * Provides utility methods to assist in manipulating arrays.
  *
  * @package Advandz
- * @subpackage Advandz.helpers.array
+ * @subpackage Advandz.helpers.arrayment
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>

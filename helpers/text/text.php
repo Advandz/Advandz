@@ -3,7 +3,7 @@
  * Provides utility methods to assist in manipulating strings.
  *
  * @package Advandz
- * @subpackage Advandz.helpers.string
+ * @subpackage Advandz.helpers.text
  * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>

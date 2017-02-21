@@ -10,6 +10,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 use Advandz\Component\Encryption;
+use Advandz\Component\Filesystem;
 
 class Spaceman
 {
@@ -121,6 +122,8 @@ class Spaceman
 
     final public static function create($type, $name)
     {
+        $filesystem = new Filesystem();
+
         if ($type == 'plugin' && !empty($name)) {
             // Create directories
             $plugin_file  = Loader::fromCamelCase($name);
@@ -135,13 +138,13 @@ class Spaceman
                 $main_knife             = '<div class="container padding-top-30 padding-bottom-20">'."\n".'    <h1>Hello World!</h1>'."\n".'    <p class="margin-0">This is the "'.$plugin_class.'" plugin.</p>'."\n".'</div>';
 
                 // Create plugin files
-                file_put_contents(PLUGINDIR.$plugin_file.DS.$plugin_file.'_controller.php', $main_controller);
-                file_put_contents(PLUGINDIR.$plugin_file.DS.$plugin_file.'_model.php', $main_model);
+                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.$plugin_file.'_controller.php', $main_controller);
+                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.$plugin_file.'_model.php', $main_model);
 
-                file_put_contents(PLUGINDIR.$plugin_file.DS.'controllers'.DS.$plugin_file.'.php', $main_plugin_controller);
+                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'controllers'.DS.$plugin_file.'.php', $main_plugin_controller);
 
-                file_put_contents(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.'structure.knife', $structure_knife);
-                file_put_contents(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.$plugin_file.'.knife', $main_knife);
+                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.'structure.knife', $structure_knife);
+                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.$plugin_file.'.knife', $main_knife);
                 self::printText("\n".'Plugin created successfully at '.PLUGINDIR, 'green');
             } else {
                 self::printText("\n".'The plugin "'.$plugin_class.'" already exists.', 'red');
@@ -153,7 +156,7 @@ class Spaceman
             $middleware       = '<?php'."\n\n".'namespace Advandz\App\Middleware;'."\n\n".'class '.$middleware_class."\n".'{'."\n".'    public function handle($request)'."\n".'    {'."\n".'        //'."\n".'        // TODO: Manage the HTTP request before dispatch it.'."\n".'        // '."\n".'    }'."\n".''."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // here that you would use for the request management.'."\n".'    //'."\n".'}';
 
             if (!file_exists(MIDDLEWAREDIR.$middleware_file.'.php')) {
-                file_put_contents(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
+                $filesystem->saveFile(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
                 self::printText("\n".'Middleware created successfully at '.MIDDLEWAREDIR, 'green');
             } else {
                 self::printText("\n".MIDDLEWAREDIR.$middleware_file.'.php file exists.', 'red');
@@ -165,7 +168,7 @@ class Spaceman
             $model       = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$model_file.' extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would use to process information'."\n".'    // in your application, load any components or helpers or anything else'."\n".'    // here that you would be use in your functions.'."\n".'    // All the public functions will be available to all controllers that imports'."\n".'    // this model.  '."\n".'    //'."\n".'}';
 
             if (!file_exists(MODELDIR.$model_file.'.php')) {
-                file_put_contents(MODELDIR.$model_file.'.php', $model);
+                $filesystem->saveFile(MODELDIR.$model_file.'.php', $model);
                 self::printText("\n".'Model created successfully at '.MODELDIR, 'green');
             } else {
                 self::printText("\n".MODELDIR.$model_file.'.php file exists.', 'red');
@@ -177,7 +180,7 @@ class Spaceman
             $controller       = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$controller_class.' extends AppController'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // in the preAction method, that you would like to be available to all methods '."\n".'    // of this controller.'."\n".'    //'."\n".'}';
 
             if (!file_exists(CONTROLLERDIR.$controller_file.'.php')) {
-                file_put_contents(CONTROLLERDIR.$controller_file.'.php', $controller);
+                $filesystem->saveFile(CONTROLLERDIR.$controller_file.'.php', $controller);
                 self::printText("\n".'Controller created successfully at '.CONTROLLERDIR, 'green');
             } else {
                 self::printText("\n".CONTROLLERDIR.$controller_file.'.php file exists.', 'red');
@@ -189,7 +192,7 @@ class Spaceman
             $facade       = '<?php'."\n\n".'namespace Advandz\App\Facade;'."\n\n".'final class '.$facade_class.''."\n".'{'."\n".'    /**'."\n".'     * Protected constructor to prevent instance creation.'."\n".'     */'."\n".'    protected function __construct()'."\n".'    {'."\n".'        // Nothing to do'."\n".'    }'."\n".'}';
 
             if (!file_exists(FACADEDIR.$facade_file.'.php')) {
-                file_put_contents(FACADEDIR.$facade_file.'.php', $facade);
+                $filesystem->saveFile(FACADEDIR.$facade_file.'.php', $facade);
                 self::printText("\n".'Facade created successfully at '.FACADEDIR, 'green');
             } else {
                 self::printText("\n".FACADEDIR.$facade_file.'.php file exists.', 'red');
@@ -209,6 +212,33 @@ class Spaceman
         } else {
             self::printText("\n".'Usage:', 'brown');
             self::printText('key ["generate"] [key]');
+        }
+    }
+
+    final public static function app($action, $name)
+    {
+        if ($action == 'rename' && !empty($name)) {
+            $name = Loader::toCamelCase($name);
+
+            $filesystem = new Filesystem();
+            $files = $filesystem->readDir(ROOTWEBDIR, true, true);
+
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    try {
+                        $data = $filesystem->readFile($file);
+                        $data = str_replace('Advandz', $name, $data);
+
+                        $filesystem->saveFile($file, $data, true);
+                        self::printText("\n".$file.' namespace has been renamed successfully.', 'green');
+                    } catch (Exception $e) {
+                        self::printText("\n".$file.' namespace can\'t be renamed.', 'red');
+                    }
+                }
+            }
+        } else {
+            self::printText("\n".'Usage:', 'brown');
+            self::printText('app ["rename"] [name]');
         }
     }
 
@@ -233,6 +263,9 @@ class Spaceman
         self::printText("\033[33m".'   :model'."\033[0m".'         - Create a new model.');
         self::printText("\033[33m".'   :controller'."\033[0m".'    - Create a new controller.');
         self::printText("\033[33m".'   :facade'."\033[0m".'        - Create a new facade.');
+
+        self::printText("\033[32m".'app'."\033[0m".'               - Create a new encryption key.');
+        self::printText("\033[33m".'   :rename'."\033[0m".'        - Generates a key.');
 
         self::printText("\033[32m".'key'."\033[0m".'               - Create a new encryption key.');
         self::printText("\033[33m".'   :generate'."\033[0m".'      - Generates a key.');

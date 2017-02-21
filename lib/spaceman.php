@@ -221,7 +221,7 @@ class Spaceman
             $name = Loader::toCamelCase($name);
 
             $filesystem = new Filesystem();
-            $files = $filesystem->readDir(ROOTWEBDIR, true, true);
+            $files      = $filesystem->readDir(ROOTWEBDIR, true, true);
 
             foreach ($files as $file) {
                 if (is_file($file)) {

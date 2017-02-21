@@ -285,6 +285,11 @@ class Spaceman
         return $encryption->generateKey($size);
     }
 
+    /**
+     * Execute a controller through the Dispatcher
+     *
+     * @param array $controller An array containing the Controller to call and CLI arguments
+     */
     final public static function app(...$controller)
     {
         $args = array_merge(['cli'], $controller);

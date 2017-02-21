@@ -14,15 +14,45 @@ namespace Advandz\Component;
 class Cashier
 {
     /**
+     * @var string The current currency code
+     */
+    private $currency = null;
+
+    /**
      * Initializes a Gateways Class.
      *
-     * @param  string $table Called function
+     * @param  string $gateway The payment gateway to load
      * @return mixed  Returns a Table Object if the table exists
      */
-    public function loadGateway($table)
+    public function _($gateway)
     {
         //
-        // TODO: Create the Gateway classes for PayPal, BitPay and Stripe.
+        // TODO: Create the Gateway classes for Stripe and Braintree.
         //
+    }
+
+    public function getCurrency()
+    {
+        
+    }
+
+    public function setCurrency()
+    {
+
+    }
+
+    public function formatAmount()
+    {
+
+    }
+
+    public function setAmount()
+    {
+
+    }
+
+    public function getAmount()
+    {
+        
     }
 }

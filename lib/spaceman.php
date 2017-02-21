@@ -9,9 +9,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+use Advandz\Helper\Cli;
 use Advandz\Component\Encryption;
 use Advandz\Component\Filesystem;
-use Advandz\Helper\Cli;
 
 class Spaceman
 {

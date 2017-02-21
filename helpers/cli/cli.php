@@ -20,7 +20,7 @@ class Cli
      */
     public function isCli()
     {
-        return (substr(php_sapi_name(), 0, 3) == 'cli');
+        return substr(php_sapi_name(), 0, 3) == 'cli';
     }
 
     /**
@@ -54,8 +54,8 @@ class Cli
     /**
      * Executes a command.
      *
-     * @param string $command  The command to execute
-     * @param bool $bypass True to send the raw outuput directly to the output buffer
+     * @param string $command The command to execute
+     * @param bool   $bypass  True to send the raw outuput directly to the output buffer
      */
     public function executeCommand($command, $bypass = false, &$output = null)
     {

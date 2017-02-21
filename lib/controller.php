@@ -337,7 +337,25 @@ class Controller
      */
     final protected static function redirect($uri = WEBDIR)
     {
-        return redirect($uri);
+        $parts    = parse_url($uri);
+        $relative = true;
+        if (substr($uri, 0, 1) == '/') {
+            $relative = false;
+        }
+
+        // If not scheme is specified, assume http(s)
+        if (!isset($parts['scheme'])) {
+            $uri = 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '').'://'.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']).($relative ? WEBDIR : '').$uri;
+        }
+
+        // Try to redirect
+        try {
+            header('Location: '.$uri);
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     /**

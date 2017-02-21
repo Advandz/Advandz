@@ -123,6 +123,35 @@ final class App
     }
 
     /**
+     * Redirects to an URL.
+     *
+     * @param  string $url The URL to redirect
+     * @return bool   False if the redirects fail
+     */
+    final private static function redirect($uri = WEBDIR)
+    {
+        $parts    = parse_url($uri);
+        $relative = true;
+        if (substr($uri, 0, 1) == '/') {
+            $relative = false;
+        }
+
+        // If not scheme is specified, assume http(s)
+        if (!isset($parts['scheme'])) {
+            $uri = 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '').'://'.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']).($relative ? WEBDIR : '').$uri;
+        }
+
+        // Try to redirect
+        try {
+            header('Location: '.$uri);
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    /**
      * Converts the URI in to an array containing the parameters of the pattern.
      *
      * @param  string $pattern The URI pattern to parse

@@ -14,56 +14,76 @@ use Advandz\Component\Filesystem;
 
 class Spaceman
 {
+    /**
+     * Initializes the Spaceman script.
+     *
+     * @param array $args An array containing the CLI arguments
+     */
     final public static function initialize(array $args)
     {
-        // Remove the first argument, useless
-        unset($args[0]);
+        // Initialize only if it is called through the CLI
+        if (substr(php_sapi_name(), 0, 3) == 'cli') {
+            passthru('clear');
+            unset($args[0]);
 
-        // Welcome message
-        self::printText('Advandz Spaceman 1.0 Development Tool', 'blue');
+            // Welcome message
+            self::printText('Advandz Spaceman 1.0 Development Tool', 'blue');
 
-        // Check given parameters
-        if (!empty($args)) {
-            @$function = $args[1];
+            // Check given parameters
+            if (!empty($args)) {
+                @$function = $args[1];
 
-            if (!empty($function) && is_callable('Spaceman::'.$function)) {
-                // Re-build the array with the parameters
-                unset($args[1]);
-                $parameters = array_values($args);
+                if (!empty($function) && is_callable('Spaceman::'.$function)) {
+                    // Re-build the array with the parameters
+                    unset($args[1]);
+                    $parameters = array_values($args);
 
-                // Call the function
-                @call_user_func_array(['Spaceman', $function], $parameters);
+                    // Call the function
+                    @call_user_func_array(['Spaceman', $function], $parameters);
+                } else {
+                    self::printText('Invalid or non-existent function called'.(empty($function) ? '.' : ': '.$function), 'red');
+                    self::help();
+                }
             } else {
-                self::printText('Invalid or non-existent function called'.(empty($function) ? '.' : ': '.$function), 'red');
                 self::help();
             }
-        } else {
-            self::help();
         }
     }
 
+    /**
+     * Starts a development server.
+     *
+     * @param int $port The port to run the web server
+     */
     final public static function server($port = 8000)
     {
-        if (is_numeric($port)) {
-            self::printText('Starting Web Server...');
-            self::printText('Running PHP '.phpversion().' listening on http://localhost:'.$port.'/');
-            self::printText('Press Ctrl-C to shutdown the server.'."\n");
+        if (substr(php_sapi_name(), 0, 3) == 'cli') {
+            if (is_numeric($port)) {
+                self::printText('Starting Web Server...');
+                self::printText('Running PHP '.phpversion().' listening on http://localhost:'.$port.'/');
+                self::printText('Press Ctrl-C to shutdown the server.'."\n");
 
-            $command = 'php -S localhost:'.self::safeArgument($port).' -t '.self::safeArgument(ROOTWEBDIR);
-            $output  = [];
+                $command = 'php -S localhost:'.self::safeArgument($port).' -t '.self::safeArgument(ROOTWEBDIR);
+                $output  = [];
 
-            $pid = exec($command, $output);
+                $pid = exec($command, $output);
 
-            foreach ($output as $value) {
-                self::printText($value);
-                flush();
+                foreach ($output as $value) {
+                    self::printText($value);
+                    flush();
+                }
+            } else {
+                self::printText("\n".'Usage:', 'brown');
+                self::printText('server [port]');
             }
-        } else {
-            self::printText("\n".'Usage:', 'brown');
-            self::printText('server [port]');
         }
     }
 
+    /**
+     * Prints an inspirational message.
+     *
+     * @return string An inspirational message.
+     */
     final public static function inspire()
     {
         $quotes = [
@@ -81,8 +101,16 @@ class Spaceman
         ];
 
         self::printText($quotes[rand(0, 10)]);
+
+        return $quotes[rand(0, 10)];
     }
 
+    /**
+     * Rebuilds or flush the stored cache.
+     *
+     * @param string $action The cache action to execute
+     * @return bool True if the action has been executed successfully
+     */
     final public static function cache($action)
     {
         if ($action == 'flush') {
@@ -98,6 +126,8 @@ class Spaceman
             }
 
             self::printText("\n".'Cache flushed successfully.', 'green');
+
+            return true;
         } elseif ($action == 'rebuild') {
             self::cache('flush');
 
@@ -111,15 +141,28 @@ class Spaceman
 
             if (!empty($output)) {
                 self::printText("\n".'Cache rebuilded successfully.', 'green');
+
+                return true;
             } else {
                 self::printText("\n".'Cache rebuilds failed.', 'red');
+
+                return false;
             }
         } else {
             self::printText("\n".'Usage:', 'brown');
             self::printText('cache ["flush"|"rebuild"]');
+
+            return false;
         }
     }
 
+    /**
+     * Creates a new class in the app.
+     *
+     * @param string $type The class type to create
+     * @param string $name The new class name
+     * @return bool True if the class has been created successfully
+     */
     final public static function create($type, $name)
     {
         $filesystem = new Filesystem();
@@ -146,8 +189,12 @@ class Spaceman
                 $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.'structure.knife', $structure_knife);
                 $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.$plugin_file.'.knife', $main_knife);
                 self::printText("\n".'Plugin created successfully at '.PLUGINDIR, 'green');
+
+                return true;
             } else {
                 self::printText("\n".'The plugin "'.$plugin_class.'" already exists.', 'red');
+
+                return false;
             }
         } elseif ($type == 'middleware' && !empty($name)) {
             // Create middleware
@@ -158,8 +205,12 @@ class Spaceman
             if (!file_exists(MIDDLEWAREDIR.$middleware_file.'.php')) {
                 $filesystem->saveFile(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
                 self::printText("\n".'Middleware created successfully at '.MIDDLEWAREDIR, 'green');
+
+                return true;
             } else {
                 self::printText("\n".MIDDLEWAREDIR.$middleware_file.'.php file exists.', 'red');
+
+                return false;
             }
         } elseif ($type == 'model' && !empty($name)) {
             // Create model
@@ -170,8 +221,12 @@ class Spaceman
             if (!file_exists(MODELDIR.$model_file.'.php')) {
                 $filesystem->saveFile(MODELDIR.$model_file.'.php', $model);
                 self::printText("\n".'Model created successfully at '.MODELDIR, 'green');
+
+                return true;
             } else {
                 self::printText("\n".MODELDIR.$model_file.'.php file exists.', 'red');
+
+                return false;
             }
         } elseif ($type == 'controller' && !empty($name)) {
             // Create controller
@@ -182,8 +237,12 @@ class Spaceman
             if (!file_exists(CONTROLLERDIR.$controller_file.'.php')) {
                 $filesystem->saveFile(CONTROLLERDIR.$controller_file.'.php', $controller);
                 self::printText("\n".'Controller created successfully at '.CONTROLLERDIR, 'green');
+
+                return true;
             } else {
                 self::printText("\n".CONTROLLERDIR.$controller_file.'.php file exists.', 'red');
+
+                return false;
             }
         } elseif ($type == 'facade' && !empty($name)) {
             // Create facade
@@ -194,54 +253,40 @@ class Spaceman
             if (!file_exists(FACADEDIR.$facade_file.'.php')) {
                 $filesystem->saveFile(FACADEDIR.$facade_file.'.php', $facade);
                 self::printText("\n".'Facade created successfully at '.FACADEDIR, 'green');
+
+                return true;
             } else {
                 self::printText("\n".FACADEDIR.$facade_file.'.php file exists.', 'red');
+
+                return false;
             }
         } else {
             self::printText("\n".'Usage:', 'brown');
             self::printText('create ["plugin"|"middleware"|"model"|"controller"|"facade"] [name]');
+
+            return false;
         }
     }
 
-    final public static function key($action)
+    /**
+     * Generates a new encryption key.
+     *
+     * @param string $size The size of the key
+     * @return string The generated key
+     */
+    final public static function key($size = 16)
     {
-        if ($action == 'generate') {
-            $encryption = new Encryption();
+        $encryption = new Encryption();
 
-            self::printText('Key: '.$encryption->generateKey(), 'purple');
-        } else {
-            self::printText("\n".'Usage:', 'brown');
-            self::printText('key ["generate"] [key]');
-        }
+        self::printText('Key:', 'brown');
+        self::printText($encryption->generateKey($size), 'green');
+
+        return $encryption->generateKey($size);
     }
 
-    final public static function app($action, $name)
-    {
-        if ($action == 'rename' && !empty($name)) {
-            $name = Loader::toCamelCase($name);
-
-            $filesystem = new Filesystem();
-            $files      = $filesystem->readDir(ROOTWEBDIR, true, true);
-
-            foreach ($files as $file) {
-                if (is_file($file)) {
-                    try {
-                        $data = $filesystem->readFile($file);
-                        $data = str_replace('Advandz', $name, $data);
-
-                        $filesystem->saveFile($file, $data, true);
-                        self::printText("\n".$file.' namespace has been renamed successfully.', 'green');
-                    } catch (Exception $e) {
-                        self::printText("\n".$file.' namespace can\'t be renamed.', 'red');
-                    }
-                }
-            }
-        } else {
-            self::printText("\n".'Usage:', 'brown');
-            self::printText('app ["rename"] [name]');
-        }
-    }
-
+    /**
+     * Prints the help message.
+     */
     final public static function help()
     {
         self::printText("\n".'Usage:', 'brown');
@@ -264,20 +309,29 @@ class Spaceman
         self::printText("\033[33m".'   :controller'."\033[0m".'    - Create a new controller.');
         self::printText("\033[33m".'   :facade'."\033[0m".'        - Create a new facade.');
 
-        self::printText("\033[32m".'app'."\033[0m".'               - Create a new encryption key.');
-        self::printText("\033[33m".'   :rename'."\033[0m".'        - Generates a key.');
-
-        self::printText("\033[32m".'key'."\033[0m".'               - Create a new encryption key.');
-        self::printText("\033[33m".'   :generate'."\033[0m".'      - Generates a key.');
+        self::printText("\033[32m".'key'."\033[0m".'               - Generates a new encryption key.');
+        self::printText("\033[33m".'   :[size]'."\033[0m".'        - The size of the key. (Default = 16)');
 
         self::printText("\033[32m".'help'."\033[0m".'              - Shows this message.');
     }
 
+    /**
+     * Escapes and sanitizes an argument.
+     * 
+     * @param  string $argument The argument to clean
+     * @return string The clean argument
+     */
     final private static function safeArgument($argument)
     {
         return escapeshellarg($argument);
     }
 
+    /**
+     * Prints a text with color.
+     * 
+     * @param  string $text  The text to print
+     * @param  string $color The color of the text
+     */
     final private static function printText($text, $color = 'default')
     {
         $colors = [
@@ -291,10 +345,12 @@ class Spaceman
             'gray'   => 37
         ];
 
-        if (array_key_exists($color, $colors)) {
-            print "\033[".$colors[$color].'m'.$text."\033[0m \n";
-        } else {
-            print $text."\n";
+        if (substr(php_sapi_name(), 0, 3) == 'cli') {
+            if (array_key_exists($color, $colors)) {
+                print "\033[".$colors[$color].'m'.$text."\033[0m \n";
+            } else {
+                print $text."\n";
+            }
         }
     }
 }

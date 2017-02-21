@@ -11,6 +11,7 @@
  */
 use Advandz\Component\Encryption;
 use Advandz\Component\Filesystem;
+use Advandz\Helper\Cli;
 
 class Spaceman
 {
@@ -21,9 +22,13 @@ class Spaceman
      */
     final public static function initialize(array $args)
     {
+        // Initialize the CLI helper
+        $cli = new Cli();
+
         // Initialize only if it is called through the CLI
-        if (substr(php_sapi_name(), 0, 3) == 'cli') {
-            passthru('clear');
+        if ($cli->isCli()) {
+            // Clear the screen
+            $cli->executeCommand('clear', true);
             unset($args[0]);
 
             // Welcome message
@@ -57,21 +62,17 @@ class Spaceman
      */
     final public static function server($port = 8000)
     {
-        if (substr(php_sapi_name(), 0, 3) == 'cli') {
+        $cli = new Cli();
+
+        if ($cli->isCli()) {
             if (is_numeric($port)) {
                 self::printText('Starting Web Server...');
                 self::printText('Running PHP '.phpversion().' listening on http://localhost:'.$port.'/');
                 self::printText('Press Ctrl-C to shutdown the server.'."\n");
 
                 $command = 'php -S localhost:'.self::safeArgument($port).' -t '.self::safeArgument(ROOTWEBDIR);
-                $output  = [];
 
-                $pid = exec($command, $output);
-
-                foreach ($output as $value) {
-                    self::printText($value);
-                    flush();
-                }
+                $cli->executeCommand($command, true);
             } else {
                 self::printText('Usage:', 'brown');
                 self::printText('server [port]');
@@ -351,23 +352,7 @@ class Spaceman
      */
     final private static function printText($text, $color = 'default')
     {
-        $colors = [
-            'black'  => 30,
-            'blue'   => 34,
-            'green'  => 32,
-            'cyan'   => 36,
-            'red'    => 31,
-            'purple' => 35,
-            'brown'  => 33,
-            'gray'   => 37
-        ];
-
-        if (substr(php_sapi_name(), 0, 3) == 'cli') {
-            if (array_key_exists($color, $colors)) {
-                print "\033[".$colors[$color].'m'.$text."\033[0m \n";
-            } else {
-                print $text."\n";
-            }
-        }
+        $cli = new Cli();
+        $cli->printText($text, $color);
     }
 }

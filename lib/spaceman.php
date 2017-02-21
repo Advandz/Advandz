@@ -108,8 +108,8 @@ class Spaceman
     /**
      * Rebuilds or flush the stored cache.
      *
-     * @param string $action The cache action to execute
-     * @return bool True if the action has been executed successfully
+     * @param  string $action The cache action to execute
+     * @return bool   True if the action has been executed successfully
      */
     final public static function cache($action)
     {
@@ -159,9 +159,9 @@ class Spaceman
     /**
      * Creates a new class in the app.
      *
-     * @param string $type The class type to create
-     * @param string $name The new class name
-     * @return bool True if the class has been created successfully
+     * @param  string $type The class type to create
+     * @param  string $name The new class name
+     * @return bool   True if the class has been created successfully
      */
     final public static function create($type, $name)
     {
@@ -271,7 +271,7 @@ class Spaceman
     /**
      * Generates a new encryption key.
      *
-     * @param string $size The size of the key
+     * @param  string $size The size of the key
      * @return string The generated key
      */
     final public static function key($size = 16)
@@ -334,7 +334,7 @@ class Spaceman
 
     /**
      * Escapes and sanitizes an argument.
-     * 
+     *
      * @param  string $argument The argument to clean
      * @return string The clean argument
      */
@@ -345,9 +345,9 @@ class Spaceman
 
     /**
      * Prints a text with color.
-     * 
-     * @param  string $text  The text to print
-     * @param  string $color The color of the text
+     *
+     * @param string $text  The text to print
+     * @param string $color The color of the text
      */
     final private static function printText($text, $color = 'default')
     {

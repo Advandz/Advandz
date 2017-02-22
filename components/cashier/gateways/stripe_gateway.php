@@ -15,5 +15,4 @@ use Stripe;
 
 class StripeGateway
 {
-    
 }

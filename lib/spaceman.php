@@ -286,7 +286,7 @@ class Spaceman
     }
 
     /**
-     * Execute a controller through the Dispatcher
+     * Execute a controller through the Dispatcher.
      *
      * @param array $controller An array containing the Controller to call and CLI arguments
      */

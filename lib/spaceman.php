@@ -217,7 +217,7 @@ class Spaceman
             // Create model
             $model_file  = Loader::fromCamelCase($name);
             $model_class = Loader::toCamelCase($name);
-            $model       = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$model_file.' extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would use to process information'."\n".'    // in your application, load any components or helpers or anything else'."\n".'    // here that you would be use in your functions.'."\n".'    // All the public functions will be available to all controllers that imports'."\n".'    // this model.  '."\n".'    //'."\n".'}';
+            $model       = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$model_class.' extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would use to process information'."\n".'    // in your application, load any components or helpers or anything else'."\n".'    // here that you would be use in your functions.'."\n".'    // All the public functions will be available to all controllers that imports'."\n".'    // this model.  '."\n".'    //'."\n".'}';
 
             if (!file_exists(MODELDIR.$model_file.'.php')) {
                 $filesystem->saveFile(MODELDIR.$model_file.'.php', $model);

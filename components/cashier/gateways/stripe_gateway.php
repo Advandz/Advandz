@@ -11,9 +11,6 @@
 
 namespace Advandz\Component;
 
-use Stripe;
-
 class StripeGateway extends Cashier
 {
-
 }

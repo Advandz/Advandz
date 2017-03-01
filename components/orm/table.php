@@ -58,7 +58,7 @@ class Table extends Record
         return $this->update($this->table, $params);
     }
 
-    public function delete($where = [])
+    public function remove($where = [])
     {
         if (!empty($where)) {
             return $this->from($this->table)->where($where[0], $where[1], $where[2])->delete();

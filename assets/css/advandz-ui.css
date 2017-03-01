@@ -535,7 +535,7 @@ mark,
 .blockquote-footer {
     display: block;
     font-size: 80%;
-    color: #818a91;
+    color: #636c72;
 }
 .blockquote-footer::before {
     content: "\2014 \00A0";
@@ -578,7 +578,7 @@ mark,
 }
 .figure-caption {
     font-size: 90%;
-    color: #818a91;
+    color: #636c72;
 }
 code,
 kbd,
@@ -597,7 +597,7 @@ kbd {
     padding: 0.2rem 0.4rem;
     font-size: 90%;
     color: #ffffff;
-    background-color: #333333;
+    background-color: #292b2c;
     border-radius: 0.2rem;
 }
 kbd kbd {
@@ -610,7 +610,7 @@ pre {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 90%;
-    color: #373a3c;
+    color: #292b2c;
 }
 pre code {
     padding: 0;
@@ -624,6 +624,7 @@ pre code {
     overflow-y: scroll;
 }
 .container {
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;

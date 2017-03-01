@@ -21,17 +21,24 @@ class Table extends Record
 
     public function __construct($table)
     {
+        parent::__construct();
         $this->table = $table;
     }
 
     public function __call($method_name, $args)
     {
-        if (!function_exists($method_name)) {
+        if (!method_exists($this, $method_name)) {
             if (!empty($args)) {
-                return $this->get($method_name, [$method_name, '=', $args[0]])->fetchAll();
+                $result = $this->get('*', [$this->table.'.'.$method_name, '=', $args[0]])->fetchAll();
+            } else {
+                $result = $this->get($method_name)->fetchAll();
             }
 
-            return $this->get($method_name)->fetchAll();
+            if (count($result) == 1) {
+                $result = $result[0];
+            }
+
+            return $result;
         }
     }
 
@@ -40,9 +47,9 @@ class Table extends Record
         return $this->insert($this->table, $params);
     }
 
-    public function get($params = null, $where = [])
+    public function get($params = '*', $where = [])
     {
-        if (empty($where)) {
+        if (!empty($where)) {
             return $this->select($params)->from($this->table)->where($where[0], $where[1], $where[2]);
         }
 

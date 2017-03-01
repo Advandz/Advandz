@@ -137,7 +137,7 @@ class Cashier
             'LTL' => '&#76;&#116;',
             'LVL' => '&#76;&#115;',
             'LYD' => '&#1604;.&#1583;',
-            'MAD' => '&#1583;.&#1605;.', //?
+            'MAD' => '&#1583;.&#1605;.',
             'MDL' => '&#76;',
             'MGA' => '&#65;&#114;',
             'MKD' => '&#1076;&#1077;&#1085;',
@@ -222,7 +222,11 @@ class Cashier
 
     public function formatAmount($amount, $symbol = false)
     {
-        $amount = number_format((float) $amount, 2);
+        $non_decimal_currencies = ['BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'VUV', 'XAF', 'XOF', 'XPF'];
+
+        if (!in_array($this->currency, $non_decimal_currencies)) {
+            $amount = number_format((float) $amount, 2);
+        }
 
         if ($symbol) {
             $amount = (substr($amount, 0, 1) == '-' ? '-' : null).$this->getCurrencySymbol().trim($amount, '-');

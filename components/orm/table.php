@@ -19,12 +19,22 @@ class Table extends Record
      */
     private $table = null;
 
+    /**
+     * Creates a new Table object.
+     */
     public function __construct($table)
     {
         parent::__construct();
         $this->table = $table;
     }
 
+    /**
+     * Catch-all calls, Get a entry from the database based on the called method.
+     *
+     * @param  string $method_name The called method
+     * @param  array  $args An array containing the method arguments
+     * @return mixed  The resultant entry from the database
+     */
     public function __call($method_name, $args)
     {
         if (!method_exists($this, $method_name)) {
@@ -38,15 +48,32 @@ class Table extends Record
                 $result = $result[0];
             }
 
+            if (empty($result)) {
+                return false;
+            }
+
             return $result;
         }
     }
 
+    /**
+     * Add a entry in the table.
+     *
+     * @param  array  $params An array containing the parameters to insert
+     * @return Table  An instance of Table
+     */
     public function add($params)
     {
         return $this->insert($this->table, $params);
     }
 
+    /**
+     * Get a entry from the table.
+     *
+     * @param  array  $params An array or string containing the parameters to fetch
+     * @param  array  $where An array containing the where sentence
+     * @return Table  An instance of Table
+     */
     public function get($params = '*', $where = [])
     {
         if (!empty($where)) {
@@ -56,6 +83,13 @@ class Table extends Record
         return $this->select($params)->from($this->table);
     }
 
+    /**
+     * Edit a entry from the table.
+     *
+     * @param  array  $params An array or string containing the parameters to update
+     * @param  array  $where An array containing the where sentence
+     * @return Table  An instance of Table
+     */
     public function edit($params, $where = [])
     {
         if (!empty($where)) {
@@ -65,6 +99,12 @@ class Table extends Record
         return $this->update($this->table, $params);
     }
 
+    /**
+     * Remove a entry from the table.
+     *
+     * @param  array  $where An array containing the where sentence
+     * @return Table  An instance of Table
+     */
     public function remove($where = [])
     {
         if (!empty($where)) {

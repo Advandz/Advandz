@@ -35,15 +35,17 @@ class UnknownException extends ErrorException
     /**
      * Report all uncaught exception except if error reporting is turned off.
      *
-     * @param Exception $e An exception that has not been caught.
+     * @param mixed $e An exception that has not been caught.
      */
-    public static function setExceptionHandler(Exception $e)
+    public static function setExceptionHandler($e)
     {
-        if (error_reporting() === 0) {
-            return;
-        }
+        if (($e instanceof Exception) || ($e instanceof Error) || ($e instanceof ParseError)) {
+            if (error_reporting() === 0) {
+                return;
+            }
 
-        print 'Uncaught '.get_class($e).', code: '.$e->getCode().' in <strong>'.$e->getFile().'</strong> on line <strong>'.$e->getLine().'</strong><br />Message: '.htmlentities($e->getMessage()).'<br />';
+            print 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
+        }
     }
 
     /**

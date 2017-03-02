@@ -41,7 +41,7 @@ class Orm extends Record
 
                 return $this->{$table_cc};
             } else {
-                throw new \Exception('Table "' . $table . "\" doesn't exist");
+                throw new \Exception('Table "'.$table."\" doesn't exist");
             }
         }
     }

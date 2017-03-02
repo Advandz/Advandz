@@ -32,7 +32,7 @@ class Table extends Record
      * Catch-all calls, Get a entry from the database based on the called method.
      *
      * @param  string $method_name The called method
-     * @param  array  $args An array containing the method arguments
+     * @param  array  $args        An array containing the method arguments
      * @return mixed  The resultant entry from the database
      */
     public function __call($method_name, $args)
@@ -59,8 +59,8 @@ class Table extends Record
     /**
      * Add a entry in the table.
      *
-     * @param  array  $params An array containing the parameters to insert
-     * @return Table  An instance of Table
+     * @param  array $params An array containing the parameters to insert
+     * @return Table An instance of Table
      */
     public function add($params)
     {
@@ -70,9 +70,9 @@ class Table extends Record
     /**
      * Get a entry from the table.
      *
-     * @param  array  $params An array or string containing the parameters to fetch
-     * @param  array  $where An array containing the where sentence
-     * @return Table  An instance of Table
+     * @param  array $params An array or string containing the parameters to fetch
+     * @param  array $where  An array containing the where sentence
+     * @return Table An instance of Table
      */
     public function get($params = '*', $where = [])
     {
@@ -86,9 +86,9 @@ class Table extends Record
     /**
      * Edit a entry from the table.
      *
-     * @param  array  $params An array or string containing the parameters to update
-     * @param  array  $where An array containing the where sentence
-     * @return Table  An instance of Table
+     * @param  array $params An array or string containing the parameters to update
+     * @param  array $where  An array containing the where sentence
+     * @return Table An instance of Table
      */
     public function edit($params, $where = [])
     {
@@ -102,8 +102,8 @@ class Table extends Record
     /**
      * Remove a entry from the table.
      *
-     * @param  array  $where An array containing the where sentence
-     * @return Table  An instance of Table
+     * @param  array $where An array containing the where sentence
+     * @return Table An instance of Table
      */
     public function remove($where = [])
     {

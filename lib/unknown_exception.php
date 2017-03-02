@@ -44,7 +44,7 @@ class UnknownException extends ErrorException
                 return;
             }
 
-            print 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
+            print 'Uncaught '.get_class($e).', code: '.$e->getCode().' in <strong>'.$e->getFile().'</strong> on line <strong>'.$e->getLine().'</strong><br />Message: '.htmlentities($e->getMessage()).'<br />';
         }
     }
 

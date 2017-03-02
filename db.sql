@@ -28,3 +28,12 @@ CREATE TABLE `sessions` (
   PRIMARY KEY  (`id`),
   KEY `expire` (`expire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `users` (
+  `username` VARCHAR(32) NOT NULL,
+  `password` TEXT NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `vars` TEXT NOT NULL,
+  PRIMARY KEY (`username`),
+  UNIQUE (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

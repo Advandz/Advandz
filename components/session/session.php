@@ -300,7 +300,7 @@ class Session
     }
 
     /**
-     * Close a session. Not implemented, included only for campaitibility.
+     * Close a session. Not implemented, included only for compatibility.
      *
      * @return bool True, always
      */

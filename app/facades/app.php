@@ -128,7 +128,7 @@ final class App
      * @param  string $url The URL to redirect
      * @return bool   False if the redirects fail
      */
-    final private static function redirect($uri = WEBDIR)
+    final public static function redirect($uri = WEBDIR)
     {
         $parts    = parse_url($uri);
         $relative = true;

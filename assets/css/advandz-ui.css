@@ -6204,8 +6204,7 @@ button.close {
 }
 
 .sidebar.sidebar-collapsed + main {
-	padding-left: 75px;
-	padding-top: 66px;
+	padding: 66px 12px 12px 75px;
 }
 
 @media (max-width: 576px) {

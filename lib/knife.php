@@ -127,12 +127,14 @@ class Knife extends Language
      */
     private function compileTags()
     {
-        // Parse comment tags
+        // Parse tags
         $this->replaceTemplate('{{--', '<?php /*');
         $this->replaceTemplate('--}}', '*/ ?>');
+        $this->replaceTemplate('\{', '/\x7b');
+        $this->replaceTemplate('\}', '/\x7d');
 
         // Compile the tags
-        preg_replace_callback('/\\{\\{([^{}]+)\}\\}/', function ($matches) {
+        preg_replace_callback('/\\{\\{([^{}]+)\\}\\}/', function ($matches) {
             $args = explode(' ', trim($matches[1]), 2);
 
             if (array_key_exists($args[0], $this->tags)) {
@@ -143,6 +145,8 @@ class Knife extends Language
         }, $this->template);
 
         // Replace escaped tags
+        $this->replaceTemplate('/\x7b', '{');
+        $this->replaceTemplate('/\x7d', '}');
         $this->replaceTemplate('{\{', '{{');
         $this->replaceTemplate('}\}', '}}');
     }

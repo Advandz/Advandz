@@ -39,12 +39,15 @@ class UnknownException extends ErrorException
      */
     public static function setExceptionHandler($e)
     {
-        if (($e instanceof Exception) || ($e instanceof Error) || ($e instanceof ParseError)) {
+        if ($e instanceof Exception) {
             if (error_reporting() === 0) {
                 return;
             }
 
-            print 'Uncaught '.get_class($e).', code: '.$e->getCode().' in <strong>'.$e->getFile().'</strong> on line <strong>'.$e->getLine().'</strong><br />Message: '.htmlentities($e->getMessage()).'<br />';
+            print 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
+        } else if (($e instanceof Error) || ($e instanceof ParseError)) {
+            $e = new self(htmlentities('Uncaught ' . get_class($e) . ', Message: ' . $e->getMessage()), 0, null, $e->getFile(), $e->getLine());
+            Dispatcher::raiseError($e);
         }
     }
 

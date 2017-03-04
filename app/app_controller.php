@@ -18,9 +18,13 @@ class AppController extends \Controller
      */
     public function preAction()
     {
+        // Load the necessary helpers
         $this->helpers(['Cdnjs']);
 
+        // Load the necessary libraries from CDNJS
         $libs = $this->Cdnjs->loadLibraries(['jquery']);
+
+        // Set the structure variables
         $this->structure->set('libs', $libs);
     }
 

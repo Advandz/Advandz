@@ -43,6 +43,11 @@ class View extends Knife
     public $assets_dir;
 
     /**
+     * @var string This application base uri
+     */
+    public $base_uri;
+
+    /**
      * @var string This view's partial path relative to the public web directory
      */
     public $view_path;
@@ -106,6 +111,7 @@ class View extends Knife
         $this->view_path        = $view_path;
         $this->view_dir         = Router::makeURI(str_replace('index.php/', '', WEBDIR).$view_path.'views'.DS.$view.DS);
         $this->assets_dir       = Router::makeURI(str_replace('index.php/', '', WEBDIR).'assets'.DS);
+        $this->base_uri         = Router::makeURI(str_replace('index.php/', '', WEBDIR));
     }
 
     /**

@@ -44,9 +44,9 @@ class UnknownException extends ErrorException
                 return;
             }
 
-            print 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
-        } else if (($e instanceof Error) || ($e instanceof ParseError)) {
-            $e = new self(htmlentities('Uncaught ' . get_class($e) . ', Message: ' . $e->getMessage()), 0, null, $e->getFile(), $e->getLine());
+            print 'Uncaught '.get_class($e).', code: '.$e->getCode().' in <strong>'.$e->getFile().'</strong> on line <strong>'.$e->getLine().'</strong><br />Message: '.htmlentities($e->getMessage()).'<br />';
+        } elseif (($e instanceof Error) || ($e instanceof ParseError)) {
+            $e = new self(htmlentities('Uncaught '.get_class($e).', Message: '.$e->getMessage()), 0, null, $e->getFile(), $e->getLine());
             Dispatcher::raiseError($e);
         }
     }

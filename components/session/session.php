@@ -294,9 +294,11 @@ class Session
      *
      * @param string $session_path The path to the session
      * @param string $session_name The name of the session
+     * @return bool True, always
      */
     private function sessionOpen($session_path, $session_name)
     {
+        return true;
     }
 
     /**
@@ -313,11 +315,11 @@ class Session
      * Reads the session data from the database.
      *
      * @param  int    $sid Session ID
-     * @return string
+     * @return string The table value
      */
     private function sessionSelect($sid)
     {
-        //  We need to use the sid set so we can write a cookie if needed
+        // We need to use the sid set so we can write a cookie if needed
         $this->sid = $sid;
 
         $row = $this->Record->select($this->tblvalue)
@@ -330,7 +332,7 @@ class Session
             return $row->{$this->tblvalue};
         }
 
-        return null;
+        return '';
     }
 
     /**

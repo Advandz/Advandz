@@ -4317,6 +4317,12 @@ tbody.collapse.in {
 	top: 0;
 }
 
+.navbar-fixed-top + main,
+.navbar-fixed-top + .container,
+.navbar-fixed-top + .container-fluid {
+	padding-top: 66px;
+}
+
 .navbar-fixed-bottom {
 	bottom: 0;
 }

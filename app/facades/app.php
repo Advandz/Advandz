@@ -119,7 +119,12 @@ final class App
      */
     final public static function getUri()
     {
-        return trim(trim(filter_input(INPUT_SERVER, 'REQUEST_URI'), WEBDIR), '/');
+        $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
+        if (substr($uri, 0, strlen(WEBDIR)) == WEBDIR) {
+            return substr($uri, strlen(WEBDIR), strlen($uri));
+        } else {
+            return $uri;
+        }
     }
 
     /**

@@ -28,10 +28,10 @@ class Users
     /**
      * Creates a new user.
      *
-     * @param  string    $username  The username
-     * @param  string    $password  The password
-     * @param  string    $email     The user email
-     * @param  array     $vars      The user data
+     * @param  string    $username The username
+     * @param  string    $password The password
+     * @param  string    $email    The user email
+     * @param  array     $vars     The user data
      * @return bool      True if the user can be added successfully
      * @throws Exception Throws when the user already exists
      */
@@ -69,7 +69,7 @@ class Users
     public function getUser($username)
     {
         if ($this->userExists($username)) {
-            $result = $this->Orm->Users->username($username);
+            $result       = $this->Orm->Users->username($username);
             $result->vars = unserialize($result->vars);
 
             return $result;
@@ -81,7 +81,7 @@ class Users
     /**
      * Delete a user.
      *
-     * @param  string    $username  The username
+     * @param  string    $username The username
      * @return bool      True if the user can be deleted successfully
      * @throws Exception Throws when the user not exists
      */
@@ -100,10 +100,10 @@ class Users
     /**
      * Edit a user.
      *
-     * @param  string $username  The username
-     * @param  string $password  The password
-     * @param  string $email     The user email
-     * @param  array  $vars      The user data
+     * @param  string    $username The username
+     * @param  string    $password The password
+     * @param  string    $email    The user email
+     * @param  array     $vars     The user data
      * @throws Exception Throws when the user not exists
      */
     public function editUser($username, $password = null, $email = null, $vars = [])
@@ -132,8 +132,8 @@ class Users
     /**
      * Validate the user credentials.
      *
-     * @param string $username  The username
-     * @param string $password  The password
+     * @param string $username The username
+     * @param string $password The password
      * @param bool   True if the user credentials are valid
      */
     public function validateCredentials($username, $password)
@@ -166,7 +166,7 @@ class Users
         $session->clear($session_id);
 
         // Log the user
-        $user = $this->getUser($username);
+        $user             = $this->getUser($username);
         $user->ip_address = $_SERVER['REMOTE_ADDR'];
         $session->write('admin_auth', $user);
 
@@ -176,7 +176,7 @@ class Users
     /**
      * Check if a user exists in the database.
      *
-     * @param string $username  The username to check
+     * @param string $username The username to check
      * @param bool True if the user exists, false otherwise
      */
     public function userExists($username)

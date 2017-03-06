@@ -292,9 +292,9 @@ class Session
     /**
      * Open the given session. Not implemented, included only for compatibility.
      *
-     * @param string $session_path The path to the session
-     * @param string $session_name The name of the session
-     * @return bool True, always
+     * @param  string $session_path The path to the session
+     * @param  string $session_name The name of the session
+     * @return bool   True, always
      */
     private function sessionOpen($session_path, $session_name)
     {

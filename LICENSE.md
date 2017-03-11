@@ -5,8 +5,8 @@ Copyright (c) 2012-2017 [CyanDark, Inc.](https://cyandark.com/opensource)
 Copyright (c) 2010-2017 [Phillips Data, Inc.](https://github.com/phillipsdata)
 Copyright (c) 2013-2017 [Dave Gandy](https://fontawesome.io/)
 Copyright (c) 2011-2017 [Daniel Eden](https://daneden.me)
+Copyright (c) 2011-2017 [The Bootstrap Authors](https://github.com/twbs/bootstrap/graphs/contributors)
 Copyright (c) 2009-2017 [Cody Phillips](https://github.com/clphillips)
-Copyright (c) 2004-2017 [David Grudl](https://davidgrudl.com/)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

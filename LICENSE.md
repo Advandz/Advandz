@@ -1,4 +1,4 @@
-# MIT License
+MIT License
 
 Copyright (c) 2016-2017 [The Advandz Team](https://advandz.com/)
 Copyright (c) 2012-2017 [CyanDark, Inc.](https://cyandark.com/opensource)

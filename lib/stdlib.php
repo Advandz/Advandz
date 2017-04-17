@@ -38,3 +38,15 @@ set_exception_handler(['UnknownException', 'setExceptionHandler']);
  * @see UnknownException::setFatalErrorHandler()
  */
 register_shutdown_function(['UnknownException', 'setFatalErrorHandler']);
+
+/*
+ * This array of class aliases will be registered when this application
+ * is started.
+ */
+$aliases = [
+    'Language' => 'Advandz\\Library\\Language'
+];
+
+foreach ($aliases as $alias => $class) {
+    class_alias($class, $alias, true);
+}

@@ -32,7 +32,7 @@ class Html
         if ($return) {
             return $result;
         }
-        print $result;
+        echo $result;
     }
 
     /**
@@ -141,7 +141,6 @@ class Html
             }
 
             if (is_array($separator)) {
-
                 // Start cap to begin this concatenation
                 if ($j == 0 && isset($separator['start'])) {
                     $result .= $separator['start'];
@@ -163,7 +162,7 @@ class Html
                     $result .= $separator['end'];
                 }
             } else {
-                $result .= ($j > 0 ? $separator : '').$params[$i];
+                $result .= ($j > 0 ? $separator : '') . $params[$i];
             }
             $j++;
         }
@@ -189,7 +188,7 @@ class Html
                 if (is_array($value)) {
                     $value = implode($glue, $value);
                 }
-                $html .= ' '.$this->_($key, true).'="'.$this->_($value, true).'"';
+                $html .= ' ' . $this->_($key, true) . '="' . $this->_($value, true) . '"';
             }
         }
 
@@ -210,7 +209,7 @@ class Html
             return $html;
         }
 
-        return '<!--[if '.$expression.']>'.(!$hidden ? '<!-->'.$html.'<!--' : $html).'<![endif]-->';
+        return '<!--[if ' . $expression . ']>' . (!$hidden ? '<!-->' . $html . '<!--' : $html) . '<![endif]-->';
     }
 
     /**

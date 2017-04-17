@@ -143,12 +143,12 @@ final class App
 
         // If not scheme is specified, assume http(s)
         if (!isset($parts['scheme'])) {
-            $uri = 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '').'://'.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']).($relative ? WEBDIR : '').$uri;
+            $uri = 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']) . ($relative ? WEBDIR : '') . $uri;
         }
 
         // Try to redirect
         try {
-            header('Location: '.$uri);
+            header('Location: ' . $uri);
 
             return true;
         } catch (Exception $e) {

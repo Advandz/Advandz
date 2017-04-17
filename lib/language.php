@@ -104,7 +104,7 @@ class Language
         if ($return) {
             return $output;
         }
-        print $output;
+        echo $output;
     }
 
     /**
@@ -131,23 +131,23 @@ class Language
         }
 
         // Check if the language file in this language has already been loaded
-        if (isset(self::$lang_files[$lang_dir.$lang_file]) && in_array($language, self::$lang_files[$lang_dir.$lang_file])) {
+        if (isset(self::$lang_files[$lang_dir . $lang_file]) && in_array($language, self::$lang_files[$lang_dir . $lang_file])) {
             return;
         }
 
         $load_success = true;
 
         // Fetch $lang from the language file, if it exists
-        if (file_exists($lang_dir.$language.DS.$lang_file)) {
-            include_once $lang_dir.$language.DS.$lang_file;
-        } elseif (file_exists($lang_dir.$language.DS.$lang_file.'.php')) {
-            include_once $lang_dir.$language.DS.$lang_file.'.php';
+        if (file_exists($lang_dir . $language . DS . $lang_file)) {
+            include_once $lang_dir . $language . DS . $lang_file;
+        } elseif (file_exists($lang_dir . $language . DS . $lang_file . '.php')) {
+            include_once $lang_dir . $language . DS . $lang_file . '.php';
         } else {
             $load_success = false;
         }
 
         if ($load_success) {
-            self::$lang_files[$lang_dir.$lang_file][] = $language;
+            self::$lang_files[$lang_dir . $lang_file][] = $language;
 
             if (isset($lang) && is_array($lang)) {
                 if (!isset(self::$lang_text[$language])) {

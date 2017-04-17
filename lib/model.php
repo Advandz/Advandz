@@ -266,7 +266,7 @@ class Model
             throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
         }
 
-        return $db_params['driver'].':dbname='.$db_params['database'].';host='.$db_params['host'].(isset($db_params['port']) ? ';port='.$db_params['port'] : '');
+        return $db_params['driver'] . ':dbname=' . $db_params['database'] . ';host=' . $db_params['host'] . (isset($db_params['port']) ? ';port=' . $db_params['port'] : '');
     }
 
     /**
@@ -289,7 +289,6 @@ class Model
 
         // Only attempt to set up a new connection if none exists
         if (!($this->connection instanceof PDO)) {
-
             // Override any default settings with those provided
             $options = (array) (isset($db_info['options']) ? $db_info['options'] : null) + $this->default_pdo_options;
             // Ensure persistence is set to either true or false

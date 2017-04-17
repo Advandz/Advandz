@@ -66,7 +66,7 @@ class Session
      */
     public function __construct()
     {
-        \Loader::load(COMPONENTDIR.'record'.DS.'record.php');
+        \Loader::load(COMPONENTDIR . 'record' . DS . 'record.php');
         Configure::load('session');
 
         $this->Record = new Record();
@@ -218,7 +218,6 @@ class Session
         $this->tblvalue  = $tblvalue;
 
         if (self::$instances == 0) {
-
             // Ensure session is HTTP Only
             if (version_compare(phpversion(), '5.2.0', '>=')) {
                 $session_params = session_get_cookie_params();

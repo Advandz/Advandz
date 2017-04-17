@@ -65,7 +65,7 @@ class Javascript extends Html
         if (isset($this->js_files[$location])) {
             $num_docs = count($this->js_files[$location]);
             for ($i = 0; $i < $num_docs; $i++) {
-                $html .= $this->addCondition('<script type="text/javascript" src="'.$this->_($this->js_files[$location][$i]['file'], true).'"></script>', $this->js_files[$location][$i]['condition'], $this->js_files[$location][$i]['hidden'])."\n";
+                $html .= $this->addCondition('<script type="text/javascript" src="' . $this->_($this->js_files[$location][$i]['file'], true) . '"></script>', $this->js_files[$location][$i]['condition'], $this->js_files[$location][$i]['hidden']) . "\n";
             }
         }
 
@@ -84,7 +84,7 @@ class Javascript extends Html
         $num_docs = count($this->js_inline);
 
         for ($i = 0; $i < $num_docs; $i++) {
-            $html .= $this->addCondition('<script type="text/javascript">'.$this->js_inline[$i]['data'].'</script>', $this->js_inline[$i]['condition'], $this->js_inline[$i]['hidden'])."\n";
+            $html .= $this->addCondition('<script type="text/javascript">' . $this->js_inline[$i]['data'] . '</script>', $this->js_inline[$i]['condition'], $this->js_inline[$i]['hidden']) . "\n";
         }
 
         return $html;
@@ -104,7 +104,7 @@ class Javascript extends Html
             $path = $this->default_path;
         }
 
-        $this->js_files[$location][] = ['file' => $path.$file, 'condition' => $condition, 'hidden' => $hidden];
+        $this->js_files[$location][] = ['file' => $path . $file, 'condition' => $condition, 'hidden' => $hidden];
 
         return $this;
     }

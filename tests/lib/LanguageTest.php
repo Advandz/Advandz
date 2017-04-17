@@ -10,8 +10,8 @@ class LanguageTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->lang_path = $lang_path = realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR).
-            DIRECTORY_SEPARATOR.'language'.DIRECTORY_SEPARATOR;
+        $this->lang_path = $lang_path = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR) .
+            DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR;
     }
 
     /**

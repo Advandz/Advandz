@@ -109,8 +109,8 @@ class View extends Knife
         list($view_path, $view) = $this->getViewPath($view);
         $this->view             = $view;
         $this->view_path        = $view_path;
-        $this->view_dir         = Router::makeURI(str_replace('index.php/', '', WEBDIR).$view_path.'views'.DS.$view.DS);
-        $this->assets_dir       = Router::makeURI(str_replace('index.php/', '', WEBDIR).'assets'.DS);
+        $this->view_dir         = Router::makeURI(str_replace('index.php/', '', WEBDIR) . $view_path . 'views' . DS . $view . DS);
+        $this->assets_dir       = Router::makeURI(str_replace('index.php/', '', WEBDIR) . 'assets' . DS);
         $this->base_uri         = Router::makeURI(str_replace('index.php/', '', WEBDIR));
     }
 
@@ -144,14 +144,14 @@ class View extends Knife
     {
         $this->setView($file, $view);
 
-        $file = ROOTWEBDIR.$this->view_path.'views'.DS.$this->view.DS.$this->file.$this->view_ext;
+        $file = ROOTWEBDIR . $this->view_path . 'views' . DS . $this->view . DS . $this->file . $this->view_ext;
 
         if (is_array($this->vars)) {
             extract($this->vars);
         } // Extract the vars to local namespace
 
         if (!file_exists($file)) {
-            throw new Exception('Files does not exist: '.$file);
+            throw new Exception('Files does not exist: ' . $file);
         }
 
         ob_start(); // Start output buffering
@@ -179,7 +179,7 @@ class View extends Knife
         $view_parts = explode('.', $view);
 
         if (count($view_parts) == 2) {
-            $view_path = str_replace(ROOTWEBDIR, '', PLUGINDIR).Loader::fromCamelCase($view_parts[0]).DS;
+            $view_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . Loader::fromCamelCase($view_parts[0]) . DS;
             $view      = $view_parts[1];
         }
 

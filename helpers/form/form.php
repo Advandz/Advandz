@@ -107,7 +107,7 @@ class Form extends Html
             // Use either a list of values or a single value
             if (is_array($value_var)) {
                 for ($i = 0; $i < count($value_var); $i++) {
-                    $value .= ($i > 0 && $temp[$value_var[$i]] != '' ? $glue : '').$temp[$value_var[$i]];
+                    $value .= ($i > 0 && $temp[$value_var[$i]] != '' ? $glue : '') . $temp[$value_var[$i]];
 
                     // Print only the first non-null value
                     if ($glue === null && $temp[$value_var[$i]] != '') {
@@ -144,7 +144,7 @@ class Form extends Html
         $default_attributes = ['method' => 'post', 'action' => $uri];
         $attributes         = array_merge($default_attributes, (array) $attributes);
 
-        $html = '<form'.$this->buildAttributes($attributes).'>'.$this->eol;
+        $html = '<form' . $this->buildAttributes($attributes) . '>' . $this->eol;
 
         // Set the CSRF token if set to do so
         if ($this->csrf_auto_create) {
@@ -170,7 +170,7 @@ class Form extends Html
      */
     public function end($end_str = null)
     {
-        $html = '</form>'.$end_str.$this->eol;
+        $html = '</form>' . $end_str . $this->eol;
 
         return $this->output($html);
     }
@@ -195,11 +195,11 @@ class Form extends Html
         }
         // Sha256 hash is the next best thing
         if (function_exists('hash')) {
-            return hash('sha256', $key.$session_id);
+            return hash('sha256', $key . $session_id);
         }
 
         // Regretably, fallback to md5
-        return md5($key.$session_id);
+        return md5($key . $session_id);
     }
 
     /**
@@ -334,7 +334,7 @@ class Form extends Html
         $default_attributes = ['for' => $for];
         $attributes         = array_merge($default_attributes, (array) $attributes);
 
-        return $this->output('<label'.$this->buildAttributes($attributes).'>'.$this->_($name, true, $preserve_tags).'</label>'.$this->eol);
+        return $this->output('<label' . $this->buildAttributes($attributes) . '>' . $this->_($name, true, $preserve_tags) . '</label>' . $this->eol);
     }
 
     /**
@@ -433,8 +433,8 @@ class Form extends Html
         $default_attributes = ['name' => $name];
         $attributes         = array_merge($default_attributes, (array) $attributes);
 
-        $html = '<textarea'.$this->buildAttributes($attributes).'>'.
-            $this->_($value, true).'</textarea>'.$this->eol;
+        $html = '<textarea' . $this->buildAttributes($attributes) . '>' .
+            $this->_($value, true) . '</textarea>' . $this->eol;
 
         return $this->output($html);
     }
@@ -479,8 +479,8 @@ class Form extends Html
         $default_attributes = ['name' => $name];
         $attributes         = array_merge($default_attributes, (array) $attributes);
 
-        $html = '<select'.$this->buildAttributes($attributes).'>'.$this->eol.
-            $this->selectOptions($options, $selected_value, $option_attributes).'</select>'.$this->eol;
+        $html = '<select' . $this->buildAttributes($attributes) . '>' . $this->eol .
+            $this->selectOptions($options, $selected_value, $option_attributes) . '</select>' . $this->eol;
 
         return $this->output($html);
     }
@@ -549,7 +549,7 @@ class Form extends Html
         $end = null;
         switch ($tag) {
             case 'button':
-                $end = '>'.$value.'</'.$tag.'>';
+                $end = '>' . $value . '</' . $tag . '>';
                 break;
             case 'input':
             default:
@@ -560,7 +560,7 @@ class Form extends Html
 
         $attributes = array_merge($default_attributes, (array) $attributes);
 
-        return '<'.$tag.$this->buildAttributes($attributes).$end.$this->eol;
+        return '<' . $tag . $this->buildAttributes($attributes) . $end . $this->eol;
     }
 
     /**
@@ -604,10 +604,10 @@ class Form extends Html
 
                 if (strpos($value, 'optgroup') === 0) {
                     if ($open_group_tag) {
-                        $html .= '</optgroup>'.$this->eol;
+                        $html .= '</optgroup>' . $this->eol;
                     } //close an open tag before starting another
 
-                    $html .= '<optgroup label="'.$this->_($name, true).'">';
+                    $html .= '<optgroup label="' . $this->_($name, true) . '">';
                     $open_group_tag = true;
                 } else {
                     $attr['value'] = $this->_($value, true);
@@ -618,14 +618,14 @@ class Form extends Html
                         $attr['selected'] = 'selected';
                     }
 
-                    $html .= $this->buildAttributes($attr).'>'.$this->_($name, true).'</option>'.$this->eol;
+                    $html .= $this->buildAttributes($attr) . '>' . $this->_($name, true) . '</option>' . $this->eol;
                 }
             }
         }
 
         //Before returning add closing optgroup tag if necessary
         if ($open_group_tag) {
-            $html .= '</optgroup>'.$this->eol;
+            $html .= '</optgroup>' . $this->eol;
         }
 
         return $html;
@@ -670,7 +670,7 @@ class Form extends Html
         if ($this->return_output) {
             return $html;
         }
-        print $html;
+        echo $html;
     }
 
     /**

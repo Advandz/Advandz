@@ -28,7 +28,7 @@ final class Loader
     {
         $paths = [
             LIBDIR,
-            ROOTWEBDIR.APPDIR,
+            ROOTWEBDIR . APPDIR,
             CONTROLLERDIR,
             MODELDIR,
             COMPONENTDIR,
@@ -38,38 +38,38 @@ final class Loader
 
         $plugin = null;
         if (($c = strpos($class, '.'))) {
-            $plugin = self::fromCamelCase(substr($class, 0, $c)).DIRECTORY_SEPARATOR;
+            $plugin = self::fromCamelCase(substr($class, 0, $c)) . DIRECTORY_SEPARATOR;
             $class  = substr($class, $c + 1);
         }
 
         if ($plugin !== null) {
             $paths = [
-                PLUGINDIR.$plugin,
-                PLUGINDIR.$plugin.'models'.DIRECTORY_SEPARATOR,
-                PLUGINDIR.$plugin.'controllers'.DIRECTORY_SEPARATOR,
-                PLUGINDIR.$plugin.'components'.DIRECTORY_SEPARATOR,
-                PLUGINDIR.$plugin.'helpers'.DIRECTORY_SEPARATOR,
-                PLUGINDIR.$plugin.'facades'.DIRECTORY_SEPARATOR
+                PLUGINDIR . $plugin,
+                PLUGINDIR . $plugin . 'models' . DIRECTORY_SEPARATOR,
+                PLUGINDIR . $plugin . 'controllers' . DIRECTORY_SEPARATOR,
+                PLUGINDIR . $plugin . 'components' . DIRECTORY_SEPARATOR,
+                PLUGINDIR . $plugin . 'helpers' . DIRECTORY_SEPARATOR,
+                PLUGINDIR . $plugin . 'facades' . DIRECTORY_SEPARATOR
             ];
         }
 
         if (strpos($class, '\\') !== false) { // PSR-4 Autoload
             $class_file = explode('\\', $class);
             $class_file = self::fromCamelCase(end($class_file));
-            $file_name  = $class_file.'.php';
+            $file_name  = $class_file . '.php';
         } else { // PSR-0 Autoload
             $class_file = self::fromCamelCase($class);
-            $file_name  = $class_file.'.php';
+            $file_name  = $class_file . '.php';
         }
 
         // Include Files
         foreach ($paths as $path) {
-            if (file_exists($path.$file_name)) {
-                include $path.$file_name;
+            if (file_exists($path . $file_name)) {
+                include $path . $file_name;
 
                 return true;
-            } elseif (file_exists($path.$class_file.DIRECTORY_SEPARATOR.$file_name)) {
-                include $path.$class_file.DIRECTORY_SEPARATOR.$file_name;
+            } elseif (file_exists($path . $class_file . DIRECTORY_SEPARATOR . $file_name)) {
+                include $path . $class_file . DIRECTORY_SEPARATOR . $file_name;
 
                 return true;
             }
@@ -101,7 +101,7 @@ final class Loader
 
                 $plugin = null;
                 if (($c = strpos($model, '.'))) {
-                    $plugin = self::fromCamelCase(substr($model, 0, $c)).DS;
+                    $plugin = self::fromCamelCase(substr($model, 0, $c)) . DS;
                     $model  = substr($model, $c + 1);
                 }
 
@@ -110,35 +110,35 @@ final class Loader
 
                 if ($plugin) {
                     // Ensure the model exists
-                    if (!file_exists(PLUGINDIR.$plugin.'models'.DS.$model_name_file.'.php')) {
-                        throw new Exception('<strong>'.$model_name.'</strong> model not found');
+                    if (!file_exists(PLUGINDIR . $plugin . 'models' . DS . $model_name_file . '.php')) {
+                        throw new Exception('<strong>' . $model_name . '</strong> model not found');
                     }
 
                     // Include the parent Plugin Model, if it exists
-                    self::load(PLUGINDIR.$plugin.substr($plugin, 0, -1).'_model.php');
+                    self::load(PLUGINDIR . $plugin . substr($plugin, 0, -1) . '_model.php');
 
                     // Include the model and its base class
-                    if (file_exists(PLUGINDIR.$plugin.'models'.DS.$model_name_file.'_base.php')) {
-                        require_once PLUGINDIR.$plugin.'models'.DS.$model_name_file.'_base.php';
+                    if (file_exists(PLUGINDIR . $plugin . 'models' . DS . $model_name_file . '_base.php')) {
+                        require_once PLUGINDIR . $plugin . 'models' . DS . $model_name_file . '_base.php';
                     }
 
-                    require_once PLUGINDIR.$plugin.'models'.DS.$model_name_file.'.php';
+                    require_once PLUGINDIR . $plugin . 'models' . DS . $model_name_file . '.php';
                 } else {
                     // Ensure the model exists
-                    if (!file_exists(MODELDIR.$model_name_file.'.php')) {
-                        throw new Exception('<strong>'.$model_name.'</strong> model not found');
+                    if (!file_exists(MODELDIR . $model_name_file . '.php')) {
+                        throw new Exception('<strong>' . $model_name . '</strong> model not found');
                     }
 
                     // Include the model and its base class
-                    if (file_exists(MODELDIR.$model_name_file.'_base.php')) {
-                        require_once MODELDIR.$model_name_file.'_base.php';
+                    if (file_exists(MODELDIR . $model_name_file . '_base.php')) {
+                        require_once MODELDIR . $model_name_file . '_base.php';
                     }
 
-                    require_once MODELDIR.$model_name_file.'.php';
+                    require_once MODELDIR . $model_name_file . '.php';
                 }
 
                 // Instantiate the model
-                $namespace           = 'Advandz\\App\\Model\\'.$model_name;
+                $namespace           = 'Advandz\\App\\Model\\' . $model_name;
                 $parent->$model_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
             }
         }
@@ -244,7 +244,7 @@ final class Loader
                 $path = HELPERDIR;
                 break;
             default:
-                throw new Exception('Unrecognized load type <strong>'.$type.'</strong> specified');
+                throw new Exception('Unrecognized load type <strong>' . $type . '</strong> specified');
                 break;
         }
 
@@ -259,12 +259,12 @@ final class Loader
 
                 $plugin = null;
                 if (($c = strpos($object, '.'))) {
-                    $plugin = self::fromCamelCase(substr($object, 0, $c)).DS;
+                    $plugin = self::fromCamelCase(substr($object, 0, $c)) . DS;
                     $object = substr($object, $c + 1);
                 }
 
                 if ($plugin) {
-                    $dir = PLUGINDIR.$plugin.DS.$type.'s'.DS;
+                    $dir = PLUGINDIR . $plugin . DS . $type . 's' . DS;
                 } else {
                     $dir = $path;
                 }
@@ -273,17 +273,17 @@ final class Loader
 
                 // Include the object
                 $object      = self::fromCamelCase($object);
-                $object_file = $object.'.php';
+                $object_file = $object . '.php';
 
                 // Search for the object in the root object directory
-                if (file_exists($dir.$object_file)) {
-                    $object = $dir.$object_file;
+                if (file_exists($dir . $object_file)) {
+                    $object = $dir . $object_file;
                 } // The object may also appear in a subdirectory of the same name
-                elseif (file_exists($dir.$object.DS.$object_file)) {
-                    $object = $dir.$object.DS.$object_file;
+                elseif (file_exists($dir . $object . DS . $object_file)) {
+                    $object = $dir . $object . DS . $object_file;
                 } // If the object can not be found in either location throw an exception
                 else {
-                    throw new Exception('<strong>'.$object_name.'</strong> '.$type.' not found');
+                    throw new Exception('<strong>' . $object_name . '</strong> ' . $type . ' not found');
                 }
 
                 // Load the object if
@@ -291,7 +291,7 @@ final class Loader
 
                 // Initialize the object
                 if ($type == 'helper' || $type == 'component') {
-                    $namespace            = 'Advandz\\'.self::toCamelCase($type).'\\'.$object_name;
+                    $namespace            = 'Advandz\\' . self::toCamelCase($type) . '\\' . $object_name;
                     $parent->$object_name = call_user_func_array([new ReflectionClass($namespace), 'newInstance'], $value);
                 } else {
                     $parent->$object_name = call_user_func_array([new ReflectionClass($object_name), 'newInstance'], $value);

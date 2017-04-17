@@ -183,7 +183,7 @@ class Acl
             $aro = $this->getAroByAlias($parent);
             if ($aro) {
                 $parent  = $aro->id;
-                $lineage = $aro->lineage.$parent.'/';
+                $lineage = $aro->lineage . $parent . '/';
             } else {
                 $parent = null;
             }

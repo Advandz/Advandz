@@ -44,9 +44,9 @@ class UnknownException extends ErrorException
                 return;
             }
 
-            print 'Uncaught '.get_class($e).', code: '.$e->getCode().' in <strong>'.$e->getFile().'</strong> on line <strong>'.$e->getLine().'</strong><br />Message: '.htmlentities($e->getMessage()).'<br />';
+            echo 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
         } elseif (($e instanceof Error) || ($e instanceof ParseError)) {
-            $e = new self(htmlentities('Uncaught '.get_class($e).', Message: '.$e->getMessage()), 0, null, $e->getFile(), $e->getLine());
+            $e = new self(htmlentities('Uncaught ' . get_class($e) . ', Message: ' . $e->getMessage()), 0, null, $e->getFile(), $e->getLine());
             Dispatcher::raiseError($e);
         }
     }
@@ -71,11 +71,11 @@ class UnknownException extends ErrorException
                 Dispatcher::raiseError($e);
             } catch (Exception $e) {
                 if (Configure::get('System.debug')) {
-                    print $e->getMessage().' on line <strong>'.$e->getLine().
-                        '</strong> in <strong>'.$e->getFile()."</strong>\n".
-                        '<br />Printing Stack Trace:<br />'.nl2br($e->getTraceAsString());
+                    echo $e->getMessage() . ' on line <strong>' . $e->getLine() .
+                        '</strong> in <strong>' . $e->getFile() . "</strong>\n" .
+                        '<br />Printing Stack Trace:<br />' . nl2br($e->getTraceAsString());
                 } else {
-                    print $e->getMessage();
+                    echo $e->getMessage();
                 }
             }
         }

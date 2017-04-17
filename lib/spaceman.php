@@ -32,13 +32,13 @@ class Spaceman
             unset($args[0]);
 
             // Welcome message
-            self::printText('Advandz Spaceman 1.0 Development Tool'."\n", 'blue');
+            self::printText('Advandz Spaceman 1.0 Development Tool' . "\n", 'blue');
 
             // Check given parameters
             if (!empty($args)) {
                 @$function = $args[1];
 
-                if (!empty($function) && is_callable('Spaceman::'.$function)) {
+                if (!empty($function) && is_callable('Spaceman::' . $function)) {
                     // Re-build the array with the parameters
                     unset($args[1]);
                     $parameters = array_values($args);
@@ -46,7 +46,7 @@ class Spaceman
                     // Call the function
                     @call_user_func_array(['Spaceman', $function], $parameters);
                 } else {
-                    self::printText('Invalid or non-existent function called'.(empty($function) ? '.' : ': '.$function), 'red');
+                    self::printText('Invalid or non-existent function called' . (empty($function) ? '.' : ': ' . $function), 'red');
                     self::help();
                 }
             } else {
@@ -67,10 +67,10 @@ class Spaceman
         if ($cli->isCli()) {
             if (is_numeric($port)) {
                 self::printText('Starting Web Server...');
-                self::printText('Running PHP '.phpversion().' listening on http://localhost:'.$port.'/');
-                self::printText('Press Ctrl-C to shutdown the server.'."\n");
+                self::printText('Running PHP ' . phpversion() . ' listening on http://localhost:' . $port . '/');
+                self::printText('Press Ctrl-C to shutdown the server.' . "\n");
 
-                $command = 'php -S localhost:'.self::safeArgument($port).' -t '.self::safeArgument(ROOTWEBDIR);
+                $command = 'php -S localhost:' . self::safeArgument($port) . ' -t ' . self::safeArgument(ROOTWEBDIR);
 
                 $cli->executeCommand($command, true);
             } else {
@@ -118,11 +118,11 @@ class Spaceman
             self::printText('Flushing cache...');
 
             // Delete all the cached files
-            $files = glob(CACHEDIR.'*');
+            $files = glob(CACHEDIR . '*');
             foreach ($files as $file) {
                 if (is_file($file)) {
                     unlink($file);
-                    self::printText($file.' deleted.', 'brown');
+                    self::printText($file . ' deleted.', 'brown');
                 }
             }
 
@@ -173,27 +173,27 @@ class Spaceman
             $plugin_file  = Loader::fromCamelCase($name);
             $plugin_class = Loader::toCamelCase($name);
 
-            if (mkdir(PLUGINDIR.$plugin_file) && mkdir(PLUGINDIR.$plugin_file.DS.'controllers') && mkdir(PLUGINDIR.$plugin_file.DS.'models') && mkdir(PLUGINDIR.$plugin_file.DS.'views') && mkdir(PLUGINDIR.$plugin_file.DS.'views'.DS.'default')) {
+            if (mkdir(PLUGINDIR . $plugin_file) && mkdir(PLUGINDIR . $plugin_file . DS . 'controllers') && mkdir(PLUGINDIR . $plugin_file . DS . 'models') && mkdir(PLUGINDIR . $plugin_file . DS . 'views') && mkdir(PLUGINDIR . $plugin_file . DS . 'views' . DS . 'default')) {
                 // Plugin files code
-                $main_controller        = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$plugin_class.'Controller extends AppController'."\n".'{'."\n".'    public function preAction()'."\n".'    {'."\n".'        $this->structure->setDefaultView(APPDIR);'."\n".'        parent::preAction();'."\n".'    }'."\n".''."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // here that you would like to be available to all controllers that extend'."\n".'    // this special AppController.  This is great for loading certain language'."\n".'    // files that are used throughout the application.'."\n".'    // (e.g. $this->loadLang("langfile", "en_us"))'."\n".'    //'."\n".'}';
-                $main_model             = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$plugin_class.'Model extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would like to use in any of your other'."\n".'    // models that extend this class.'."\n".'    //'."\n".'}';
-                $main_plugin_controller = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$plugin_class.' extends '.$plugin_class.'Controller'."\n".'{'."\n".'    public function index()'."\n".'    {'."\n".'        //'."\n".'        // TODO: Define any methods, load any models or components or anything else'."\n".'        // in the preAction method, that you would like to be available to all methods '."\n".'        // of this controller.'."\n".'        //'."\n".'    }'."\n".'}';
+                $main_controller        = '<?php' . "\n\n" . 'namespace Advandz\App\Controller;' . "\n\n" . 'class ' . $plugin_class . 'Controller extends AppController' . "\n" . '{' . "\n" . '    public function preAction()' . "\n" . '    {' . "\n" . '        $this->structure->setDefaultView(APPDIR);' . "\n" . '        parent::preAction();' . "\n" . '    }' . "\n" . '' . "\n" . '    //' . "\n" . '    // TODO: Define any methods, load any models or components or anything else' . "\n" . '    // here that you would like to be available to all controllers that extend' . "\n" . '    // this special AppController.  This is great for loading certain language' . "\n" . '    // files that are used throughout the application.' . "\n" . '    // (e.g. $this->loadLang("langfile", "en_us"))' . "\n" . '    //' . "\n" . '}';
+                $main_model             = '<?php' . "\n\n" . 'namespace Advandz\App\Model;' . "\n\n" . 'class ' . $plugin_class . 'Model extends AppModel' . "\n" . '{' . "\n" . '    //' . "\n" . '    // TODO: Define any methods that you would like to use in any of your other' . "\n" . '    // models that extend this class.' . "\n" . '    //' . "\n" . '}';
+                $main_plugin_controller = '<?php' . "\n\n" . 'namespace Advandz\App\Controller;' . "\n\n" . 'class ' . $plugin_class . ' extends ' . $plugin_class . 'Controller' . "\n" . '{' . "\n" . '    public function index()' . "\n" . '    {' . "\n" . '        //' . "\n" . '        // TODO: Define any methods, load any models or components or anything else' . "\n" . '        // in the preAction method, that you would like to be available to all methods ' . "\n" . '        // of this controller.' . "\n" . '        //' . "\n" . '    }' . "\n" . '}';
                 $structure_knife        = '{{!@var content}}';
-                $main_knife             = '<div class="container padding-top-30 padding-bottom-20">'."\n".'    <h1>Hello World!</h1>'."\n".'    <p class="margin-0">This is the "'.$plugin_class.'" plugin.</p>'."\n".'</div>';
+                $main_knife             = '<div class="container padding-top-30 padding-bottom-20">' . "\n" . '    <h1>Hello World!</h1>' . "\n" . '    <p class="margin-0">This is the "' . $plugin_class . '" plugin.</p>' . "\n" . '</div>';
 
                 // Create plugin files
-                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.$plugin_file.'_controller.php', $main_controller);
-                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.$plugin_file.'_model.php', $main_model);
+                $filesystem->saveFile(PLUGINDIR . $plugin_file . DS . $plugin_file . '_controller.php', $main_controller);
+                $filesystem->saveFile(PLUGINDIR . $plugin_file . DS . $plugin_file . '_model.php', $main_model);
 
-                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'controllers'.DS.$plugin_file.'.php', $main_plugin_controller);
+                $filesystem->saveFile(PLUGINDIR . $plugin_file . DS . 'controllers' . DS . $plugin_file . '.php', $main_plugin_controller);
 
-                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.'structure.knife', $structure_knife);
-                $filesystem->saveFile(PLUGINDIR.$plugin_file.DS.'views'.DS.'default'.DS.$plugin_file.'.knife', $main_knife);
-                self::printText('Plugin created successfully at '.PLUGINDIR, 'green');
+                $filesystem->saveFile(PLUGINDIR . $plugin_file . DS . 'views' . DS . 'default' . DS . 'structure.knife', $structure_knife);
+                $filesystem->saveFile(PLUGINDIR . $plugin_file . DS . 'views' . DS . 'default' . DS . $plugin_file . '.knife', $main_knife);
+                self::printText('Plugin created successfully at ' . PLUGINDIR, 'green');
 
                 return true;
             } else {
-                self::printText('The plugin "'.$plugin_class.'" already exists.', 'red');
+                self::printText('The plugin "' . $plugin_class . '" already exists.', 'red');
 
                 return false;
             }
@@ -201,15 +201,15 @@ class Spaceman
             // Create middleware
             $middleware_file  = Loader::fromCamelCase($name);
             $middleware_class = Loader::toCamelCase($name);
-            $middleware       = '<?php'."\n\n".'namespace Advandz\App\Middleware;'."\n\n".'class '.$middleware_class."\n".'{'."\n".'    public function handle($request)'."\n".'    {'."\n".'        //'."\n".'        // TODO: Manage the HTTP request before dispatch it.'."\n".'        // '."\n".'    }'."\n".''."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // here that you would use for the request management.'."\n".'    //'."\n".'}';
+            $middleware       = '<?php' . "\n\n" . 'namespace Advandz\App\Middleware;' . "\n\n" . 'class ' . $middleware_class . "\n" . '{' . "\n" . '    public function handle($request)' . "\n" . '    {' . "\n" . '        //' . "\n" . '        // TODO: Manage the HTTP request before dispatch it.' . "\n" . '        // ' . "\n" . '    }' . "\n" . '' . "\n" . '    //' . "\n" . '    // TODO: Define any methods, load any models or components or anything else' . "\n" . '    // here that you would use for the request management.' . "\n" . '    //' . "\n" . '}';
 
-            if (!file_exists(MIDDLEWAREDIR.$middleware_file.'.php')) {
-                $filesystem->saveFile(MIDDLEWAREDIR.$middleware_file.'.php', $middleware);
-                self::printText('Middleware created successfully at '.MIDDLEWAREDIR, 'green');
+            if (!file_exists(MIDDLEWAREDIR . $middleware_file . '.php')) {
+                $filesystem->saveFile(MIDDLEWAREDIR . $middleware_file . '.php', $middleware);
+                self::printText('Middleware created successfully at ' . MIDDLEWAREDIR, 'green');
 
                 return true;
             } else {
-                self::printText(MIDDLEWAREDIR.$middleware_file.'.php file exists.', 'red');
+                self::printText(MIDDLEWAREDIR . $middleware_file . '.php file exists.', 'red');
 
                 return false;
             }
@@ -217,15 +217,15 @@ class Spaceman
             // Create model
             $model_file  = Loader::fromCamelCase($name);
             $model_class = Loader::toCamelCase($name);
-            $model       = '<?php'."\n\n".'namespace Advandz\App\Model;'."\n\n".'class '.$model_class.' extends AppModel'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods that you would use to process information'."\n".'    // in your application, load any components or helpers or anything else'."\n".'    // here that you would be use in your functions.'."\n".'    // All the public functions will be available to all controllers that imports'."\n".'    // this model.  '."\n".'    //'."\n".'}';
+            $model       = '<?php' . "\n\n" . 'namespace Advandz\App\Model;' . "\n\n" . 'class ' . $model_class . ' extends AppModel' . "\n" . '{' . "\n" . '    //' . "\n" . '    // TODO: Define any methods that you would use to process information' . "\n" . '    // in your application, load any components or helpers or anything else' . "\n" . '    // here that you would be use in your functions.' . "\n" . '    // All the public functions will be available to all controllers that imports' . "\n" . '    // this model.  ' . "\n" . '    //' . "\n" . '}';
 
-            if (!file_exists(MODELDIR.$model_file.'.php')) {
-                $filesystem->saveFile(MODELDIR.$model_file.'.php', $model);
-                self::printText('Model created successfully at '.MODELDIR, 'green');
+            if (!file_exists(MODELDIR . $model_file . '.php')) {
+                $filesystem->saveFile(MODELDIR . $model_file . '.php', $model);
+                self::printText('Model created successfully at ' . MODELDIR, 'green');
 
                 return true;
             } else {
-                self::printText(MODELDIR.$model_file.'.php file exists.', 'red');
+                self::printText(MODELDIR . $model_file . '.php file exists.', 'red');
 
                 return false;
             }
@@ -233,15 +233,15 @@ class Spaceman
             // Create controller
             $controller_file  = Loader::fromCamelCase($name);
             $controller_class = Loader::toCamelCase($name);
-            $controller       = '<?php'."\n\n".'namespace Advandz\App\Controller;'."\n\n".'class '.$controller_class.' extends AppController'."\n".'{'."\n".'    //'."\n".'    // TODO: Define any methods, load any models or components or anything else'."\n".'    // in the preAction method, that you would like to be available to all methods '."\n".'    // of this controller.'."\n".'    //'."\n".'}';
+            $controller       = '<?php' . "\n\n" . 'namespace Advandz\App\Controller;' . "\n\n" . 'class ' . $controller_class . ' extends AppController' . "\n" . '{' . "\n" . '    //' . "\n" . '    // TODO: Define any methods, load any models or components or anything else' . "\n" . '    // in the preAction method, that you would like to be available to all methods ' . "\n" . '    // of this controller.' . "\n" . '    //' . "\n" . '}';
 
-            if (!file_exists(CONTROLLERDIR.$controller_file.'.php')) {
-                $filesystem->saveFile(CONTROLLERDIR.$controller_file.'.php', $controller);
-                self::printText('Controller created successfully at '.CONTROLLERDIR, 'green');
+            if (!file_exists(CONTROLLERDIR . $controller_file . '.php')) {
+                $filesystem->saveFile(CONTROLLERDIR . $controller_file . '.php', $controller);
+                self::printText('Controller created successfully at ' . CONTROLLERDIR, 'green');
 
                 return true;
             } else {
-                self::printText(CONTROLLERDIR.$controller_file.'.php file exists.', 'red');
+                self::printText(CONTROLLERDIR . $controller_file . '.php file exists.', 'red');
 
                 return false;
             }
@@ -249,15 +249,15 @@ class Spaceman
             // Create facade
             $facade_file  = Loader::fromCamelCase($name);
             $facade_class = Loader::toCamelCase($name);
-            $facade       = '<?php'."\n\n".'namespace Advandz\App\Facade;'."\n\n".'final class '.$facade_class.''."\n".'{'."\n".'    /**'."\n".'     * Protected constructor to prevent instance creation.'."\n".'     */'."\n".'    protected function __construct()'."\n".'    {'."\n".'        // Nothing to do'."\n".'    }'."\n".'}';
+            $facade       = '<?php' . "\n\n" . 'namespace Advandz\App\Facade;' . "\n\n" . 'final class ' . $facade_class . '' . "\n" . '{' . "\n" . '    /**' . "\n" . '     * Protected constructor to prevent instance creation.' . "\n" . '     */' . "\n" . '    protected function __construct()' . "\n" . '    {' . "\n" . '        // Nothing to do' . "\n" . '    }' . "\n" . '}';
 
-            if (!file_exists(FACADEDIR.$facade_file.'.php')) {
-                $filesystem->saveFile(FACADEDIR.$facade_file.'.php', $facade);
-                self::printText('Facade created successfully at '.FACADEDIR, 'green');
+            if (!file_exists(FACADEDIR . $facade_file . '.php')) {
+                $filesystem->saveFile(FACADEDIR . $facade_file . '.php', $facade);
+                self::printText('Facade created successfully at ' . FACADEDIR, 'green');
 
                 return true;
             } else {
-                self::printText(FACADEDIR.$facade_file.'.php file exists.', 'red');
+                self::printText(FACADEDIR . $facade_file . '.php file exists.', 'red');
 
                 return false;
             }
@@ -312,30 +312,30 @@ class Spaceman
         self::printText('Usage:', 'brown');
         self::printText('command :[action] [parameters]');
 
-        self::printText("\n".'Available commands:', 'brown');
-        self::printText("\033[32m".'server'."\033[0m".'             - Starts a development web server.');
-        self::printText("\033[33m".'   :[port]'."\033[0m".'         - The port number to start the server.');
+        self::printText("\n" . 'Available commands:', 'brown');
+        self::printText("\033[32m" . 'server' . "\033[0m" . '             - Starts a development web server.');
+        self::printText("\033[33m" . '   :[port]' . "\033[0m" . '         - The port number to start the server.');
 
-        self::printText("\033[32m".'inspire'."\033[0m".'            - Show an inspiring quote.');
+        self::printText("\033[32m" . 'inspire' . "\033[0m" . '            - Show an inspiring quote.');
 
-        self::printText("\033[32m".'app'."\033[0m".'                - Execute the app.');
-        self::printText("\033[33m".'   :[controller]'."\033[0m".'   - The controller to execute.');
+        self::printText("\033[32m" . 'app' . "\033[0m" . '                - Execute the app.');
+        self::printText("\033[33m" . '   :[controller]' . "\033[0m" . '   - The controller to execute.');
 
-        self::printText("\033[32m".'cache'."\033[0m".'              - Rebuild or flush the cache.');
-        self::printText("\033[33m".'   :flush'."\033[0m".'          - Flush the saved cache.');
-        self::printText("\033[33m".'   :rebuild'."\033[0m".'        - Rebuilds the cache.');
+        self::printText("\033[32m" . 'cache' . "\033[0m" . '              - Rebuild or flush the cache.');
+        self::printText("\033[33m" . '   :flush' . "\033[0m" . '          - Flush the saved cache.');
+        self::printText("\033[33m" . '   :rebuild' . "\033[0m" . '        - Rebuilds the cache.');
 
-        self::printText("\033[32m".'create'."\033[0m".'             - Create a new class.');
-        self::printText("\033[33m".'   :plugin'."\033[0m".'         - Create a new plugin.');
-        self::printText("\033[33m".'   :middleware'."\033[0m".'     - Create a new middleware.');
-        self::printText("\033[33m".'   :model'."\033[0m".'          - Create a new model.');
-        self::printText("\033[33m".'   :controller'."\033[0m".'     - Create a new controller.');
-        self::printText("\033[33m".'   :facade'."\033[0m".'         - Create a new facade.');
+        self::printText("\033[32m" . 'create' . "\033[0m" . '             - Create a new class.');
+        self::printText("\033[33m" . '   :plugin' . "\033[0m" . '         - Create a new plugin.');
+        self::printText("\033[33m" . '   :middleware' . "\033[0m" . '     - Create a new middleware.');
+        self::printText("\033[33m" . '   :model' . "\033[0m" . '          - Create a new model.');
+        self::printText("\033[33m" . '   :controller' . "\033[0m" . '     - Create a new controller.');
+        self::printText("\033[33m" . '   :facade' . "\033[0m" . '         - Create a new facade.');
 
-        self::printText("\033[32m".'key'."\033[0m".'                - Generates a new encryption key.');
-        self::printText("\033[33m".'   :[size]'."\033[0m".'         - The size of the key. (Default = 16)');
+        self::printText("\033[32m" . 'key' . "\033[0m" . '                - Generates a new encryption key.');
+        self::printText("\033[33m" . '   :[size]' . "\033[0m" . '         - The size of the key. (Default = 16)');
 
-        self::printText("\033[32m".'help'."\033[0m".'               - Shows this message.');
+        self::printText("\033[32m" . 'help' . "\033[0m" . '               - Shows this message.');
     }
 
     /**

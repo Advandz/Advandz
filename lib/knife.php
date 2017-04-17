@@ -71,7 +71,7 @@ class Knife extends Language
             $this->Html = new Html();
 
             // Set compiled view file
-            $compiled_file = CACHEDIR.md5($file).'.php';
+            $compiled_file = CACHEDIR . md5($file) . '.php';
 
             // Delete compiled view if is old
             if (Configure::get('Caching.on') && file_exists($compiled_file)) {
@@ -95,7 +95,7 @@ class Knife extends Language
                 }
 
                 if (!$this->template) {
-                    throw new Exception("File is not a valid view or you don't have the permissions to read them: ".$file);
+                    throw new Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
                 }
 
                 // Compile tags
@@ -140,7 +140,7 @@ class Knife extends Language
             if (array_key_exists($args[0], $this->tags)) {
                 @$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
             } else {
-                throw new Exception($matches[0].' is a invalid tag');
+                throw new Exception($matches[0] . ' is a invalid tag');
             }
         }, $this->template);
 

@@ -38,8 +38,8 @@ final class Router
         if (isset($middlewares) && is_array($middlewares)) {
             foreach ($middlewares as $middleware) {
                 $file_name = Loader::fromCamelCase($middleware);
-                if (Loader::load(MIDDLEWAREDIR.$file_name.'.php')) {
-                    $namespace = 'Advandz\\App\\Middleware\\'.$middleware;
+                if (Loader::load(MIDDLEWAREDIR . $file_name . '.php')) {
+                    $namespace = 'Advandz\\App\\Middleware\\' . $middleware;
 
                     // Execute handle function
                     if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
@@ -47,10 +47,10 @@ final class Router
 
                         call_user_func_array([$middleware_class, 'handle'], array_merge([$orig_uri], $params));
                     } else {
-                        throw new Exception($middleware.' Middleware is invalid or is not callable');
+                        throw new Exception($middleware . ' Middleware is invalid or is not callable');
                     }
                 } else {
-                    throw new Exception($middleware.' Middleware not exists');
+                    throw new Exception($middleware . ' Middleware not exists');
                 }
             }
         }
@@ -64,7 +64,7 @@ final class Router
                 throw new Exception('Illegal URI specified in Router::route()');
             }
 
-            self::$routes['orig'][]   = '/'.self::escape($orig_uri).'/i';
+            self::$routes['orig'][]   = '/' . self::escape($orig_uri) . '/i';
             self::$routes['mapped'][] = self::escape($mapped_uri);
         }
     }
@@ -133,7 +133,7 @@ final class Router
      */
     public static function filterURI($uri)
     {
-        return preg_replace('/^('.self::escape(WEBDIR).'|'.self::escape(dirname(WEBDIR))."|\/)/i", '', $uri, 1);
+        return preg_replace('/^(' . self::escape(WEBDIR) . '|' . self::escape(dirname(WEBDIR)) . "|\/)/i", '', $uri, 1);
     }
 
     /**
@@ -202,7 +202,7 @@ final class Router
         $filtered_uri = self::filterURI($request_uri);
 
         // Handle routing. Routes are defined in config/routes.php
-        if (Loader::load(CONFIGDIR.'routes.php')) {
+        if (Loader::load(CONFIGDIR . 'routes.php')) {
             $filtered_uri = self::match($filtered_uri);
         }
 
@@ -215,14 +215,14 @@ final class Router
             foreach ($temp as $key => $value) {
                 if ($value != '') {
                     $uri[] = $value;
-                    $uri_str .= $value.'/';
+                    $uri_str .= $value . '/';
                 }
             }
         }
 
         // If the controller was not passed in the URI add it to the URI string
         if (!isset($uri[0])) {
-            $uri_str = $controller.'/'.$uri_str;
+            $uri_str = $controller . '/' . $uri_str;
         }
 
         $i = 0;
@@ -230,7 +230,7 @@ final class Router
             $controller = Loader::fromCamelCase($uri[$i++]);
         }
 
-        if (is_dir(PLUGINDIR.$controller.DS)) {
+        if (is_dir(PLUGINDIR . $controller . DS)) {
             $i      = 0;
             $plugin = $controller;
             if (isset($uri[$i][0]) && $uri[$i][0] != '?') {

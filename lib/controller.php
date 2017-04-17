@@ -201,7 +201,7 @@ class Controller
     final protected function draw($file = null, $view = null)
     {
         $view = new View($file, $view);
-        print $view->fetch();
+        echo $view->fetch();
     }
 
     /**
@@ -305,7 +305,7 @@ class Controller
             } else {
                 // Auto-load the view file. These have the format of:
                 // [controller_name]_[method_name] for all non-index methods
-                $file = Loader::fromCamelCase($this->controller).($this->action != null && $this->action != 'index' ? '_'.strtolower($this->action) : '');
+                $file = Loader::fromCamelCase($this->controller) . ($this->action != null && $this->action != 'index' ? '_' . strtolower($this->action) : '');
             }
         }
 
@@ -324,7 +324,7 @@ class Controller
         }
 
         // Output the structure containing the view to standard out
-        print $output;
+        echo $output;
     }
 
     /**
@@ -345,12 +345,12 @@ class Controller
 
         // If not scheme is specified, assume http(s)
         if (!isset($parts['scheme'])) {
-            $uri = 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '').'://'.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']).($relative ? WEBDIR : '').$uri;
+            $uri = 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 's' : '') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']) . ($relative ? WEBDIR : '') . $uri;
         }
 
         // Try to redirect
         try {
-            header('Location: '.$uri);
+            header('Location: ' . $uri);
 
             return true;
         } catch (Exception $e) {

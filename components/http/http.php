@@ -161,8 +161,8 @@ class Http
 
         // Add basic authentication header
         if (isset($this->auth[0]) && isset($this->auth[1])) {
-            $this->headers[] = 'Authorization: Basic '.base64_encode($this->auth[0].':'.$this->auth[1]);
-            curl_setopt($curl, CURLOPT_USERPWD, base64_encode($this->auth[0].':'.$this->auth[1]));
+            $this->headers[] = 'Authorization: Basic ' . base64_encode($this->auth[0] . ':' . $this->auth[1]);
+            curl_setopt($curl, CURLOPT_USERPWD, base64_encode($this->auth[0] . ':' . $this->auth[1]));
         }
 
         // Set headers
@@ -174,7 +174,7 @@ class Http
         if ($this->method == 'GET') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
             if (!empty($data)) {
-                $get = '?'.http_build_query($data);
+                $get = '?' . http_build_query($data);
             }
         }
 
@@ -200,12 +200,12 @@ class Http
         if ($this->method == 'DELETE') {
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
             if (!empty($data)) {
-                $get = '?'.http_build_query($data);
+                $get = '?' . http_build_query($data);
             }
         }
 
         // Build URL
-        $url = ($this->ssl ? 'https' : 'http').'://'.$this->server.(isset($this->port) ? ':'.$this->port : '').'/'.$this->uri.(isset($get) ? $get : '');
+        $url = ($this->ssl ? 'https' : 'http') . '://' . $this->server . (isset($this->port) ? ':' . $this->port : '') . '/' . $this->uri . (isset($get) ? $get : '');
 
         // Make request
         curl_setopt($curl, CURLOPT_URL, $url);

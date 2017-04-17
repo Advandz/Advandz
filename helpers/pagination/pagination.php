@@ -274,13 +274,13 @@ class Pagination extends Html
                 // Build first, prev links, merge with disabled settings if not needed but shown
                 if ($this->settings['navigation']['first']['show'] == 'always' || ($this->settings['navigation']['first']['show'] == 'if_needed' && $prev_needed)) {
                     if (!$prev_needed) {
-                        $this->settings['navigation']['first']['attributes']['class'] = (isset($this->settings['navigation']['first']['attributes']['class']) ? $this->settings['navigation']['first']['attributes']['class'] : '').' '.$this->settings['navigation']['first']['disabled'];
+                        $this->settings['navigation']['first']['attributes']['class'] = (isset($this->settings['navigation']['first']['attributes']['class']) ? $this->settings['navigation']['first']['attributes']['class'] : '') . ' ' . $this->settings['navigation']['first']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['first'], 1);
                 }
                 if ($this->settings['navigation']['prev']['show'] == 'always' || ($this->settings['navigation']['prev']['show'] == 'if_needed' && $prev_needed)) {
                     if (!$prev_needed) {
-                        $this->settings['navigation']['prev']['attributes']['class'] = (isset($this->settings['navigation']['prev']['attributes']['class']) ? $this->settings['navigation']['prev']['attributes']['class'] : '').' '.$this->settings['navigation']['prev']['disabled'];
+                        $this->settings['navigation']['prev']['attributes']['class'] = (isset($this->settings['navigation']['prev']['attributes']['class']) ? $this->settings['navigation']['prev']['attributes']['class'] : '') . ' ' . $this->settings['navigation']['prev']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['prev'], $prev);
                 }
@@ -297,13 +297,13 @@ class Pagination extends Html
                 // Build next, last links, merge with disabled settings if not needed but shown
                 if ($this->settings['navigation']['next']['show'] == 'always' || ($this->settings['navigation']['next']['show'] == 'if_needed' && $next_needed)) {
                     if (!$next_needed) {
-                        $this->settings['navigation']['next']['attributes']['class'] = (isset($this->settings['navigation']['next']['attributes']['class']) ? $this->settings['navigation']['next']['attributes']['class'] : '').' '.$this->settings['navigation']['next']['disabled'];
+                        $this->settings['navigation']['next']['attributes']['class'] = (isset($this->settings['navigation']['next']['attributes']['class']) ? $this->settings['navigation']['next']['attributes']['class'] : '') . ' ' . $this->settings['navigation']['next']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['next'], $next);
                 }
                 if ($this->settings['navigation']['last']['show'] == 'always' || ($this->settings['navigation']['last']['show'] == 'if_needed' && $next_needed)) {
                     if (!$next_needed) {
-                        $this->settings['navigation']['last']['attributes']['class'] = (isset($this->settings['navigation']['last']['attributes']['class']) ? $this->settings['navigation']['last']['attributes']['class'] : '').' '.$this->settings['navigation']['last']['disabled'];
+                        $this->settings['navigation']['last']['attributes']['class'] = (isset($this->settings['navigation']['last']['attributes']['class']) ? $this->settings['navigation']['last']['attributes']['class'] : '') . ' ' . $this->settings['navigation']['last']['disabled'];
                     }
                     $html .= $this->createNavItem($this->settings['navigation']['last'], $pages);
                 }
@@ -336,7 +336,7 @@ class Pagination extends Html
         $index = null;
         // Look for the index partition where the page label is located
         foreach ($temp as $i => $value) {
-            if ($value == '['.$this->settings['uri_labels']['page'].']') {
+            if ($value == '[' . $this->settings['uri_labels']['page'] . ']') {
                 $index = $i;
                 $temp  = explode('/', $_SERVER['REQUEST_URI']);
                 break;
@@ -362,7 +362,7 @@ class Pagination extends Html
      */
     private function createNavItem($nav_item, $page)
     {
-        return $this->output($this->openTag($nav_item).(isset($nav_item['link']) && !$nav_item['link'] ? $page : $this->createLink($nav_item, $page)).$this->closeTag($nav_item));
+        return $this->output($this->openTag($nav_item) . (isset($nav_item['link']) && !$nav_item['link'] ? $page : $this->createLink($nav_item, $page)) . $this->closeTag($nav_item));
     }
 
     /**
@@ -375,7 +375,7 @@ class Pagination extends Html
     {
         $html = null;
         if (is_array($tag) && isset($tag['tag'])) {
-            $html .= '<'.$this->_($tag['tag'], true).$this->buildAttributes($tag['attributes']).'>'.$this->eol;
+            $html .= '<' . $this->_($tag['tag'], true) . $this->buildAttributes($tag['attributes']) . '>' . $this->eol;
         }
 
         return $this->output($html);
@@ -391,7 +391,7 @@ class Pagination extends Html
     {
         $html = null;
         if (is_array($tag) && isset($tag['tag'])) {
-            $html .= '</'.$this->_($tag['tag'], true).'>'.$this->eol;
+            $html .= '</' . $this->_($tag['tag'], true) . '>' . $this->eol;
         }
 
         return $this->output($html);
@@ -409,9 +409,9 @@ class Pagination extends Html
         $html = null;
         if (is_array($link)) {
             $link['link_attributes']['href'] = $this->getPageUri($page);
-            $html .= '<a'.$this->buildAttributes($link['link_attributes']).'>'.
-                (isset($link['name']) ? $this->_($link['name'], true) : $this->_($page, true)).
-                '</a>'.$this->eol;
+            $html .= '<a' . $this->buildAttributes($link['link_attributes']) . '>' .
+                (isset($link['name']) ? $this->_($link['name'], true) : $this->_($page, true)) .
+                '</a>' . $this->eol;
         }
 
         return $this->output($html);
@@ -437,12 +437,12 @@ class Pagination extends Html
                 }
             }
             foreach ($this->settings['params'] as $key => $value) {
-                $query .= ($query == null ? '?' : '&').$key.'='.$value;
+                $query .= ($query == null ? '?' : '&') . $key . '=' . $value;
             }
         }
 
         // Build the URI
-        return $this->settings['uri'].(substr($this->settings['uri'], -1) != '/' ? '/' : '').$query;
+        return $this->settings['uri'] . (substr($this->settings['uri'], -1) != '/' ? '/' : '') . $query;
     }
 
     /**
@@ -456,7 +456,7 @@ class Pagination extends Html
         $uri = $this->getUri();
 
         // Replace the page tag with the page value
-        return str_replace(['['.$this->settings['uri_labels']['page'].']', '['.$this->settings['uri_labels']['per_page'].']'], [$page, $this->settings['results_per_page']], $uri);
+        return str_replace(['[' . $this->settings['uri_labels']['page'] . ']', '[' . $this->settings['uri_labels']['per_page'] . ']'], [$page, $this->settings['results_per_page']], $uri);
     }
 
     /**
@@ -484,6 +484,6 @@ class Pagination extends Html
         if ($this->return_output) {
             return $html;
         }
-        print $html;
+        echo $html;
     }
 }

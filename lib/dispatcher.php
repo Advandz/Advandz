@@ -24,7 +24,7 @@ class Dispatcher extends Controller
         // Build the request URI based on the command line parameters
         $num_args = count($args);
         for ($i = 1; $i < $num_args; $i++) {
-            $request_uri .= $args[$i].'/';
+            $request_uri .= $args[$i] . '/';
         }
 
         self::dispatch($request_uri, true);
@@ -51,7 +51,7 @@ class Dispatcher extends Controller
         // be fed if no post data has been submitted during the request.
         if (Configure::get('Caching.on') && empty($_post)) {
             if (($output = Cache::fetchCache($uri_str))) {
-                print $output;
+                echo $output;
 
                 return;
             }
@@ -59,36 +59,36 @@ class Dispatcher extends Controller
 
         // Initialize the AppModel and AppController, so they can be
         // automatically extended
-        Loader::load(ROOTWEBDIR.APPDIR.'app_model.php');
-        Loader::load(ROOTWEBDIR.APPDIR.'app_controller.php');
+        Loader::load(ROOTWEBDIR . APPDIR . 'app_model.php');
+        Loader::load(ROOTWEBDIR . APPDIR . 'app_controller.php');
 
         $plugin_path = null; // relative path to the plugin directory if it exists
 
         if (empty($plugin)) {
-            if (!Loader::load(CONTROLLERDIR.$controller.'.php')) {
-                throw new Exception('<strong>'.$controller.'</strong> is not a valid controller', 404);
+            if (!Loader::load(CONTROLLERDIR . $controller . '.php')) {
+                throw new Exception('<strong>' . $controller . '</strong> is not a valid controller', 404);
             }
         } else {
-            if (file_exists(PLUGINDIR.$plugin.DS.'controllers'.DS.$controller.'.php')) {
-                $plugin_path = str_replace(ROOTWEBDIR, '', PLUGINDIR).$plugin.DS;
+            if (file_exists(PLUGINDIR . $plugin . DS . 'controllers' . DS . $controller . '.php')) {
+                $plugin_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . $plugin . DS;
 
                 // Load parent plugin model
-                Loader::load(PLUGINDIR.$plugin.DS.$plugin.'_model.php');
+                Loader::load(PLUGINDIR . $plugin . DS . $plugin . '_model.php');
 
                 // Load parent plugin controller
-                Loader::load(PLUGINDIR.$plugin.DS.$plugin.'_controller.php');
+                Loader::load(PLUGINDIR . $plugin . DS . $plugin . '_controller.php');
 
                 // Load the plugin
-                Loader::load(PLUGINDIR.$plugin.DS.'controllers'.DS.$controller.'.php');
+                Loader::load(PLUGINDIR . $plugin . DS . 'controllers' . DS . $controller . '.php');
             } else {
-                throw new Exception('<strong>'.$controller.'</strong> is not a valid controller', 404);
+                throw new Exception('<strong>' . $controller . '</strong> is not a valid controller', 404);
             }
         }
 
         // If the first character of the controller is a number we must prepend the controller
         // with an underscore.
-        $contrl    = (is_numeric(substr($controller, 0, 1)) ? '_' : '').Loader::toCamelCase($controller);
-        $namespace = 'Advandz\\App\\Controller\\'.$contrl;
+        $contrl    = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . Loader::toCamelCase($controller);
+        $namespace = 'Advandz\\App\\Controller\\' . $contrl;
         $ctrl      = new $namespace($controller, $action, $is_cli);
 
         // Make the POST/GET/FILES available to the controller
@@ -119,10 +119,10 @@ class Dispatcher extends Controller
                     $action_return = $ctrl->$action();
                 } // The method is private and thus is not callable
                 else {
-                    throw new Exception('<strong>'.$action.'</strong> is not a callable method in controller <strong>'.$controller.'</strong>', 404);
+                    throw new Exception('<strong>' . $action . '</strong> is not a callable method in controller <strong>' . $controller . '</strong>', 404);
                 }
             } else {
-                throw new Exception('<strong>'.$action.'</strong> is not a valid method in controller <strong>'.$controller.'</strong>', 404);
+                throw new Exception('<strong>' . $action . '</strong> is not a valid method in controller <strong>' . $controller . '</strong>', 404);
             }
         } // Call the default action
         else {
@@ -150,20 +150,20 @@ class Dispatcher extends Controller
         $error_message = null;
 
         if ($e instanceof UnknownException) {
-            $error_message = htmlentities($e->getMessage(), ENT_QUOTES, 'UTF-8').' on line <strong>'.$e->getLine().'</strong> in <strong>'.$e->getFile().'</strong>';
+            $error_message = htmlentities($e->getMessage(), ENT_QUOTES, 'UTF-8') . ' on line <strong>' . $e->getLine() . '</strong> in <strong>' . $e->getFile() . '</strong>';
         } elseif ($e instanceof Exception) {
             if ($e->getCode() == 404 && Configure::get('System.404_forwarding')) {
                 // Forward to 404 - page not found.
                 try {
                     header('HTTP/1.0 404 Not Found');
-                    header('Location: '.WEBDIR.'404/');
+                    header('Location: ' . WEBDIR . '404/');
 
                     return true;
                 } catch (Exception $e) {
                     return false;
                 }
             } elseif (Configure::get('System.debug')) {
-                $error_message = htmlentities($e->getMessage(), ENT_QUOTES, 'UTF-8').' on line <strong>'.$e->getLine().'</strong> in <strong>'.$e->getFile()."</strong>\n".'<br /><br /><strong>Printing Stack Trace:</strong><br /><code>'.nl2br($e->getTraceAsString()).'</code>';
+                $error_message = htmlentities($e->getMessage(), ENT_QUOTES, 'UTF-8') . ' on line <strong>' . $e->getLine() . '</strong> in <strong>' . $e->getFile() . "</strong>\n" . '<br /><br /><strong>Printing Stack Trace:</strong><br /><code>' . nl2br($e->getTraceAsString()) . '</code>';
             } elseif (error_reporting() !== 0) {
                 $error_message = htmlentities($e->getMessage(), ENT_QUOTES, 'UTF-8');
             }

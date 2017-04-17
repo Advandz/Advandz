@@ -39,7 +39,7 @@ class Table extends Record
     {
         if (!method_exists($this, $method_name)) {
             if (!empty($args)) {
-                $result = $this->get('*', [$this->table.'.'.$method_name, '=', $args[0]])->fetchAll();
+                $result = $this->get('*', [$this->table . '.' . $method_name, '=', $args[0]])->fetchAll();
             } else {
                 $result = $this->get($method_name)->fetchAll();
             }

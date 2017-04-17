@@ -42,7 +42,7 @@ class Xml
                 // Encode numeric entities that can be encoded
                 if ($i == 9 || $i == 10 || $i == 13) {
                     $search_chars[]  = chr($i);
-                    $replace_chars[] = '&#'.$i.';';
+                    $replace_chars[] = '&#' . $i . ';';
                 } // Strip invalid characters from the document
                 else {
                     $search_chars[]  = chr($i);
@@ -66,7 +66,7 @@ class Xml
      */
     public function makeXml($vars, $encoding = 'UTF-8')
     {
-        $xml = '<?xml version="1.0" encoding="'.$encoding.'" ?>';
+        $xml = '<?xml version="1.0" encoding="' . $encoding . '" ?>';
         $xml .= $this->buildXMLSegment($vars, $this->root_node);
 
         return $xml;
@@ -95,7 +95,6 @@ class Xml
 
         if (is_array($value)) {
             foreach ($value as $key => $value2) {
-
                 // Remove any illegal tag characters
                 $key = preg_replace('/[^a-z0-9_:.-]/i', '', $key);
                 // Recurse
@@ -107,19 +106,19 @@ class Xml
 
                 // If numeric, wrap element with parent's tag
                 if (is_numeric($key)) {
-                    $xml .= str_repeat($tab, $tab_count).'<'.$root_node.'>'.$sub.($break ? "\n".str_repeat($tab, $tab_count) : '').'</'.$root_node.'>';
+                    $xml .= str_repeat($tab, $tab_count) . '<' . $root_node . '>' . $sub . ($break ? "\n" . str_repeat($tab, $tab_count) : '') . '</' . $root_node . '>';
                 } else {
                     if ($sub != '') {
                         // If parent is a numeric array, then $sub was given parents tag, so no need to wrap this element in a tag
                         if (is_array($value2) && count(array_diff_key($value2, array_keys(array_keys($value2)))) == 0) {
-                            $xml .= str_repeat($tab, $tab_count).$sub;
+                            $xml .= str_repeat($tab, $tab_count) . $sub;
                         } // Handle normal elements
                         else {
-                            $xml .= str_repeat($tab, $tab_count).'<'.$key.'>'.$sub.($break ? "\n".str_repeat($tab, $tab_count) : '').'</'.$key.'>';
+                            $xml .= str_repeat($tab, $tab_count) . '<' . $key . '>' . $sub . ($break ? "\n" . str_repeat($tab, $tab_count) : '') . '</' . $key . '>';
                         }
                     } // Handle elements with no content
                     else {
-                        $xml .= str_repeat($tab, $tab_count).'<'.$key.' />';
+                        $xml .= str_repeat($tab, $tab_count) . '<' . $key . ' />';
                     }
                 }
                 // Bubble up

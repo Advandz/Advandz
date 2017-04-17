@@ -44,9 +44,9 @@ class Cli
 
         if ($this->isCli()) {
             if (array_key_exists($color, $colors)) {
-                print "\033[".$colors[$color].'m'.$text."\033[0m \n";
+                echo "\033[" . $colors[$color] . 'm' . $text . "\033[0m \n";
             } else {
-                print $text."\n";
+                echo $text . "\n";
             }
         }
     }

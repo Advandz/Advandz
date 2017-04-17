@@ -45,7 +45,7 @@ class Cashier
 
             return true;
         } else {
-            throw new \Exception($currency.' is a invalid currency');
+            throw new \Exception($currency . ' is a invalid currency');
         }
     }
 
@@ -229,7 +229,7 @@ class Cashier
         }
 
         if ($symbol) {
-            $amount = (substr($amount, 0, 1) == '-' ? '-' : null).$this->getCurrencySymbol().trim($amount, '-');
+            $amount = (substr($amount, 0, 1) == '-' ? '-' : null) . $this->getCurrencySymbol() . trim($amount, '-');
         }
 
         return $amount;

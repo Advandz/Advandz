@@ -57,7 +57,7 @@ class Json
      */
     public function printJson()
     {
-        print $this->json;
+        echo $this->json;
 
         return $this->json;
     }

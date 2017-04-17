@@ -37,7 +37,7 @@ class UnknownExceptionTest extends PHPUnit_Framework_TestCase
     {
         $message = 'Testing Error';
         $e       = new Exception($message);
-        $this->expectOutputRegex('/'.$message.'/');
+        $this->expectOutputRegex('/' . $message . '/');
 
         UnknownException::setExceptionHandler($e);
     }

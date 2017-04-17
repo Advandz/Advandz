@@ -26,7 +26,7 @@ class Filesystem
         try {
             return file_get_contents($file);
         } catch (Exception $e) {
-            throw new \Exception('The file '.$file.' can\'t be readed, Permission denied');
+            throw new \Exception('The file ' . $file . ' can\'t be readed, Permission denied');
         }
     }
 
@@ -45,10 +45,10 @@ class Filesystem
             try {
                 return @file_put_contents($file, $data);
             } catch (Exception $e) {
-                throw new \Exception('The file '.$file.' can\'t be written, Permission denied');
+                throw new \Exception('The file ' . $file . ' can\'t be written, Permission denied');
             }
         } else {
-            throw new \Exception('The file '.$file.' already exists');
+            throw new \Exception('The file ' . $file . ' already exists');
         }
     }
 
@@ -64,7 +64,7 @@ class Filesystem
         try {
             return unlink($file);
         } catch (Exception $e) {
-            throw new \Exception('The file '.$file.' can\'t be deleted, Permission denied');
+            throw new \Exception('The file ' . $file . ' can\'t be deleted, Permission denied');
         }
     }
 
@@ -119,10 +119,10 @@ class Filesystem
 
             if ($recursive || $flat) {
                 foreach ($content as $key => $entry) {
-                    $path = DS.trim($dir, DS).DS.$entry;
+                    $path = DS . trim($dir, DS) . DS . $entry;
 
                     if (is_dir($path)) {
-                        $path = $path.DS;
+                        $path = $path . DS;
                     }
 
                     if ($flat) {
@@ -162,7 +162,7 @@ class Filesystem
         try {
             return mkdir($dir, $permissions, true);
         } catch (Exception $e) {
-            throw new \Exception('The directory '.$dir.' can\'t be created, Permission denied');
+            throw new \Exception('The directory ' . $dir . ' can\'t be created, Permission denied');
         }
     }
 
@@ -192,7 +192,7 @@ class Filesystem
             try {
                 return rmdir($dir);
             } catch (Exception $e) {
-                throw new \Exception('The directory '.$dir.' can\'t be deleted, Permission denied');
+                throw new \Exception('The directory ' . $dir . ' can\'t be deleted, Permission denied');
             }
         }
     }
@@ -208,7 +208,7 @@ class Filesystem
         try {
             return is_dir($dir);
         } catch (Exception $e) {
-            throw new \Exception('The directory '.$dir.' can\'t be readed, Permission denied');
+            throw new \Exception('The directory ' . $dir . ' can\'t be readed, Permission denied');
         }
     }
 }

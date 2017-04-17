@@ -93,8 +93,8 @@ final class Configure
     {
         $file .= '.php';
 
-        if (file_exists($config_dir.$file)) {
-            include_once $config_dir.$file;
+        if (file_exists($config_dir . $file)) {
+            include_once $config_dir . $file;
         }
 
         if (isset($config) && is_array($config)) {

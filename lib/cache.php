@@ -25,13 +25,13 @@ final class Cache
      */
     final public static function emptyCache($path = null)
     {
-        if (!($dir = @opendir(CACHEDIR.$path))) {
+        if (!($dir = @opendir(CACHEDIR . $path))) {
             return;
         }
 
         while ($item = @readdir($dir)) {
-            if (is_file(CACHEDIR.$path.$item)) {
-                @unlink(CACHEDIR.$path.$item);
+            if (is_file(CACHEDIR . $path . $item)) {
+                @unlink(CACHEDIR . $path . $item);
             }
         }
     }
@@ -111,6 +111,6 @@ final class Cache
      */
     final private static function cacheName($name, $path = null)
     {
-        return CACHEDIR.$path.md5(strtolower($name)).Configure::get('Caching.ext');
+        return CACHEDIR . $path . md5(strtolower($name)) . Configure::get('Caching.ext');
     }
 }

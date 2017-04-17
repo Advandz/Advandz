@@ -88,7 +88,7 @@ class Upload
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
     {
         // Full path to the upload directory
-        $path = ROOTWEBDIR.$this->upload_dir;
+        $path = ROOTWEBDIR . $this->upload_dir;
 
         // Check if exits the upload directory, If not exists then create it
         if (!is_dir($path)) {
@@ -101,17 +101,17 @@ class Upload
 
         // Validate the file size
         if ($file['size'] > $this->file_size) {
-            throw new \Exception('The uploaded file exceeds the '.$this->file_size.' limit size');
+            throw new \Exception('The uploaded file exceeds the ' . $this->file_size . ' limit size');
         }
 
         // Write the file to the upload directory
-        if (!file_exists($path.$file['name']) || ($overwrite && file_exists($path.$file['name']))) {
+        if (!file_exists($path . $file['name']) || ($overwrite && file_exists($path . $file['name']))) {
             if ($hash_name) {
                 $file_extension = $this->getExtension($file['name']);
                 $file_hash      = $this->hash($file['tmp_name']);
-                $new_path       = $path.$file_hash.$file_extension;
+                $new_path       = $path . $file_hash . $file_extension;
             } else {
-                $new_path = $path.$file['name'];
+                $new_path = $path . $file['name'];
             }
 
             // Move and chmod the file to the upload directory
@@ -174,6 +174,6 @@ class Upload
      */
     private function getExtension($file_name)
     {
-        return '.'.explode('.', $file_name, 2)[1];
+        return '.' . explode('.', $file_name, 2)[1];
     }
 }

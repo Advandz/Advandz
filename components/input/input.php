@@ -49,7 +49,7 @@ class Input
             // Verify that the domain is valid
             if ($check_record) {
                 // Append "." to the host name to prevent DNS server from creating the record
-                $host = substr(strstr($check[0], '@'), 1).'.';
+                $host = substr(strstr($check[0], '@'), 1) . '.';
 
                 if (function_exists('getmxrr') && !getmxrr($host, $mxhosts)) {
                     // This will catch DNSs that are not MX
@@ -97,19 +97,19 @@ class Input
         switch ($type) {
             default:
             case 'any':
-                $regex = '/.{'.$min_length.',}/i';
+                $regex = '/.{' . $min_length . ',}/i';
                 break;
             case 'any_no_space':
-                $regex = "/^[\S]{".$min_length.',}$/Di';
+                $regex = "/^[\S]{" . $min_length . ',}$/Di';
                 break;
             case 'alpha_num':
-                $regex = '/^[a-z0-9]{'.$min_length.',}$/Di';
+                $regex = '/^[a-z0-9]{' . $min_length . ',}$/Di';
                 break;
             case 'alpha':
-                $regex = '/^[a-z]{'.$min_length.',}$/Di';
+                $regex = '/^[a-z]{' . $min_length . ',}$/Di';
                 break;
             case 'num':
-                $regex = '/^[0-9]{'.$min_length.',}$/Di';
+                $regex = '/^[0-9]{' . $min_length . ',}$/Di';
                 break;
             case 'custom':
                 $regex = $custom_regex;
@@ -196,7 +196,7 @@ class Input
             case '!==':
                 return $a !== $b;
             default:
-                throw new \Exception('Unrecognized operator: '.$op);
+                throw new \Exception('Unrecognized operator: ' . $op);
         }
     }
 
@@ -309,7 +309,6 @@ class Input
         if (is_array($this->rules) && is_array($data)) {
             // Test each rule
             foreach ($this->rules as $index => $rule) {
-
                 // Validate array rules
                 if (strpos($index, '[') !== false) {
                     $depth = substr_count($index, '[');
@@ -496,7 +495,6 @@ class Input
 
         // Loop through each rule set for this index
         foreach ($rule as $type => $rule_set) {
-
             // Ensure that we are allowed to validate this rule, even if the value is not set
             if (!isset($value) && isset($rule_set['if_set']) && $rule_set['if_set']) {
                 continue;
@@ -541,7 +539,7 @@ class Input
                 // If the rule is apart of a larger array set the full path to avoid overwriting other errors
                 $error_key = $index;
                 foreach ($path as $path_value) {
-                    $error_key .= '['.$path_value.']';
+                    $error_key .= '[' . $path_value . ']';
                 }
 
                 $this->errors[$error_key][$type] = (isset($rule_set['message']) ? $rule_set['message'] : null);

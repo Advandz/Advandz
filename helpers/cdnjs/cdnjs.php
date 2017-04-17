@@ -58,16 +58,16 @@ class Cdnjs extends Http
                     // Get library version file
                     foreach ($library->assets as $asset) {
                         if ($asset->version == $version) {
-                            $loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/'.$library->name
-                                .'/'.$asset->version.'/'.$library->filename;
+                            $loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/' . $library->name
+                                . '/' . $asset->version . '/' . $library->filename;
                             break;
                         }
                     }
 
                     // Load the latest version if the provided version is invalid
                     if (empty($loaded_libs[$library->name]) || !@file_get_contents($loaded_libs[$library->name])) {
-                        $loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/'.$library->name
-                            .'/'.$library->version.'/'.$library->filename;
+                        $loaded_libs[$library->name] = 'https://cdnjs.cloudflare.com/ajax/libs/' . $library->name
+                            . '/' . $library->version . '/' . $library->filename;
                     }
                 }
             }
@@ -116,7 +116,7 @@ class Cdnjs extends Http
         // Get the library from CDNJS
         if (isset($lib)) {
             $library = $this->server('api.cdnjs.com')
-                ->uri('libraries/'.$lib)
+                ->uri('libraries/' . $lib)
                 ->useSsl()
                 ->method('GET')
                 ->execute();

@@ -20,7 +20,7 @@ $start = microtime(true);
  */
 try {
     // Load framework
-    include dirname(__FILE__).'/lib/init.php';
+    include dirname(__FILE__) . '/lib/init.php';
 
     // Dispatch the Web request
     if (!empty($_SERVER['REQUEST_URI'])) {
@@ -36,11 +36,11 @@ try {
     } catch (Exception $e) {
         // Print stack trace if Dispatcher can't raise the error
         if (Configure::get('System.debug')) {
-            print $e->getMessage().' on line <strong>'.$e->getLine().'</strong> in <strong>'
-                .$e->getFile()."</strong>\n".'<br />Printing Stack Trace:<br />'
-                .nl2br($e->getTraceAsString());
+            echo $e->getMessage() . ' on line <strong>' . $e->getLine() . '</strong> in <strong>'
+                . $e->getFile() . "</strong>\n" . '<br />Printing Stack Trace:<br />'
+                . nl2br($e->getTraceAsString());
         } else {
-            print $e->getMessage();
+            echo $e->getMessage();
         }
     }
 }
@@ -54,5 +54,5 @@ $end = microtime(true);
  * Display rendering time if benchmarking is enabled
  */
 if (Configure::get('System.benchmark')) {
-    print 'Execution time: '.($end - $start).' seconds.';
+    echo 'Execution time: ' . ($end - $start) . ' seconds.';
 }

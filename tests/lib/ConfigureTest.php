@@ -74,9 +74,9 @@ class ConfigureTest extends PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $file_name = 'config_test';
-        $file_path = realpath(dirname(__FILE__).'/../').'/config/';
+        $file_path = realpath(dirname(__FILE__) . '/../') . '/config/';
 
-        $this->assertFileExists($file_path.$file_name.'.php');
+        $this->assertFileExists($file_path . $file_name . '.php');
 
         Configure::load($file_name, $file_path);
 

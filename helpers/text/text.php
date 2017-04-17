@@ -127,7 +127,7 @@ class Text
 
         // Check for irregular singular forms
         foreach ($this->irregular as $pattern => $result) {
-            $pattern = '/'.$pattern.'$/i';
+            $pattern = '/' . $pattern . '$/i';
 
             if (preg_match($pattern, $string)) {
                 return preg_replace($pattern, $result, $string);
@@ -159,7 +159,7 @@ class Text
 
         // Check for irregular plural forms
         foreach ($this->irregular as $result => $pattern) {
-            $pattern = '/'.$pattern.'$/i';
+            $pattern = '/' . $pattern . '$/i';
 
             if (preg_match($pattern, $string)) {
                 return preg_replace($pattern, $result, $string);
@@ -304,7 +304,7 @@ class Text
      */
     public function truncate($text, $limit)
     {
-        return substr($text, 0, $limit).'...';
+        return substr($text, 0, $limit) . '...';
     }
 
     /**

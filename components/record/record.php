@@ -163,7 +163,7 @@ class Record extends \Model
      */
     public function create($table, $if_not_exists = false)
     {
-        $this->type     = 'create'.($if_not_exists ? '_if_not_exists' : '');
+        $this->type     = 'create' . ($if_not_exists ? '_if_not_exists' : '');
         $this->tables[] = $table;
 
         $statement = $this->query($this->buildQuery(), $this->values);
@@ -215,7 +215,7 @@ class Record extends \Model
      */
     public function drop($table, $if_exists = false)
     {
-        $this->type     = 'drop'.($if_exists ? '_if_exists' : '');
+        $this->type     = 'drop' . ($if_exists ? '_if_exists' : '');
         $this->tables[] = $table;
 
         $statement = $this->query($this->buildQuery());
@@ -861,7 +861,7 @@ class Record extends \Model
         $this->values = $values;
         // Wrap the original query and COUNT those values
         $result = (array) $this->select(['COUNT(*)' => 'total'], false)
-            ->from(['('.$sql.')' => 't_'.mt_rand()])
+            ->from(['(' . $sql . ')' => 't_' . mt_rand()])
             ->fetch();
 
         return (int) $result['total'];
@@ -1087,17 +1087,17 @@ class Record extends \Model
                 // If escaping it must be a list
                 if ($bind_value) {
                     // List values must all be bound
-                    $sql .= $op.' ('.implode(',', array_fill(0, $num_values, '?')).')';
+                    $sql .= $op . ' (' . implode(',', array_fill(0, $num_values, '?')) . ')';
                     foreach ($value as $val) {
                         $this->values[] = $val;
                     }
                 } // If not binding must be a subquery
                 else {
-                    $sql .= $op.$this->buildSubquery($value);
+                    $sql .= $op . $this->buildSubquery($value);
                 }
             } // Value is scalar
             else {
-                $sql .= $op.($bind_value ? '?' : ($escape ? $this->escapeField($value) : $value));
+                $sql .= $op . ($bind_value ? '?' : ($escape ? $this->escapeField($value) : $value));
 
                 if ($bind_value) {
                     $this->values[] = $value;
@@ -1119,30 +1119,30 @@ class Record extends \Model
 
         switch ($this->type) {
             case 'delete':
-                $sql = 'DELETE '.$this->buildColumns().' FROM '.$this->buildTables().$this->buildWhere().$this->buildLimit();
+                $sql = 'DELETE ' . $this->buildColumns() . ' FROM ' . $this->buildTables() . $this->buildWhere() . $this->buildLimit();
                 break;
             case 'insert':
-                $sql = 'INSERT INTO '.$this->buildTables().$this->buildValues().$this->buildOnDuplicate();
+                $sql = 'INSERT INTO ' . $this->buildTables() . $this->buildValues() . $this->buildOnDuplicate();
                 break;
             case 'update':
-                $sql = 'UPDATE '.$this->buildTables().' SET '.$this->buildValuePairs($this->fields).$this->buildWhere().$this->buildLimit();
+                $sql = 'UPDATE ' . $this->buildTables() . ' SET ' . $this->buildValuePairs($this->fields) . $this->buildWhere() . $this->buildLimit();
                 break;
             case 'select':
-                $sql = 'SELECT '.$this->buildColumns().' FROM '.$this->buildTables().$this->buildWhere().$this->buildGroup().$this->buildHaving().$this->buildOrder().$this->buildLimit();
+                $sql = 'SELECT ' . $this->buildColumns() . ' FROM ' . $this->buildTables() . $this->buildWhere() . $this->buildGroup() . $this->buildHaving() . $this->buildOrder() . $this->buildLimit();
                 break;
             case 'create_if_not_exists':
             case 'create':
-                $sql = 'CREATE TABLE '.($this->type == 'create_if_not_exists' ? 'IF NOT EXISTS ' : '').$this->buildTables().$this->buildFields().$this->buildTableOptions();
+                $sql = 'CREATE TABLE ' . ($this->type == 'create_if_not_exists' ? 'IF NOT EXISTS ' : '') . $this->buildTables() . $this->buildFields() . $this->buildTableOptions();
                 break;
             case 'alter':
-                $sql = 'ALTER TABLE '.$this->buildTables().$this->buildFields(false);
+                $sql = 'ALTER TABLE ' . $this->buildTables() . $this->buildFields(false);
                 break;
             case 'truncate':
-                $sql = 'TRUNCATE TABLE '.$this->buildTables();
+                $sql = 'TRUNCATE TABLE ' . $this->buildTables();
                 break;
             case 'drop_if_exists':
             case 'drop':
-                $sql = 'DROP TABLE '.($this->type == 'drop_if_exists' ? 'IF EXISTS ' : '').$this->buildTables();
+                $sql = 'DROP TABLE ' . ($this->type == 'drop_if_exists' ? 'IF EXISTS ' : '') . $this->buildTables();
                 break;
         }
 
@@ -1172,11 +1172,11 @@ class Record extends \Model
                     $this->values[] = $field[$action]['default'];
                 }
 
-                $field_str = $this->escapeField($name).' '.$field[$action]['type'].
-                    (isset($field[$action]['size']) ? '('.$field[$action]['size'].')' : '').
-                    (isset($field[$action]['unsigned']) && $field[$action]['unsigned'] ? ' UNSIGNED ' : '').
-                    (isset($field[$action]['is_null']) && $field[$action]['is_null'] ? ' NULL' : ' NOT NULL').
-                    (isset($field[$action]['default']) ? ' DEFAULT ?' : '').
+                $field_str = $this->escapeField($name) . ' ' . $field[$action]['type'] .
+                    (isset($field[$action]['size']) ? '(' . $field[$action]['size'] . ')' : '') .
+                    (isset($field[$action]['unsigned']) && $field[$action]['unsigned'] ? ' UNSIGNED ' : '') .
+                    (isset($field[$action]['is_null']) && $field[$action]['is_null'] ? ' NULL' : ' NOT NULL') .
+                    (isset($field[$action]['default']) ? ' DEFAULT ?' : '') .
                     (isset($field[$action]['auto_increment']) && $field[$action]['auto_increment'] ? ' AUTO_INCREMENT' : '');
             }
 
@@ -1184,9 +1184,9 @@ class Record extends \Model
                 $fields[] = $field_str;
             } else {
                 if ($action == 'add') {
-                    $fields[] = 'ADD '.$field_str;
+                    $fields[] = 'ADD ' . $field_str;
                 } else {
-                    $fields[] = 'DROP '.$this->escapeField($name);
+                    $fields[] = 'DROP ' . $this->escapeField($name);
                 }
             }
         }
@@ -1200,18 +1200,18 @@ class Record extends \Model
                     $field_str = '';
                     $i         = 0;
                     foreach ($field[$action] as $field_name) {
-                        $field_str .= ($i++ > 0 ? ', ' : '').$this->escapeField($field_name);
+                        $field_str .= ($i++ > 0 ? ', ' : '') . $this->escapeField($field_name);
                     }
 
-                    $key_field = strtoupper($type).($type != 'index' ? ' KEY ' : ' ').($type == 'primary' ? '' : $this->escapeField($name));
+                    $key_field = strtoupper($type) . ($type != 'index' ? ' KEY ' : ' ') . ($type == 'primary' ? '' : $this->escapeField($name));
 
                     if ($create) {
-                        $fields[] = $key_field.'('.$field_str.')';
+                        $fields[] = $key_field . '(' . $field_str . ')';
                     } else {
                         if ($action == 'add') {
-                            $fields[] = 'ADD '.$key_field.'('.$field_str.')';
+                            $fields[] = 'ADD ' . $key_field . '(' . $field_str . ')';
                         } else {
-                            $fields[] = 'DROP '.$key_field;
+                            $fields[] = 'DROP ' . $key_field;
                         }
                     }
                 }
@@ -1219,10 +1219,10 @@ class Record extends \Model
         }
 
         if ($create) {
-            return ' ('.implode(', ', $fields).')';
+            return ' (' . implode(', ', $fields) . ')';
         }
 
-        return ' '.implode(', ', $fields);
+        return ' ' . implode(', ', $fields);
     }
 
     /**
@@ -1253,10 +1253,10 @@ class Record extends \Model
             $this->on($field, $op, $value, $bind_value, $escape);
         }
 
-        $this->join_sql .= ($this->join_sql != '' ? ' ' : '').($join ? $join.' ' : '').'JOIN '.(is_array($table) ? $this->buildSubquery($table) : $this->escapeField($table));
+        $this->join_sql .= ($this->join_sql != '' ? ' ' : '') . ($join ? $join . ' ' : '') . 'JOIN ' . (is_array($table) ? $this->buildSubquery($table) : $this->escapeField($table));
 
         if (!empty($this->on)) {
-            $this->join_sql .= ' ON '.$this->buildConditionals($this->on);
+            $this->join_sql .= ' ON ' . $this->buildConditionals($this->on);
         }
 
         // Reset the conditionals
@@ -1280,7 +1280,7 @@ class Record extends \Model
                 foreach ($this->columns[$i]['fields'] as $key => $value) {
                     $sql .= ($j++ > 0 ? ', ' : '');
                     if (!is_numeric($key)) {
-                        $sql .= ($this->columns[$i]['escape'] ? $this->escapeField($key) : $key).' AS '.$this->escapeField($value);
+                        $sql .= ($this->columns[$i]['escape'] ? $this->escapeField($key) : $key) . ' AS ' . $this->escapeField($value);
                     } else {
                         $sql .= ($this->columns[$i]['escape'] ? $this->escapeField($value) : $value);
                     }
@@ -1309,7 +1309,7 @@ class Record extends \Model
                 $sql .= $this->escapeField($this->tables[$i]);
             }
         }
-        $sql .= strlen($this->join_sql) > 0 ? ' '.$this->join_sql : '';
+        $sql .= strlen($this->join_sql) > 0 ? ' ' . $this->join_sql : '';
 
         return $sql;
     }
@@ -1324,7 +1324,7 @@ class Record extends \Model
         $sql = '';
 
         if (!empty($this->duplicate)) {
-            $sql .= ' ON DUPLICATE KEY UPDATE '.$this->buildConditionals($this->duplicate, false);
+            $sql .= ' ON DUPLICATE KEY UPDATE ' . $this->buildConditionals($this->duplicate, false);
         }
 
         return $sql;
@@ -1340,7 +1340,7 @@ class Record extends \Model
         $sql = '';
 
         if (!empty($this->where)) {
-            $sql .= ' WHERE '.$this->buildConditionals($this->where);
+            $sql .= ' WHERE ' . $this->buildConditionals($this->where);
         }
 
         return $sql;
@@ -1358,8 +1358,8 @@ class Record extends \Model
         if (!empty($this->order)) {
             $sql .= ' ORDER BY ';
             for ($i = 0; $i < count($this->order); $i++) {
-                $sql .= ($i > 0 ? ', ' : '').
-                    ($this->order[$i]['escape'] ? $this->quoteIdentifier($this->order[$i]['field']) : $this->order[$i]['field']).
+                $sql .= ($i > 0 ? ', ' : '') .
+                    ($this->order[$i]['escape'] ? $this->quoteIdentifier($this->order[$i]['field']) : $this->order[$i]['field']) .
                     (strtolower($this->order[$i]['order']) == 'desc' ? ' DESC' : ' ASC');
             }
         }
@@ -1379,7 +1379,7 @@ class Record extends \Model
         if (!empty($this->group)) {
             $sql .= ' GROUP BY ';
             for ($i = 0; $i < count($this->group); $i++) {
-                $sql .= ($i > 0 ? ', ' : '').$this->escapeField($this->group[$i]);
+                $sql .= ($i > 0 ? ', ' : '') . $this->escapeField($this->group[$i]);
             }
         }
 
@@ -1396,7 +1396,7 @@ class Record extends \Model
         $sql = '';
 
         if (!empty($this->having)) {
-            $sql .= ' HAVING '.$this->buildConditionals($this->having);
+            $sql .= ' HAVING ' . $this->buildConditionals($this->having);
         }
 
         return $sql;
@@ -1412,7 +1412,7 @@ class Record extends \Model
         $sql = '';
 
         if (isset($this->limit['start']) && isset($this->limit['records'])) {
-            $sql .= ' LIMIT '.(int) $this->limit['start'].', '.(int) $this->limit['records'];
+            $sql .= ' LIMIT ' . (int) $this->limit['start'] . ', ' . (int) $this->limit['records'];
         }
 
         return $sql;
@@ -1430,13 +1430,13 @@ class Record extends \Model
         foreach ($subquery as $key => $value) {
             // Subquery non-aliasing
             if (is_numeric($key)) {
-                $sql .= '('.$value.')';
+                $sql .= '(' . $value . ')';
             } // Handle subquery aliasing (multiple words = subquery)
             elseif (substr_count($key, ' ') > 0) {
-                $sql .= '('.$key.') AS '.$this->escapeField($value);
+                $sql .= '(' . $key . ') AS ' . $this->escapeField($value);
             } // Handle table aliasing
             else {
-                $sql .= $this->escapeField($key).' AS '.$this->escapeField($value);
+                $sql .= $this->escapeField($key) . ' AS ' . $this->escapeField($value);
             }
         }
 
@@ -1456,7 +1456,7 @@ class Record extends \Model
             $fields = '';
             $values = '';
             foreach ($this->fields as $field => $value) {
-                $fields .= ($i > 0 ? ', ' : '').$this->escapeField($field);
+                $fields .= ($i > 0 ? ', ' : '') . $this->escapeField($field);
                 $values .= ($i > 0 ? ', ' : '');
 
                 if (is_array($value)) {
@@ -1473,7 +1473,7 @@ class Record extends \Model
                 $i++;
             }
 
-            $sql .= ' ('.$fields.') VALUES ('.$values.')';
+            $sql .= ' (' . $fields . ') VALUES (' . $values . ')';
         }
 
         return $sql;
@@ -1490,7 +1490,7 @@ class Record extends \Model
         if (!empty($pairs)) {
             $i = 0;
             foreach ($pairs as $key => $value) {
-                $sql .= ($i > 0 ? ', ' : '').$this->escapeField($key).'=';
+                $sql .= ($i > 0 ? ', ' : '') . $this->escapeField($key) . '=';
                 // If value was an array, then check if we are to bind this value
                 if (is_array($value)) {
                     if (isset($value['bind_value']) && $value['bind_value'] === false) {
@@ -1500,7 +1500,7 @@ class Record extends \Model
                         $this->values[] = $value['value'];
                     }
                 } else {
-                    $sql .= ($i > 0 ? ', ' : '').$this->escapeField($key).'=?';
+                    $sql .= ($i > 0 ? ', ' : '') . $this->escapeField($key) . '=?';
                     $this->values[] = $value;
                 }
                 $i++;
@@ -1557,7 +1557,7 @@ class Record extends \Model
         $elements = count($matches);
         switch ($elements) {
             case 4:
-                return $matches[2].'('.$this->escapeField($matches[3]).')';
+                return $matches[2] . '(' . $this->escapeField($matches[3]) . ')';
             case 5:
                 return $this->escapeTableField($matches[4]);
         }
@@ -1576,7 +1576,7 @@ class Record extends \Model
     {
         $q = $this->ident_quote_chr;
 
-        return preg_replace("/(\w+)/", $q.'$1'.$q, $field);
+        return preg_replace("/(\w+)/", $q . '$1' . $q, $field);
     }
 
     /**
@@ -1597,7 +1597,7 @@ class Record extends \Model
         $parts = [];
         if (is_array($identifier)) {
             foreach ($identifier as $part) {
-                $parts[] = $q.str_replace($q, $q.$q, $part).$q;
+                $parts[] = $q . str_replace($q, $q . $q, $part) . $q;
             }
         }
 

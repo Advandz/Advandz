@@ -24,7 +24,7 @@ class Orm extends Record
     public function _($tables)
     {
         // Load the table class
-        \Loader::load(COMPONENTDIR.'orm'.DS.'table.php');
+        \Loader::load(COMPONENTDIR . 'orm' . DS . 'table.php');
 
         // Prepare tables array
         $tables = (array) $tables;
@@ -41,7 +41,7 @@ class Orm extends Record
 
                 return $this->{$table_cc};
             } else {
-                throw new \Exception('Table "'.$table."\" doesn't exist");
+                throw new \Exception('Table "' . $table . "\" doesn't exist");
             }
         }
     }

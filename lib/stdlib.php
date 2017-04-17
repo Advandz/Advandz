@@ -40,7 +40,7 @@ set_exception_handler(['UnknownException', 'setExceptionHandler']);
 register_shutdown_function(['UnknownException', 'setFatalErrorHandler']);
 
 /*
- * Initialize class aliases, that will be registered when this application 
+ * Initialize class aliases, that will be registered when this application
  * is started.
  */
 foreach (Configure::get('System.class_alias') as $alias => $class) {

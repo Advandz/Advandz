@@ -129,16 +129,13 @@ define('VENDORDIR', ROOTWEBDIR . 'vendors' . DS);
  */
 include_once LIBDIR . 'loader.php';
 include_once LIBDIR . 'autoload.php';
-include_once LIBDIR . 'stdlib.php';
-
-/*
- * Initialize class aliases
- */
-foreach ($aliases as $alias => $class) {
-    class_alias($class, $alias, true);
-}
 
 /*
  * Load core configuration
  */
 include_once CONFIGDIR . 'core.php';
+
+/*
+ * Load standard library
+ */
+include_once LIBDIR . 'stdlib.php';

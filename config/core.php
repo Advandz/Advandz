@@ -34,6 +34,11 @@ Configure::set('System.view_ext', '.knife');
 Configure::set('System.404_forwarding', true);
 // Render views in CLI mode
 Configure::set('System.cli_render_views', false);
+// This array of class aliases will be registered when this application
+// is started.
+Configure::set('System.class_alias', [
+    'Language' => 'Advandz\\Library\\Language'
+]);
 // Override the default error reporting level after boostrapping
 //Configure::errorReporting(0);
 

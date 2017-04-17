@@ -46,7 +46,3 @@ register_shutdown_function(['UnknownException', 'setFatalErrorHandler']);
 $aliases = [
     'Language' => 'Advandz\\Library\\Language'
 ];
-
-foreach ($aliases as $alias => $class) {
-    class_alias($class, $alias, true);
-}

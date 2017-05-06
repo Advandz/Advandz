@@ -151,9 +151,9 @@ class Arrayment
     /**
      * Merge two arrays.
      *
-     * @param  array $array1       The first array
-     * @param  array $array2       The second array
-     * @param  bool  $recursive    True, to merge the arrays in recursive mode
+     * @param  array $array1    The first array
+     * @param  array $array2    The second array
+     * @param  bool  $recursive True, to merge the arrays in recursive mode
      * @return mixed The resultant array, False if fails.
      */
     public function merge(array $array1, array $array2, $recursive = false)
@@ -172,9 +172,9 @@ class Arrayment
     /**
      * Combine two arrays.
      *
-     * @param  array $array1       The first array
-     * @param  array $array2       The second array
-     * @param  bool  $recursive    True, to merge the arrays in recursive mode
+     * @param  array $array1    The first array
+     * @param  array $array2    The second array
+     * @param  bool  $recursive True, to merge the arrays in recursive mode
      * @return mixed The resultant array, False if fails.
      */
     public function combine(array $array1, array $array2)

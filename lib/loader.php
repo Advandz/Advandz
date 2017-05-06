@@ -274,7 +274,7 @@ final class Loader
                     $dir = PLUGINDIR . $plugin . DS . $type . 's' . DS;
                 } else {
                     $dir = $path;
-                } 
+                }
 
                 // Generate namespace and get file name
                 if (strpos($object, '\\') !== false) {
@@ -293,7 +293,7 @@ final class Loader
                 if (file_exists($dir . $object_name_file . '.php')) {
                     // Search for the object in the root object directory
                     require_once $dir . $object_name_file . '.php';
-                } else if (file_exists($dir . $object_name_file . DS . $object_name_file . '.php')) {
+                } elseif (file_exists($dir . $object_name_file . DS . $object_name_file . '.php')) {
                     // The object may also appear in a subdirectory of the same name
                     require_once $dir . $object_name_file . DS . $object_name_file . '.php';
                 } else {

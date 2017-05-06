@@ -11,8 +11,8 @@
 
 namespace Advandz\Library;
 
-use Exception;
 use Router;
+use Exception;
 
 class View extends Knife
 {

@@ -49,16 +49,16 @@ class Pagination extends Html
         $this->settings = [
             // Wrapper to surround the link set
             'wrapper'          => [
-                'tag'        => 'div',
-                'attributes' => ['class' => 'pagination'],
+                'tag'        => 'nav',
+                'attributes' => [],
             ],
             'navigation'       => [
                 // First page link
                 'first'     => [
                     'tag'             => 'li',
                     'name'            => \Language::_('Pagination.first_link', true),
-                    'attributes'      => [],
-                    'link_attributes' => [],
+                    'attributes'      => ['class' => 'page-item'],
+                    'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // options: if_needed, never, always
                     'disabled'        => 'disabled', // class to use if show and not needed
                 ],
@@ -66,8 +66,8 @@ class Pagination extends Html
                 'last'      => [
                     'tag'             => 'li',
                     'name'            => \Language::_('Pagination.last_link', true),
-                    'attributes'      => [],
-                    'link_attributes' => [],
+                    'attributes'      => ['class' => 'page-item'],
+                    'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always
                     'disabled'        => 'disabled', // Class to use if show and not needed
                 ],
@@ -75,8 +75,8 @@ class Pagination extends Html
                 'next'      => [
                     'tag'             => 'li',
                     'name'            => \Language::_('Pagination.next_link', true),
-                    'attributes'      => [],
-                    'link_attributes' => [],
+                    'attributes'      => ['class' => 'page-item'],
+                    'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always
                     'disabled'        => 'disabled', // Class to use if show and not needed
                 ],
@@ -84,29 +84,29 @@ class Pagination extends Html
                 'prev'      => [
                     'tag'             => 'li',
                     'name'            => \Language::_('Pagination.prev_link', true),
-                    'attributes'      => [],
-                    'link_attributes' => [],
+                    'attributes'      => ['class' => 'page-item'],
+                    'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always
                     'disabled'        => 'disabled', // Class to use if show and not needed
                 ],
                 // Surround for the set of links
                 'surround'  => [
                     'tag'             => 'ul',
-                    'attributes'      => [],
+                    'attributes'      => ['class' => 'pagination'],
                     'link_attributes' => [],
                 ],
                 // The currently active link
                 'current'   => [
                     'tag'             => 'li',
-                    'attributes'      => ['class' => 'current'],
-                    'link_attributes' => [],
-                    'link'            => false, // Disable linking
+                    'attributes'      => ['class' => 'page-item active'],
+                    'link_attributes' => ['class' => 'page-link'],
+                    'link'            => true, // Disable linking
                 ],
                 // All numeric links
                 'numerical' => [
                     'tag'             => 'li',
-                    'attributes'      => [],
-                    'link_attributes' => [],
+                    'attributes'      => ['class' => 'page-item'],
+                    'link_attributes' => ['class' => 'page-link'],
                 ],
             ],
             'merge_get'        => true, // Merge get params from URI with those set in 'params'
@@ -114,7 +114,7 @@ class Pagination extends Html
             'pages_to_show'    => 5, // Max number of numerical pages shown in the pagination
             'total_pages'      => 0, // Total number of pages (used instead of total results/result_per_page settings)
             'total_results'    => 0, // Total number of results in the pagination set
-            'results_per_page' => 1, // Number of result items per page
+            'results_per_page' => \Configure::get('Pagination.results_per_page'), // Number of result items per page
             'uri'              => '',
             'uri_labels'       => [ // Tags that will be substituted with their appropriate value
                 'page'     => 'page',

@@ -131,11 +131,11 @@ include_once LIBDIR . 'loader.php';
 include_once LIBDIR . 'autoload.php';
 
 /*
- * Load core configuration
- */
-include_once CONFIGDIR . 'core.php';
-
-/*
  * Load standard library
  */
 include_once LIBDIR . 'stdlib.php';
+
+/*
+ * Load core configuration
+ */
+include_once CONFIGDIR . 'core.php';

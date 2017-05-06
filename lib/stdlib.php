@@ -43,6 +43,13 @@ register_shutdown_function(['UnknownException', 'setFatalErrorHandler']);
  * Initialize class aliases, that will be registered when this application
  * is started.
  */
-foreach (Configure::get('System.class_alias') as $alias => $class) {
-    class_alias($class, $alias, true);
-}
+class_alias('Advandz\Library\Dispatcher', 'Dispatcher');
+class_alias('Advandz\Library\Controller', 'Controller');
+class_alias('Advandz\Library\Configure', 'Configure');
+class_alias('Advandz\Library\Language', 'Language');
+class_alias('Advandz\Library\Router', 'Router');
+class_alias('Advandz\Library\Loader', 'Loader');
+class_alias('Advandz\Library\Model', 'Model');
+class_alias('Advandz\Library\Cache', 'Cache');
+class_alias('Advandz\Library\Knife', 'Knife');
+class_alias('Advandz\Library\View', 'View');

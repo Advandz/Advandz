@@ -121,9 +121,9 @@ final class App
     {
         $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
         if (substr($uri, 0, strlen(WEBDIR)) == WEBDIR) {
-            return substr($uri, strlen(WEBDIR), strlen($uri));
+            return trim(substr($uri, strlen(WEBDIR), strlen($uri)), '/') . '/';
         } else {
-            return $uri;
+            return trim($uri, '/') . '/';
         }
     }
 

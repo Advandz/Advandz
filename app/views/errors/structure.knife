@@ -10,8 +10,12 @@
         <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-ui.css">
     </head>
     <body>
-
-        {{!@var content}}
-
+        <div class="container padding-top-50 padding-top-sm-25 padding-bottom-50 padding-bottom-sm-25">
+            <div class="row">
+                <div class="col-md-12">
+                    {{!@var content}}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

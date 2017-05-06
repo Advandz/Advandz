@@ -14,8 +14,6 @@
 
 namespace Advandz\Library;
 
-use Configure;
-
 class Language
 {
     /**
@@ -72,7 +70,7 @@ class Language
      */
     final public static function getText($lang_key, $return = false)
     {
-        $language = self::$current_language != null ? self::$current_language : Configure::get('Language.default');
+        $language = self::$current_language != null ? self::$current_language : \Configure::get('Language.default');
 
         $output = '';
 
@@ -82,9 +80,9 @@ class Language
         }
         // If the text defined did not exist in the set language, look for it
         // in the default language
-        elseif (isset(self::$lang_text[Configure::get('Language.default')][$lang_key])) {
-            $output = self::$lang_text[Configure::get('Language.default')][$lang_key];
-        } elseif (Configure::get('Language.allow_pass_through')) {
+        elseif (isset(self::$lang_text[\Configure::get('Language.default')][$lang_key])) {
+            $output = self::$lang_text[\Configure::get('Language.default')][$lang_key];
+        } elseif (\Configure::get('Language.allow_pass_through')) {
             $output = $lang_key;
         }
 
@@ -124,6 +122,7 @@ class Language
         if (is_array($lang_file)) {
             $num_lang_files = count($lang_file);
             for ($i = 0; $i < $num_lang_files; $i++) {
+                $lang_file[$i] = \Loader::fromCamelCase($lang_file[$i]);
                 self::loadLang($lang_file[$i], $language, $lang_dir);
             }
 
@@ -160,8 +159,8 @@ class Language
                 }
 
                 // Load the text for the default language as well so we have that to fall back on
-                if ($language != Configure::get('Language.default')) {
-                    self::loadLang($lang_file, Configure::get('Language.default'), $lang_dir);
+                if ($language != \Configure::get('Language.default')) {
+                    self::loadLang($lang_file, \Configure::get('Language.default'), $lang_dir);
                 }
             }
             // free up memory occupied by the $lang array, since it has already
@@ -170,8 +169,8 @@ class Language
         }
         // If the language just attemped did not load and this is the was not the
         // default language, then attempt to load the default language
-        elseif ($language != Configure::get('Language.default')) {
-            self::loadLang($lang_file, Configure::get('Language.default'), $lang_dir);
+        elseif ($language != \Configure::get('Language.default')) {
+            self::loadLang($lang_file, \Configure::get('Language.default'), $lang_dir);
         }
     }
 

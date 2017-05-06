@@ -10,6 +10,9 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
+
+namespace Advandz\Library;
+
 class Controller
 {
     /**
@@ -149,6 +152,16 @@ class Controller
     final protected function helpers($helpers)
     {
         Loader::loadHelpers($this, $helpers);
+    }
+
+    /**
+     * Load the given language into this controller.
+     *
+     * @param array $languages All languages to load
+     */
+    final protected function languages($languages)
+    {
+        Language::loadLang($languages);
     }
 
     /**

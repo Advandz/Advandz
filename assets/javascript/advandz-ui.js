@@ -2740,4 +2740,38 @@ if (typeof jQuery === 'undefined') {
 		};
 		return Popover;
 	}(jQuery);
+	/**
+	 * --------------------------------------------------------------------------
+	 * sidebar.js
+	 * --------------------------------------------------------------------------
+	 */
+	var Sidebar = function ($) {
+		$(document).on("click", ".navbar-sidebar-button", function() {
+			if (window.innerWidth > 576) {
+				if ($(".sidebar").hasClass("sidebar-collapsed")) {
+					$(".sidebar").removeClass("sidebar-collapsed");
+				} else {
+					$(".sidebar").addClass("sidebar-collapsed");
+				}
+			} else {
+				$(".sidebar").toggle();
+			}
+	    });
+
+		$(window).resize(function() {
+			if (window.innerWidth > 576) {
+				$(".sidebar").show();
+			} else {
+				$(".sidebar").hide();
+			}
+
+			if (!$(".sidebar").hasClass("sidebar-collapsed-fixed") && window.innerWidth > 576) {
+				if (window.innerWidth > 1200) {
+					$(".sidebar").removeClass("sidebar-collapsed");
+				} else {
+					$(".sidebar").addClass("sidebar-collapsed");
+				}
+			}
+		});
+	}(jQuery);
 }();

@@ -8,6 +8,12 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
+
+namespace Advandz\Library;
+
+use Exception;
+use Router;
+
 class View extends Knife
 {
     /**

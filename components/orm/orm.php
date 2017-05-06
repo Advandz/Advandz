@@ -34,7 +34,7 @@ class Orm extends Record
             $table = \Loader::fromCamelCase($table);
 
             // Check if table exists
-            if ($this->select()->from($table)->numResults() > 0) {
+            if ($this->select()->from($table)) {
                 // Initialize the table class
                 $table_cc          = \Loader::toCamelCase($table);
                 $this->{$table_cc} = new Table($table);

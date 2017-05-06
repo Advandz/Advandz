@@ -47,7 +47,7 @@ class Upload
         $files_array = [];
 
         foreach ($files as $key => $file) {
-            if (is_array($file)) {
+            if (is_array($file) && is_array($file['name'])) {
                 foreach ($file['name'] as $file_key => $value) {
                     if (!empty($file['name'][$file_key]) && !empty($file['tmp_name'][$file_key])) {
                         $files_array[$key][] = [
@@ -60,15 +60,7 @@ class Upload
                     }
                 }
             } else {
-                if (!empty($file['name'][$key]) && !empty($file['tmp_name'][$key])) {
-                    $files_array[] = [
-                        'name'     => $file['name'][$key],
-                        'type'     => $file['type'][$key],
-                        'tmp_name' => $file['tmp_name'][$key],
-                        'error'    => $file['error'][$key],
-                        'size'     => $file['size'][$key]
-                    ];
-                }
+                $files_array = $files;
             }
         }
 
@@ -87,25 +79,25 @@ class Upload
      */
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
     {
-        // Full path to the upload directory
-        $path = ROOTWEBDIR . $this->upload_dir;
+        if (!empty($file['tmp_name'])) {
+            // Full path to the upload directory
+            $path = ROOTWEBDIR . $this->upload_dir . DS;
 
-        // Check if exits the upload directory, If not exists then create it
-        if (!is_dir($path)) {
-            try {
-                mkdir($path);
-            } catch (Exception $e) {
-                throw new \Exception('Failed to create the uploads directory');
+            // Check if exits the upload directory, If not exists then create it
+            if (!is_dir($path)) {
+                try {
+                    mkdir($path);
+                } catch (Exception $e) {
+                    throw new \Exception('Failed to create the uploads directory');
+                }
             }
-        }
 
-        // Validate the file size
-        if ($file['size'] > $this->file_size) {
-            throw new \Exception('The uploaded file exceeds the ' . $this->file_size . ' limit size');
-        }
+            // Validate the file size
+            if ($file['size'] > $this->file_size) {
+                throw new \Exception('The uploaded file exceeds the ' . $this->file_size . ' limit size');
+            }
 
-        // Write the file to the upload directory
-        if (!file_exists($path . $file['name']) || ($overwrite && file_exists($path . $file['name']))) {
+            // Build full upload path
             if ($hash_name) {
                 $file_extension = $this->getExtension($file['name']);
                 $file_hash      = $this->hash($file['tmp_name']);
@@ -114,13 +106,18 @@ class Upload
                 $new_path = $path . $file['name'];
             }
 
-            // Move and chmod the file to the upload directory
-            $transfer    = move_uploaded_file($file['tmp_name'], $new_path);
-            $permissions = chmod($new_path, $permissions);
+            // Write the file to the upload directory
+            if (!file_exists($new_path) || ($overwrite && file_exists($new_path))) {
+                // Move and chmod the file to the upload directory
+                $transfer    = move_uploaded_file($file['tmp_name'], $new_path);
+                $permissions = chmod($new_path, $permissions);
 
-            return $new_path;
+                return $new_path;
+            } else {
+                throw new \Exception('Another file with the same name exists in the uploads directory');
+            }
         } else {
-            throw new \Exception('Another file with the same name exists in the uploads directory');
+            throw new \Exception('The given file is invalid');
         }
     }
 
@@ -137,6 +134,27 @@ class Upload
         } else {
             throw new \Exception('Invalid maximum size, Maximum size must be a non-zero integer value');
         }
+    }
+
+    /**
+     * Get the web url of a file from the path location.
+     *
+     * @param  string $path The path to the uploaded file
+     * @return string The file extension
+     */
+    public function getWebUrl($path)
+    {
+        return str_replace(DS, '/', str_replace(ROOTWEBDIR, '', $path));
+    }
+
+    /**
+     * Set the upload directory.
+     *
+     * @return string The upload directory
+     */
+    public function getUploadDir()
+    {
+        return $this->upload_dir;
     }
 
     /**

@@ -8,6 +8,12 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
+
+namespace Advandz\Library;
+
+use Exception;
+use ReflectionClass;
+
 final class Router
 {
     /**
@@ -37,10 +43,19 @@ final class Router
         // Load Middleware
         if (isset($middlewares) && is_array($middlewares)) {
             foreach ($middlewares as $middleware) {
-                $file_name = Loader::fromCamelCase($middleware);
-                if (Loader::load(MIDDLEWAREDIR . $file_name . '.php')) {
-                    $namespace = 'Advandz\\App\\Middleware\\' . $middleware;
 
+                // Generate namespace and get file name
+                if (strpos($middleware, '\\') !== false) {
+                    $file_name = explode('\\', $middleware);
+                    $file_name = Loader::fromCamelCase(end($file_name));
+                    $namespace = $middleware;
+                } else {
+                    $file_name = Loader::fromCamelCase($middleware);
+                    $namespace = 'Advandz\\App\\Middleware\\' . $middleware;
+                }
+
+                // Load middleware file
+                if (Loader::load(MIDDLEWAREDIR . $file_name . '.php')) {
                     // Execute handle function
                     if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
                         $middleware_class = new $namespace();

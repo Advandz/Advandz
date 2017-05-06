@@ -22,7 +22,7 @@ class Users
         \Loader::loadComponents($this, ['Orm', 'Input', 'Password']);
 
         // Load the users table from database to the ORM
-        $this->Orm->_(['users']);
+        $this->Orm->_(['Users']);
     }
 
     /**

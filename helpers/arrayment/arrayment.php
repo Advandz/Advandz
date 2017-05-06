@@ -153,17 +153,34 @@ class Arrayment
      *
      * @param  array $array1       The first array
      * @param  array $array2       The second array
-     * @param  bool  $matrix_merge True, to combine the arrays in to key=>value pairs.
+     * @param  bool  $recursive    True, to merge the arrays in recursive mode
      * @return mixed The resultant array, False if fails.
      */
-    public function merge(array $array1, array $array2, $matrix_merge = false)
+    public function merge(array $array1, array $array2, $recursive = false)
     {
         if (is_array($array1) && is_array($array2)) {
-            if ($matrix_merge) {
-                return array_combine($array1, $array2);
+            if ($recursive) {
+                return array_merge_recursive($array1, $array2);
             } else {
                 return array_merge($array1, $array2);
             }
+        }
+
+        return false;
+    }
+
+    /**
+     * Combine two arrays.
+     *
+     * @param  array $array1       The first array
+     * @param  array $array2       The second array
+     * @param  bool  $recursive    True, to merge the arrays in recursive mode
+     * @return mixed The resultant array, False if fails.
+     */
+    public function combine(array $array1, array $array2)
+    {
+        if (is_array($array1) && is_array($array2)) {
+            return array_combine($array1, $array2);
         }
 
         return false;
@@ -231,5 +248,24 @@ class Arrayment
         }
 
         return $results;
+    }
+
+    /**
+     * Iterates over each value in the array passing them to the callback function.
+     * If the callback function returns true, the current value from array is returned
+     * into the result array. Array keys are preserved.
+     *
+     * @param  array    $array    The array to iterate over
+     * @param  callable $callback The callback function to use, If no callback is supplied,
+     *                            all empty entries will be removed.
+     * @return array    Returns the filtered array.
+     */
+    public function filter(array $array, callable $callback = null)
+    {
+        if (is_callable($callback)) {
+            return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
+        } else {
+            return array_filter($array);
+        }
     }
 }

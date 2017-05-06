@@ -9,7 +9,11 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
+
+namespace Advandz\Library;
+
 use Advandz\Helper\Html;
+use Exception;
 
 class Knife extends Language
 {
@@ -26,10 +30,10 @@ class Knife extends Language
         '!@lang'     => '<?php $this->_("%%STATEMENT%%"); ?>',
         '@yield'     => '<?php echo $this->Html->safe($this->%%STATEMENT%%); ?>',
         '!@yield'    => '<?php echo $this->%%STATEMENT%%; ?>',
-        '@raw'       => '<?php echo $this->Html->safe(print_r($%%STATEMENT%%, true)); ?>',
-        '!@raw'      => '<?php print_r($%%STATEMENT%%); ?>',
-        '@var'       => '<?php echo $this->Html->safe($%%STATEMENT%%); ?>',
-        '!@var'      => '<?php echo $%%STATEMENT%%; ?>',
+        '@raw'       => '<?php echo $this->Html->safe(print_r(%%STATEMENT%%, true)); ?>',
+        '!@raw'      => '<?php print_r(%%STATEMENT%%); ?>',
+        '@var'       => '<?php echo $this->Html->safe($this->Html->ifSet($%%STATEMENT%%)); ?>',
+        '!@var'      => '<?php echo $this->Html->ifSet($%%STATEMENT%%); ?>',
         '@this'      => '<?php $this->%%STATEMENT%%; ?>',
         '!@this'     => '<?php $this->%%STATEMENT%%; ?>',
         '@constant'  => '<?php echo $this->Html->safe(defined(%%STATEMENT%%) ? %%STATEMENT%% : \'%%STATEMENT%%\'); ?>',

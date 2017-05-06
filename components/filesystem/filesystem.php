@@ -211,4 +211,26 @@ class Filesystem
             throw new \Exception('The directory ' . $dir . ' can\'t be readed, Permission denied');
         }
     }
+
+    /**
+     * Check if the file exists.
+     *
+     * @param  string $file The full path of the file
+     * @return bool   True if the file exists
+     */
+    public function fileExists($file)
+    {
+        return file_exists($file);
+    }
+
+    /**
+     * Check if the given directory exists.
+     *
+     * @param  string $dir The full path of the directory
+     * @return bool   True if the directory exists
+     */
+    public function dirExists($dir)
+    {
+        return $this->isDir($dir);
+    }
 }

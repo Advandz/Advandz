@@ -18,4 +18,4 @@
 /*
  * Autoload the framework libraries
  */
-spl_autoload_register(['Loader', 'autoload'], true, true);
+spl_autoload_register(['Advandz\Library\Loader', 'autoload'], true, true);

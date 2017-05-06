@@ -9,6 +9,12 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
+
+namespace Advandz\Library;
+
+use Exception;
+use PDO;
+
 class Model
 {
     /**
@@ -40,11 +46,12 @@ class Model
      * @var array Default PDO attribute settings
      */
     private $default_pdo_options = [
-        PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_CASE              => PDO::CASE_LOWER,
-        PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
-        PDO::ATTR_PERSISTENT        => false,
-        PDO::ATTR_STRINGIFY_FETCHES => false,
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_CASE               => PDO::CASE_LOWER,
+        PDO::ATTR_ORACLE_NULLS       => PDO::NULL_NATURAL,
+        PDO::ATTR_PERSISTENT         => false,
+        PDO::ATTR_STRINGIFY_FETCHES  => false,
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET SQL_MODE="ALLOW_INVALID_DATES";'
     ];
 
     /**
@@ -65,6 +72,47 @@ class Model
         if (!Configure::get('Database.lazy_connecting') || $db_info !== null) {
             $this->makeConnection($db_info);
         }
+    }
+
+    /**
+     * Load the given models into this controller.
+     *
+     * @param array $models All models to load
+     */
+    final protected function uses($models)
+    {
+        Loader::loadModels($this, $models);
+    }
+
+    /**
+     * Load the given components into this controller.
+     *
+     * @param array $components All components to load
+     */
+    final protected function components($components)
+    {
+        Loader::loadComponents($this, $components);
+    }
+
+    /**
+     * Load the given helpers into this controller, making them available to
+     * any implicitly initialized Views, including Controller::$structure.
+     *
+     * @param array $helpers All helpers to load
+     */
+    final protected function helpers($helpers)
+    {
+        Loader::loadHelpers($this, $helpers);
+    }
+
+    /**
+     * Load the given language into this controller.
+     *
+     * @param array $languages All languages to load
+     */
+    final protected function languages($languages)
+    {
+        Language::loadLang($languages);
     }
 
     /**

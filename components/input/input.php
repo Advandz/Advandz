@@ -6,12 +6,14 @@
  *
  * @package Advandz
  * @subpackage Advandz.components.input
- * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
+ * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
- * @author Cody Phillips <therealclphillips.woop@gmail.com>
+ * @author The Advandz Team <team@advandz.com>
  */
 
 namespace Advandz\Component;
+
+use Advandz\Helper\Arrayment;
 
 class Input
 {
@@ -24,16 +26,6 @@ class Input
      * @var array All rules set in Input::setRules()
      */
     private $rules = [];
-
-    /**
-     * @var bool Flag whether or not checking should cease
-     */
-    private $end_checks = false;
-
-    /**
-     * @var mixed A set of data that this instance is currently validating
-     */
-    private $data = null;
 
     /**
      * Checks if the given string is a valid email address.
@@ -258,9 +250,7 @@ class Input
     /**
      * Set rules, overriding any existing rules set and empting any existing errors.
      *
-     * @param array $rules A multi-deminsional array, where the 1st dimension is the index value of the data given to
-     *                     Input::validates()
-     * @see Input::validates()
+     * @param array $rules A multi-deminsional array, where the 1st dimension is the rule.
      */
     public function setRules($rules)
     {
@@ -269,107 +259,47 @@ class Input
     }
 
     /**
-     * Invokes Input::validateRule() to process the rule against the given value.
-     * This method formatted for use by array_walk_recusrive to process elements
-     * recusively.
-     *
-     * @param mixed  $value     The value to evaluate
-     * @param string $key       The most immediate key to the given value
-     * @param array  $var       An array containing the full string index of the rule to evaluate ('index') and the complete
-     *                          rule ('rule')
-     * @param int    $max_depth The maximum depth to travel
-     * @param int    $cur_depth The current depth traveled
-     * @param array  $path      A list of all array indexes encountered
-     */
-    public function processValidation(&$value, $key, $var, $max_depth = null, $cur_depth = 0, $path = [])
-    {
-        // Find the key at the current depth
-        $index = array_key_exists($cur_depth, $var['raw_index']) ? $var['raw_index'][$cur_depth] : '';
-
-        if ($cur_depth >= $max_depth && ($key == $index || is_numeric($key))) {
-            $this->validateRule($var['index'], $var['rule'], $value, $key, $path);
-        }
-    }
-
-    /**
-     * Validates all set rules using the given data, sets any error messages to Input::$errors
-     * Each ruleset attached to a field can have the following indices: rule, message, negate, last, final, pre_format,
-     * post_format pre_format and post_format accept a typical PHP callback parameter, post_format will only be called
-     * if the rule passes validation.
+     * Validates all set rules using the given data, sets any error messages to Input::$errors.
      *
      * @param  array $data An array of data such as POST
      * @return bool  true if all rules pass, false if any rule is broken
      * @see Input::errors()
      */
-    public function validates(&$data)
+    public function validate(&$data)
     {
-        $this->end_checks = false;
-        $this->data       = $data;
-
-        if (is_array($this->rules) && is_array($data)) {
-            // Test each rule
-            foreach ($this->rules as $index => $rule) {
-                // Validate array rules
-                if (strpos($index, '[') !== false) {
-                    $depth = substr_count($index, '[');
-
-                    $field = [];
-                    // Turn rule index into array
-                    parse_str($index, $field);
-
-                    // Convert $index string into an array where each index
-                    // represents a depth and each value represents the key
-                    $raw_index = explode('[', $index);
-                    foreach ($raw_index as &$key) {
-                        $key = trim($key, ']');
-                    }
-                    $depth = count($raw_index) - 1;
-
-                    // Extract the primary index
-                    $index = key($field);
-
-                    // Ensure final element of $field is null
-                    $this->clearLeaves($field);
-
-                    $val_exists = true;
-                    // If the value doesn't exist, create it temporarily so the rule can be evaluated
-                    if (!$this->pathSet($data, $field)) {
-                        $orig_data  = $data;
-                        $data       = $field; // $field makes a perfect substitute, it's already null
-                        $val_exists = false;
-                    }
-
-                    // Search recursively through the array for the element to be evaluated and attempt to validate it
-                    $this->array_walk_recursive($data[$index], [$this, 'processValidation'], ['index' => $index, 'raw_index' => $raw_index, 'rule' => $rule], $depth);
-
-                    // Destroy the temporary value created in order to validate rules
-                    if (!$val_exists) {
-                        $data = $orig_data;
-                    }
-                } // Validate scalar rules
-                else {
-                    $val_exists = true;
-                    if (!array_key_exists($index, $data)) {
-                        $val_exists = false;
-                    }
-
-                    $this->validateRule($index, $rule, $data[$index], $index);
-                    if (!$val_exists) {
-                        unset($data[$index]);
-                    }
-                }
-                if ($this->end_checks) {
-                    break;
-                }
+        foreach ($this->rules as $rule) {
+            // Build function arguments
+            if (!empty($rule['options']) || isset($rule['options'])) {
+                $arguments = array_merge([$data[$rule['field']]], $rule['options']);
+            } else if (isset($data[$rule['field']])) {
+                $arguments = [$data[$rule['field']]];
+            } else {
+                $arguments = [$rule['field']];
             }
-        }
 
-        $this->data = null;
+            // Validate rules
+            $errors     = [];
+            $validation = call_user_func_array([$this, $rule['rule']], $arguments);
 
-        if (empty($this->errors)) {
+            // Negate result
+            if ((bool) $rule['negate']) {
+                $validation = !$validation;
+            }
+
+            // Validate result
+            if ($validation == false) {
+                $errors[] = $rule['error'];
+            }
+
+            // Set errors
+            if (!empty($errors)) {
+                $this->setErrors($errors);
+
+                return false;
+            }
+
             return true;
-        } // no rule has been broken
-        return false; // rules have been broken
+        }
     }
 
     /**
@@ -395,267 +325,5 @@ class Input
         }
 
         return $this->errors;
-    }
-
-    /**
-     * Format Data from Input::validates() with the given $callback.
-     *
-     * @param mixed  $callback A string whose function accepts a single parameter,
-     *                         or an array whose format is that of a PHP callback with the addition of optional parameters
-     * @param mixed  $data     The data to be formatted
-     * @param string $key      The most immediate key to the given value
-     * @param array  $path     A list of all array indexes encountered
-     * @param return mixed The result returned by the callback
-     * @return mixed The formatted data
-     */
-    private function formatData($callback, $data, $key, $path)
-    {
-        $params = [];
-
-        if (is_array($callback)) {
-            $method = array_shift($callback);
-            $params = $callback;
-        } else {
-            $method = $callback;
-        }
-
-        $this->replaceLinkedParams($params, $path);
-
-        // Push $data onto the list of parameters
-        array_unshift($params, $data);
-
-        return call_user_func_array($method, $params);
-    }
-
-    /**
-     * Replaces all linked params in rules identified by an array with an index of '_linked'.
-     *
-     * @param array $params An array of paramters to pass to the callback, possibly containing linked params
-     * @param array $path   A list of all array indexes encountered
-     */
-    private function replaceLinkedParams(&$params, $path)
-    {
-        // Find all numeric paths for the current rule path, these are used
-        // for substitution in the _linked field for all blank indexes
-        foreach ($path as $index) {
-            if (is_int($index)) {
-                $numeric_paths[] = $index;
-            }
-        }
-
-        foreach ($params as &$param) {
-            // The number of blank array indexes from the _linked rule value
-            $blank = 0;
-            // If the parameter given is linked, find the value of the linked field
-            if (is_array($param) && isset($param['_linked'])) {
-                $data_set = $this->data;
-
-                $index = $param['_linked'];
-                // default param to null, just incase it doesn't exist
-                $param = null;
-
-                // Construct an array of all index levels for the _linked field
-                $raw_index = explode('[', $index);
-                foreach ($raw_index as &$index) {
-                    $index = trim($index, ']');
-
-                    // If any index is empty, try to substitute it for the current
-                    // rule's path
-                    if ($index == '' && array_key_exists($blank, $numeric_paths)) {
-                        $index = $numeric_paths[$blank++];
-                    }
-
-                    if (!array_key_exists($index, $data_set)) {
-                        break;
-                    }
-                    $data_set =&$data_set[$index];
-                }
-
-                $param = $data_set;
-                unset($data_set);
-            }
-        }
-    }
-
-    /**
-     * Validate the rule against the given index and value, sets any errors into this object's $errors class variable.
-     *
-     * @param string $index The index set for this rule
-     * @param array  $rule  the Rule to validate against
-     * @param mixed  $value The value given by the data element to which the rule is applied
-     * @param string $key   The most immediate key to the given value
-     * @param array  $path  A list of all array indexes encountered
-     */
-    private function validateRule($index, $rule, &$value, $key, $path = [])
-    {
-        // Cast the rule set into an array of rules for this index
-        if (isset($rule['rule'])) {
-            $rule = [$rule];
-        }
-
-        // Loop through each rule set for this index
-        foreach ($rule as $type => $rule_set) {
-            // Ensure that we are allowed to validate this rule, even if the value is not set
-            if (!isset($value) && isset($rule_set['if_set']) && $rule_set['if_set']) {
-                continue;
-            }
-
-            if (is_array($rule_set['rule'])) {
-                $method = array_shift($rule_set['rule']);
-            } else {
-                $method           = $rule_set['rule'];
-                $rule_set['rule'] = [];
-            }
-
-            // Format the data before running the evaluation
-            if (isset($rule_set['pre_format'])) {
-                $value = $this->formatData($rule_set['pre_format'], $value, $key, $path);
-            }
-
-            // Push the $data[$index] value onto the array of parameters to be sent to the method governing the given rule
-            array_unshift($rule_set['rule'], $value);
-
-            $this->replaceLinkedParams($rule_set['rule'], $path);
-
-            // Call the rule given, which may be a callback or a method within the scope of this class
-            if (is_string($method)) {
-                // If the method doesn't exist in this class, assume it is a global PHP function
-                if (method_exists($this, $method)) {
-                    $method = [$this, $method];
-                }
-            }
-
-            // Process boolean rules (true / false)
-            if (is_bool($method)) {
-                $response = !$method;
-            } // Process callback rules
-            else {
-                $response = !call_user_func_array($method, $rule_set['rule']);
-            }
-
-            // A response is considered an error if it returns false, so by default we negate
-            // responses. If the rule set is configured to negate responses then we look for a 'true' response instead
-            if ((isset($rule_set['negate']) && $rule_set['negate'] && !$response) || ((!isset($rule_set['negate']) || !$rule_set['negate']) && $response)) {
-                // If the rule is apart of a larger array set the full path to avoid overwriting other errors
-                $error_key = $index;
-                foreach ($path as $path_value) {
-                    $error_key .= '[' . $path_value . ']';
-                }
-
-                $this->errors[$error_key][$type] = (isset($rule_set['message']) ? $rule_set['message'] : null);
-
-                // If this rule is set as the last to evaluate for this field stop checks
-                if (isset($rule_set['last']) && $rule_set['last']) {
-                    break;
-                }
-                // If this rule is set as the final to evaluate for this set of checks stop all checks
-                if (isset($rule_set['final']) && $rule_set['final']) {
-                    $this->end_checks = true;
-                    break;
-                }
-            }
-
-            // Format the data after running the evaluation
-            if (isset($rule_set['post_format'])) {
-                $value = $this->formatData($rule_set['post_format'], $value, $key, $path);
-            }
-        }
-    }
-
-    /**
-     * Emulates the standard array_walk_recursive function, with the added functionality
-     * of passing array elements through when no further recusion can be made.
-     *
-     * @param  array    $input     The input array to recurse through
-     * @param  callback $callback  The callback function to apply to each member of $input
-     * @param  array    $params    An array of additional parameters to be passed to the callback
-     * @param  int      $max_depth The maximum permitted depth to recurse
-     * @param  int      $cur_depth The current depth
-     * @param  array    $path      A list of all array indexes encountered
-     * @return bool     False if the input is no longer an array and therefore can not be recursed through, true
-     *                            otherwise
-     */
-    private static function array_walk_recursive(&$input, $callback, $params = null, $max_depth = null, $cur_depth = 0, $path = [])
-    {
-        if (!is_array($input)) {
-            return false;
-        }
-
-        // Recursed as far down as permitted
-        if ($max_depth > 0 && $cur_depth >= $max_depth) {
-            return false;
-        }
-
-        $cur_depth++;
-
-        foreach ($input as $key => $value) {
-            $cur_key = array_key_exists($cur_depth, $params['raw_index']) ? $params['raw_index'][$cur_depth] : '';
-
-            // If the key doesn't match for this current depth, we're not supposed to evaluate it
-            // so continue to the next element
-            if ($key != $cur_key && $cur_key != '') {
-                continue;
-            }
-
-            $path[] = $key;
-
-            // Invoke the callback, emulating the array_walk_recursive function
-            if (!is_array($input[$key]) || $cur_depth >= $max_depth) {
-                call_user_func_array($callback, [&$input[$key], $key, $params, $max_depth, $cur_depth, $path]);
-            }
-
-            if (is_array($input[$key])) {
-                // Recurse deeper
-                self::array_walk_recursive($input[$key], $callback, $params, $max_depth, $cur_depth, $path);
-            }
-
-            // Make room for the next index at this level
-            array_pop($path);
-        }
-
-        // Finished all indexes at this depth, bubble back up
-        return true;
-    }
-
-    /**
-     * Recursively evaluates whether the path defined by $field is defined in $data.
-     *
-     * @param  mixed $data  An array of data, or a scalar value if the array has been fully traversed
-     * @param  mixed $field An array defining a path that $data should define, scalar if the array has been fully
-     *                      traversed
-     * @return bool  True if $field is fully defined in $data, false otherwise.
-     */
-    private static function pathSet($data, $field)
-    {
-        if (is_array($data) && is_array($field)) {
-            foreach ($data as $data_key => $data_value) {
-                foreach ($field as $field_key => $field_value) {
-                    if ($field_key == $data_key) {
-                        return self::pathSet($data_value, $field_value);
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Recursively sets all leaf elements of the given array to null.
-     *
-     * @param mixed $data An array of data whose leaves to set to null, or a scalar value if the array has been fully
-     *                    traversed
-     */
-    private static function clearLeaves(&$data)
-    {
-        if (is_array($data)) {
-            foreach ($data as $key => $value) {
-                self::clearLeaves($data[$key]);
-            }
-        } else {
-            $data = null;
-        }
     }
 }

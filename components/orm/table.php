@@ -39,9 +39,9 @@ class Table extends Record
     {
         if (!method_exists($this, $method_name)) {
             if (!empty($args)) {
-                $result = $this->get('*', [$this->table . '.' . $method_name, '=', $args[0]])->fetchAll();
+                $result = $this->get('*', [$this->table . '.' . $method_name, '=', $args[0]]);
             } else {
-                $result = $this->get($method_name)->fetchAll();
+                $result = $this->get($method_name);
             }
 
             if (count($result) == 1) {
@@ -77,10 +77,10 @@ class Table extends Record
     public function get($params = '*', $where = [])
     {
         if (!empty($where)) {
-            return $this->select($params)->from($this->table)->where($where[0], $where[1], $where[2]);
+            return $this->select($params)->from($this->table)->where($where[0], $where[1], $where[2])->fetchAll();
         }
 
-        return $this->select($params)->from($this->table);
+        return $this->select($params)->from($this->table)->fetchAll();
     }
 
     /**

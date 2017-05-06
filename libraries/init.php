@@ -67,7 +67,7 @@ define('CACHEDIR', ROOTWEBDIR . 'cache' . DS);
 /*
  * Absolute path to the lib directory.
  */
-define('LIBDIR', ROOTWEBDIR . 'library' . DS);
+define('LIBDIR', ROOTWEBDIR . 'libraries' . DS);
 
 /*
  * Absolute path to the models directory, where all models are stored.

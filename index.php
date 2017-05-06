@@ -20,7 +20,7 @@ $start = microtime(true);
  */
 try {
     // Load framework
-    include dirname(__FILE__) . '/library/init.php';
+    include dirname(__FILE__) . '/libraries/init.php';
 
     // Dispatch the Web request
     if (!empty($_SERVER['REQUEST_URI'])) {

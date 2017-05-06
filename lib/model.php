@@ -12,8 +12,8 @@
 
 namespace Advandz\Library;
 
-use Exception;
 use PDO;
+use Exception;
 
 class Model
 {

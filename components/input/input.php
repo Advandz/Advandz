@@ -13,8 +13,6 @@
 
 namespace Advandz\Component;
 
-use Advandz\Helper\Arrayment;
-
 class Input
 {
     /**
@@ -271,7 +269,7 @@ class Input
             // Build function arguments
             if (!empty($rule['options']) || isset($rule['options'])) {
                 $arguments = array_merge([$data[$rule['field']]], $rule['options']);
-            } else if (isset($data[$rule['field']])) {
+            } elseif (isset($data[$rule['field']])) {
                 $arguments = [$data[$rule['field']]];
             } else {
                 $arguments = [$rule['field']];

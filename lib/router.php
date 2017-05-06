@@ -43,7 +43,6 @@ final class Router
         // Load Middleware
         if (isset($middlewares) && is_array($middlewares)) {
             foreach ($middlewares as $middleware) {
-
                 // Generate namespace and get file name
                 if (strpos($middleware, '\\') !== false) {
                     $file_name = explode('\\', $middleware);

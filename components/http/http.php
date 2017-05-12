@@ -135,8 +135,8 @@ class Http
      * Sets the method to send the request.
      *
      * @param  string    $method Request method
-     * @return Http      Reference to this class
      * @throws Exception When an invalid HTTP method is given
+     * @return Http      Reference to this class
      */
     public function method($method)
     {

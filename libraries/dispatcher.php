@@ -147,8 +147,8 @@ class Dispatcher extends Controller
      * Print an exception thrown error page.
      *
      * @param  Exception $e An exception thrown
-     * @return bool      False if the redirects fail
      * @throws Exception Throw our original error, since the error can not be handled cleanly
+     * @return bool      False if the redirects fail
      */
     public static function raiseError($e)
     {

@@ -322,8 +322,9 @@ class Text
     /**
      * Censor words from a text.
      *
-     * @param  string $text  The text string
-     * @param  array  $words The array of censored words
+     * @param  string $text        The text string
+     * @param  array  $words       The array of censored words
+     * @param  mixed  $replacement
      * @return string The clean text
      */
     public function censorWords($text, array $words, $replacement = '****')

@@ -36,8 +36,8 @@ class Filesystem
      * @param  string    $file      The full path of the file to save
      * @param  mixed     $data      The permission value in octets, null to default to user permissions
      * @param  bool      $overwrite True to overwrite if the file exists
-     * @return bool      True if the file has been saved successfully
      * @throws Exception If the file can't be writed
+     * @return bool      True if the file has been saved successfully
      */
     public function saveFile($file, $data, $overwrite = false)
     {
@@ -56,8 +56,8 @@ class Filesystem
      * Delete a file.
      *
      * @param  string    $file The full path of the file to delete
-     * @return bool      True if the file has been deleted, false if not exists
      * @throws Exception If the file can't be deleted
+     * @return bool      True if the file has been deleted, false if not exists
      */
     public function deleteFile($file)
     {
@@ -154,8 +154,8 @@ class Filesystem
      *
      * @param  string    $dir         The full path of the new directory
      * @param  int       $permissions The permissions of the directory (Ignored in Windows)
-     * @return bool      True if the directory has been created successfully
      * @throws Exception If the directory can't be created
+     * @return bool      True if the directory has been created successfully
      */
     public function createDir($dir, $permissions = 0777)
     {
@@ -171,8 +171,8 @@ class Filesystem
      *
      * @param  string    $dir       The full path of the directory
      * @param  bool      $recursive True to delete all the containing files and folders
-     * @return bool      True if the directory has been deleted successfully
      * @throws Exception If the directory can't be deleted
+     * @return bool      True if the directory has been deleted successfully
      */
     public function deleteDir($dir, $recursive = true)
     {

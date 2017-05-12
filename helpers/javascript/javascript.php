@@ -93,9 +93,11 @@ class Javascript extends Html
     /**
      * Sets the given javascript file into the structure view.
      *
-     * @param  string     $file     The name of the javascript file to load
-     * @param  string     $location The location to set the given file (genearlly "head" or "body")
-     * @param  string     $path     The path to the javascript file, if null will use the default path set in the constructor
+     * @param  string     $file      The name of the javascript file to load
+     * @param  string     $location  The location to set the given file (genearlly "head" or "body")
+     * @param  string     $path      The path to the javascript file, if null will use the default path set in the constructor
+     * @param  null|mixed $condition
+     * @param  mixed      $hidden
      * @return Javascript Returns the instance of this object
      */
     public function setFile($file, $location = 'head', $path = null, $condition = null, $hidden = true)
@@ -112,7 +114,9 @@ class Javascript extends Html
     /**
      * Sets the given javascript data to be appended to the list of javascript data.
      *
-     * @param  string     $data The javascript data to set
+     * @param  string     $data      The javascript data to set
+     * @param  null|mixed $condition
+     * @param  mixed      $hidden
      * @return Javascript Returns the instance of this object
      */
     public function setInline($data, $condition = null, $hidden = true)

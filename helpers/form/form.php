@@ -494,6 +494,7 @@ class Form extends Html
      * @param  array  $attributes        Attributes for this input field
      * @param  array  $option_attributes Attributes for each option to set. If single dimension will set the attributes
      *                                   for every option, if multi-dimensional will set option for each element key that matches in $options
+     * @param  mixed  $selected_values
      * @return string The multi-select field, void if output enabled
      */
     public function fieldMultiSelect($name, $options = [], $selected_values = [], $attributes = [], $option_attributes = [])

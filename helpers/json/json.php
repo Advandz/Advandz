@@ -65,8 +65,8 @@ class Json
     /**
      * Check the JSON latest error.
      *
-     * @return bool      True if is a valid JSON
      * @throws Exception When the JSON parser returns the last error occurred
+     * @return bool      True if is a valid JSON
      */
     private function jsonError()
     {

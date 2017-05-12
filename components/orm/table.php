@@ -21,6 +21,7 @@ class Table extends Record
 
     /**
      * Creates a new Table object.
+     * @param mixed $table
      */
     public function __construct($table)
     {

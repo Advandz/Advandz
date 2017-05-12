@@ -131,6 +131,7 @@ final class App
      * Redirects to an URL.
      *
      * @param  string $url The URL to redirect
+     * @param  mixed  $uri
      * @return bool   False if the redirects fail
      */
     final public static function redirect($uri = WEBDIR)

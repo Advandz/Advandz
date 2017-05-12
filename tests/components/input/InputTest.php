@@ -35,6 +35,11 @@ class InputTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Input::isPassword
      * @dataProvider isPasswordProvider
+     * @param mixed $str
+     * @param mixed $length
+     * @param mixed $type
+     * @param mixed $regex
+     * @param mixed $result
      */
     public function testIsPassword($str, $length, $type, $regex, $result)
     {
@@ -73,6 +78,10 @@ class InputTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Input::isDate()
      * @dataProvider isDateProvider
+     * @param mixed $date
+     * @param mixed $min
+     * @param mixed $max
+     * @param mixed $result
      */
     public function testIsDate($date, $min, $max, $result)
     {
@@ -109,6 +118,10 @@ class InputTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Input::compares
      * @dataProvider comparesProvider
+     * @param mixed $a
+     * @param mixed $op
+     * @param mixed $b
+     * @param mixed $result
      */
     public function testCompares($a, $op, $b, $result)
     {
@@ -219,6 +232,9 @@ class InputTest extends PHPUnit_Framework_TestCase
      * @covers Input::replaceLinkedParams
      * @covers Input::processValidation
      * @dataProvider inputPreFormatProvider
+     * @param mixed $rules
+     * @param mixed $data
+     * @param mixed $formatted_data
      */
     public function testPreFormat($rules, $data, $formatted_data)
     {
@@ -243,6 +259,9 @@ class InputTest extends PHPUnit_Framework_TestCase
      * @covers Input::replaceLinkedParams
      * @covers Input::processValidation
      * @dataProvider inputPostFormatProvider
+     * @param mixed $rules
+     * @param mixed $data
+     * @param mixed $formatted_data
      */
     public function testPostFormat($rules, $data, $formatted_data)
     {
@@ -267,6 +286,9 @@ class InputTest extends PHPUnit_Framework_TestCase
      * @covers Input::replaceLinkedParams
      * @covers Input::processValidation
      * @dataProvider inputValidationProvider
+     * @param mixed $rules
+     * @param mixed $data
+     * @param mixed $result
      */
     public function testValidation($rules, $data, $result)
     {

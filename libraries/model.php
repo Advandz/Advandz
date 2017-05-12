@@ -165,8 +165,8 @@ class Model
      * Query the Database using the given prepared statement and argument list.
      *
      * @param  string       $sql The SQL to execute
-     * @return PDOStatement The resulting PDOStatement from the execution of this query
      * @throws Exception    Thrown when no PDO connection has been established
+     * @return PDOStatement The resulting PDOStatement from the execution of this query
      */
     public function query($sql)
     {
@@ -200,8 +200,8 @@ class Model
      *
      * @param  string       $sql        The SQL statement to prepare
      * @param  int          $fetch_mode The PDO::FETCH_* constant, defaults to "Database.fetch_mode" config setting
-     * @return PDOStatement The resulting PDOStatement from the preparation of this query
      * @throws Exception    When connection has not been instantiated
+     * @return PDOStatement The resulting PDOStatement from the preparation of this query
      * @see PDOStatement::execute()
      */
     public function prepare($sql, $fetch_mode = null)
@@ -225,8 +225,8 @@ class Model
     /**
      * Begin a transaction.
      *
-     * @return bool      True if the transaction was successfully opened, false otherwise
      * @throws Exception When connection has not been instantiated
+     * @return bool      True if the transaction was successfully opened, false otherwise
      */
     public function begin()
     {
@@ -241,8 +241,8 @@ class Model
     /**
      * Rolls back and closes the transaction.
      *
-     * @return bool      True if the transaction was successfully rolled back and closed, false otherwise
      * @throws Exception When connection has not been instantiated
+     * @return bool      True if the transaction was successfully rolled back and closed, false otherwise
      */
     public function rollBack()
     {
@@ -257,8 +257,8 @@ class Model
     /**
      * Commits a transaction.
      *
-     * @return bool      True if the transaction was successfully commited and closed, false otherwise
      * @throws Exception When connection has not been instantiated
+     * @return bool      True if the transaction was successfully commited and closed, false otherwise
      */
     public function commit()
     {
@@ -285,8 +285,8 @@ class Model
      *
      * @param  PDOStatement $statement The statement to count affected rows on,
      *                                 if null the last Model::query() statement will be used.
-     * @return int          The number of rows affected by the previous query
      * @throws Exception    Thrown when called prior to Model::query()
+     * @return int          The number of rows affected by the previous query
      */
     public function affectedRows($statement = null)
     {
@@ -305,8 +305,8 @@ class Model
      * Build a DSN string using the given array of parameters.
      *
      * @param  array     $db_params An array of parameters
-     * @return string    The DSN string
      * @throws Exception Thrown when $db contains invalid parameters
+     * @return string    The DSN string
      */
     public static function makeDSN($db_params)
     {

@@ -122,6 +122,7 @@ final class Router
 
     /**
      * Converts a directory string into a properly formed URI.
+     * @param mixed $dir
      */
     public static function makeURI($dir)
     {

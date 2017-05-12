@@ -107,7 +107,8 @@ class Session
     /**
      * Read Session information for the given index.
      *
-     * @param  string $name The name of the index to read
+     * @param  string $name    The name of the index to read
+     * @param  mixed  $persist
      * @return mixed  The value stored in $name of the session, or an empty string.
      */
     public function read($name, $persist = true)
@@ -202,12 +203,13 @@ class Session
     /**
      * Set session handler callback methods and start the session.
      *
-     * @param int    $ttl       Time to Live (seconds)
-     * @param string $tbl       Name of the session table
-     * @param string $tblid     Name of the session ID field
-     * @param string $tblexpire Name of the session expire date field
-     * @param string $tblvalue  Name of the session value field
-     * @param bool   $httponly  Whether or not the cookie should be flagged for HTTP only
+     * @param int    $ttl          Time to Live (seconds)
+     * @param string $tbl          Name of the session table
+     * @param string $tblid        Name of the session ID field
+     * @param string $tblexpire    Name of the session expire date field
+     * @param string $tblvalue     Name of the session value field
+     * @param bool   $httponly     Whether or not the cookie should be flagged for HTTP only
+     * @param mixed  $session_name
      */
     private function sessionSet($ttl, $tbl, $tblid, $tblexpire, $tblvalue, $session_name, $httponly)
     {

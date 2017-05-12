@@ -32,8 +32,8 @@ class Users
      * @param  string    $password The password
      * @param  string    $email    The user email
      * @param  array     $vars     The user data
-     * @return bool      True if the user can be added successfully
      * @throws Exception Throws when the user already exists
+     * @return bool      True if the user can be added successfully
      */
     public function addUser($username, $password, $email, $vars = [])
     {
@@ -63,8 +63,8 @@ class Users
      * Get the information from a user.
      *
      * @param  string    $username The username
-     * @return array     An array containing the user information
      * @throws Exception Throws when the user not exists
+     * @return array     An array containing the user information
      */
     public function getUser($username)
     {
@@ -82,8 +82,8 @@ class Users
      * Delete a user.
      *
      * @param  string    $username The username
-     * @return bool      True if the user can be deleted successfully
      * @throws Exception Throws when the user not exists
+     * @return bool      True if the user can be deleted successfully
      */
     public function removeUser($username)
     {

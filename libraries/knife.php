@@ -65,8 +65,8 @@ class Knife extends Language
      * Compiles the template into PHP code.
      *
      * @param  string    $file The template file used as our view
-     * @return string    The file location to the compiled code
      * @throws Exception When is not a valid view or you don't have the permissions to read them
+     * @return string    The file location to the compiled code
      */
     public function compile($file = null)
     {

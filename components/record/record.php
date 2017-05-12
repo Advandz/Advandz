@@ -719,6 +719,7 @@ class Record extends \Model
      * Sets the fields to order by.
      *
      * @param  array  $fields The fields to order by
+     * @param  mixed  $escape
      * @return Record Reference to this class
      */
     public function order(array $fields, $escape = true)
@@ -1482,6 +1483,7 @@ class Record extends \Model
     /**
      * Creates key = value pairs, comma separated.
      *
+     * @param  mixed  $pairs
      * @return string The value pairs of a query
      */
     private function buildValuePairs($pairs)

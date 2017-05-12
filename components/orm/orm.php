@@ -18,8 +18,8 @@ class Orm extends Record
      * Initializes a Table Class.
      *
      * @param  mixed     $tables The database table to use
-     * @return Table     Returns a Table Object if the table exists
      * @throws Exception If the table not exists in the database
+     * @return Table     Returns a Table Object if the table exists
      */
     public function _($tables)
     {

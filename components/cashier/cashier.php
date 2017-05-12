@@ -25,6 +25,7 @@ class Cashier
 
     /**
      * Constructs a new Cashier object.
+     * @param mixed $currency
      */
     public function __construct($currency = 'USD')
     {

@@ -27,6 +27,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Dispatcher::dispatchCli
      * @dataProvider dispatchCliProvider
+     * @param mixed $expected
      */
     public function testDispatchCli(array $args, $expected)
     {
@@ -67,6 +68,8 @@ class DispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Dispatcher::raiseError
      * @dataProvider raiseErrorProvider
+     * @param mixed $e
+     * @param mixed $type
      */
     public function testRaiseError($e, $type)
     {

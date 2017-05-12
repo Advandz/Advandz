@@ -429,6 +429,8 @@ class RecordTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Record::quoteIdentifier
      * @dataProvider quoteIdentifierProvider
+     * @param mixed $identifier
+     * @param mixed $result
      */
     public function testQuoteIdentifier($identifier, $result)
     {
@@ -455,8 +457,9 @@ class RecordTest extends PHPUnit_Framework_TestCase
     /**
      * Generates a Record mock with Record::query and Record::reset mocked.
      *
-     * @param  string $query  The SQL before substitution
-     * @param  array  $params The parameters to substitute
+     * @param  string     $query  The SQL before substitution
+     * @param  array      $params The parameters to substitute
+     * @param  null|mixed $return
      * @return object
      */
     protected function getQueryMock($query, $params = [], $return = null)

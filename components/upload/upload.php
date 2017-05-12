@@ -74,8 +74,8 @@ class Upload
      * @param  int       $permissions The permission value in octets, null to default to user permissions
      * @param  bool      $overwrite   Whether or not to overwrite the file if it already exists
      * @param  bool      $hash_name   Use the SHA-256 sum of the file, as file's name
-     * @return string    The path to the uploaded file
      * @throws Exception If the file can't be writed
+     * @return string    The path to the uploaded file
      */
     public function saveFile($file, $permissions = 0644, $overwrite = false, $hash_name = false)
     {
@@ -172,8 +172,8 @@ class Upload
      * Calculates the hash sum of a file.
      *
      * @param  string    $file The full path of the file
-     * @return string    The SHA-256 hash of the file
      * @throws Exception If the file not exits
+     * @return string    The SHA-256 hash of the file
      */
     public function hash($file)
     {

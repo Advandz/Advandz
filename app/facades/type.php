@@ -25,8 +25,8 @@ final class Type
      * Set the data type of a variable as String.
      *
      * @param  string    $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of string
+     * @return string    The value
      */
     final public static function _string($value = '')
     {
@@ -41,8 +41,8 @@ final class Type
      * Set the data type of a variable as Integer.
      *
      * @param  int       $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of integer
+     * @return string    The value
      */
     final public static function _int($value = 0)
     {
@@ -57,8 +57,8 @@ final class Type
      * Set the data type of a variable as Float.
      *
      * @param  float     $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of float
+     * @return string    The value
      */
     final public static function _float($value = 0.0)
     {
@@ -73,8 +73,8 @@ final class Type
      * Set the data type of a variable as Double.
      *
      * @param  float     $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of double
+     * @return string    The value
      */
     final public static function _double($value = 0.0)
     {
@@ -89,8 +89,8 @@ final class Type
      * Set the data type of a variable as Boolean.
      *
      * @param  bool      $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of boolean
+     * @return string    The value
      */
     final public static function _bool($value = false)
     {
@@ -105,8 +105,8 @@ final class Type
      * Set the data type of a variable as Array.
      *
      * @param  array     $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an instance of array
+     * @return string    The value
      */
     final public static function _array($value = [])
     {
@@ -121,8 +121,8 @@ final class Type
      * Set the data type of a variable as Object.
      *
      * @param  string    $value The defined value of the variable
-     * @return string    The value
      * @throws Exception When the argument passed is not an object
+     * @return string    The value
      */
     final public static function _object($value = null)
     {

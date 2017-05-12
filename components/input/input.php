@@ -112,10 +112,11 @@ class Input
     /**
      * Tests whether the given string is considered a valid date suitable to strtotime().
      *
-     * @param  string $str The string to test
-     * @param  mixed  $min The minimum acceptable date (string) or unix time stamp (int)
-     * @param  mixed  $min The maximum acceptable date (string) or unix time stamp (int)
-     * @return bool   True if $str is a valid date, false otherwise
+     * @param  string     $str The string to test
+     * @param  mixed      $min The minimum acceptable date (string) or unix time stamp (int)
+     * @param  mixed      $min The maximum acceptable date (string) or unix time stamp (int)
+     * @param  null|mixed $max
+     * @return bool       True if $str is a valid date, false otherwise
      */
     public static function isDate($str, $min = null, $max = null)
     {
@@ -163,8 +164,8 @@ class Input
      * @param  mixed     $a  The value to compare
      * @param  string    $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
      * @param  mixed     $b  The value to compare against
-     * @return bool      True if $a validates $op against $b, false otherwise
      * @throws Exception Thrown when an unrecognized operator, $op, is given
+     * @return bool      True if $a validates $op against $b, false otherwise
      */
     public static function compares($a, $op, $b)
     {

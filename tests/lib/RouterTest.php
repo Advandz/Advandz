@@ -22,6 +22,8 @@ class RouterTest extends PHPUnit_Framework_TestCase
      * @covers Router::route
      * @dataProvider routeProvider
      * @expectedException Exception
+     * @param mixed $orig_uri
+     * @param mixed $mapped_uri
      */
     public function testRoute($orig_uri, $mapped_uri)
     {
@@ -116,6 +118,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Router::routesTo
      * @dataProvider routesToProvider
+     * @param mixed $uri
      */
     public function testRoutesTo($uri)
     {

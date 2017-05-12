@@ -232,7 +232,8 @@ class Arrayment
     /**
      * Flatten a matrix with dots.
      *
-     * @param  array $array The array to split
+     * @param  array $array   The array to split
+     * @param  mixed $prepend
      * @return array The resultant array
      */
     public function dotMatrix(array $array, $prepend = '')

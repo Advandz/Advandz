@@ -176,6 +176,7 @@ class Html
      * using the $glue parameter.
      *
      * @param array $attributes The attribute keys and values to build
+     * @param mixed $glue
      * @pararm string $glue The string to use to concatenate an array of attribute values together
      * @return string The key=value attributes
      */

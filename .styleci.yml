@@ -10,6 +10,9 @@ enabled:
  - align_double_arrow
  - no_short_echo_tag
  - phpdoc_align
+ - phpdoc_order
+ - phpdoc_link_to_see
+ - phpdoc_add_missing_param_annotation
  - space_after_semicolon
  - concat_with_spaces
  - no_extra_block_blank_lines
@@ -30,4 +33,3 @@ finder:
  exclude:
   - "language"
   - "vendors"
-  - "vendor"

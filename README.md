@@ -13,7 +13,7 @@ Advandz is an enterprise-class powerful and scalable application development fra
 
 ## Learning Advandz
 
-Advandz has an extensive, clear and thorough documentation. The [Advandz documentation](http://documentation.advandz.com/) is thorough, complete, and makes it a breeze to get started learning the framework.
+Advandz has an extensive, clear and thorough documentation. The [Advandz documentation](http://advandz.com/documentation/) is thorough, complete, and makes it a breeze to get started learning the framework.
 
 ## What if I find a bug?
 

@@ -9,14 +9,14 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-icons.css">
         <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-animations.css">
-        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-ui.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz.css">
         <link rel="stylesheet" href="{{@yield assets_dir}}css/styles.css">
 
         <!-- Scripts -->
         {{foreach $libs as $lib}}
             <script src="{{!@var lib}}"></script>
         {{/foreach}}
-        <script src="{{@yield assets_dir}}javascript/advandz-ui.js"></script>
+        <script src="{{@yield assets_dir}}javascript/advandz.js"></script>
         <script src="{{@yield assets_dir}}javascript/script.js"></script>
     </head>
     <body>

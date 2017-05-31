@@ -63,9 +63,12 @@ class Dispatcher extends Controller
         }
 
         // Initialize the AppModel and AppController, so they can be
-        // automatically extended
+        // automatically extended, furthermore load the respective
+        // default language files.
         Loader::load(ROOTWEBDIR . APPDIR . 'app_model.php');
+        Language::loadLang('app_model');
         Loader::load(ROOTWEBDIR . APPDIR . 'app_controller.php');
+        Language::loadLang('app_controller');
 
         $plugin_path = null; // relative path to the plugin directory if it exists
 
@@ -95,6 +98,9 @@ class Dispatcher extends Controller
         $contrl    = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . Loader::toCamelCase($controller);
         $namespace = 'Advandz\\App\\Controller\\' . $contrl;
         $ctrl      = new $namespace($controller, $action, $is_cli);
+
+        // Load the default language file for the controller
+        Language::loadLang($controller);
 
         // Make the POST/GET/FILES available to the controller
         $ctrl->uri        = $uri;
@@ -147,8 +153,8 @@ class Dispatcher extends Controller
      * Print an exception thrown error page.
      *
      * @param  Exception $e An exception thrown
-     * @throws Exception Throw our original error, since the error can not be handled cleanly
      * @return bool      False if the redirects fail
+     * @throws Exception Throw our original error, since the error can not be handled cleanly
      */
     public static function raiseError($e)
     {

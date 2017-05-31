@@ -6,9 +6,6 @@
     "type": "project",
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "require": {
-        "php": ">=5.6"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -21,12 +18,16 @@
             "app",
             "components",
             "helpers",
-            "lib"
+            "libraries"
         ]
     },
     "require": {
+        "php": ">=5.6",
         "stripe/stripe-php": ">=4.0.0",
-        "braintree/braintree_php": ">=3.20.0"
+        "braintree/braintree_php": ">=3.20.0",
+        "php-ai/php-ml": ">=0.4.1",
+        "deployer/deployer": ">=5.0.0",
+        "phpids/phpids": ">=0.7"
     },
     "config": {
         "preferred-install": "dist",
@@ -39,9 +40,9 @@
             "rm -rf README.md",
             "rm -rf build",
             "rm -rf tests",
-	        "rm -rf .styleci.yml",
-	        "rm -rf .travis.yml",
-	        "rm -rf .gitignore"
+            "rm -rf .styleci.yml",
+            "rm -rf .travis.yml",
+            "rm -rf .gitignore"
         ],
         "post-update-cmd": [
             "rm -rf LICENSE.md",
@@ -49,8 +50,8 @@
             "rm -rf build",
             "rm -rf tests",
             "rm -rf .styleci.yml",
-	        "rm -rf .travis.yml",
-	        "rm -rf .gitignore"
+            "rm -rf .travis.yml",
+            "rm -rf .gitignore"
         ]
     }
 }

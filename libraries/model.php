@@ -13,7 +13,6 @@
 namespace Advandz\Library;
 
 use PDO;
-use Exception;
 
 class Model
 {
@@ -139,7 +138,7 @@ class Model
     public function lastInsertId($name = null)
     {
         if (!($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::lastInsertId when connection has not been instantiated');
+            throw new \Exception('Call to Model::lastInsertId when connection has not been instantiated');
         }
 
         return $this->connection->lastInsertId($name);
@@ -155,7 +154,7 @@ class Model
     public function setAttribute($attribute, $value)
     {
         if (!($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::setAttribute when connection has not been instantiated');
+            throw new \Exception('Call to Model::setAttribute when connection has not been instantiated');
         }
 
         $this->connection->setAttribute($attribute, $value);
@@ -165,8 +164,8 @@ class Model
      * Query the Database using the given prepared statement and argument list.
      *
      * @param  string       $sql The SQL to execute
-     * @throws Exception    Thrown when no PDO connection has been established
      * @return PDOStatement The resulting PDOStatement from the execution of this query
+     * @throws Exception    Thrown when no PDO connection has been established
      */
     public function query($sql)
     {
@@ -181,7 +180,7 @@ class Model
 
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::query when connection has not been instantiated');
+            throw new \Exception('Call to Model::query when connection has not been instantiated');
         }
 
         // Store this statement in our PDO object for easy use later
@@ -200,15 +199,15 @@ class Model
      *
      * @param  string       $sql        The SQL statement to prepare
      * @param  int          $fetch_mode The PDO::FETCH_* constant, defaults to "Database.fetch_mode" config setting
-     * @throws Exception    When connection has not been instantiated
      * @return PDOStatement The resulting PDOStatement from the preparation of this query
+     * @throws Exception    When connection has not been instantiated
      * @see PDOStatement::execute()
      */
     public function prepare($sql, $fetch_mode = null)
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::prepare when connection has not been instantiated');
+            throw new \Exception('Call to Model::prepare when connection has not been instantiated');
         }
 
         if ($fetch_mode === null) {
@@ -225,14 +224,14 @@ class Model
     /**
      * Begin a transaction.
      *
-     * @throws Exception When connection has not been instantiated
      * @return bool      True if the transaction was successfully opened, false otherwise
+     * @throws Exception When connection has not been instantiated
      */
     public function begin()
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::begin when connection has not been instantiated');
+            throw new \Exception('Call to Model::begin when connection has not been instantiated');
         }
 
         return $this->connection->beginTransaction();
@@ -241,14 +240,14 @@ class Model
     /**
      * Rolls back and closes the transaction.
      *
-     * @throws Exception When connection has not been instantiated
      * @return bool      True if the transaction was successfully rolled back and closed, false otherwise
+     * @throws Exception When connection has not been instantiated
      */
     public function rollBack()
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::rollBack when connection has not been instantiated');
+            throw new \Exception('Call to Model::rollBack when connection has not been instantiated');
         }
 
         return $this->connection->rollBack();
@@ -257,14 +256,14 @@ class Model
     /**
      * Commits a transaction.
      *
-     * @throws Exception When connection has not been instantiated
      * @return bool      True if the transaction was successfully commited and closed, false otherwise
+     * @throws Exception When connection has not been instantiated
      */
     public function commit()
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new Exception('Call to Model::commit when connection has not been instantiated');
+            throw new \Exception('Call to Model::commit when connection has not been instantiated');
         }
 
         return $this->connection->commit();
@@ -285,8 +284,8 @@ class Model
      *
      * @param  PDOStatement $statement The statement to count affected rows on,
      *                                 if null the last Model::query() statement will be used.
-     * @throws Exception    Thrown when called prior to Model::query()
      * @return int          The number of rows affected by the previous query
+     * @throws Exception    Thrown when called prior to Model::query()
      */
     public function affectedRows($statement = null)
     {
@@ -295,7 +294,7 @@ class Model
         }
 
         if (!($statement instanceof PDOStatement)) {
-            throw new Exception('Call to Model::affectedRows before initializing a statement, call Model::query first');
+            throw new \Exception('Call to Model::affectedRows before initializing a statement, call Model::query first');
         }
 
         return $statement->rowCount();
@@ -305,13 +304,13 @@ class Model
      * Build a DSN string using the given array of parameters.
      *
      * @param  array     $db_params An array of parameters
-     * @throws Exception Thrown when $db contains invalid parameters
      * @return string    The DSN string
+     * @throws Exception Thrown when $db contains invalid parameters
      */
     public static function makeDSN($db_params)
     {
         if (!isset($db_params['driver']) || !isset($db_params['database']) || !isset($db_params['host'])) {
-            throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
+            throw new \Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
         }
 
         return $db_params['driver'] . ':dbname=' . $db_params['database'] . ';host=' . $db_params['host'] . (isset($db_params['port']) ? ';port=' . $db_params['port'] : '');
@@ -354,7 +353,7 @@ class Model
                     $this->query($db_info['charset_query']);
                 }
             } catch (PDOException $e) {
-                throw new Exception($e->getMessage());
+                throw new \Exception($e->getMessage());
             }
         }
     }

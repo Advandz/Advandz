@@ -7,7 +7,7 @@
         <title>Advandz Framework</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-ui.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz.css">
     </head>
     <body>
         <div class="container padding-top-50 padding-top-sm-25 padding-bottom-50 padding-bottom-sm-25">

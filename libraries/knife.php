@@ -6,13 +6,12 @@
  * @package Advandz
  * @subpackage Advandz.lib
  * @copyright Copyright (c) 2016-2017 Advandz, LLC. All Rights Reserved.
- * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @license https://www.advandz.com/eula/ The Advandz License Agreement
  * @author The Advandz Team <team@advandz.com>
  */
 
 namespace Advandz\Library;
 
-use Exception;
 use Advandz\Helper\Html;
 
 class Knife extends Language
@@ -65,8 +64,8 @@ class Knife extends Language
      * Compiles the template into PHP code.
      *
      * @param  string    $file The template file used as our view
-     * @throws Exception When is not a valid view or you don't have the permissions to read them
      * @return string    The file location to the compiled code
+     * @throws Exception When is not a valid view or you don't have the permissions to read them
      */
     public function compile($file = null)
     {
@@ -99,7 +98,7 @@ class Knife extends Language
                 }
 
                 if (!$this->template) {
-                    throw new Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
+                    throw new \Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
                 }
 
                 // Compile tags
@@ -144,7 +143,7 @@ class Knife extends Language
             if (array_key_exists($args[0], $this->tags)) {
                 @$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
             } else {
-                throw new Exception($matches[0] . ' is a invalid tag');
+                throw new \Exception($matches[0] . ' is a invalid tag');
             }
         }, $this->template);
 

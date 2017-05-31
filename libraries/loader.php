@@ -114,11 +114,13 @@ final class Loader
 
                 // Generate namespace and get file name
                 if (strpos($model, '\\') !== false) {
+                    // A namespace has been provided
                     $model_name      = explode('\\', $model);
                     $model_name      = self::toCamelCase(end($model_name));
                     $model_name_file = self::fromCamelCase($model_name);
                     $namespace       = $model;
                 } else {
+                    // A class has been provided
                     $model_name      = self::toCamelCase($model);
                     $model_name_file = self::fromCamelCase($model);
                     $namespace       = 'Advandz\\App\\Model\\' . $model_name;
@@ -278,11 +280,13 @@ final class Loader
 
                 // Generate namespace and get file name
                 if (strpos($object, '\\') !== false) {
+                    // A namespace has been provided
                     $object_name      = explode('\\', $object);
                     $object_name      = self::toCamelCase($object_name);
                     $object_name_file = self::fromCamelCase($object_name);
                     $namespace        = $object;
                 } else {
+                    // A class has been provided
                     $object           = self::fromCamelCase($object);
                     $object_name      = self::toCamelCase($object);
                     $object_name_file = self::fromCamelCase($object);
@@ -298,7 +302,7 @@ final class Loader
                     require_once $dir . $object_name_file . DS . $object_name_file . '.php';
                 } else {
                     // If the object can not be found in either location throw an exception
-                    throw new Exception('<strong>' . $object_name . '</strong> ' . $type . ' not found');
+                    throw new Exception('<strong>' . $namespace . '</strong> ' . $type . ' not found');
                 }
 
                 // Initialize the object

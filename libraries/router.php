@@ -11,7 +11,6 @@
 
 namespace Advandz\Library;
 
-use Exception;
 use ReflectionClass;
 
 final class Router
@@ -61,10 +60,10 @@ final class Router
 
                         call_user_func_array([$middleware_class, 'handle'], array_merge([$orig_uri], $params));
                     } else {
-                        throw new Exception($middleware . ' Middleware is invalid or is not callable');
+                        throw new \Exception($middleware . ' Middleware is invalid or is not callable');
                     }
                 } else {
-                    throw new Exception($middleware . ' Middleware not exists');
+                    throw new \Exception($middleware . ' Middleware not exists');
                 }
             }
         }
@@ -75,7 +74,7 @@ final class Router
         } else {
             // Validate URI
             if (strlen($orig_uri) == 0 || strlen($mapped_uri) == 0) {
-                throw new Exception('Illegal URI specified in Router::route()');
+                throw new \Exception('Illegal URI specified in Router::route()');
             }
 
             self::$routes['orig'][]   = '/' . self::escape($orig_uri) . '/i';
@@ -122,7 +121,6 @@ final class Router
 
     /**
      * Converts a directory string into a properly formed URI.
-     * @param mixed $dir
      */
     public static function makeURI($dir)
     {

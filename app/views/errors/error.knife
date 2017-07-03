@@ -1,8 +1,0 @@
-<div class="card">
-    <div class="card-header">
-        Error
-    </div>
-    <div class="card-block">
-        <p class="card-text">{{!@var error}}</p>
-    </div>
-</div>

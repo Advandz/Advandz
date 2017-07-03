@@ -14,13 +14,13 @@
  * Refuse to run spaceman when called from php-cgi
  */
 if (substr(php_sapi_name(), 0, 3) == 'cgi') {
-    die("The use of Spaceman is not supported when running php-cgi. Spaceman needs php-cli to function!\n");
+    die('The use of Spaceman is not supported when running php-cgi. Spaceman needs php-cli to function!');
 }
 
 /**
  * Load the Advandz autoloader and boot the app
  */
-include(dirname(__FILE__) . "/lib/init.php");
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'advandz' . DIRECTORY_SEPARATOR . 'init.php';
 
 /**
  * Launch the command line interface

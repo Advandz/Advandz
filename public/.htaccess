@@ -1,0 +1,11 @@
+########################################################
+# package:    Advandz
+# filename:   .htaccess
+########################################################
+
+# Enable the rewrite engine
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php

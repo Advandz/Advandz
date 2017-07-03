@@ -15,24 +15,24 @@
     ],
     "autoload": {
         "classmap": [
-            "app",
-            "components",
-            "helpers",
-            "libraries"
+            "advandz/core",
+            "advandz/helper",
+            "advandz/component",
+            "advandz/app"
         ]
     },
     "require": {
-        "php": ">=5.6",
-        "stripe/stripe-php": ">=4.0.0",
-        "braintree/braintree_php": ">=3.20.0",
-        "php-ai/php-ml": ">=0.4.1",
-        "deployer/deployer": ">=5.0.0",
-        "phpids/phpids": ">=0.7"
+        "php": ">=7.0",
+        "stripe/stripe-php": "~4.0",
+        "braintree/braintree_php": "~3.20",
+        "php-ai/php-ml": "~0.4",
+        "deployer/deployer": "~5.0",
+        "enygma/expose": "~3.0"
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "vendor-dir": "vendors/composer"
+        "vendor-dir": "advandz/vendor"
     },
     "scripts": {
         "post-install-cmd": [

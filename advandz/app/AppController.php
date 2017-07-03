@@ -11,8 +11,8 @@
 
 namespace Advandz\App\Controller;
 
-use Advandz\Helper\Cdnjs;
 use Controller;
+use Advandz\Helper\Cdnjs;
 
 class AppController extends Controller
 {

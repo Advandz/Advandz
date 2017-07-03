@@ -90,8 +90,8 @@ class Cdnjs extends Http
      * Search a library.
      *
      * @param  string    $lib The library name
-     * @return mixed     An array with the results or false if not return results
      * @throws Exception When the library not exists
+     * @return mixed     An array with the results or false if not return results
      */
     public function searchLibrary($lib)
     {
@@ -118,8 +118,8 @@ class Cdnjs extends Http
      * Get library.
      *
      * @param  string    $lib The library name
-     * @return mixed     An array with the results or false if not return results
      * @throws Exception When the library not exists
+     * @return mixed     An array with the results or false if not return results
      */
     public function getLibrary($lib)
     {

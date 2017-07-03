@@ -17,7 +17,6 @@ enabled:
  - concat_with_spaces
  - no_extra_block_blank_lines
  - no_empty_comment
- - psr4
 
 disabled:
  - phpdoc_no_package

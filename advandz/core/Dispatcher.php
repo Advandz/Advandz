@@ -13,8 +13,8 @@
 
 namespace Advandz\Core;
 
-use Advandz\Helper\Text;
 use Exception;
+use Advandz\Helper\Text;
 
 class Dispatcher extends Controller
 {

@@ -32,10 +32,15 @@ define('ADVANDZ_VERSION', '1.0.0');
 define('DS', DIRECTORY_SEPARATOR);
 
 /*
- * Sets the root web directory, which is the absolute path to your web directory
- * (e.g. where index.php appears).
+ * Sets the root web directory, which is the absolute path to your web directory.
  */
 define('ROOTWEBDIR', dirname(__FILE__) . DS);
+
+/*
+ * Sets the public web directory, which is the absolute path to your public web directory
+ * (e.g. where index.php appears).
+ */
+define('PUBLICWEBDIR', realpath(dirname(__FILE__) . DS . '..') . DS);
 
 /*
  * If you have htaccess running that redirects requests to index.php this must
@@ -54,54 +59,54 @@ unset($script, $webdir, $path);
 
 /*
  * The name of the application directory where all models, views, and
- * controllers are placed.  Must end with a trailing directory separator
+ * controllers are placed. Must end with a trailing directory separator.
  */
 define('APPDIR', 'app' . DS);
 
 /*
  * Absolute path to the models directory, where all models are stored.
  */
-define('MODELDIR', ROOTWEBDIR . APPDIR . 'model' . DS);
+define('MODELDIR', ROOTWEBDIR . APPDIR . 'Model' . DS);
 
 /*
  * Absolute path to the views directory, where all views are stored.
  */
-define('VIEWDIR', ROOTWEBDIR . APPDIR . 'views' . DS);
+define('VIEWDIR', ROOTWEBDIR . APPDIR . 'Views' . DS);
 
 /*
  * Absolute path to the controllers directory, where all controllers are stored.
  */
-define('CONTROLLERDIR', ROOTWEBDIR . APPDIR . 'controller' . DS);
+define('CONTROLLERDIR', ROOTWEBDIR . APPDIR . 'Controller' . DS);
 
 /*
  * Absolute path to the facades directory, where all facades are stored.
  */
-define('FACADEDIR', ROOTWEBDIR . APPDIR . 'facade' . DS);
+define('FACADEDIR', ROOTWEBDIR . APPDIR . 'Facade' . DS);
 
 /*
  * Absolute path to the middleware directory, where all facades are stored.
  */
-define('MIDDLEWAREDIR', ROOTWEBDIR . APPDIR . 'middleware' . DS);
-
-/*
- * Absolute path to the config directory, where config files are stored.
- */
-define('CONFIGDIR', ROOTWEBDIR . APPDIR . 'config' . DS);
+define('MIDDLEWAREDIR', ROOTWEBDIR . APPDIR . 'Middleware' . DS);
 
 /*
  * Absolute path to the plugins directory, where plugins are stored.
  */
-define('PLUGINDIR', ROOTWEBDIR . APPDIR . 'plugins' . DS);
+define('PLUGINDIR', ROOTWEBDIR . APPDIR . 'Plugins' . DS);
 
 /*
  * Absolute path to the language directory, where all language files are stored.
  */
-define('LANGDIR', ROOTWEBDIR . APPDIR . 'language' . DS);
+define('LANGDIR', ROOTWEBDIR . APPDIR . 'Language' . DS);
 
 /*
  * Absolute path to the core directory.
  */
 define('COREDIR', ROOTWEBDIR . 'core' . DS);
+
+/*
+ * Absolute path to the config directory, where config files are stored.
+ */
+define('CONFIGDIR', ROOTWEBDIR . 'config' . DS);
 
 /*
  * Absolute path to the components directory, where all components are stored.

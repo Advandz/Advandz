@@ -23,33 +23,32 @@ if (function_exists('date_default_timezone_set')) {
  *
  * @see UnknownException::setErrorHandler()
  */
-set_error_handler(['UnknownException', 'setErrorHandler']);
+set_error_handler(['Advandz\\Core\\UnknownException', 'setErrorHandler']);
 
 /*
  * Send all uncaught exceptions to UnknownException::setExceptionHandler
  *
  * @see UnknownException::setExceptionHandler()
  */
-set_exception_handler(['UnknownException', 'setExceptionHandler']);
+set_exception_handler(['Advandz\\Core\\UnknownException', 'setExceptionHandler']);
 
 /*
  * Send all capturable Fatal errors to UnknownException::setFatalErrorHandler
  *
  * @see UnknownException::setFatalErrorHandler()
  */
-register_shutdown_function(['UnknownException', 'setFatalErrorHandler']);
+register_shutdown_function(['Advandz\\Core\\UnknownException', 'setFatalErrorHandler']);
 
 /*
  * Initialize class aliases, that will be registered when this application
  * is started.
  */
-class_alias('Advandz\Core\Dispatcher', 'Dispatcher');
-class_alias('Advandz\Core\Controller', 'Controller');
-class_alias('Advandz\Core\Configure', 'Configure');
-class_alias('Advandz\Core\Language', 'Language');
-class_alias('Advandz\Core\Router', 'Router');
-class_alias('Advandz\Core\Loader', 'Loader');
-class_alias('Advandz\Core\Model', 'Model');
-class_alias('Advandz\Core\Cache', 'Cache');
-class_alias('Advandz\Core\Knife', 'Knife');
-class_alias('Advandz\Core\View', 'View');
+class_alias('Advandz\\Core\\Dispatcher', 'Dispatcher');
+class_alias('Advandz\\Core\\Controller', 'Controller');
+class_alias('Advandz\\Core\\Configure', 'Configure');
+class_alias('Advandz\\Core\\Language', 'Language');
+class_alias('Advandz\\Core\\Router', 'Router');
+class_alias('Advandz\\Core\\Model', 'Model');
+class_alias('Advandz\\Core\\Cache', 'Cache');
+class_alias('Advandz\\Core\\Knife', 'Knife');
+class_alias('Advandz\\Core\\View', 'View');

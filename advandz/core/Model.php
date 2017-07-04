@@ -13,6 +13,7 @@
 namespace Advandz\Core;
 
 use PDO;
+use Exception;
 
 class Model
 {
@@ -74,47 +75,6 @@ class Model
     }
 
     /**
-     * Load the given models into this controller.
-     *
-     * @param array $models All models to load
-     */
-    final protected function uses($models)
-    {
-        Loader::loadModels($this, $models);
-    }
-
-    /**
-     * Load the given components into this controller.
-     *
-     * @param array $components All components to load
-     */
-    final protected function components($components)
-    {
-        Loader::loadComponents($this, $components);
-    }
-
-    /**
-     * Load the given helpers into this controller, making them available to
-     * any implicitly initialized Views, including Controller::$structure.
-     *
-     * @param array $helpers All helpers to load
-     */
-    final protected function helpers($helpers)
-    {
-        Loader::loadHelpers($this, $helpers);
-    }
-
-    /**
-     * Load the given language into this controller.
-     *
-     * @param array $languages All languages to load
-     */
-    final protected function languages($languages)
-    {
-        Language::loadLang($languages);
-    }
-
-    /**
      * Sets the fetch mode to the given value, returning the old value.
      *
      * @param  mixed $fetch_mode The PDO:FETCH_* constant (int) to fetch records by, null to use default setting
@@ -138,7 +98,7 @@ class Model
     public function lastInsertId($name = null)
     {
         if (!($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::lastInsertId when connection has not been instantiated');
+            throw new Exception('Call to Model::lastInsertId when connection has not been instantiated');
         }
 
         return $this->connection->lastInsertId($name);
@@ -154,7 +114,7 @@ class Model
     public function setAttribute($attribute, $value)
     {
         if (!($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::setAttribute when connection has not been instantiated');
+            throw new Exception('Call to Model::setAttribute when connection has not been instantiated');
         }
 
         $this->connection->setAttribute($attribute, $value);
@@ -180,7 +140,7 @@ class Model
 
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::query when connection has not been instantiated');
+            throw new Exception('Call to Model::query when connection has not been instantiated');
         }
 
         // Store this statement in our PDO object for easy use later
@@ -207,7 +167,7 @@ class Model
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::prepare when connection has not been instantiated');
+            throw new Exception('Call to Model::prepare when connection has not been instantiated');
         }
 
         if ($fetch_mode === null) {
@@ -231,7 +191,7 @@ class Model
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::begin when connection has not been instantiated');
+            throw new Exception('Call to Model::begin when connection has not been instantiated');
         }
 
         return $this->connection->beginTransaction();
@@ -247,7 +207,7 @@ class Model
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::rollBack when connection has not been instantiated');
+            throw new Exception('Call to Model::rollBack when connection has not been instantiated');
         }
 
         return $this->connection->rollBack();
@@ -263,7 +223,7 @@ class Model
     {
         // Ensure PDO connection exists
         if ($this->lazyConnect() && !($this->connection instanceof PDO)) {
-            throw new \Exception('Call to Model::commit when connection has not been instantiated');
+            throw new Exception('Call to Model::commit when connection has not been instantiated');
         }
 
         return $this->connection->commit();
@@ -294,7 +254,7 @@ class Model
         }
 
         if (!($statement instanceof PDOStatement)) {
-            throw new \Exception('Call to Model::affectedRows before initializing a statement, call Model::query first');
+            throw new Exception('Call to Model::affectedRows before initializing a statement, call Model::query first');
         }
 
         return $statement->rowCount();
@@ -310,7 +270,7 @@ class Model
     public static function makeDSN($db_params)
     {
         if (!isset($db_params['driver']) || !isset($db_params['database']) || !isset($db_params['host'])) {
-            throw new \Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
+            throw new Exception("Call to Model::makeDSN with invalid parameters, required an Array like ['driver'=>,'database'=>,'host'=>]");
         }
 
         return $db_params['driver'] . ':dbname=' . $db_params['database'] . ';host=' . $db_params['host'] . (isset($db_params['port']) ? ';port=' . $db_params['port'] : '');
@@ -353,7 +313,7 @@ class Model
                     $this->query($db_info['charset_query']);
                 }
             } catch (PDOException $e) {
-                throw new \Exception($e->getMessage());
+                throw new Exception($e->getMessage());
             }
         }
     }

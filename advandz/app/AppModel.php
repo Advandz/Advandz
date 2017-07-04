@@ -11,7 +11,7 @@
 
 namespace Advandz\App\Model;
 
-use Model;
+use Advandz\Core\Model;
 
 class AppModel extends Model
 {

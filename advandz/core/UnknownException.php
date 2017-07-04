@@ -8,6 +8,12 @@
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
  */
+
+namespace Advandz\Core;
+
+use ErrorException;
+use Exception;
+
 class UnknownException extends ErrorException
 {
     /**

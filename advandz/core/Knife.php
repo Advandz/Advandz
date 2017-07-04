@@ -13,6 +13,7 @@
 namespace Advandz\Core;
 
 use Advandz\Helper\Html;
+use Exception;
 
 class Knife extends Language
 {
@@ -96,7 +97,7 @@ class Knife extends Language
                 }
 
                 if (!$this->template) {
-                    throw new \Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
+                    throw new Exception("File is not a valid view or you don't have the permissions to read them: " . $file);
                 }
 
                 // Compile tags
@@ -141,7 +142,7 @@ class Knife extends Language
             if (array_key_exists($args[0], $this->tags)) {
                 @$this->replaceTag($matches[0], $this->tags[$args[0]], $args[1]);
             } else {
-                throw new \Exception($matches[0] . ' is a invalid tag');
+                throw new Exception($matches[0] . ' is a invalid tag');
             }
         }, $this->template);
 

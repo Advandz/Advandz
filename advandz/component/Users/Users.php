@@ -19,7 +19,7 @@ class Users
     public function __construct()
     {
         // Load the necessary components
-        $this->Orm      = new Orm();
+        $this->Orm = new Orm();
         $this->Password = new Password();
 
         // Load the users table from database to the ORM

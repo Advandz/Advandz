@@ -11,7 +11,9 @@
 
 namespace Advandz\Core;
 
+use Advandz\Helper\Text;
 use ReflectionClass;
+use Exception;
 
 final class Router
 {
@@ -42,29 +44,22 @@ final class Router
         // Load Middleware
         if (isset($middlewares) && is_array($middlewares)) {
             foreach ($middlewares as $middleware) {
-                // Generate namespace and get file name
+                // Generate namespace
                 if (strpos($middleware, '\\') !== false) {
-                    $file_name = explode('\\', $middleware);
-                    $file_name = Loader::fromCamelCase(end($file_name));
                     $namespace = $middleware;
                 } else {
-                    $file_name = Loader::fromCamelCase($middleware);
                     $namespace = 'Advandz\\App\\Middleware\\' . $middleware;
                 }
 
-                // Load middleware file
-                if (Loader::load(MIDDLEWAREDIR . $file_name . '.php')) {
-                    // Execute handle function
-                    if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
-                        $middleware_class = new $namespace();
+                // Execute handle function from the middleware
+                if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
+                    $middleware = new $namespace();
 
-                        call_user_func_array([$middleware_class, 'handle'], array_merge([$orig_uri], $params));
-                    } else {
-                        throw new \Exception($middleware . ' Middleware is invalid or is not callable');
-                    }
+                    call_user_func_array([$middleware, 'handle'], array_merge([$orig_uri], $params));
                 } else {
-                    throw new \Exception($middleware . ' Middleware not exists');
+                    throw new Exception($middleware . ' middleware is invalid or is not callable');
                 }
+
             }
         }
 
@@ -74,7 +69,7 @@ final class Router
         } else {
             // Validate URI
             if (strlen($orig_uri) == 0 || strlen($mapped_uri) == 0) {
-                throw new \Exception('Illegal URI specified in Router::route()');
+                throw new Exception('Illegal URI specified in Router::route()');
             }
 
             self::$routes['orig'][]   = '/' . self::escape($orig_uri) . '/i';
@@ -197,11 +192,11 @@ final class Router
      *
      * @param  string $request_uri A URI to parse
      * @return array  An array containing the following indexes:
-     *                            - controller The name of the controller this URI maps to
-     *                            - action The action method this URI maps to
-     *                            - get An array of get parameters this URI maps to
-     *                            - uri An array of URI parts
-     *                            - uri_str A string representation of the URI containing the controller requested (if no passed in the URI)
+     *  - controller; The name of the controller this URI maps to
+     *  - action: The action method this URI maps to
+     *  - get: An array of get parameters this URI maps to
+     *  - uri: An array of URI parts
+     *  - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri)
     {
@@ -216,9 +211,8 @@ final class Router
         $filtered_uri = self::filterURI($request_uri);
 
         // Handle routing. Routes are defined in config/routes.php
-        if (Loader::load(CONFIGDIR . 'routes.php')) {
-            $filtered_uri = self::match($filtered_uri);
-        }
+        include_once CONFIGDIR . 'routes.php';
+        $filtered_uri = self::match($filtered_uri);
 
         // Parse the URI into its many parts
         $temp = self::parseURI($filtered_uri);
@@ -241,7 +235,8 @@ final class Router
 
         $i = 0;
         if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
-            $controller = Loader::fromCamelCase($uri[$i++]);
+            $text = new Text();
+            $controller = $text->snakeCase($uri[$i++]);
         }
 
         if (is_dir(PLUGINDIR . $controller . DS)) {

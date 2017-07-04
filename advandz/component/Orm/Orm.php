@@ -12,8 +12,8 @@
 
 namespace Advandz\Component;
 
-use Advandz\Helper\Text;
 use Advandz\Component\Orm\Table;
+use Advandz\Helper\Text;
 
 class Orm extends Record
 {

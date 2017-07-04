@@ -11,6 +11,9 @@
 
 namespace Advandz\Core;
 
+use Advandz\Helper\Text;
+use Exception;
+
 class View extends Knife
 {
     /**
@@ -154,7 +157,7 @@ class View extends Knife
         } // Extract the vars to local namespace
 
         if (!file_exists($file)) {
-            throw new \Exception('Files does not exist: ' . $file);
+            throw new Exception('Files does not exist: ' . $file);
         }
 
         ob_start(); // Start output buffering
@@ -182,7 +185,8 @@ class View extends Knife
         $view_parts = explode('.', $view);
 
         if (count($view_parts) == 2) {
-            $view_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . Loader::fromCamelCase($view_parts[0]) . DS;
+            $text = new Text();
+            $view_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . $text->snakeCase($view_parts[0]) . DS;
             $view      = $view_parts[1];
         }
 

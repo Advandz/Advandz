@@ -11,6 +11,8 @@
 
 namespace Advandz\Helper;
 
+use Advandz\Core\Language;
+
 class Pagination extends Html
 {
     /**
@@ -42,7 +44,7 @@ class Pagination extends Html
     public function __construct(array $get = [], array $format = [])
     {
         // Load the language for the pagination
-        \Language::loadLang('pagination');
+        Language::loadLang('Pagination');
 
         $this->setGet($get);
 
@@ -56,7 +58,7 @@ class Pagination extends Html
                 // First page link
                 'first'     => [
                     'tag'             => 'li',
-                    'name'            => \Language::_('Pagination.button.first_link', true),
+                    'name'            => Language::_('Pagination.button.first_link', true),
                     'attributes'      => ['class' => 'page-item'],
                     'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // options: if_needed, never, always
@@ -65,7 +67,7 @@ class Pagination extends Html
                 // Last page link
                 'last'      => [
                     'tag'             => 'li',
-                    'name'            => \Language::_('Pagination.button.last_link', true),
+                    'name'            => Language::_('Pagination.button.last_link', true),
                     'attributes'      => ['class' => 'page-item'],
                     'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always
@@ -74,7 +76,7 @@ class Pagination extends Html
                 // Next page link
                 'next'      => [
                     'tag'             => 'li',
-                    'name'            => \Language::_('Pagination.button.next_link', true),
+                    'name'            => Language::_('Pagination.button.next_link', true),
                     'attributes'      => ['class' => 'page-item'],
                     'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always
@@ -83,7 +85,7 @@ class Pagination extends Html
                 // Previous page link
                 'prev'      => [
                     'tag'             => 'li',
-                    'name'            => \Language::_('Pagination.button.prev_link', true),
+                    'name'            => Language::_('Pagination.button.prev_link', true),
                     'attributes'      => ['class' => 'page-item'],
                     'link_attributes' => ['class' => 'page-link'],
                     'show'            => 'if_needed', // Options: if_needed, never, always

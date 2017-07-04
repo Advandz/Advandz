@@ -11,8 +11,8 @@
 
 namespace Advandz\Core;
 
-use ErrorException;
 use Exception;
+use ErrorException;
 
 class UnknownException extends ErrorException
 {

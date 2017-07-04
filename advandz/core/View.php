@@ -11,8 +11,8 @@
 
 namespace Advandz\Core;
 
-use Advandz\Helper\Text;
 use Exception;
+use Advandz\Helper\Text;
 
 class View extends Knife
 {
@@ -185,7 +185,7 @@ class View extends Knife
         $view_parts = explode('.', $view);
 
         if (count($view_parts) == 2) {
-            $text = new Text();
+            $text      = new Text();
             $view_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . $text->snakeCase($view_parts[0]) . DS;
             $view      = $view_parts[1];
         }

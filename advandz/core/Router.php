@@ -11,9 +11,9 @@
 
 namespace Advandz\Core;
 
-use Advandz\Helper\Text;
-use ReflectionClass;
 use Exception;
+use ReflectionClass;
+use Advandz\Helper\Text;
 
 final class Router
 {
@@ -59,7 +59,6 @@ final class Router
                 } else {
                     throw new Exception($middleware . ' middleware is invalid or is not callable');
                 }
-
             }
         }
 
@@ -192,11 +191,11 @@ final class Router
      *
      * @param  string $request_uri A URI to parse
      * @return array  An array containing the following indexes:
-     *  - controller; The name of the controller this URI maps to
-     *  - action: The action method this URI maps to
-     *  - get: An array of get parameters this URI maps to
-     *  - uri: An array of URI parts
-     *  - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
+     *                            - controller; The name of the controller this URI maps to
+     *                            - action: The action method this URI maps to
+     *                            - get: An array of get parameters this URI maps to
+     *                            - uri: An array of URI parts
+     *                            - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri)
     {
@@ -235,7 +234,7 @@ final class Router
 
         $i = 0;
         if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
-            $text = new Text();
+            $text       = new Text();
             $controller = $text->snakeCase($uri[$i++]);
         }
 

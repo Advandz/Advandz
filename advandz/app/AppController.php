@@ -9,7 +9,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-namespace Advandz\App\Controller;
+namespace Advandz\App;
 
 use Advandz\Helper\Cdnjs;
 use Advandz\Core\Controller;

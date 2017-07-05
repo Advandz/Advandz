@@ -11,6 +11,8 @@
 
 namespace Advandz\App\Controller;
 
+use Advandz\App\AppController;
+
 class Main extends AppController
 {
     //

@@ -11,9 +11,9 @@
 
 namespace Advandz\Core;
 
-use Exception;
-use ReflectionClass;
 use Advandz\Helper\Text;
+use ReflectionClass;
+use Exception;
 
 final class Router
 {
@@ -59,6 +59,7 @@ final class Router
                 } else {
                     throw new Exception($middleware . ' middleware is invalid or is not callable');
                 }
+
             }
         }
 
@@ -191,11 +192,11 @@ final class Router
      *
      * @param  string $request_uri A URI to parse
      * @return array  An array containing the following indexes:
-     *                            - controller; The name of the controller this URI maps to
-     *                            - action: The action method this URI maps to
-     *                            - get: An array of get parameters this URI maps to
-     *                            - uri: An array of URI parts
-     *                            - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
+     *  - controller; The name of the controller this URI maps to
+     *  - action: The action method this URI maps to
+     *  - get: An array of get parameters this URI maps to
+     *  - uri: An array of URI parts
+     *  - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri)
     {
@@ -205,6 +206,9 @@ final class Router
         $get        = [];
         $uri        = [];
         $uri_str    = null;
+
+        // Load the necessary helpers
+        $text = new Text();
 
         // Filter the URI, removing any part of the web root
         $filtered_uri = self::filterURI($request_uri);
@@ -234,15 +238,14 @@ final class Router
 
         $i = 0;
         if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
-            $text       = new Text();
-            $controller = $text->snakeCase($uri[$i++]);
+            $controller = $text->studlyCase($uri[$i++]);
         }
 
         if (is_dir(PLUGINDIR . $controller . DS)) {
             $i      = 0;
             $plugin = $controller;
             if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
-                $controller = $uri[$i++];
+                $controller = $text->studlyCase($uri[$i++]);
             } else {
                 $controller = Configure::get('System.default_controller');
             }
@@ -250,7 +253,7 @@ final class Router
 
         // Determine the action (if any) to call in the controller
         if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
-            $action = $uri[$i++];
+            $action = $text->camelCase($uri[$i++]);
         }
 
         // Assign all remaining parameters as GET params, if a param is of the form key:value then

@@ -11,8 +11,10 @@
 
 namespace Advandz\Core;
 
-use Exception;
 use ErrorException;
+use Exception;
+use ParseError;
+use Error;
 
 class UnknownException extends ErrorException
 {
@@ -45,15 +47,27 @@ class UnknownException extends ErrorException
      */
     public static function setExceptionHandler($e)
     {
-        if ($e instanceof Exception) {
-            if (error_reporting() === 0) {
-                return;
-            }
+        // Only report errors if error_reporting is set
+        if (error_reporting() === 0) {
+            return;
+        }
 
-            echo 'Uncaught ' . get_class($e) . ', code: ' . $e->getCode() . ' in <strong>' . $e->getFile() . '</strong> on line <strong>' . $e->getLine() . '</strong><br />Message: ' . htmlentities($e->getMessage()) . '<br />';
-        } elseif (($e instanceof Error) || ($e instanceof ParseError)) {
+        // Raise error
+        if (error_reporting()) {
             $e = new self(htmlentities('Uncaught ' . get_class($e) . ', Message: ' . $e->getMessage()), 0, null, $e->getFile(), $e->getLine());
-            Dispatcher::raiseError($e);
+            
+            try {
+                Dispatcher::raiseError($e);
+            } catch (Exception $e) {
+                if (Configure::get('System.debug')) {
+                    echo $e->getMessage() . ' on line <strong>' . $e->getLine() .
+                        '</strong> in <strong>' . $e->getFile() . "</strong>\n" .
+                        '<br />Printing Stack Trace:<br />' . nl2br($e->getTraceAsString());
+                } else {
+                    echo $e->getMessage();
+                }
+            }
+            
         }
     }
 
@@ -73,6 +87,7 @@ class UnknownException extends ErrorException
         // Only raise error if last registered error was Fatal
         if (!empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
             $e = new self($error['message'], 0, $error['type'], $error['file'], $error['line']);
+            
             try {
                 Dispatcher::raiseError($e);
             } catch (Exception $e) {

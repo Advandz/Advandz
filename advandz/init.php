@@ -91,7 +91,7 @@ define('MIDDLEWAREDIR', ROOTWEBDIR . APPDIR . 'Middleware' . DS);
 /*
  * Absolute path to the plugins directory, where plugins are stored.
  */
-define('PLUGINDIR', ROOTWEBDIR . APPDIR . 'Plugins' . DS);
+define('PLUGINDIR', ROOTWEBDIR . APPDIR . 'Plugin' . DS);
 
 /*
  * Absolute path to the language directory, where all language files are stored.

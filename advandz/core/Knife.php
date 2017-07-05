@@ -12,8 +12,8 @@
 
 namespace Advandz\Core;
 
-use Exception;
 use Advandz\Helper\Html;
+use Exception;
 
 class Knife extends Language
 {
@@ -68,10 +68,10 @@ class Knife extends Language
      */
     public function compile($file = null)
     {
-        if (Configure::get('Knife.on')) {
-            // Initialize HTML Helper
-            $this->Html = new Html();
+        // Load the necessary helpers
+        $this->Html = new Html();
 
+        if (Configure::get('Knife.on')) {
             // Set compiled view file
             $compiled_file = CACHEDIR . md5($file) . '.php';
 

@@ -9,7 +9,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-namespace Advandz\App\Model;
+namespace Advandz\App;
 
 use Advandz\Core\Model;
 

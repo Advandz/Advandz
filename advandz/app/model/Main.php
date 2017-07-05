@@ -11,6 +11,8 @@
 
 namespace Advandz\App\Model;
 
+use Advandz\App\AppModel;
+
 class Main extends AppModel
 {
     //

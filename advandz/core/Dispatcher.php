@@ -13,8 +13,8 @@
 
 namespace Advandz\Core;
 
-use Exception;
 use Advandz\Helper\Text;
+use Exception;
 
 class Dispatcher extends Controller
 {
@@ -45,11 +45,14 @@ class Dispatcher extends Controller
      */
     public static function dispatch($request_uri, $is_cli = false)
     {
-        self::cleanGlobals();
+        // Load the necessary helpers
+        $text = new Text();
 
+        // Get superglobal parameters
         $_post  = $_POST;
         $_files = $_FILES;
 
+        // Fetch parameters from the router
         list($plugin, $controller, $action, $_get, $uri, $uri_str) = array_values(Router::routesTo($request_uri));
 
         // If caching is enabled, check if this request exists in the cache
@@ -64,46 +67,72 @@ class Dispatcher extends Controller
         }
 
         // Initialize the AppModel and AppController, so they can be
-        // automatically extended, furthermore load the respective
+        // automatically extended, and then load the respective
         // default language files.
         include_once ROOTWEBDIR . APPDIR . 'AppModel.php';
         include_once ROOTWEBDIR . APPDIR . 'AppController.php';
 
-        // Language::loadLang('app_model');
-        // Language::loadLang('app_controller');
+        Language::loadLang('AppModel');
+        Language::loadLang('AppController');
 
-        /*$plugin_path = null; // relative path to the plugin directory if it exists
+        // Relative path to the plugin directory if it exists
+        $plugin_path = null; 
 
+        // Check if the called controller is from the app or a plugin
         if (empty($plugin)) {
-            if (!Loader::load(CONTROLLERDIR . $controller . '.php')) {
-                throw new Exception('<strong>' . $controller . '</strong> is not a valid controller', 404);
+            // Generate the class name and the namespace name of the
+            // controller
+            $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $controller;
+            $namespace = 'Advandz\\App\\Controller\\' . $class;
+
+            // Load the controller
+            if (file_exists(CONTROLLERDIR . $class . '.php')) {
+                include_once CONTROLLERDIR . $class . '.php';
+            } else {
+                throw new Exception($class . ' is not a valid controller', 404);
             }
         } else {
-            if (file_exists(PLUGINDIR . $plugin . DS . 'controllers' . DS . $controller . '.php')) {
+            // Generate the class name and the namespace name of the
+            // main plugin controller
+            $plugin    = (is_numeric(substr($plugin, 0, 1)) ? '_' : '') . $plugin;
+            $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $controller;
+            $namespace = 'Advandz\\App\\Controller\\' . $class;
+
+            // If an controller exists with the called action, overwrite the action with the controller
+            if (file_exists(PLUGINDIR . $plugin . DS . 'Controller' . DS . $text->studlyCase($action) . '.php')) {
+                $class     = (is_numeric(substr($action, 0, 1)) ? '_' : '') . $text->studlyCase($action);
+                $namespace = 'Advandz\\App\\Controller\\' . $class;
+                $action    = $text->camelCase(isset($_get[0]) ? $_get[0] : null);
+
+                // Remove first get element, because has been used as an action
+                @array_shift($_get);
+            }
+
+            // Load the plguin and the controller
+            if (file_exists(PLUGINDIR . $plugin . DS . 'Controller' . DS . $class . '.php')) {
                 $plugin_path = str_replace(ROOTWEBDIR, '', PLUGINDIR) . $plugin . DS;
 
                 // Load parent plugin model
-                Loader::load(PLUGINDIR . $plugin . DS . $plugin . '_model.php');
+                include_once PLUGINDIR . $plugin . DS . $plugin . 'Model.php';
 
                 // Load parent plugin controller
-                Loader::load(PLUGINDIR . $plugin . DS . $plugin . '_controller.php');
+                include_once PLUGINDIR . $plugin . DS . $plugin . 'Controller.php';
 
                 // Load the plugin
-                Loader::load(PLUGINDIR . $plugin . DS . 'controllers' . DS . $controller . '.php');
+                include_once PLUGINDIR . $plugin . DS . 'Controller' . DS . $class . '.php';
             } else {
-                throw new Exception('<strong>' . $controller . '</strong> is not a valid controller', 404);
+                throw new Exception($class . ' is not a valid controller from "' . $plugin . '" plugin', 404);
             }
-        }*/
+        }
 
         // If the first character of the controller is a number we must prepend the controller
         // with an underscore.
-        $text      = new Text();
-        $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $text->studlyCase($controller);
-        $namespace = 'Advandz\\App\\Controller\\' . $class;
-        $ctrl      = new $namespace();
-
+        if (class_exists($namespace)) {
+            $ctrl = new $namespace();
+        }
+        
         // Load the default language file for the controller
-        Language::loadLang($controller);
+        Language::loadLang($class);
 
         // Make the POST/GET/FILES available to the controller
         $ctrl->uri        = $uri;
@@ -116,9 +145,10 @@ class Dispatcher extends Controller
         $ctrl->action     = $action;
         $ctrl->is_cli     = $is_cli;
 
-        /*if ($plugin_path) {
+        // If a plugin path is set, set the path as default view
+        if ($plugin_path) {
             $ctrl->setDefaultViewPath($plugin_path);
-        }*/
+        }
 
         // Handle pre action (overwritten by the controller)
         $ctrl->preAction();
@@ -138,10 +168,10 @@ class Dispatcher extends Controller
             } else {
                 throw new Exception($action . ' is not a valid method in controller "' . $controller . '"', 404);
             }
-        } // Call the default action
-        else {
+        } else {
+            // Due the desired action don't exists, then call the default action
             $action_return = $ctrl->index();
-        } // May be overwritten by the controller
+        }
 
         // Handle post action (overwritten by the controller)
         $ctrl->postAction();
@@ -190,29 +220,6 @@ class Dispatcher extends Controller
         } catch (Exception $err) {
             // Throw our original error, since the error can not be handled cleanly
             throw $e;
-        }
-    }
-
-    /**
-     * Strip slashes from the given string.
-     *
-     * @param string $str
-     */
-    public static function stripSlashes(&$str)
-    {
-        $str = stripslashes($str);
-    }
-
-    /**
-     * Clean all super globals by removing slashes added by 'magic quotes'.
-     */
-    private static function cleanGlobals()
-    {
-        if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
-            array_walk_recursive($_GET, ['Dispatcher', 'stripSlashes']);
-            array_walk_recursive($_POST, ['Dispatcher', 'stripSlashes']);
-            array_walk_recursive($_COOKIE, ['Dispatcher', 'stripSlashes']);
-            array_walk_recursive($_REQUEST, ['Dispatcher', 'stripSlashes']);
         }
     }
 }

@@ -7,17 +7,15 @@
         <title>Advandz Framework</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-icons.css">
-        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz-animations.css">
         <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz.css">
-        <link rel="stylesheet" href="{{@yield assets_dir}}css/styles.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/app.css">
 
         <!-- Scripts -->
         {{foreach $libs as $lib}}
             <script src="{{@print $lib}}"></script>
         {{/foreach}}
         <script src="{{@yield assets_dir}}javascript/advandz.js"></script>
-        <script src="{{@yield assets_dir}}javascript/script.js"></script>
+        <script src="{{@yield assets_dir}}javascript/app.js"></script>
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="{{@yield assets_dir}}favicons/apple-touch-icon.png">

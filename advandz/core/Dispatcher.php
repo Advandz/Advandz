@@ -13,8 +13,8 @@
 
 namespace Advandz\Core;
 
-use Advandz\Helper\Text;
 use Exception;
+use Advandz\Helper\Text;
 
 class Dispatcher extends Controller
 {
@@ -76,7 +76,7 @@ class Dispatcher extends Controller
         Language::loadLang('AppController');
 
         // Relative path to the plugin directory if it exists
-        $plugin_path = null; 
+        $plugin_path = null;
 
         // Check if the called controller is from the app or a plugin
         if (empty($plugin)) {
@@ -130,7 +130,7 @@ class Dispatcher extends Controller
         if (class_exists($namespace)) {
             $ctrl = new $namespace();
         }
-        
+
         // Load the default language file for the controller
         Language::loadLang($class);
 

@@ -11,10 +11,9 @@
 
 namespace Advandz\Core;
 
-use ErrorException;
-use Exception;
-use ParseError;
 use Error;
+use Exception;
+use ErrorException;
 
 class UnknownException extends ErrorException
 {
@@ -55,7 +54,7 @@ class UnknownException extends ErrorException
         // Raise error
         if (error_reporting()) {
             $e = new self(htmlentities('Uncaught ' . get_class($e) . ', Message: ' . $e->getMessage()), 0, null, $e->getFile(), $e->getLine());
-            
+
             try {
                 Dispatcher::raiseError($e);
             } catch (Exception $e) {
@@ -67,7 +66,6 @@ class UnknownException extends ErrorException
                     echo $e->getMessage();
                 }
             }
-            
         }
     }
 
@@ -87,7 +85,7 @@ class UnknownException extends ErrorException
         // Only raise error if last registered error was Fatal
         if (!empty($error) && ($error['type'] & E_ERROR) && (error_reporting() & $error['type'])) {
             $e = new self($error['message'], 0, $error['type'], $error['file'], $error['line']);
-            
+
             try {
                 Dispatcher::raiseError($e);
             } catch (Exception $e) {

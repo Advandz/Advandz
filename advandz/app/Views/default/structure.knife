@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Advandz Framework</title>
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/advandz.css">
+        <link rel="stylesheet" href="{{@yield assets_dir}}css/app.css">
+
+        <!-- Scripts -->
+        {{foreach $libs as $lib}}
+            <script src="{{@print $lib}}"></script>
+        {{/foreach}}
+        <script src="{{@yield assets_dir}}javascript/advandz.js"></script>
+        <script src="{{@yield assets_dir}}javascript/app.js"></script>
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{@yield assets_dir}}favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{@yield assets_dir}}favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{@yield assets_dir}}favicons/favicon-16x16.png">
+        <link rel="manifest" href="{{@yield assets_dir}}favicons/manifest.json">
+        <link rel="mask-icon" href="{{@yield assets_dir}}favicons/safari-pinned-tab.svg" color="#0275d8">
+        <meta name="theme-color" content="#0275d8">
+    </head>
+    <body>
+        <nav class="navbar navbar-static-top navbar-dark bg-inverse round-corners-none">
+            <a class="navbar-brand" href="#">Advandz Framework</a>
+        </nav>
+
+        {{!@print $content}}
+
+        <div class="container">
+            <hr>
+            <footer>
+                <small><a href="https://advandz.com/">Advandz Framework</a> is released under the MIT license.</small>
+            </footer>
+        </div>
+    </body>
+</html>

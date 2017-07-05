@@ -1,0 +1,28 @@
+<?php
+/*
+ * All routes may be defined here.  Routes have the following syntax:
+ * Router::route($orig_uri, $mapped_uri [, $middleware, ...$params]);
+ *
+ * For example:
+ * Router::route("foo/bar", "bar/foo");
+ * Router::route("foo/bar", "bar/foo", ['Middleware']);
+ *
+ * The above route maps the "foo" controller and "bar" method to the "bar"
+ * controller and "foo" method.
+ *
+ * Each parenthesized regular expression in the first parameter can be used in
+ * the second parameter by calling the $[numeric value] of that statement. For
+ * example: $1, $2, ... $n.
+ *
+ * @package Advandz
+ * @copyright Copyright (c) 2016-2017 Advandz, LLC. All Rights Reserved.
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author The Advandz Team <team@advandz.com>
+ */
+
+// Main Middleware
+Router::route('^', '$1', ['Main']);
+
+//
+// TODO: Define your application routes
+//

@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-header">
+        Error
+    </div>
+    <div class="card-block">
+        <p class="card-text">{{!@print $error}}</p>
+    </div>
+</div>

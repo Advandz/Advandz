@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-inverse card-warning text-xs-center margin-top-50 margin-bottom-40">
+                <div class="card-block">
+                    <blockquote class="card-blockquote">
+                        <h2>404</h2>
+                        <p class="margin-0">Sorry, the page you are trying to access does not exist or may have moved.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

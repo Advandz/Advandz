@@ -15,16 +15,16 @@
     ],
     "autoload": {
         "classmap": [
-            "advandz/core",
-            "advandz/helper",
-            "advandz/component",
+            "advandz/core/",
+            "advandz/helper/",
+            "advandz/component/",
             "advandz/app"
         ]
     },
     "require": {
         "php": ">=7.0",
         "stripe/stripe-php": "~4.0",
-        "braintree/braintree_php": "~3.20",
+        "braintree/braintree_php": "~3.2",
         "php-ai/php-ml": "~0.4",
         "deployer/deployer": "~5.0",
         "enygma/expose": "~3.0"
@@ -40,18 +40,14 @@
             "rm -rf README.md",
             "rm -rf build",
             "rm -rf tests",
-            "rm -rf .styleci.yml",
-            "rm -rf .travis.yml",
-            "rm -rf .gitignore"
+            "rm -rf .travis.yml"
         ],
         "post-update-cmd": [
             "rm -rf LICENSE.md",
             "rm -rf README.md",
             "rm -rf build",
             "rm -rf tests",
-            "rm -rf .styleci.yml",
-            "rm -rf .travis.yml",
-            "rm -rf .gitignore"
+            "rm -rf .travis.yml"
         ]
     }
 }

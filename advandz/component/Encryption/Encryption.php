@@ -11,8 +11,8 @@
 
 namespace Advandz\Component;
 
-use Advandz\Core\Configure;
 use Exception;
+use Advandz\Core\Configure;
 
 class Encryption
 {

@@ -12,9 +12,9 @@
 
 namespace Advandz\Component;
 
+use Exception;
 use Advandz\Helper\Text;
 use Advandz\Component\Orm\Table;
-use Exception;
 
 class Orm extends Record
 {

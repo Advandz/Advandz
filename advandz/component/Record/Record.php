@@ -11,8 +11,8 @@
 
 namespace Advandz\Component;
 
-use Advandz\Core\Model;
 use stdClass;
+use Advandz\Core\Model;
 
 class Record extends Model
 {

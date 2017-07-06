@@ -8,6 +8,9 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
+//###############################################################################
+// Session
+//###############################################################################
 // The number of seconds to keep a session alive.
 Configure::set('Session.ttl', 1800);
 // The number of seconds to keep a cookie stored session alive

@@ -12,6 +12,8 @@
 
 namespace Advandz\Component;
 
+use Exception;
+
 class Password
 {
     /**

@@ -3,13 +3,13 @@
  * This class helps you quickly write simple yet powerful web services and APIs.
  *
  * @package Advandz
- * @subpackage Advandz.app.facades
+ * @subpackage Advandz.core
  * @copyright Copyright (c) 2016-2017 Advandz, LLC. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author The Advandz Team <team@advandz.com>
  */
 
-namespace Advandz\App\Facade;
+namespace Advandz\Core;
 
 final class App
 {

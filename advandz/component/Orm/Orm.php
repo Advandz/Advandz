@@ -14,6 +14,7 @@ namespace Advandz\Component;
 
 use Advandz\Helper\Text;
 use Advandz\Component\Orm\Table;
+use Exception;
 
 class Orm extends Record
 {
@@ -41,7 +42,7 @@ class Orm extends Record
 
                 return $this->{$table_cc};
             } else {
-                throw new \Exception('Table "' . $table . "\" doesn't exist");
+                throw new Exception('Table "' . $table . "\" doesn't exist");
             }
         }
     }

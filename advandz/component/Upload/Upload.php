@@ -12,6 +12,7 @@
 namespace Advandz\Component;
 
 use Advandz\Core\Configure;
+use Exception;
 
 class Upload
 {
@@ -89,13 +90,13 @@ class Upload
                 try {
                     mkdir($this->upload_dir);
                 } catch (Exception $e) {
-                    throw new \Exception('Failed to create the uploads directory');
+                    throw new Exception('Failed to create the uploads directory');
                 }
             }
 
             // Validate the file size
             if ($file['size'] > $this->file_size) {
-                throw new \Exception('The uploaded file exceeds the ' . $this->file_size . ' limit size');
+                throw new Exception('The uploaded file exceeds the ' . $this->file_size . ' limit size');
             }
 
             // Build full upload path
@@ -115,10 +116,10 @@ class Upload
 
                 return $path;
             } else {
-                throw new \Exception('Another file with the same name exists in the uploads directory');
+                throw new Exception('Another file with the same name exists in the uploads directory');
             }
         } else {
-            throw new \Exception('The given file is invalid');
+            throw new Exception('The given file is invalid');
         }
     }
 
@@ -133,7 +134,7 @@ class Upload
         if (is_int($max_size) && !empty($max_size)) {
             $this->file_size = $max_size;
         } else {
-            throw new \Exception('Invalid maximum size, Maximum size must be a non-zero integer value');
+            throw new Exception('Invalid maximum size, Maximum size must be a non-zero integer value');
         }
     }
 
@@ -181,7 +182,7 @@ class Upload
         if (file_exists($file)) {
             return hash_file('sha256', $file);
         } else {
-            throw new \Exception('The given file not exists or has been moved');
+            throw new Exception('The given file not exists or has been moved');
         }
     }
 

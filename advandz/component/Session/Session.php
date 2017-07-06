@@ -12,7 +12,7 @@
 namespace Advandz\Component;
 
 use PDO;
-use Configure;
+use Advandz\Core\Configure;
 
 class Session
 {

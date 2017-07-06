@@ -12,6 +12,8 @@
 
 namespace Advandz\Component\Orm;
 
+use Advandz\Component\Record;
+
 class Table extends Record
 {
     /**

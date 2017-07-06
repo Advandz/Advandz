@@ -17,6 +17,8 @@
 
 namespace Advandz\Component;
 
+use PDO;
+
 class Acl
 {
     /**
@@ -25,7 +27,7 @@ class Acl
     public function __construct()
     {
         $this->Record = new Record();
-        $this->Record->setFetchMode(\PDO::FETCH_OBJ);
+        $this->Record->setFetchMode(PDO::FETCH_OBJ);
     }
 
     /**

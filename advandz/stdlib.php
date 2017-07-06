@@ -52,3 +52,4 @@ class_alias('Advandz\\Core\\Model', 'Model');
 class_alias('Advandz\\Core\\Cache', 'Cache');
 class_alias('Advandz\\Core\\Knife', 'Knife');
 class_alias('Advandz\\Core\\View', 'View');
+class_alias('Advandz\\Core\\App', 'App');

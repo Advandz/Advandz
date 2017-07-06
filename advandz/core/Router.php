@@ -3,7 +3,7 @@
  * Handles mapping of URIs from one type to another.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.core
  * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
@@ -242,7 +242,7 @@ final class Router
 
         if (is_dir(PLUGINDIR . $controller . DS)) {
             $i      = 0;
-            $plugin = $controller;
+            $plugin = $text->studlyCase($controller);
             if (isset($uri[$i][0]) && $uri[$i][0] != '?') {
                 $controller = $text->studlyCase($uri[$i++]);
             } else {

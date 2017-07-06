@@ -11,6 +11,8 @@
 
 namespace Advandz\Helper;
 
+use Exception;
+
 class Json
 {
     /**

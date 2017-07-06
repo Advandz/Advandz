@@ -11,6 +11,9 @@
 
 namespace Advandz\Component;
 
+use Advandz\Core\Configure;
+use Exception;
+
 class Encryption
 {
     /**
@@ -29,7 +32,7 @@ class Encryption
     public function __construct()
     {
         // Fetch default encryption key
-        $key = \Configure::get('Encryption.key');
+        $key = Configure::get('Encryption.key');
 
         if (!empty($key)) {
             $this->setKey($key);
@@ -47,7 +50,7 @@ class Encryption
     {
         // Check if a valid key is set
         if (empty($this->key)) {
-            throw new \Exception('An encryption key isn\'t provided');
+            throw new Exception('An encryption key isn\'t provided');
         }
 
         // Generate a random IV
@@ -59,7 +62,7 @@ class Encryption
                 $serialize = true;
                 $data      = serialize($data);
             } else {
-                throw new \Exception('The data cannot be encrypted, Data passed must be an instance of string, object or array');
+                throw new Exception('The data cannot be encrypted, Data passed must be an instance of string, object or array');
             }
         } else {
             $serialize = false;
@@ -69,7 +72,7 @@ class Encryption
         $data = openssl_encrypt($data, $this->algorithm, hex2bin($this->key), 0, $iv);
 
         if ($data === false) {
-            throw new \Exception('The data cannot be encrypted');
+            throw new Exception('The data cannot be encrypted');
         }
 
         // Calculate a MAC for the encrypted data
@@ -84,7 +87,7 @@ class Encryption
         ]);
 
         if (!is_string($result)) {
-            throw new \Exception('The data cannot be encrypted, The JSON parser returns null or an error');
+            throw new Exception('The data cannot be encrypted, The JSON parser returns null or an error');
         }
 
         return base64_encode($result);
@@ -101,7 +104,7 @@ class Encryption
     {
         // Check if a valid key is set
         if (empty($this->key)) {
-            throw new \Exception('An encryption key isn\'t provided');
+            throw new Exception('An encryption key isn\'t provided');
         }
 
         // Decode the encrypted data
@@ -116,7 +119,7 @@ class Encryption
                 $decrypted = openssl_decrypt($data['data'], $this->algorithm, hex2bin($this->key), 0, base64_decode($data['iv']));
 
                 if ($decrypted === false) {
-                    throw new \Exception('The data cannot be decrypted');
+                    throw new Exception('The data cannot be decrypted');
                 }
 
                 // Unserialize the data
@@ -126,10 +129,10 @@ class Encryption
 
                 return $decrypted;
             } else {
-                throw new \Exception('The data cannot be decrypted, Invalid HMAC');
+                throw new Exception('The data cannot be decrypted, Invalid HMAC');
             }
         } else {
-            throw new \Exception('The data cannot be decrypted, The given data is invalid');
+            throw new Exception('The data cannot be decrypted, The given data is invalid');
         }
     }
 
@@ -145,7 +148,7 @@ class Encryption
         if ($this->supportedKey($this->key, $algorithm)) {
             $this->algorithm = $algorithm;
         } else {
-            throw new \Exception('The only supported ciphers algorithms are AES-128-CBC and AES-256-CBC with the correct key lengths');
+            throw new Exception('The only supported ciphers algorithms are AES-128-CBC and AES-256-CBC with the correct key lengths');
         }
     }
 
@@ -160,7 +163,7 @@ class Encryption
         if ($this->supportedKey($key, $this->algorithm)) {
             $this->key = $key;
         } else {
-            throw new \Exception('The only supported ciphers algorithms are AES-128-CBC and AES-256-CBC with the correct key lengths');
+            throw new Exception('The only supported ciphers algorithms are AES-128-CBC and AES-256-CBC with the correct key lengths');
         }
     }
 

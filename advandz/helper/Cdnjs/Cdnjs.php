@@ -14,6 +14,7 @@
 namespace Advandz\Helper;
 
 use Advandz\Component\Http;
+use Exception;
 
 class Cdnjs extends Http
 {

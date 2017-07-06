@@ -3,7 +3,7 @@
  * Allows the creation of views.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.core
  * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>

@@ -13,6 +13,8 @@
 
 namespace Advandz\Component;
 
+use Exception;
+
 class Http
 {
     /**
@@ -143,7 +145,7 @@ class Http
         if ($method == 'GET' || $method == 'POST' || $method == 'DELETE' || $method == 'PUT') {
             $this->method = $method;
         } else {
-            throw new \Exception('HTTP Invalid method');
+            throw new Exception($method. ' is an HTTP invalid method');
         }
 
         return $this;

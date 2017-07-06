@@ -11,6 +11,8 @@
 
 namespace Advandz\Component;
 
+use Exception;
+
 class Users
 {
     /**
@@ -57,7 +59,7 @@ class Users
                 return true;
             }
         } else {
-            throw new \Exception('The user ' . $username . ' already exists');
+            throw new Exception('The user ' . $username . ' already exists');
         }
 
         return false;
@@ -78,7 +80,7 @@ class Users
 
             return $result;
         } else {
-            throw new \Exception('The user ' . $username . ' not exists in the database');
+            throw new Exception('The user ' . $username . ' not exists in the database');
         }
     }
 
@@ -97,7 +99,7 @@ class Users
 
             return true;
         } else {
-            throw new \Exception('The user ' . $username . ' not exists in the database');
+            throw new Exception('The user ' . $username . ' not exists in the database');
         }
     }
 
@@ -129,7 +131,7 @@ class Users
                 $this->Orm->Users->edit(['vars' => serialize($vars)], ['username', '=', $username]);
             }
         } else {
-            throw new \Exception('The user ' . $username . ' not exists in the database');
+            throw new Exception('The user ' . $username . ' not exists in the database');
         }
     }
 

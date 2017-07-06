@@ -5,7 +5,7 @@
  * its protected methods.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.core
  * @copyright Copyright (c) 2010-2013 Phillips Data, Inc. All Rights Reserved.
  * @license https://opensource.org/licenses/MIT The MIT License (MIT)
  * @author Cody Phillips <therealclphillips.woop@gmail.com>
@@ -78,12 +78,15 @@ class Dispatcher extends Controller
         // Relative path to the plugin directory if it exists
         $plugin_path = null;
 
+        // Root controller namesapce
+        $root_namespace = 'Advandz\\App\\Controller\\';
+
         // Check if the called controller is from the app or a plugin
         if (empty($plugin)) {
             // Generate the class name and the namespace name of the
             // controller
             $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $controller;
-            $namespace = 'Advandz\\App\\Controller\\' . $class;
+            $namespace = $root_namespace . $class;
 
             // Load the controller
             if (file_exists(CONTROLLERDIR . $class . '.php')) {
@@ -94,14 +97,13 @@ class Dispatcher extends Controller
         } else {
             // Generate the class name and the namespace name of the
             // main plugin controller
-            $plugin    = (is_numeric(substr($plugin, 0, 1)) ? '_' : '') . $plugin;
-            $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $controller;
-            $namespace = 'Advandz\\App\\Controller\\' . $class;
-
-            // If an controller exists with the called action, overwrite the action with the controller
-            if (file_exists(PLUGINDIR . $plugin . DS . 'Controller' . DS . $text->studlyCase($action) . '.php')) {
+            if (!file_exists(PLUGINDIR . $plugin . DS . 'Controller' . DS . $text->studlyCase($action) . '.php')) {
+                $class     = (is_numeric(substr($controller, 0, 1)) ? '_' : '') . $controller;
+                $namespace = $root_namespace . $class;
+            } else {
+                // If an controller exists with the called action, overwrite the action with the controller
                 $class     = (is_numeric(substr($action, 0, 1)) ? '_' : '') . $text->studlyCase($action);
-                $namespace = 'Advandz\\App\\Controller\\' . $class;
+                $namespace = $root_namespace . $class;
                 $action    = $text->camelCase(isset($_get[0]) ? $_get[0] : null);
 
                 // Remove first get element, because has been used as an action

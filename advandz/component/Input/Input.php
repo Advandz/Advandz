@@ -13,6 +13,8 @@
 
 namespace Advandz\Component;
 
+use Exception;
+
 class Input
 {
     /**
@@ -187,7 +189,7 @@ class Input
             case '!==':
                 return $a !== $b;
             default:
-                throw new \Exception('Unrecognized operator: ' . $op);
+                throw new Exception('Unrecognized operator: ' . $op);
         }
     }
 

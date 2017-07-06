@@ -37,12 +37,6 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOTWEBDIR', dirname(__FILE__) . DS);
 
 /*
- * Sets the public web directory, which is the absolute path to your public web directory
- * (e.g. where index.php appears).
- */
-define('PUBLICWEBDIR', realpath(dirname(__FILE__) . DS . '..') . DS);
-
-/*
  * If you have htaccess running that redirects requests to index.php this must
  * be set to true.  If set to false and no htaccess is present, URIs have the
  * form of /index.php/controller/action/param1/.../paramN
@@ -132,14 +126,14 @@ define('VENDORDIR', ROOTWEBDIR . 'vendor' . DS);
 /*
  * Include core libraries
  */
-include_once VENDORDIR . 'autoload.php';
+require VENDORDIR . 'autoload.php';
 
 /*
  * Load standard library
  */
-include_once ROOTWEBDIR . 'stdlib.php';
+require ROOTWEBDIR . 'stdlib.php';
 
 /*
  * Load core configuration
  */
-include_once CONFIGDIR . 'core.php';
+require CONFIGDIR . 'core.php';

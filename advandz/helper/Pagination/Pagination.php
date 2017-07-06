@@ -12,6 +12,7 @@
 namespace Advandz\Helper;
 
 use Advandz\Core\Language;
+use Advandz\Core\Configure;
 
 class Pagination extends Html
 {
@@ -116,7 +117,7 @@ class Pagination extends Html
             'pages_to_show'    => 5, // Max number of numerical pages shown in the pagination
             'total_pages'      => 0, // Total number of pages (used instead of total results/result_per_page settings)
             'total_results'    => 0, // Total number of results in the pagination set
-            'results_per_page' => \Configure::get('Pagination.results_per_page'), // Number of result items per page
+            'results_per_page' => Configure::get('Pagination.results_per_page'), // Number of result items per page
             'uri'              => '',
             'uri_labels'       => [ // Tags that will be substituted with their appropriate value
                 'page'     => 'page',

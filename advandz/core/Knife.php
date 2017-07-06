@@ -4,7 +4,7 @@
  * In fact, all views are compiled into PHP code.
  *
  * @package Advandz
- * @subpackage Advandz.lib
+ * @subpackage Advandz.core
  * @copyright Copyright (c) 2016-2017 Advandz, LLC. All Rights Reserved.
  * @license https://www.advandz.com/eula/ The Advandz License Agreement
  * @author The Advandz Team <team@advandz.com>

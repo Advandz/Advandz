@@ -38,15 +38,11 @@
         "post-install-cmd": [
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf build",
-            "rm -rf tests",
             "rm -rf .travis.yml"
         ],
         "post-update-cmd": [
             "rm -rf LICENSE.md",
             "rm -rf README.md",
-            "rm -rf build",
-            "rm -rf tests",
             "rm -rf .travis.yml"
         ]
     }

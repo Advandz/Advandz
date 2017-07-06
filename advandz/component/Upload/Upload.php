@@ -11,6 +11,8 @@
 
 namespace Advandz\Component;
 
+use Advandz\Core\Configure;
+
 class Upload
 {
     /**
@@ -28,8 +30,8 @@ class Upload
      */
     public function __construct()
     {
-        // Fetch default encryption key
-        $upload_dir = \Configure::get('Upload.upload_dir');
+        // Fetch default upload folder
+        $upload_dir = Configure::get('Upload.upload_dir');
 
         if (!empty($upload_dir)) {
             $this->upload_dir = ROOTWEBDIR . trim($upload_dir, DS) . DS;
@@ -143,7 +145,7 @@ class Upload
      */
     public function getWebUrl($path)
     {
-        return WEBDIR . str_replace(DS, '/', str_replace(ROOTWEBDIR, '', $path));
+        return str_replace('index.php' . DS, '', WEBDIR) . str_replace(DS, '/', str_replace(ROOTWEBDIR, '', str_replace('..' . DS, '', $path)));
     }
 
     /**

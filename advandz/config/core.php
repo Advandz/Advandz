@@ -19,7 +19,7 @@ Configure::set('System.benchmark', false);
 // $this->structure = 'viewfile' in your controller
 Configure::set('System.default_structure', 'structure');
 // The default controller that will be loaded when no controller is specified.
-Configure::set('System.default_controller', 'main');
+Configure::set('System.default_controller', 'Main');
 // The default view directory. If you wish to use another view simultaneously
 // then in your controller you would pass the view as the second parameter to
 // Controller::render() or View::partial().

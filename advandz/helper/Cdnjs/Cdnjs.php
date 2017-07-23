@@ -21,7 +21,7 @@ class Cdnjs extends Http
     /**
      * @var array An array containing the loaded libraries
      */
-    public $libraries = [];
+    private $libraries = [];
 
     /**
      * Load a library.
@@ -116,7 +116,7 @@ class Cdnjs extends Http
     }
 
     /**
-     * Get library.
+     * Get an specific library.
      *
      * @param  string    $lib The library name
      * @throws Exception When the library not exists
@@ -141,5 +141,15 @@ class Cdnjs extends Http
         } else {
             throw new Exception('Undefined library name');
         }
+    }
+
+    /**
+     * Get all the loaded libraries.
+     *
+     * @return mixed An array containing the loaded libraries
+     */
+    public function getLibraries()
+    {
+        return $this->libraries;
     }
 }

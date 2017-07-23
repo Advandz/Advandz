@@ -218,6 +218,7 @@ class Text
     public function snakeCase($text)
     {
         $text = trim($text);
+        $text = preg_replace('/(?<!^)[A-Z]/', '_$0', $text);
         $text = str_replace(' ', '_', $text);
         $text = str_replace('-', '_', $text);
 
@@ -242,7 +243,7 @@ class Text
      * Converts a text to a URL friendly string.
      *
      * @param  string $text The text to be converted
-     * @return string The kebab-case text
+     * @return string The url friendly text
      */
     public function uri($text)
     {

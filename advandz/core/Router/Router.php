@@ -33,47 +33,19 @@ final class Router
     /**
      * Sets a route from $orig_uri to $mapped_uri.
      *
-     * @param  string    $orig_uri    The original URI to map from
-     * @param  mixed     $mapped_uri  The destination URI to map to or a anonymous function
-     * @param  array     $middlewares An array containing the name of the middleware
-     * @param  mixed     $params      Parameters for the middleware
+     * @param  string    $orig_uri   The original URI to map from
+     * @param  mixed     $mapped_uri The destination URI to map to or a anonymous function
      * @throws Exception Illegal URI specified
      */
-    public static function route($orig_uri, $mapped_uri, $middlewares = null, ...$params)
+    public static function route($orig_uri, $mapped_uri)
     {
-        // Load Middleware
-        if (isset($middlewares) && is_array($middlewares)) {
-            foreach ($middlewares as $middleware) {
-                // Generate namespace
-                if (strpos($middleware, '\\') !== false) {
-                    $namespace = $middleware;
-                } else {
-                    $namespace = 'Advandz\\App\\Middleware\\' . $middleware;
-                }
-
-                // Execute handle function from the middleware
-                if (class_exists($namespace) && is_callable([$namespace, 'handle'])) {
-                    $middleware = new $namespace();
-
-                    call_user_func_array([$middleware, 'handle'], array_merge([$orig_uri], $params));
-                } else {
-                    throw new Exception($middleware . ' middleware is invalid or is not callable');
-                }
-            }
+        // Validate URI
+        if (empty($orig_uri) || empty($mapped_uri)) {
+            throw new Exception('Illegal URI specified in Router::route()');
         }
 
-        if (is_callable($mapped_uri)) {
-            call_user_func($mapped_uri);
-            exit();
-        } else {
-            // Validate URI
-            if (strlen($orig_uri) == 0 || strlen($mapped_uri) == 0) {
-                throw new Exception('Illegal URI specified in Router::route()');
-            }
-
-            self::$routes['orig'][]   = '/' . self::escape($orig_uri) . '/i';
-            self::$routes['mapped'][] = self::escape($mapped_uri);
-        }
+        self::$routes['orig'][]   = '/' . self::escape($orig_uri) . '/i';
+        self::$routes['mapped'][] = self::escape($mapped_uri);
     }
 
     /**
@@ -191,11 +163,11 @@ final class Router
      *
      * @param  string $request_uri A URI to parse
      * @return array  An array containing the following indexes:
-     *                            - controller; The name of the controller this URI maps to
-     *                            - action: The action method this URI maps to
-     *                            - get: An array of get parameters this URI maps to
-     *                            - uri: An array of URI parts
-     *                            - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
+     *  - controller: The name of the controller this URI maps to
+     *  - action: The action method this URI maps to
+     *  - get: An array of get parameters this URI maps to
+     *  - uri: An array of URI parts
+     *  - uri_str: A string representation of the URI containing the controller requested (if no passed in the URI)
      */
     public static function routesTo($request_uri)
     {

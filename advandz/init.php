@@ -90,7 +90,7 @@ define('PLUGINDIR', ROOTWEBDIR . APPDIR . 'Plugin' . DS);
 /*
  * Absolute path to the language directory, where all language files are stored.
  */
-define('LANGDIR', ROOTWEBDIR . APPDIR . 'Language' . DS);
+define('LANGDIR', ROOTWEBDIR . 'language' . DS);
 
 /*
  * Absolute path to the core directory.

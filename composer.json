@@ -14,12 +14,9 @@
         }
     ],
     "autoload": {
-        "classmap": [
-            "advandz/core/",
-            "advandz/helper/",
-            "advandz/component/",
-            "advandz/app"
-        ]
+        "psr-4": {
+            "Advandz\\": "advandz/"
+        }
     },
     "require": {
         "php": ">=7.0",
@@ -27,12 +24,14 @@
         "braintree/braintree_php": "~3.2",
         "php-ai/php-ml": "~0.4",
         "deployer/deployer": "~5.0",
-        "enygma/expose": "~3.0"
+        "enygma/expose": "~3.0",
+        "mongodb/mongodb": "~1.1"
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "vendor-dir": "advandz/vendor"
+        "vendor-dir": "advandz/vendor",
+        "optimize-autoloader": true
     },
     "scripts": {
         "post-install-cmd": [

@@ -2,17 +2,18 @@
 /**
  * Supplies methods useful in verifying and formatting input data. Provides a
  * number of methods to verify whether the input data is formatted correctly.
- * Supports validating both scalar and array data.
+ * You also can access all user input data with a few simple methods.
  *
- * @package Advandz
+ * @package    Advandz
  * @subpackage Advandz.components.input
- * @copyright Copyright (c) 2012-2017 CyanDark, Inc. All Rights Reserved.
- * @license https://opensource.org/licenses/MIT The MIT License (MIT)
- * @author The Advandz Team <team@advandz.com>
+ * @copyright  Copyright (c) 2016-2017 Advandz, LLC. All Rights Reserved.
+ * @license    https://opensource.org/licenses/MIT The MIT License (MIT)
+ * @author     The Advandz Team <team@advandz.com>
  */
 
 namespace Advandz\Component;
 
+use Symfony\Component\HttpFoundation\Request;
 use Exception;
 
 class Input
@@ -26,6 +27,137 @@ class Input
      * @var array All rules set in Input::setRules()
      */
     private $rules = [];
+
+    /**
+     * @var Request The request object
+     */
+    private $request;
+
+    /**
+     * Initialize the request.
+     */
+    public function __construct()
+    {
+        $this->request = Request::createFromGlobals();
+    }
+
+    /**
+     * Get a posted value.
+     *
+     * @param null $key     The value key, if key is not provided all the items will be returned
+     * @param null $default Return if the value of given key is empty
+     * @return mixed The requested value
+     */
+    public static function request($key = null, $default = null)
+    {
+        $request = Request::createFromGlobals();
+
+        if (!empty($key)) {
+            $value = $request->request->get($key);
+
+            return !empty($value) ? $value : $default;
+        }
+
+        return $request->request;
+    }
+
+    /**
+     * Get a query value.
+     *
+     * @param null $key     The value key, if key is not provided all the items will be returned
+     * @param null $default Return if the value of given key is empty
+     * @return mixed The requested value
+     */
+    public static function query($key = null, $default = null)
+    {
+        $request = Request::createFromGlobals();
+
+        if (!empty($key)) {
+            $value = $request->query->get($key);
+
+            return !empty($value) ? $value : $default;
+        }
+
+        return $request->query;
+    }
+
+    /**
+     * Get a value, no matter what the HTTP verb was used for the request.
+     *
+     * @param null $key     The value key, if key is not provided all the items will be returned
+     * @param null $default Return if the value of given key is empty
+     * @return mixed The requested value
+     */
+    public static function get($key = null, $default = null)
+    {
+        $request = Request::createFromGlobals();
+        $value   = !empty($request->request->get($key)) ? $request->request->get($key) : $request->query->get($key);
+
+        return !empty($value) ? $value : $default;
+    }
+
+    /**
+     * Determine if an input value is present in the input data.
+     *
+     * @param null $key The value key to check
+     * @return bool True if the value exists in the input data
+     */
+    public static function has($key = null)
+    {
+        return !empty(self::get($key));
+    }
+
+    /**
+     * Get all input data.
+     *
+     * @return array The input data
+     */
+    public static function all()
+    {
+        $request = Request::createFromGlobals();
+
+        return array_merge($request->request->all(), $request->query->all());
+    }
+
+    /**
+     * Get only some values from the request input data, no matter what the HTTP verb was used for the request.
+     *
+     * @return array The filtered input data
+     */
+    public static function only()
+    {
+        $request    = Request::createFromGlobals();
+        $input      = array_merge($request->request->all(), $request->query->all());
+        $parameters = func_get_args();
+        $values     = [];
+
+        foreach ($parameters as $parameter) {
+            $values[$parameter] = $input[$parameter];
+        }
+
+        return $values;
+    }
+
+    /**
+     * Get all the values, except the given parameters from the request input data, no matter what the HTTP verb was
+     * used for the request.
+     *
+     * @return array The filtered input data
+     */
+    public static function except()
+    {
+        $request    = Request::createFromGlobals();
+        $input      = array_merge($request->request->all(), $request->query->all());
+        $parameters = func_get_args();
+
+        foreach ($parameters as $parameter) {
+            if (isset($input[$parameter])) {
+                unset ($input[$parameter]);
+            }
+        }
+
+        return $input;
+    }
 
     /**
      * Checks if the given string is a valid email address.
@@ -116,8 +248,7 @@ class Input
      *
      * @param  string     $str The string to test
      * @param  mixed      $min The minimum acceptable date (string) or unix time stamp (int)
-     * @param  mixed      $min The maximum acceptable date (string) or unix time stamp (int)
-     * @param  null|mixed $max
+     * @param  mixed      $max The maximum acceptable date (string) or unix time stamp (int)
      * @return bool       True if $str is a valid date, false otherwise
      */
     public static function isDate($str, $min = null, $max = null)
@@ -163,9 +294,9 @@ class Input
     /**
      * Tests how the given values compare.
      *
-     * @param  mixed     $a  The value to compare
-     * @param  string    $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
-     * @param  mixed     $b  The value to compare against
+     * @param  mixed  $a  The value to compare
+     * @param  string $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
+     * @param  mixed  $b  The value to compare against
      * @throws Exception Thrown when an unrecognized operator, $op, is given
      * @return bool      True if $a validates $op against $b, false otherwise
      */
@@ -262,24 +393,26 @@ class Input
     /**
      * Validates all set rules using the given data, sets any error messages to Input::$errors.
      *
-     * @param  array $data An array of data such as POST
+     * @param  mixed $data An array or an object of data
      * @return bool  true if all rules pass, false if any rule is broken
      * @see Input::errors()
      */
-    public function validate(&$data)
+    public function validate($data)
     {
+        $data   = (array) $data;
+        $errors = [];
+
         foreach ($this->rules as $rule) {
             // Build function arguments
             if (!empty($rule['options']) || isset($rule['options'])) {
                 $arguments = array_merge([$data[$rule['field']]], $rule['options']);
-            } elseif (isset($data[$rule['field']])) {
+            } else if (isset($data[$rule['field']])) {
                 $arguments = [$data[$rule['field']]];
             } else {
                 $arguments = [$rule['field']];
             }
 
             // Validate rules
-            $errors     = [];
             $validation = call_user_func_array([$this, $rule['rule']], $arguments);
 
             // Negate result
@@ -288,7 +421,7 @@ class Input
             }
 
             // Validate result
-            if ($validation == false) {
+            if (!$validation) {
                 $errors[] = $rule['error'];
             }
 

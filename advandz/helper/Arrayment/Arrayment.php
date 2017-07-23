@@ -19,7 +19,7 @@ class Arrayment
      * @param  array $array The array to fetch the element
      * @return mixed The first element of the given array, false if it's not an array.
      */
-    public function first(array $array)
+    public static function first(array $array)
     {
         if (is_array($array)) {
             $array = array_values($array);
@@ -36,7 +36,7 @@ class Arrayment
      * @param  array $array The array to fetch the element
      * @return mixed The last element of the given array, false if it's not an array.
      */
-    public function last(array $array)
+    public static function last(array $array)
     {
         if (is_array($array)) {
             $array = array_reverse($array);
@@ -54,7 +54,7 @@ class Arrayment
      * @param  array  $array The array
      * @return mixed  True if exists the key, false otherwise
      */
-    public function keyExists($key, array $array)
+    public static function keyExists($key, array $array)
     {
         if (is_string($key) && is_array($array)) {
             return array_key_exists($key, $array);
@@ -70,7 +70,7 @@ class Arrayment
      * @param  array $array The array
      * @return mixed True if exists the value, false otherwise
      */
-    public function valueExists($value, array $array)
+    public static function valueExists($value, array $array)
     {
         if (is_array($array)) {
             foreach ($array as $element) {
@@ -91,7 +91,7 @@ class Arrayment
      * @param  string $key   The key to add to the array
      * @return array  The resultant array
      */
-    public function add(&$array, $value, $key = null)
+    public static function add(&$array, $value, $key = null)
     {
         if (is_array($array)) {
             if (!empty($key) && is_string($key)) {
@@ -111,7 +111,7 @@ class Arrayment
      * @param  string $key   The key to delete
      * @return array  The resultant array
      */
-    public function remove(&$array, $key)
+    public static function remove(&$array, $key)
     {
         if (is_array($array)) {
             unset($array[$key]);
@@ -127,7 +127,7 @@ class Arrayment
      * @param  string $key   The key to fetch
      * @return mixed  The selected array element
      */
-    public function get(array $array, $key)
+    public static function get(array $array, $key)
     {
         if (is_array($array) && array_key_exists($key, $array)) {
             return $array[$key];
@@ -139,7 +139,7 @@ class Arrayment
      *
      * @param array $array The array
      */
-    public function random(array $array)
+    public static function random(array $array)
     {
         if (is_array($array)) {
             return $array[array_rand($array)];
@@ -149,24 +149,21 @@ class Arrayment
     }
 
     /**
-     * Merge two arrays.
+     * Merge two or more arrays.
      *
-     * @param  array $array1    The first array
-     * @param  array $array2    The second array
      * @param  bool  $recursive True, to merge the arrays in recursive mode
-     * @return mixed The resultant array, False if fails.
+     * @return array The resultant array.
      */
-    public function merge(array $array1, array $array2, $recursive = false)
+    public static function merge($recursive = false)
     {
-        if (is_array($array1) && is_array($array2)) {
-            if ($recursive) {
-                return array_merge_recursive($array1, $array2);
-            } else {
-                return array_merge($array1, $array2);
-            }
-        }
+        $args = func_get_args();
+        $args = array_shift($args);
 
-        return false;
+        if ($recursive) {
+            return call_user_func_array('array_merge_recursive', $args);
+        } else {
+            return call_user_func_array('array_merge', $args);
+        }
     }
 
     /**
@@ -219,6 +216,19 @@ class Arrayment
     }
 
     /**
+     * Iteratively reduce the array to a single value using a callback function.
+     *
+     * @param  array    $array    The array to reduce
+     * @param  callable $callback The function to reduce the array to a single value
+     * @param  mixed    $initial  If is available, it will be used at the beginning of the process, or as a final result in case the array is empty.
+     * @return mixed    Returns the resulting value.
+     */
+    public function reduce($array, callable $callback, $initial = null)
+    {
+        return array_reduce($array, $callback, $initial);
+    }
+
+    /**
      * Returns two arrays, one containing the keys, and the other containing the values of the original array.
      *
      * @param  array $array The array to split
@@ -226,14 +236,14 @@ class Arrayment
      */
     public function split($array)
     {
-        return [array_keys($array), array_values($array)];
+        return ['keys' => array_keys($array), 'values' => array_values($array)];
     }
 
     /**
      * Flatten a matrix with dots.
      *
      * @param  array $array   The array to split
-     * @param  mixed $prepend
+     * @param  mixed $prepend The string to prepend to the key
      * @return array The resultant array
      */
     public function dotMatrix(array $array, $prepend = '')

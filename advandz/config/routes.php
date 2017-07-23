@@ -1,11 +1,10 @@
 <?php
 /**
  * All routes may be defined here.  Routes have the following syntax:
- * Router::route($orig_uri, $mapped_uri [, $middleware, ...$params]);.
+ * Router::route($orig_uri, $mapped_uri);.
  *
  * For example:
  * Router::route("foo/bar", "bar/foo");
- * Router::route("foo/bar", "bar/foo", ['Middleware']);
  *
  * The above route maps the "foo" controller and "bar" method to the "bar"
  * controller and "foo" method.
@@ -20,8 +19,7 @@
  * @author The Advandz Team <team@advandz.com>
  */
 
-// Main Middleware
-Router::route('^', '$1', ['Main']);
+Router::route('^', '$1');
 
 //
 // TODO: Define your application routes

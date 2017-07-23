@@ -164,7 +164,8 @@ class Http
         // Add basic authentication header
         if (isset($this->auth[0]) && isset($this->auth[1])) {
             $this->headers[] = 'Authorization: Basic ' . base64_encode($this->auth[0] . ':' . $this->auth[1]);
-            curl_setopt($curl, CURLOPT_USERPWD, base64_encode($this->auth[0] . ':' . $this->auth[1]));
+            curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($curl, CURLOPT_USERPWD, $this->auth[0] . ':' . $this->auth[1]);
         }
 
         // Set headers

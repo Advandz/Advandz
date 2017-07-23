@@ -124,6 +124,16 @@ class Upload
     }
 
     /**
+     * Get the maximum upload size.
+     *
+     * @return int The maximum upload size in bytes
+     */
+    public function getMaxSize()
+    {
+        return $this->file_size;
+    }
+
+    /**
      * Set the maximum upload size.
      *
      * @param  int       $max_size The maximum upload size in bytes
@@ -139,18 +149,7 @@ class Upload
     }
 
     /**
-     * Get the web url of a file from the path location.
-     *
-     * @param  string $path The path to the uploaded file
-     * @return string The file extension
-     */
-    public function getWebUrl($path)
-    {
-        return str_replace('index.php' . DS, '', WEBDIR) . str_replace(DS, '/', str_replace(ROOTWEBDIR, '', str_replace('..' . DS, '', $path)));
-    }
-
-    /**
-     * Set the upload directory.
+     * Get the upload directory.
      *
      * @return string The upload directory
      */

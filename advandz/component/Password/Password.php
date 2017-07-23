@@ -17,6 +17,14 @@ use Exception;
 class Password
 {
     /**
+     * Protected constructor to prevent instance creation.
+     */
+    protected function __construct()
+    {
+        // Nothing to do
+    }
+    
+    /**
      * Generates a secure and strong password.
      *
      * @param  int    $length  Length of the password
@@ -24,7 +32,7 @@ class Password
      * @param  bool   $symbols Include symbols in the password
      * @return string A secure password
      */
-    public function generate($length = 12, $numbers = true, $symbols = true)
+    public static function generate($length = 12, $numbers = true, $symbols = true)
     {
         // Letters
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -59,7 +67,7 @@ class Password
      * @param  int    $cost     Denotes the algorithmic cost that should be used
      * @return string The password hash
      */
-    public function hash($password, $cost = 10)
+    public static function hash($password, $cost = 10)
     {
         $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => $cost]);
 
@@ -76,7 +84,7 @@ class Password
      * @param  string $hash The password hash
      * @return array  Returns information about the given hash
      */
-    public function getHashInfo($hash)
+    public static function getHashInfo($hash)
     {
         return password_get_info($hash);
     }
@@ -88,7 +96,7 @@ class Password
      * @param  int    $cost Denotes the algorithmic cost that should be used
      * @return bool   True if the hash need be rehashed
      */
-    public function needsRehash($hash, $cost = 10)
+    public static function needsRehash($hash, $cost = 10)
     {
         return password_needs_rehash($hash, PASSWORD_BCRYPT, ['cost' => $cost]);
     }
@@ -100,7 +108,7 @@ class Password
      * @param  string $hash     The created hash
      * @return bool   True if the password is valid
      */
-    public function verify($password, $hash)
+    public static function verify($password, $hash)
     {
         if (strlen($hash) === 0) {
             return false;

@@ -14,6 +14,22 @@ namespace Advandz\Helper;
 class Cli
 {
     /**
+     * @var string An string containing the text output buffer
+     */
+    private $text;
+
+    /**
+     * Creates a new Table object.
+     * @param mixed $table
+     */
+    public function __construct($table)
+    {
+        if (substr(php_sapi_name(), 0, 3) != 'cli') {
+            throw new Exception('Cli::class is not supported when running php-cgi');
+        }
+    }
+
+    /**
      * Check if the call is from the CLI.
      *
      * @return bool True if the call is from the CLI
@@ -24,12 +40,13 @@ class Cli
     }
 
     /**
-     * Prints a colored text in the CLI output.
+     * Colour a text in the CLI output.
      *
-     * @param string $text  The text to print
-     * @param string $color The color of the text
+     * @param  string $text   The text to print
+     * @param  string $color  The color of the text
+     * @return Cli    An instance of Cli
      */
-    public function printText($text, $color = 'default')
+    public function color($text, $color = 'default')
     {
         $colors = [
             'black'  => 30,
@@ -42,13 +59,27 @@ class Cli
             'gray'   => 37
         ];
 
-        if ($this->isCli()) {
-            if (array_key_exists($color, $colors)) {
-                echo "\033[" . $colors[$color] . 'm' . $text . "\033[0m \n";
-            } else {
-                echo $text . "\n";
-            }
+        if (array_key_exists($color, $colors)) {
+            $this->text .= "\033[" . $colors[$color] . 'm' . $text . "\033[0m";
+        } else {
+            $this->text .= $text;
         }
+
+        return $this;
+    }
+
+    /**
+     * Prints a colored text in the CLI output.
+     *
+     * @param string $text The text to print, if not provided the stored text will be printed
+     */
+    public function print($text = null)
+    {
+        if (empty($text)) {
+            $text = $this->text;
+        }
+
+        echo $text . "\n";
     }
 
     /**
@@ -56,14 +87,19 @@ class Cli
      *
      * @param string $command The command to execute
      * @param bool   $bypass  True to send the raw outuput directly to the output buffer
+     * @param mixed  The result of the executed command
      */
-    public function executeCommand($command, $bypass = false, &$output = null)
+    public function executeCommand($command, $bypass = false)
     {
+        $output = '';
+
         if ($bypass) {
             passthru($command, $output);
         } else {
             exec($command, $output);
         }
+
+        return $output;
     }
 
     /**

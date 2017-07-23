@@ -28,7 +28,7 @@ class Hashing
      * @param  bool   $file      True, to generate a keyed hash value using the HMAC method and the contents of a given file.
      * @return string Return a keyed hash using HMAC.
      */
-    public function hmacHash($algorithm, $data, $key, $raw = false, $file = false)
+    public static function hmacHash($algorithm, $data, $key, $raw = false, $file = false)
     {
         if ($file) {
             return hash_hmac_file($algorithm, $data, $key, $raw);
@@ -46,7 +46,7 @@ class Hashing
      * @param  bool   $file      True, to generate a keyed hash value using the contents of a given file.
      * @return string Return the Hash of a specific data.
      */
-    public function hash($algorithm, $data, $raw = false, $file = false)
+    public static function hash($algorithm, $data, $raw = false, $file = false)
     {
         if ($file) {
             return hash_file($algorithm, $data, $raw);
@@ -60,17 +60,29 @@ class Hashing
      *
      * @return array Return an array containing a list of registered hashing algorithms
      */
-    public function listHashAlgorithms()
+    public static function listHashAlgorithms()
     {
         return hash_algos();
     }
 
     /**
+     * Compares two strings using the same time whether they're equal or not.
+     *
+     * @param string $hash      The string of known length to compare against
+     * @param string $user_hash The user-supplied string
+     * @param bool True if hash is equal
+     */
+    public static function compare($hash, $user_hash)
+    {
+        return hash_equals($hash, $user_hash);
+    }
+    
+    /**
      * Initialize an incremental hashing context.
      *
      * @param string $algorithm Hashing algorithm.
      */
-    public function startHash($algorithm)
+    public function start($algorithm)
     {
         $this->data = hash_init($algorithm);
     }
@@ -81,7 +93,7 @@ class Hashing
      * @param mixed $data Data or file to be hashed.
      * @param bool  $file True, to generate a keyed hash value using the contents of a given file.
      */
-    public function addDataToHash($data, $file = false)
+    public function addData($data, $file = false)
     {
         if ($file) {
             hash_update_file($this->data, $data);
@@ -95,23 +107,11 @@ class Hashing
      *
      * @param string $algorithm Hashing algorithm.
      */
-    public function finishHash()
+    public function finish()
     {
         $hash       = hash_final($this->data);
         $this->data = null;
 
         return $hash;
-    }
-
-    /**
-     * Compares two strings using the same time whether they're equal or not.
-     *
-     * @param string $hash      The string of known length to compare against
-     * @param string $user_hash The user-supplied string
-     * @param bool True if hash is equal
-     */
-    public function compareHash($hash, $user_hash)
-    {
-        return hash_equals($hash, $user_hash);
     }
 }

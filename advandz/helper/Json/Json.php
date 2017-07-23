@@ -54,14 +54,10 @@ class Json
 
     /**
      * Prints the latest succesfully encoded JSON string.
-     *
-     * @return string The JSON string
      */
     public function printJson()
     {
         echo $this->json;
-
-        return $this->json;
     }
 
     /**

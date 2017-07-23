@@ -76,7 +76,7 @@ class Hashing
     {
         return hash_equals($hash, $user_hash);
     }
-    
+
     /**
      * Initialize an incremental hashing context.
      *

@@ -23,7 +23,7 @@ class Password
     {
         // Nothing to do
     }
-    
+
     /**
      * Generates a secure and strong password.
      *

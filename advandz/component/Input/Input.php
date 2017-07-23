@@ -13,8 +13,8 @@
 
 namespace Advandz\Component;
 
-use Symfony\Component\HttpFoundation\Request;
 use Exception;
+use Symfony\Component\HttpFoundation\Request;
 
 class Input
 {
@@ -44,8 +44,8 @@ class Input
     /**
      * Get a posted value.
      *
-     * @param null $key     The value key, if key is not provided all the items will be returned
-     * @param null $default Return if the value of given key is empty
+     * @param  null  $key     The value key, if key is not provided all the items will be returned
+     * @param  null  $default Return if the value of given key is empty
      * @return mixed The requested value
      */
     public static function request($key = null, $default = null)
@@ -64,8 +64,8 @@ class Input
     /**
      * Get a query value.
      *
-     * @param null $key     The value key, if key is not provided all the items will be returned
-     * @param null $default Return if the value of given key is empty
+     * @param  null  $key     The value key, if key is not provided all the items will be returned
+     * @param  null  $default Return if the value of given key is empty
      * @return mixed The requested value
      */
     public static function query($key = null, $default = null)
@@ -84,8 +84,8 @@ class Input
     /**
      * Get a value, no matter what the HTTP verb was used for the request.
      *
-     * @param null $key     The value key, if key is not provided all the items will be returned
-     * @param null $default Return if the value of given key is empty
+     * @param  null  $key     The value key, if key is not provided all the items will be returned
+     * @param  null  $default Return if the value of given key is empty
      * @return mixed The requested value
      */
     public static function get($key = null, $default = null)
@@ -99,7 +99,7 @@ class Input
     /**
      * Determine if an input value is present in the input data.
      *
-     * @param null $key The value key to check
+     * @param  null $key The value key to check
      * @return bool True if the value exists in the input data
      */
     public static function has($key = null)
@@ -152,7 +152,7 @@ class Input
 
         foreach ($parameters as $parameter) {
             if (isset($input[$parameter])) {
-                unset ($input[$parameter]);
+                unset($input[$parameter]);
             }
         }
 
@@ -246,10 +246,10 @@ class Input
     /**
      * Tests whether the given string is considered a valid date suitable to strtotime().
      *
-     * @param  string     $str The string to test
-     * @param  mixed      $min The minimum acceptable date (string) or unix time stamp (int)
-     * @param  mixed      $max The maximum acceptable date (string) or unix time stamp (int)
-     * @return bool       True if $str is a valid date, false otherwise
+     * @param  string $str The string to test
+     * @param  mixed  $min The minimum acceptable date (string) or unix time stamp (int)
+     * @param  mixed  $max The maximum acceptable date (string) or unix time stamp (int)
+     * @return bool   True if $str is a valid date, false otherwise
      */
     public static function isDate($str, $min = null, $max = null)
     {
@@ -294,9 +294,9 @@ class Input
     /**
      * Tests how the given values compare.
      *
-     * @param  mixed  $a  The value to compare
-     * @param  string $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
-     * @param  mixed  $b  The value to compare against
+     * @param  mixed     $a  The value to compare
+     * @param  string    $op The comparison operator: >, <, >=, <=, ==, ===, !=, !==
+     * @param  mixed     $b  The value to compare against
      * @throws Exception Thrown when an unrecognized operator, $op, is given
      * @return bool      True if $a validates $op against $b, false otherwise
      */
@@ -406,7 +406,7 @@ class Input
             // Build function arguments
             if (!empty($rule['options']) || isset($rule['options'])) {
                 $arguments = array_merge([$data[$rule['field']]], $rule['options']);
-            } else if (isset($data[$rule['field']])) {
+            } elseif (isset($data[$rule['field']])) {
                 $arguments = [$data[$rule['field']]];
             } else {
                 $arguments = [$rule['field']];

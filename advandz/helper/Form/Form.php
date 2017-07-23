@@ -44,9 +44,9 @@ class Form extends Html
      * Sets the CSRF Token options.
      *
      * @param array $options An array of CSRF token options including:
-     *  - token_name: The field name of the CSRF token
-     *  - set_on_create: True to automatically set the CSRF token on create
-     *  - token_key: The CSRF token key used to make each token unique
+     *                       - token_name: The field name of the CSRF token
+     *                       - set_on_create: True to automatically set the CSRF token on create
+     *                       - token_key: The CSRF token key used to make each token unique
      */
     public function setCsrfOptions(array $options)
     {
@@ -57,7 +57,7 @@ class Form extends Html
         if (isset($options['set_on_create'])) {
             $this->csrf_auto_create = $options['set_on_create'];
         }
-        
+
         if (isset($options['token_key'])) {
             $this->csrf_token_key = $options['token_key'];
         }

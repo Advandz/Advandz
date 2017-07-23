@@ -42,8 +42,8 @@ class Cli
     /**
      * Colour a text in the CLI output.
      *
-     * @param  string $text   The text to print
-     * @param  string $color  The color of the text
+     * @param  string $text  The text to print
+     * @param  string $color The color of the text
      * @return Cli    An instance of Cli
      */
     public function color($text, $color = 'default')
